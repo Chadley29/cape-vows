@@ -552,8 +552,9 @@ function HomePage({ setPage }) {
             <h2 className="section-title" style={{ fontSize: "1.75rem" }}>List Your <em>Business</em></h2>
             <p className="section-desc" style={{ fontSize: "1rem" }}>Are you a venue or wedding supplier in the Western Cape? Get your business discovered by engaged couples planning their big day.</p>
           </div>
+          {/* ── CHANGE 3: "Submit a Listing" button removed from public homepage ── */}
           <div>
-            <button className="btn btn-primary" style={{ marginRight: "0.75rem" }} onClick={() => setPage("admin")}>Submit a Listing</button>
+            <p style={{ fontFamily: "var(--ff-sans)", fontSize: "0.8rem", color: "var(--muted)" }}>Contact us to get listed →<br />hello@capevows.co.za</p>
           </div>
         </div>
       </section>
@@ -724,7 +725,10 @@ function AdminPage({ onAddVenue, onAddVendor, extraVenues, extraVendors }) {
 
 // ─── App ───────────────────────────────────────────────────────────────────────
 export default function App() {
-  const [page, setPage] = useState("home");
+  // ── CHANGE 1: Read hash on load — go to admin only if URL ends in #admin ──
+  const [page, setPage] = useState(
+    window.location.hash === "#admin" ? "admin" : "home"
+  );
   const [extraVenues, setExtraVenues] = useState([]);
   const [extraVendors, setExtraVendors] = useState([]);
 
@@ -739,7 +743,7 @@ export default function App() {
           <button className={`nav-link${page === "home" ? " active" : ""}`} onClick={() => setPage("home")}>Home</button>
           <button className={`nav-link${page === "venues" ? " active" : ""}`} onClick={() => setPage("venues")}>Venues</button>
           <button className={`nav-link${page === "vendors" ? " active" : ""}`} onClick={() => setPage("vendors")}>Vendors</button>
-          <button className={`nav-link cta${page === "admin" ? " active" : ""}`} onClick={() => setPage("admin")}>+ Add Listing</button>
+          {/* ── CHANGE 2: "+ Add Listing" button removed — access via capevows.co.za/#admin ── */}
         </div>
       </nav>
 
