@@ -240,6 +240,7 @@ function VenueCard({ venue, onClick }) {
         }
         <div className="card-img-overlay" />
         <span className="card-badge">{venue.type}</span>
+        <span style={{ position: "absolute", bottom: "0.6rem", left: "0.75rem", fontFamily: "var(--ff-sans)", fontSize: "0.55rem", letterSpacing: "0.08em", textTransform: "uppercase", background: "rgba(0,0,0,0.5)", color: "rgba(255,255,255,0.8)", padding: "0.2rem 0.5rem", borderRadius: "2px" }}>Illustrative image</span>
       </div>
       <div className="card-body">
         <div className="card-region">{venue.region}</div>
@@ -297,6 +298,7 @@ function VenueModal({ venue, onClose }) {
           <div className="modal-hero-overlay" />
           <span className="modal-hero-text">{venue.name}</span>
           <span className="modal-badge">{venue.type}</span>
+          <span style={{ position: "absolute", bottom: "1rem", right: "1.5rem", fontFamily: "var(--ff-sans)", fontSize: "0.55rem", letterSpacing: "0.08em", textTransform: "uppercase", background: "rgba(0,0,0,0.5)", color: "rgba(255,255,255,0.75)", padding: "0.2rem 0.5rem", borderRadius: "2px" }}>Illustrative image</span>
           <button className="modal-close" onClick={onClose}>✕</button>
         </div>
         <div className="modal-body">
@@ -517,7 +519,7 @@ function HomePage({ setPage }) {
         </div>
         <div className="hero-stats">
           <div className="hero-stat"><span className="hero-stat-n">10</span><span className="hero-stat-l">Venues Listed</span></div>
-          <div className="hero-stat"><span className="hero-stat-n">12</span><span className="hero-stat-l">Vendors Listed</span></div>
+          <div className="hero-stat"><span className="hero-stat-n">Soon</span><span className="hero-stat-l">Vendors Coming</span></div>
           <div className="hero-stat"><span className="hero-stat-n">8</span><span className="hero-stat-l">Regions Covered</span></div>
         </div>
       </div>
@@ -587,6 +589,7 @@ function VenuesPage({ extraVenues }) {
           <div className="section-eyebrow">Western Cape</div>
           <h1 className="section-title">Wedding <em>Venues</em></h1>
           <p className="section-desc">Browse {all.length} curated venues across the Western Cape — filter by region, style, size and budget.</p>
+          <p style={{ fontFamily: "var(--ff-sans)", fontSize: "0.72rem", color: "var(--muted)", marginTop: "0.5rem", fontStyle: "italic" }}>📷 Images shown are illustrative — real venue photography coming soon.</p>
         </div>
       </div>
       <div className="filter-bar">
@@ -632,60 +635,38 @@ function VenuesPage({ extraVenues }) {
   );
 }
 
-function VendorsPage({ extraVendors }) {
-  const [cat, setCat] = useState("All");
-  const [region, setRegion] = useState("All Regions");
-  const [search, setSearch] = useState("");
-  const [selected, setSelected] = useState(null);
-  const all = [...VENDORS, ...extraVendors];
-
-  const filtered = all.filter(v => {
-    if (cat !== "All" && v.category !== cat) return false;
-    if (region !== "All Regions" && v.region !== region) return false;
-    if (search && !v.name.toLowerCase().includes(search.toLowerCase()) && !v.description.toLowerCase().includes(search.toLowerCase())) return false;
-    return true;
-  });
-
+function VendorsPage() {
   return (
     <section style={{ paddingTop: "3rem" }}>
-      {selected && <VendorModal vendor={selected} onClose={() => setSelected(null)} />}
       <div className="section-header">
         <div>
           <div className="section-eyebrow">Wedding Suppliers</div>
           <h1 className="section-title">Cape <em>Vendors</em></h1>
-          <p className="section-desc">Discover {all.length} trusted wedding vendors across the Western Cape, from photographers to florists.</p>
+          <p className="section-desc">Photographers, florists, caterers, planners and more — all hand-selected for the Western Cape market.</p>
         </div>
       </div>
-      <div className="tags">
-        {VENDOR_CATS.map(c => <span key={c} className={`tag${cat === c ? " active" : ""}`} onClick={() => setCat(c)}>{c}</span>)}
+
+      <div style={{ background: "var(--cream2)", border: "1px solid var(--border)", borderRadius: "8px", padding: "4rem 2.5rem", textAlign: "center", margin: "2rem 0" }}>
+        <div style={{ fontSize: "2.5rem", marginBottom: "1.25rem" }}>🌸</div>
+        <div style={{ fontFamily: "var(--ff-sans)", fontSize: "0.68rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "0.75rem" }}>Coming Soon</div>
+        <h2 style={{ fontFamily: "var(--ff-serif)", fontSize: "clamp(1.6rem, 3vw, 2.2rem)", color: "var(--green)", marginBottom: "1rem", lineHeight: 1.2 }}>Our Vendor Directory<br /><em>Is on Its Way</em></h2>
+        <p style={{ fontFamily: "var(--ff-body)", fontSize: "1.05rem", color: "var(--muted)", maxWidth: "480px", margin: "0 auto 2rem", lineHeight: 1.75 }}>We're carefully curating the Western Cape's best photographers, florists, caterers, planners and more. Check back soon.</p>
+        <div style={{ display: "flex", gap: "0.75rem", justifyContent: "center", flexWrap: "wrap" }}>
+          {["Photography", "Floristry", "Catering", "Coordination", "Entertainment", "Hair & Make-up", "Décor & Hire", "Cake & Desserts"].map(cat => (
+            <span key={cat} style={{ fontFamily: "var(--ff-sans)", fontSize: "0.65rem", letterSpacing: "0.08em", textTransform: "uppercase", background: "#fff", border: "1px solid var(--border)", color: "var(--muted)", padding: "0.3rem 0.75rem", borderRadius: "12px" }}>{cat}</span>
+          ))}
+        </div>
       </div>
-      <div className="filter-bar" style={{ paddingTop: "1rem", paddingBottom: "1rem" }}>
-        <div className="filter-search">
-          <div className="filter-label">Search vendors</div>
-          <input className="filter-input" placeholder="Search by name or specialty…" value={search} onChange={e => setSearch(e.target.value)} />
+
+      <div style={{ background: "var(--green)", borderRadius: "6px", padding: "2rem 2.5rem", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "1.5rem" }}>
+        <div>
+          <div style={{ fontFamily: "var(--ff-sans)", fontSize: "0.68rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold2)", marginBottom: "0.5rem" }}>Are you a wedding supplier?</div>
+          <div style={{ fontFamily: "var(--ff-serif)", fontSize: "1.3rem", color: "#fff", lineHeight: 1.2 }}>Get listed when we launch <em>vendor profiles</em></div>
         </div>
-        <div className="filter-group">
-          <div className="filter-label">Region</div>
-          <select className="filter-select" value={region} onChange={e => setRegion(e.target.value)}>
-            {REGIONS.map(r => <option key={r}>{r}</option>)}
-          </select>
-        </div>
-        <button className="filter-clear" onClick={() => { setCat("All"); setRegion("All Regions"); setSearch(""); }}>Clear</button>
+        <a href="mailto:hello@capevows.co.za?subject=Vendor Listing Enquiry" style={{ textDecoration: "none" }}>
+          <button className="btn btn-primary">Get in Touch</button>
+        </a>
       </div>
-      <div className="flex-between" style={{ marginBottom: "1.5rem" }}>
-        <span className="results-count">{filtered.length} vendor{filtered.length !== 1 ? "s" : ""} found</span>
-      </div>
-      {filtered.length === 0 ? (
-        <div className="empty">
-          <div className="empty-icon">🌸</div>
-          <div className="empty-title">No vendors match your search</div>
-          <div className="empty-sub">Try a different category or region</div>
-        </div>
-      ) : (
-        <div className="cards-grid">
-          {filtered.map(v => <VendorCard key={v.id} vendor={v} onClick={setSelected} />)}
-        </div>
-      )}
     </section>
   );
 }
@@ -749,7 +730,7 @@ export default function App() {
 
       {page === "home" && <HomePage setPage={setPage} />}
       {page === "venues" && <VenuesPage extraVenues={extraVenues} />}
-      {page === "vendors" && <VendorsPage extraVendors={extraVendors} />}
+      {page === "vendors" && <VendorsPage />}
       {page === "admin" && <AdminPage onAddVenue={addVenue} onAddVendor={addVendor} extraVenues={extraVenues} extraVendors={extraVendors} />}
 
       <footer>
