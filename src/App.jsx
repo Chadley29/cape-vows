@@ -39,7 +39,7 @@ const css = `
   .nav-link.cta:hover { background: var(--green2); color: #fff; }
 
   /* Hero */
-  .hero { position: relative; min-height: 88vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--green); }
+  .hero { position: relative; min-height: 88vh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; background: var(--green); padding-bottom: 3rem; }
   .hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #1a2e26 0%, #2D4A3E 40%, #3d6356 70%, #8a6b4a 100%); }
   .hero-pattern { position: absolute; inset: 0; opacity: 0.08; background-image: repeating-linear-gradient(45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%); background-size: 20px 20px; }
   .hero-overlay { position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 50%, rgba(184,137,90,0.15) 0%, transparent 60%); }
@@ -54,13 +54,44 @@ const css = `
   .btn-primary:hover { background: var(--gold2); transform: translateY(-1px); }
   .btn-outline { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.4); }
   .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); }
-  .hero-stats { position: absolute; bottom: 2.5rem; left: 0; right: 0; display: flex; justify-content: center; gap: 3rem; z-index: 2; }
+  .hero-stats { position: relative; display: flex; justify-content: center; gap: 3rem; z-index: 2; margin-top: 3rem; padding-bottom: 1rem; }
   .hero-stat { text-align: center; color: rgba(255,255,255,0.8); }
   .hero-stat-n { font-family: var(--ff-serif); font-size: 2rem; color: var(--gold2); display: block; }
   .hero-stat-l { font-family: var(--ff-sans); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.7; }
 
   /* Section */
   section { padding: 5rem 2.5rem; max-width: 1200px; margin: 0 auto; }
+
+  /* ── Responsive ──────────────────────────────────────────────────── */
+  @media (max-width: 480px) {
+    nav { padding: 0 1rem; }
+    .nav-logo { font-size: 1.1rem; }
+    .hero-content { padding: 2rem 1rem; }
+    .hero-stats { gap: 1.5rem; margin-top: 2rem; }
+    section { padding: 3rem 1rem; }
+    .filter-bar { padding: 1rem; }
+    .modal-body { padding: 1.25rem 1rem; }
+    .modal-actions { padding: 1rem 1rem 1.5rem; }
+    .modal-hero-text { left: 1rem; font-size: 1.3rem; }
+    .modal-grid { grid-template-columns: 1fr; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .section-header { flex-direction: column; align-items: flex-start; }
+    .hero-actions { flex-direction: column; align-items: center; }
+  }
+  @media (max-width: 360px) {
+    body { font-size: 16px; overflow-x: hidden; }
+    .nav-logo { font-size: 1rem; }
+    .nav-link { padding: 0.5rem 0.6rem; font-size: 0.68rem; letter-spacing: 0.06em; }
+    .hero-stats { gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .hero-stat-n { font-size: 1.5rem; }
+    .hero-stat-l { font-size: 0.58rem; }
+    .btn { padding: 0.75rem 1.25rem; font-size: 0.65rem; }
+    .filter-group { min-width: 100%; }
+    section { padding: 2.5rem 0.75rem; }
+    .modal { border-radius: 0; }
+    .research-input-row { flex-direction: column; }
+    .research-url-input { min-width: unset; width: 100%; }
+  }
   .section-eyebrow { font-family: var(--ff-sans); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
   .section-title { font-family: var(--ff-serif); font-size: clamp(2rem, 4vw, 3rem); color: var(--green); line-height: 1.2; margin-bottom: 1rem; }
   .section-title em { font-style: italic; }
@@ -165,7 +196,7 @@ const css = `
   .empty-sub { font-family: var(--ff-body); color: var(--muted); }
 
   /* Footer */
-  footer { background: var(--green); color: rgba(255,255,255,0.7); text-align: center; padding: 3rem 2rem; margin-top: 4rem; }
+  footer { background: var(--green); color: rgba(255,255,255,0.7); text-align: center; padding: 3rem 1rem; margin-top: 4rem; width: 100%; }
   .footer-logo { font-family: var(--ff-serif); font-size: 1.5rem; color: var(--gold2); font-style: italic; margin-bottom: 0.75rem; }
   .footer-sub { font-family: var(--ff-sans); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.5; }
 
@@ -502,8 +533,10 @@ function ResearchPanel({ onAddVenue, onAddVendor }) {
 
 // ─── Pages ─────────────────────────────────────────────────────────────────────
 function HomePage({ setPage }) {
+  const [selected, setSelected] = useState(null);
   return (
     <>
+      {selected && <VenueModal venue={selected} onClose={() => setSelected(null)} />}
       <div className="hero">
         <div className="hero-bg" />
         <div className="hero-pattern" />
@@ -534,11 +567,11 @@ function HomePage({ setPage }) {
           <button className="btn btn-primary" onClick={() => setPage("venues")}>View All Venues</button>
         </div>
         <div className="cards-grid">
-          {VENUES.slice(0, 3).map(v => <VenueCard key={v.id} venue={v} onClick={() => {}} />)}
+          {VENUES.slice(0, 3).map(v => <VenueCard key={v.id} venue={v} onClick={setSelected} />)}
         </div>
       </section>
 
-      <div style={{ background: "var(--green)", padding: "4rem 2.5rem", textAlign: "center" }}>
+      <div style={{ background: "var(--green)", padding: "4rem 2.5rem", textAlign: "center", width: "100%" }}>
         <div style={{ maxWidth: "640px", margin: "0 auto" }}>
           <div style={{ fontFamily: "var(--ff-sans)", fontSize: "0.68rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold2)", marginBottom: "1rem" }}>Wedding Suppliers</div>
           <h2 style={{ fontFamily: "var(--ff-serif)", fontSize: "clamp(2rem, 4vw, 3rem)", color: "#fff", marginBottom: "1rem", lineHeight: 1.2 }}>Every Expert You <em>Need</em></h2>
