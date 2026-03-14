@@ -92,6 +92,7 @@ const css = `
     .research-input-row { flex-direction: column; }
     .research-url-input { min-width: unset; width: 100%; }
   }
+
   .section-eyebrow { font-family: var(--ff-sans); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
   .section-title { font-family: var(--ff-serif); font-size: clamp(2rem, 4vw, 3rem); color: var(--green); line-height: 1.2; margin-bottom: 1rem; }
   .section-title em { font-style: italic; }
@@ -213,21 +214,14 @@ styleEl.textContent = css;
 document.head.appendChild(styleEl);
 
 // ─── Data ──────────────────────────────────────────────────────────────────────
-const REGIONS = ["All Regions", "Cape Winelands", "Cape Town City", "Atlantic Seaboard", "Constantia Valley", "Overberg", "Garden Route", "West Coast"];
-const VENUE_TYPES = ["All Types", "Wine Estate", "Mountain Retreat", "Beach & Coastal", "Historic Manor", "Garden Estate", "Boutique Hotel", "Farm & Country"];
-const CAPACITIES = ["Any Capacity", "Up to 50", "50–100", "100–200", "200+"];
 const PRICE_RANGES = ["Any Budget", "Budget (< R50k)", "Mid-Range (R50–150k)", "Premium (R150–300k)", "Luxury (R300k+)"];
-
-const VENDOR_CATS = ["All", "Photography", "Floristry", "Catering", "Entertainment", "Coordination", "Hair & Make-up", "Décor & Hire", "Cake & Desserts", "Transport", "Stationery"];
 
 const VENUES = [
   { id: 1, img: "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=800&q=80", name: "Babylonstoren", region: "Cape Winelands", type: "Wine Estate", capacity: "Up to 100", price: "Luxury (R300k+)", address: "Babylonstoren Farm, Simondium, Franschhoek", phone: "021 863 3852", website: "https://babylonstoren.com/weddings", description: "A magnificently restored Cape Dutch farm with a historic homestead, eight themed gardens and breathtaking Simonsberg Mountain views. The estate offers an unparalleled setting for bespoke weddings in one of South Africa's most celebrated wine regions.", features: ["Wine Tasting", "On-site Accommodation", "Farm-to-Table Catering", "Bridal Suite", "Mountain Views", "Outdoor Ceremony"], highlight: "Eight iconic heritage gardens" },
   { id: 2, img: "https://images.unsplash.com/photo-1510627489930-0c1b0bfb6785?auto=format&fit=crop&w=800&q=80", name: "Boschendal Wine Estate", region: "Cape Winelands", type: "Wine Estate", capacity: "Up to 200", price: "Luxury (R300k+)", address: "Pniel Road, Groot Drakenstein, Franschhoek", phone: "021 870 4200", website: "https://boschendal.com/events/wedding-venues/", description: "One of South Africa's oldest wine farms, dating back to 1685. Boschendal's iconic Cape Dutch manor house and sprawling grounds provide a timeless backdrop against the Drakenstein Mountains.", features: ["Cape Dutch Architecture", "Award-winning Wines", "Multiple Venues", "Accommodation", "Gourmet Catering", "Heritage Gardens"], highlight: "Founded in 1685 — over 300 years of history" },
   { id: 3, img: "https://images.unsplash.com/photo-1506377585622-bedcbb027afc?auto=format&fit=crop&w=800&q=80", name: "Cavalli Estate", region: "Cape Winelands", type: "Wine Estate", capacity: "Up to 400", price: "Mid-Range (R50–150k)", address: "R44, Somerset West, Helderberg", phone: "021 855 3218", website: "https://cavalliestate.com/functions-weddings/main-venue/", description: "An ultra-modern equestrian wine estate where equine elegance meets contemporary luxury. Cavalli features a striking glass-and-steel venue with panoramic vineyard and mountain views, plus a working stud farm.", features: ["Modern Architecture", "Equestrian Setting", "Fine Dining", "Wine & Art", "Helicopter Access", "Bridal Suite"], highlight: "Stunning glass venue overlooking the Helderberg" },
   { id: 4, img: "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?auto=format&fit=crop&w=800&q=80", name: "La Motte Wine Estate", region: "Cape Winelands", type: "Wine Estate", capacity: "Up to 72", price: "Budget (< R50k)", address: "R45, Main Road, Franschhoek", phone: "021 876 8000", website: "https://la-motte.com/", description: "Nestled in the heart of Franschhoek Valley, La Motte combines exceptional wine, art, and heritage. The estate's beautifully restored homestead and museum create an intimate, cultured wedding atmosphere.", features: ["Art Museum On-site", "Heritage Homestead", "Award-winning Restaurant", "Wine Pairing", "Fynbos Gardens", "Intimate Ceremony Spaces"], highlight: "Where wine, art, and heritage intertwine" },
-
   { id: 6, img: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=800&q=80", name: "Zorgvliet Wines", region: "Cape Winelands", type: "Farm & Country", capacity: "Up to 140", price: "Premium (R150–300k)", address: "Banhoek Valley, Stellenbosch", phone: "021 885 1399", website: "https://zorgvliet.com/weddings/", description: "Hidden in the lush Banhoek Valley between Stellenbosch and Franschhoek, Zorgvliet is a tranquil wine farm offering a beautifully intimate setting with magnificent mountain surrounds and indigenous gardens.", features: ["Banhoek Valley Setting", "Indigenous Gardens", "River Views", "Rustic Barn Venue", "Wine Tasting", "Country Charm"], highlight: "Secret valley charm with mountain backdrops" },
-
   { id: 8, img: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=800&q=80", name: "Nooitgedacht Wine Estate", region: "Cape Winelands", type: "Garden Estate", capacity: "Up to 300", price: "Mid-Range (R50–150k)", address: "Nooitgedacht Farm, Koelenhof, Stellenbosch", phone: "021 865 2495", website: "https://www.nooitgedachtestate.co.za/weddings", description: "A sprawling Stellenbosch estate with beautiful rose gardens, a restored manor house, and charming farm atmosphere. Nooitgedacht offers a versatile setting for both intimate garden ceremonies and large celebrations.", features: ["Rose Gardens", "Manor House", "Large Capacity", "Multiple Reception Areas", "Flexible Packages", "On-site Catering"], highlight: "Famous rose gardens in full bloom" },
   { id: 9, img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80", name: "Groot Constantia", region: "Constantia Valley", type: "Historic Manor", capacity: "Up to 200", price: "Premium (R150–300k)", address: "Groot Constantia Rd, Constantia, Cape Town", phone: "021 794 5128", website: "https://grootconstantia.co.za/groot-constantia-jewel-in-the-capes-wedding-venue-crown/", description: "South Africa's oldest wine estate, founded in 1685 by Simon van der Stel. The National Monument manor house and ancient oak trees create an incomparably historic wedding setting in the Constantia valley.", features: ["National Monument", "Oldest Wine Farm", "Oak-lined Avenues", "Museum On-site", "Multiple Restaurants", "Heritage Cellar"], highlight: "South Africa's oldest wine estate — est. 1685" },
   { id: 10, img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80", name: "Steenberg Farm", region: "Constantia Valley", type: "Boutique Hotel", capacity: "Up to 100", price: "Luxury (R300k+)", address: "Steenberg Road, Tokai, Cape Town", phone: "021 713 2222", website: "https://steenbergfarm.com/weddings/", description: "The elegant Steenberg Hotel sits on a historic 1682 farm in Constantia. The Conservatory venue features soaring glass ceilings and vineyard views, with 5-star hotel amenities for the perfect luxury wedding weekend.", features: ["5-Star Hotel", "Glass Conservatory", "Golf Course", "Vineyard Views", "Full Accommodation", "Spa & Wellness"], highlight: "5-star luxury on a 1682 historic farm" },
@@ -278,7 +272,7 @@ function VenueCard({ venue, onClick }) {
         <div className="card-title">{venue.name}</div>
         <div className="card-desc">{venue.description}</div>
         <div className="card-meta">
-          <span className="card-pill">👥 {venue.capacity}</span>
+          <span className="card-pill">👥 {venue.capacity} guests</span>
           <span className="card-pill green">✦ {venue.highlight}</span>
         </div>
       </div>
@@ -473,7 +467,6 @@ function ResearchPanel({ onAddVenue, onAddVendor }) {
     <div className="research-panel">
       <div className="research-title">🔍 AI Research Tool</div>
       <div className="research-sub">Paste any Western Cape venue or vendor website URL and Claude will research and extract the key details automatically.</div>
-
       <div className="research-input-row">
         <input className="research-url-input" value={url} onChange={e => setUrl(e.target.value)} placeholder="https://example-venue.co.za" onKeyDown={e => e.key === "Enter" && research()} />
         <select className="research-type-select" value={type} onChange={e => setType(e.target.value)}>
@@ -484,14 +477,11 @@ function ResearchPanel({ onAddVenue, onAddVendor }) {
           {loading ? "Researching…" : "Research & Extract"}
         </button>
       </div>
-
       {loading && <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", padding: "0.5rem 0", fontFamily: "var(--ff-sans)", fontSize: "0.85rem", color: "var(--muted)" }}>
         <div className="loading-dots"><span /><span /><span /></div> Searching the web and extracting details…
       </div>}
-
       {error && <div className="error-notice">{error}</div>}
       {saved && <div className="success-notice">✓ Successfully added to the directory!</div>}
-
       {result && (
         <div className="research-result">
           <div className="research-result-title">Extracted Details — Review & Edit Before Saving</div>
@@ -542,7 +532,6 @@ function HomePage({ setPage }) {
         <div className="hero-pattern" />
         <div className="hero-overlay" />
         <div className="hero-content">
-          <div className="hero-eyebrow">Western Cape, South Africa</div>
           <h1 className="hero-title">Your Perfect<br /><em>Cape Wedding</em><br />Awaits</h1>
           <p className="hero-sub">The definitive directory of venues & vendors across the Cape Winelands, Cape Town, and beyond — curated in one elegant place.</p>
           <div className="hero-actions">
@@ -567,7 +556,11 @@ function HomePage({ setPage }) {
           <button className="btn btn-primary" onClick={() => setPage("venues")}>View All Venues</button>
         </div>
         <div className="cards-grid">
-          {VENUES.slice(0, 3).map(v => <VenueCard key={v.id} venue={v} onClick={setSelected} />)}
+          {[
+            VENUES.find(v => v.price === "Mid-Range (R50–150k)"),
+            VENUES.find(v => v.price === "Premium (R150–300k)"),
+            VENUES.find(v => v.price === "Luxury (R300k+)"),
+          ].filter(Boolean).map(v => <VenueCard key={v.id} venue={v} onClick={setSelected} />)}
         </div>
       </section>
 
@@ -575,8 +568,10 @@ function HomePage({ setPage }) {
         <div style={{ maxWidth: "640px", margin: "0 auto" }}>
           <div style={{ fontFamily: "var(--ff-sans)", fontSize: "0.68rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold2)", marginBottom: "1rem" }}>Wedding Suppliers</div>
           <h2 style={{ fontFamily: "var(--ff-serif)", fontSize: "clamp(2rem, 4vw, 3rem)", color: "#fff", marginBottom: "1rem", lineHeight: 1.2 }}>Every Expert You <em>Need</em></h2>
-          <p style={{ fontFamily: "var(--ff-body)", color: "rgba(255,255,255,0.7)", marginBottom: "2.5rem", fontSize: "1.1rem" }}>Photographers, florists, caterers, DJs, planners and more — all hand-selected for the Western Cape market.</p>
-          <button className="btn btn-primary" onClick={() => setPage("vendors")}>Browse All Vendors</button>
+          <p style={{ fontFamily: "var(--ff-body)", color: "rgba(255,255,255,0.7)", marginBottom: "2.5rem", fontSize: "1.1rem" }}>Photographers, florists, caterers, DJs, planners and more — all hand-selected for the Western Cape market. Vendor profiles coming soon.</p>
+          <a href="mailto:hello@capevows.co.za?subject=Vendor Listing Enquiry" style={{ textDecoration: "none" }}>
+            <button className="btn btn-primary">Register Your Interest</button>
+          </a>
         </div>
       </div>
 
@@ -587,9 +582,11 @@ function HomePage({ setPage }) {
             <h2 className="section-title" style={{ fontSize: "1.75rem" }}>List Your <em>Business</em></h2>
             <p className="section-desc" style={{ fontSize: "1rem" }}>Are you a venue or wedding supplier in the Western Cape? Get your business discovered by engaged couples planning their big day.</p>
           </div>
-          {/* ── CHANGE 3: "Submit a Listing" button removed from public homepage ── */}
           <div>
-            <p style={{ fontFamily: "var(--ff-sans)", fontSize: "0.8rem", color: "var(--muted)" }}>Contact us to get listed →<br />hello@capevows.co.za</p>
+            <p style={{ fontFamily: "var(--ff-sans)", fontSize: "0.8rem", color: "var(--muted)", marginBottom: "1rem" }}>Contact us to get listed</p>
+            <a href="mailto:hello@capevows.co.za?subject=Listing Enquiry" style={{ textDecoration: "none" }}>
+              <button className="btn-green">hello@capevows.co.za</button>
+            </a>
           </div>
         </div>
       </section>
@@ -600,11 +597,19 @@ function HomePage({ setPage }) {
 function VenuesPage({ extraVenues }) {
   const [region, setRegion] = useState("All Regions");
   const [type, setType] = useState("All Types");
-  const [cap, setCap] = useState("Any Capacity");
   const [price, setPrice] = useState("Any Budget");
   const [search, setSearch] = useState("");
+  const [sort, setSort] = useState("Default");
   const [selected, setSelected] = useState(null);
   const all = [...VENUES, ...extraVenues];
+
+  // Dynamic filters — only show values present in the data
+  const availableRegions = ["All Regions", ...Array.from(new Set(all.map(v => v.region))).sort()];
+  const availableTypes = ["All Types", ...Array.from(new Set(all.map(v => v.type))).sort()];
+  const availablePrices = ["Any Budget", ...PRICE_RANGES.slice(1).filter(p => all.some(v => v.price === p))];
+
+  const priceOrder = { "Budget (< R50k)": 1, "Mid-Range (R50–150k)": 2, "Premium (R150–300k)": 3, "Luxury (R300k+)": 4 };
+  const capNum = (c) => parseInt((c || "0").replace(/\D/g, "")) || 0;
 
   const filtered = all.filter(v => {
     if (region !== "All Regions" && v.region !== region) return false;
@@ -612,6 +617,15 @@ function VenuesPage({ extraVenues }) {
     if (price !== "Any Budget" && v.price !== price) return false;
     if (search && !v.name.toLowerCase().includes(search.toLowerCase()) && !v.description.toLowerCase().includes(search.toLowerCase())) return false;
     return true;
+  });
+
+  const sorted = [...filtered].sort((a, b) => {
+    if (sort === "Price: Low to High") return (priceOrder[a.price] || 0) - (priceOrder[b.price] || 0);
+    if (sort === "Price: High to Low") return (priceOrder[b.price] || 0) - (priceOrder[a.price] || 0);
+    if (sort === "Capacity: Low to High") return capNum(a.capacity) - capNum(b.capacity);
+    if (sort === "Capacity: High to Low") return capNum(b.capacity) - capNum(a.capacity);
+    if (sort === "Name: A–Z") return a.name.localeCompare(b.name);
+    return 0;
   });
 
   return (
@@ -622,7 +636,7 @@ function VenuesPage({ extraVenues }) {
           <div className="section-eyebrow">Western Cape</div>
           <h1 className="section-title">Wedding <em>Venues</em></h1>
           <p className="section-desc">Browse {all.length} curated venues across the Western Cape — filter by region, style, size and budget.</p>
-          <p style={{ fontFamily: "var(--ff-sans)", fontSize: "0.72rem", color: "var(--muted)", marginTop: "0.5rem", fontStyle: "italic" }}>📷 Images shown are illustrative — real venue photography coming soon.</p>
+          <p style={{ fontFamily: "var(--ff-sans)", fontSize: "0.72rem", color: "var(--muted)", marginTop: "0.5rem", fontStyle: "italic" }}>Images shown are illustrative — real venue photography coming soon.</p>
         </div>
       </div>
       <div className="filter-bar">
@@ -633,27 +647,33 @@ function VenuesPage({ extraVenues }) {
         <div className="filter-group">
           <div className="filter-label">Region</div>
           <select className="filter-select" value={region} onChange={e => setRegion(e.target.value)}>
-            {REGIONS.map(r => <option key={r}>{r}</option>)}
+            {availableRegions.map(r => <option key={r}>{r}</option>)}
           </select>
         </div>
         <div className="filter-group">
           <div className="filter-label">Venue Type</div>
           <select className="filter-select" value={type} onChange={e => setType(e.target.value)}>
-            {VENUE_TYPES.map(t => <option key={t}>{t}</option>)}
+            {availableTypes.map(t => <option key={t}>{t}</option>)}
           </select>
         </div>
         <div className="filter-group">
           <div className="filter-label">Budget</div>
           <select className="filter-select" value={price} onChange={e => setPrice(e.target.value)}>
-            {PRICE_RANGES.map(p => <option key={p}>{p}</option>)}
+            {availablePrices.map(p => <option key={p}>{p}</option>)}
           </select>
         </div>
-        <button className="filter-clear" onClick={() => { setRegion("All Regions"); setType("All Types"); setCap("Any Capacity"); setPrice("Any Budget"); setSearch(""); }}>Clear All</button>
+        <div className="filter-group">
+          <div className="filter-label">Sort By</div>
+          <select className="filter-select" value={sort} onChange={e => setSort(e.target.value)}>
+            {["Default", "Price: Low to High", "Price: High to Low", "Capacity: Low to High", "Capacity: High to Low", "Name: A–Z"].map(s => <option key={s}>{s}</option>)}
+          </select>
+        </div>
+        <button className="filter-clear" onClick={() => { setRegion("All Regions"); setType("All Types"); setPrice("Any Budget"); setSearch(""); setSort("Default"); }}>Clear All</button>
       </div>
       <div className="flex-between" style={{ marginBottom: "1.5rem" }}>
-        <span className="results-count">{filtered.length} venue{filtered.length !== 1 ? "s" : ""} found</span>
+        <span className="results-count">{sorted.length} venue{sorted.length !== 1 ? "s" : ""} found</span>
       </div>
-      {filtered.length === 0 ? (
+      {sorted.length === 0 ? (
         <div className="empty">
           <div className="empty-icon">🌿</div>
           <div className="empty-title">No venues match your filters</div>
@@ -661,7 +681,7 @@ function VenuesPage({ extraVenues }) {
         </div>
       ) : (
         <div className="cards-grid">
-          {filtered.map(v => <VenueCard key={v.id} venue={v} onClick={setSelected} />)}
+          {sorted.map(v => <VenueCard key={v.id} venue={v} onClick={setSelected} />)}
         </div>
       )}
     </section>
@@ -680,7 +700,7 @@ function VendorsPage() {
       </div>
 
       <div style={{ background: "var(--cream2)", border: "1px solid var(--border)", borderRadius: "8px", padding: "4rem 2.5rem", textAlign: "center", margin: "2rem 0" }}>
-        <div style={{ fontSize: "2.5rem", marginBottom: "1.25rem" }}>🌸</div>
+        <div style={{ fontSize: "2.5rem", marginBottom: "1.25rem" }}>✦</div>
         <div style={{ fontFamily: "var(--ff-sans)", fontSize: "0.68rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "0.75rem" }}>Coming Soon</div>
         <h2 style={{ fontFamily: "var(--ff-serif)", fontSize: "clamp(1.6rem, 3vw, 2.2rem)", color: "var(--green)", marginBottom: "1rem", lineHeight: 1.2 }}>Our Vendor Directory<br /><em>Is on Its Way</em></h2>
         <p style={{ fontFamily: "var(--ff-body)", fontSize: "1.05rem", color: "var(--muted)", maxWidth: "480px", margin: "0 auto 2rem", lineHeight: 1.75 }}>We're carefully curating the Western Cape's best photographers, florists, caterers, planners and more. Check back soon.</p>
@@ -739,7 +759,6 @@ function AdminPage({ onAddVenue, onAddVendor, extraVenues, extraVendors }) {
 
 // ─── App ───────────────────────────────────────────────────────────────────────
 export default function App() {
-  // ── CHANGE 1: Read hash on load — go to admin only if URL ends in #admin ──
   const [page, setPage] = useState(
     window.location.hash === "#admin" ? "admin" : "home"
   );
@@ -757,7 +776,6 @@ export default function App() {
           <button className={`nav-link${page === "home" ? " active" : ""}`} onClick={() => setPage("home")}>Home</button>
           <button className={`nav-link${page === "venues" ? " active" : ""}`} onClick={() => setPage("venues")}>Venues</button>
           <button className={`nav-link${page === "vendors" ? " active" : ""}`} onClick={() => setPage("vendors")}>Vendors</button>
-          {/* ── CHANGE 2: "+ Add Listing" button removed — access via capevows.co.za/#admin ── */}
         </div>
       </nav>
 
