@@ -213,6 +213,13 @@ const styleEl = document.createElement("style");
 styleEl.textContent = css;
 document.head.appendChild(styleEl);
 
+// ─── Analytics ────────────────────────────────────────────────────────────────
+const track = (eventName, params = {}) => {
+  if (typeof window.gtag === "function") {
+    window.gtag("event", eventName, params);
+  }
+};
+
 // ─── Data ──────────────────────────────────────────────────────────────────────
 const REGIONS = [
   "All Regions",
@@ -665,7 +672,18 @@ const getGradient = (id) => gradients[id % gradients.length];
 // ─── Components ────────────────────────────────────────────────────────────────
 function VenueCard({ venue, onClick }) {
   return (
-    <div className="card" onClick={() => onClick(venue)}>
+    <div
+      className="card"
+      onClick={() => {
+        track("venue_card_click", {
+          venue_name: venue.name,
+          venue_region: venue.region,
+          venue_type: venue.type,
+          venue_price: venue.price,
+        });
+        onClick(venue);
+      }}
+    >
       <div className="card-img">
         {venue.img ? (
           <img src={venue.img} alt={venue.name} loading="lazy" />
@@ -711,7 +729,17 @@ function VenueCard({ venue, onClick }) {
 
 function VendorCard({ vendor, onClick }) {
   return (
-    <div className="card" onClick={() => onClick(vendor)}>
+    <div
+      className="card"
+      onClick={() => {
+        track("vendor_card_click", {
+          vendor_name: vendor.name,
+          vendor_category: vendor.category,
+          vendor_region: vendor.region,
+        });
+        onClick(vendor);
+      }}
+    >
       <div className="card-img" style={{ height: "180px" }}>
         {vendor.img ? (
           <img src={vendor.img} alt={vendor.name} loading="lazy" />
@@ -740,6 +768,13 @@ function VendorCard({ vendor, onClick }) {
 }
 
 function VenueModal({ venue, onClose }) {
+  useEffect(() => {
+    track("venue_modal_open", {
+      venue_name: venue.name,
+      venue_region: venue.region,
+      venue_price: venue.price,
+    });
+  }, []);
   return (
     <div
       className="modal-overlay"
@@ -826,6 +861,13 @@ function VenueModal({ venue, onClose }) {
             target="_blank"
             rel="noopener noreferrer"
             style={{ textDecoration: "none" }}
+            onClick={() =>
+              track("outbound_click", {
+                venue_name: venue.name,
+                destination: venue.website,
+                click_location: "venue_modal",
+              })
+            }
           >
             <button className="btn-green">Visit Official Website</button>
           </a>
@@ -839,6 +881,12 @@ function VenueModal({ venue, onClose }) {
 }
 
 function VendorModal({ vendor, onClose }) {
+  useEffect(() => {
+    track("vendor_modal_open", {
+      vendor_name: vendor.name,
+      vendor_category: vendor.category,
+    });
+  }, []);
   return (
     <div
       className="modal-overlay"
@@ -1245,13 +1293,19 @@ function HomePage({ setPage }) {
           <div className="hero-actions">
             <button
               className="btn btn-primary"
-              onClick={() => setPage("venues")}
+              onClick={() => {
+                track("hero_cta_click", { button: "explore_venues" });
+                setPage("venues");
+              }}
             >
               Explore Venues
             </button>
             <button
               className="btn btn-outline"
-              onClick={() => setPage("vendors")}
+              onClick={() => {
+                track("hero_cta_click", { button: "find_vendors" });
+                setPage("vendors");
+              }}
             >
               Find Vendors
             </button>
@@ -1286,7 +1340,16 @@ function HomePage({ setPage }) {
               destinations.
             </p>
           </div>
-          <button className="btn btn-primary" onClick={() => setPage("venues")}>
+          <button
+            className="btn btn-primary"
+            onClick={() => {
+              track("cta_click", {
+                button: "view_all_venues",
+                location: "homepage_featured",
+              });
+              setPage("venues");
+            }}
+          >
             View All Venues
           </button>
         </div>
@@ -1350,6 +1413,12 @@ function HomePage({ setPage }) {
           <a
             href="mailto:hello@capevows.co.za?subject=Vendor Listing Enquiry"
             style={{ textDecoration: "none" }}
+            onClick={() =>
+              track("email_cta_click", {
+                button: "register_interest",
+                location: "homepage_vendor_band",
+              })
+            }
           >
             <button className="btn btn-primary">Register Your Interest</button>
           </a>
@@ -1394,6 +1463,12 @@ function HomePage({ setPage }) {
             <a
               href="mailto:hello@capevows.co.za?subject=Listing Enquiry"
               style={{ textDecoration: "none" }}
+              onClick={() =>
+                track("email_cta_click", {
+                  button: "get_listed",
+                  location: "homepage_listing_cta",
+                })
+              }
             >
               <button className="btn-green">hello@capevows.co.za</button>
             </a>
@@ -1504,7 +1579,14 @@ function VenuesPage({ extraVenues }) {
           <select
             className="filter-select"
             value={region}
-            onChange={(e) => setRegion(e.target.value)}
+            onChange={(e) => {
+              setRegion(e.target.value);
+              if (e.target.value !== "All Regions")
+                track("filter_used", {
+                  filter_type: "region",
+                  value: e.target.value,
+                });
+            }}
           >
             {availableRegions.map((r) => (
               <option key={r}>{r}</option>
@@ -1516,7 +1598,14 @@ function VenuesPage({ extraVenues }) {
           <select
             className="filter-select"
             value={type}
-            onChange={(e) => setType(e.target.value)}
+            onChange={(e) => {
+              setType(e.target.value);
+              if (e.target.value !== "All Types")
+                track("filter_used", {
+                  filter_type: "venue_type",
+                  value: e.target.value,
+                });
+            }}
           >
             {availableTypes.map((t) => (
               <option key={t}>{t}</option>
@@ -1528,7 +1617,14 @@ function VenuesPage({ extraVenues }) {
           <select
             className="filter-select"
             value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            onChange={(e) => {
+              setPrice(e.target.value);
+              if (e.target.value !== "Any Budget")
+                track("filter_used", {
+                  filter_type: "budget",
+                  value: e.target.value,
+                });
+            }}
           >
             {availablePrices.map((p) => (
               <option key={p}>{p}</option>
@@ -1540,7 +1636,11 @@ function VenuesPage({ extraVenues }) {
           <select
             className="filter-select"
             value={sort}
-            onChange={(e) => setSort(e.target.value)}
+            onChange={(e) => {
+              setSort(e.target.value);
+              if (e.target.value !== "Default")
+                track("sort_used", { sort_value: e.target.value });
+            }}
           >
             {[
               "Default",
@@ -1731,6 +1831,12 @@ function VendorsPage() {
         <a
           href="mailto:hello@capevows.co.za?subject=Vendor Listing Enquiry"
           style={{ textDecoration: "none" }}
+          onClick={() =>
+            track("email_cta_click", {
+              button: "get_in_touch",
+              location: "vendors_page",
+            })
+          }
         >
           <button className="btn btn-primary">Get in Touch</button>
         </a>
@@ -1853,6 +1959,11 @@ export default function App() {
     setShowCookieBanner(false);
   };
 
+  const navigateTo = (p) => {
+    setPage(p);
+    track("page_view", { page_name: p });
+  };
+
   return (
     <div>
       <nav>
@@ -1862,26 +1973,26 @@ export default function App() {
         <div className="nav-links">
           <button
             className={`nav-link${page === "home" ? " active" : ""}`}
-            onClick={() => setPage("home")}
+            onClick={() => navigateTo("home")}
           >
             Home
           </button>
           <button
             className={`nav-link${page === "venues" ? " active" : ""}`}
-            onClick={() => setPage("venues")}
+            onClick={() => navigateTo("venues")}
           >
             Venues
           </button>
           <button
             className={`nav-link${page === "vendors" ? " active" : ""}`}
-            onClick={() => setPage("vendors")}
+            onClick={() => navigateTo("vendors")}
           >
             Vendors
           </button>
         </div>
       </nav>
 
-      {page === "home" && <HomePage setPage={setPage} />}
+      {page === "home" && <HomePage setPage={navigateTo} />}
       {page === "venues" && <VenuesPage extraVenues={extraVenues} />}
       {page === "vendors" && <VendorsPage />}
       {page === "admin" && (
