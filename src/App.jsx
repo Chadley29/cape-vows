@@ -267,7 +267,7 @@ const VENDOR_CATS = [
 const VENUES = [
   {
     id: 1,
-    img: "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=800&q=80",
+    img: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=800&q=80",
     name: "Babylonstoren",
     region: "Cape Winelands",
     type: "Wine Estate",
@@ -313,7 +313,7 @@ const VENUES = [
   },
   {
     id: 3,
-    img: "https://images.unsplash.com/photo-1506377585622-bedcbb027afc?auto=format&fit=crop&w=800&q=80",
+    img: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
     name: "Cavalli Estate",
     region: "Cape Winelands",
     type: "Wine Estate",
@@ -336,7 +336,7 @@ const VENUES = [
   },
   {
     id: 4,
-    img: "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?auto=format&fit=crop&w=800&q=80",
+    img: "https://images.unsplash.com/photo-1543722530-d2c3201371e7?auto=format&fit=crop&w=800&q=80",
     name: "La Motte Wine Estate",
     region: "Cape Winelands",
     type: "Wine Estate",
@@ -360,7 +360,7 @@ const VENUES = [
 
   {
     id: 6,
-    img: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=800&q=80",
+    img: "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=800&q=80",
     name: "Zorgvliet Wines",
     region: "Cape Winelands",
     type: "Farm & Country",
@@ -384,7 +384,7 @@ const VENUES = [
 
   {
     id: 8,
-    img: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=800&q=80",
+    img: "https://images.unsplash.com/photo-1508193638397-1c4234db14d8?auto=format&fit=crop&w=800&q=80",
     name: "Nooitgedacht Wine Estate",
     region: "Cape Winelands",
     type: "Garden Estate",
@@ -407,7 +407,7 @@ const VENUES = [
   },
   {
     id: 9,
-    img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80",
+    img: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=800&q=80",
     name: "Groot Constantia",
     region: "Constantia Valley",
     type: "Historic Manor",
@@ -454,7 +454,7 @@ const VENUES = [
   },
   {
     id: 11,
-    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+    img: "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=800&q=80",
     name: "Hawksmoor House",
     region: "Cape Town City",
     type: "Historic Manor",
