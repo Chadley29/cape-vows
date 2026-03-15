@@ -93,7 +93,6 @@ const css = `
     .research-input-row { flex-direction: column; }
     .research-url-input { min-width: unset; width: 100%; }
   }
-
   .section-eyebrow { font-family: var(--ff-sans); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
   .section-title { font-family: var(--ff-serif); font-size: clamp(2rem, 4vw, 3rem); color: var(--green); line-height: 1.2; margin-bottom: 1rem; }
   .section-title em { font-style: italic; }
@@ -215,12 +214,47 @@ styleEl.textContent = css;
 document.head.appendChild(styleEl);
 
 // ─── Data ──────────────────────────────────────────────────────────────────────
+const REGIONS = [
+  "All Regions",
+  "Cape Winelands",
+  "Cape Town City",
+  "Atlantic Seaboard",
+  "Constantia Valley",
+  "Overberg",
+  "Garden Route",
+  "West Coast",
+];
+const VENUE_TYPES = [
+  "All Types",
+  "Wine Estate",
+  "Mountain Retreat",
+  "Beach & Coastal",
+  "Historic Manor",
+  "Garden Estate",
+  "Boutique Hotel",
+  "Farm & Country",
+];
+const CAPACITIES = ["Any Capacity", "Up to 50", "50–100", "100–200", "200+"];
 const PRICE_RANGES = [
   "Any Budget",
   "Budget (< R50k)",
   "Mid-Range (R50–150k)",
   "Premium (R150–300k)",
   "Luxury (R300k+)",
+];
+
+const VENDOR_CATS = [
+  "All",
+  "Photography",
+  "Floristry",
+  "Catering",
+  "Entertainment",
+  "Coordination",
+  "Hair & Make-up",
+  "Décor & Hire",
+  "Cake & Desserts",
+  "Transport",
+  "Stationery",
 ];
 
 const VENUES = [
@@ -316,6 +350,7 @@ const VENUES = [
     ],
     highlight: "Where wine, art, and heritage intertwine",
   },
+
   {
     id: 6,
     img: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=800&q=80",
@@ -339,6 +374,7 @@ const VENUES = [
     ],
     highlight: "Secret valley charm with mountain backdrops",
   },
+
   {
     id: 8,
     img: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=800&q=80",
@@ -995,6 +1031,7 @@ function ResearchPanel({ onAddVenue, onAddVendor }) {
         Paste any Western Cape venue or vendor website URL and Claude will
         research and extract the key details automatically.
       </div>
+
       <div className="research-input-row">
         <input
           className="research-url-input"
@@ -1020,6 +1057,7 @@ function ResearchPanel({ onAddVenue, onAddVendor }) {
           {loading ? "Researching…" : "Research & Extract"}
         </button>
       </div>
+
       {loading && (
         <div
           style={{
@@ -1040,12 +1078,14 @@ function ResearchPanel({ onAddVenue, onAddVendor }) {
           Searching the web and extracting details…
         </div>
       )}
+
       {error && <div className="error-notice">{error}</div>}
       {saved && (
         <div className="success-notice">
           ✓ Successfully added to the directory!
         </div>
       )}
+
       {result && (
         <div className="research-result">
           <div className="research-result-title">
@@ -1339,6 +1379,7 @@ function HomePage({ setPage }) {
               business discovered by engaged couples planning their big day.
             </p>
           </div>
+          {/* ── Contact CTA ── */}
           <div>
             <p
               style={{
@@ -1801,9 +1842,16 @@ export default function App() {
   );
   const [extraVenues, setExtraVenues] = useState([]);
   const [extraVendors, setExtraVendors] = useState([]);
+  const [showCookieBanner, setShowCookieBanner] = useState(
+    () => !localStorage.getItem("cv_cookies_accepted"),
+  );
 
   const addVenue = (v) => setExtraVenues((e) => [...e, v]);
   const addVendor = (v) => setExtraVendors((e) => [...e, v]);
+  const acceptCookies = () => {
+    localStorage.setItem("cv_cookies_accepted", "true");
+    setShowCookieBanner(false);
+  };
 
   return (
     <div>
@@ -1864,6 +1912,78 @@ export default function App() {
           </a>
         </div>
       </footer>
+
+      {showCookieBanner && (
+        <div
+          style={{
+            position: "fixed",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            zIndex: 999,
+            background: "var(--green)",
+            padding: "1rem 2.5rem",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: "1rem",
+            flexWrap: "wrap",
+            borderTop: "1px solid rgba(255,255,255,0.1)",
+          }}
+        >
+          <p
+            style={{
+              fontFamily: "var(--ff-sans)",
+              fontSize: "0.78rem",
+              color: "rgba(255,255,255,0.8)",
+              margin: 0,
+              flex: 1,
+              minWidth: "220px",
+              lineHeight: 1.6,
+            }}
+          >
+            We use cookies to understand how visitors use Cape Vows.{" "}
+            <a
+              href="/privacy-policy.html"
+              style={{ color: "var(--gold2)", textDecoration: "underline" }}
+            >
+              Privacy Policy
+            </a>
+          </p>
+          <div
+            style={{
+              display: "flex",
+              gap: "0.75rem",
+              alignItems: "center",
+              flexShrink: 0,
+            }}
+          >
+            <button
+              className="btn btn-primary"
+              onClick={acceptCookies}
+              style={{ padding: "0.5rem 1.25rem", fontSize: "0.68rem" }}
+            >
+              Got it
+            </button>
+            <button
+              onClick={acceptCookies}
+              style={{
+                fontFamily: "var(--ff-sans)",
+                fontSize: "0.68rem",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                background: "transparent",
+                color: "rgba(255,255,255,0.4)",
+                border: "none",
+                cursor: "pointer",
+                padding: "0.5rem",
+              }}
+            >
+              Dismiss
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
