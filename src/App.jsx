@@ -267,7 +267,7 @@ const VENDOR_CATS = [
 const VENUES = [
   {
     id: 1,
-    img: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=800&q=80",
+    img: "https://images.unsplash.com/photo-1615992290562-d81c200f05cf?auto=format&fit=crop&w=800&q=80",
     name: "Babylonstoren",
     region: "Cape Winelands",
     type: "Wine Estate",
@@ -290,7 +290,7 @@ const VENUES = [
   },
   {
     id: 2,
-    img: "https://images.unsplash.com/photo-1510627489930-0c1b0bfb6785?auto=format&fit=crop&w=800&q=80",
+    img: "https://images.unsplash.com/photo-1615992290562-d81c200f05cf?auto=format&fit=crop&w=800&q=80",
     name: "Boschendal Wine Estate",
     region: "Cape Winelands",
     type: "Wine Estate",
@@ -313,7 +313,7 @@ const VENUES = [
   },
   {
     id: 3,
-    img: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
+    img: "https://images.unsplash.com/photo-1640531783776-abf014a39f7f?auto=format&fit=crop&w=800&q=80",
     name: "Cavalli Estate",
     region: "Cape Winelands",
     type: "Wine Estate",
@@ -336,7 +336,7 @@ const VENUES = [
   },
   {
     id: 4,
-    img: "https://images.unsplash.com/photo-1543722530-d2c3201371e7?auto=format&fit=crop&w=800&q=80",
+    img: "https://images.unsplash.com/photo-1510824737382-5f31941bcb2d?auto=format&fit=crop&w=800&q=80",
     name: "La Motte Wine Estate",
     region: "Cape Winelands",
     type: "Wine Estate",
@@ -360,7 +360,7 @@ const VENUES = [
 
   {
     id: 6,
-    img: "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=800&q=80",
+    img: "https://images.unsplash.com/photo-1510824737382-5f31941bcb2d?auto=format&fit=crop&w=800&q=80",
     name: "Zorgvliet Wines",
     region: "Cape Winelands",
     type: "Farm & Country",
@@ -384,7 +384,7 @@ const VENUES = [
 
   {
     id: 8,
-    img: "https://images.unsplash.com/photo-1508193638397-1c4234db14d8?auto=format&fit=crop&w=800&q=80",
+    img: "https://images.unsplash.com/photo-1640531783776-abf014a39f7f?auto=format&fit=crop&w=800&q=80",
     name: "Nooitgedacht Wine Estate",
     region: "Cape Winelands",
     type: "Garden Estate",
@@ -407,7 +407,7 @@ const VENUES = [
   },
   {
     id: 9,
-    img: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=800&q=80",
+    img: "https://images.unsplash.com/photo-1621151580036-80a52d86d0c3?auto=format&fit=crop&w=800&q=80",
     name: "Groot Constantia",
     region: "Constantia Valley",
     type: "Historic Manor",
@@ -431,7 +431,7 @@ const VENUES = [
   },
   {
     id: 10,
-    img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80",
+    img: "https://images.unsplash.com/photo-1621151580036-80a52d86d0c3?auto=format&fit=crop&w=800&q=80",
     name: "Steenberg Farm",
     region: "Constantia Valley",
     type: "Boutique Hotel",
@@ -454,7 +454,7 @@ const VENUES = [
   },
   {
     id: 11,
-    img: "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=800&q=80",
+    img: "https://images.unsplash.com/photo-1621151580036-80a52d86d0c3?auto=format&fit=crop&w=800&q=80",
     name: "Hawksmoor House",
     region: "Cape Town City",
     type: "Historic Manor",
@@ -477,7 +477,7 @@ const VENUES = [
   },
   {
     id: 12,
-    img: "https://images.unsplash.com/photo-1500076656116-558758c991c1?auto=format&fit=crop&w=800&q=80",
+    img: "https://images.unsplash.com/photo-1720001854251-d539687c33bc?auto=format&fit=crop&w=800&q=80",
     name: "Stanford Valley Guest Farm",
     region: "Overberg",
     type: "Farm & Country",
