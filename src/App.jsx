@@ -336,83 +336,12 @@ const VENUES = [
   },
   {
     id: 4,
-    img: "https://images.unsplash.com/photo-1510824737382-5f31941bcb2d?auto=format&fit=crop&w=800&q=80",
-    name: "La Motte Wine Estate",
-    region: "Cape Winelands",
-    type: "Wine Estate",
-    capacity: "Up to 72",
-    price: "Budget (< R50k)",
-    address: "R45, Main Road, Franschhoek",
-    phone: "021 876 8000",
-    website: "https://la-motte.com/",
-    description:
-      "Nestled in the heart of Franschhoek Valley, La Motte combines exceptional wine, art, and heritage. The estate's beautifully restored homestead and museum create an intimate, cultured wedding atmosphere.",
-    features: [
-      "Art Museum On-site",
-      "Heritage Homestead",
-      "Award-winning Restaurant",
-      "Wine Pairing",
-      "Fynbos Gardens",
-      "Intimate Ceremony Spaces",
-    ],
-    highlight: "Where wine, art, and heritage intertwine",
-  },
-
-  {
-    id: 6,
-    img: "https://images.unsplash.com/photo-1510824737382-5f31941bcb2d?auto=format&fit=crop&w=800&q=80",
-    name: "Zorgvliet Wines",
-    region: "Cape Winelands",
-    type: "Farm & Country",
-    capacity: "Up to 140",
-    price: "Premium (R150–300k)",
-    address: "Banhoek Valley, Stellenbosch",
-    phone: "021 885 1399",
-    website: "https://zorgvliet.com/weddings/",
-    description:
-      "Hidden in the lush Banhoek Valley between Stellenbosch and Franschhoek, Zorgvliet is a tranquil wine farm offering a beautifully intimate setting with magnificent mountain surrounds and indigenous gardens.",
-    features: [
-      "Banhoek Valley Setting",
-      "Indigenous Gardens",
-      "River Views",
-      "Rustic Barn Venue",
-      "Wine Tasting",
-      "Country Charm",
-    ],
-    highlight: "Secret valley charm with mountain backdrops",
-  },
-
-  {
-    id: 8,
-    img: "https://images.unsplash.com/photo-1640531783776-abf014a39f7f?auto=format&fit=crop&w=800&q=80",
-    name: "Nooitgedacht Wine Estate",
-    region: "Cape Winelands",
-    type: "Garden Estate",
-    capacity: "Up to 300",
-    price: "Mid-Range (R50–150k)",
-    address: "Nooitgedacht Farm, Koelenhof, Stellenbosch",
-    phone: "021 865 2495",
-    website: "https://www.nooitgedachtestate.co.za/weddings",
-    description:
-      "A sprawling Stellenbosch estate with beautiful rose gardens, a restored manor house, and charming farm atmosphere. Nooitgedacht offers a versatile setting for both intimate garden ceremonies and large celebrations.",
-    features: [
-      "Rose Gardens",
-      "Manor House",
-      "Large Capacity",
-      "Multiple Reception Areas",
-      "Flexible Packages",
-      "On-site Catering",
-    ],
-    highlight: "Famous rose gardens in full bloom",
-  },
-  {
-    id: 9,
     img: "https://images.unsplash.com/photo-1621151580036-80a52d86d0c3?auto=format&fit=crop&w=800&q=80",
     name: "Groot Constantia",
     region: "Constantia Valley",
     type: "Historic Manor",
     capacity: "Up to 200",
-    price: "Premium (R150–300k)",
+    price: "Contact Venue",
     address: "Groot Constantia Rd, Constantia, Cape Town",
     phone: "021 794 5128",
     website:
@@ -430,30 +359,7 @@ const VENUES = [
     highlight: "South Africa's oldest wine estate — est. 1685",
   },
   {
-    id: 10,
-    img: "https://images.unsplash.com/photo-1621151580036-80a52d86d0c3?auto=format&fit=crop&w=800&q=80",
-    name: "Steenberg Farm",
-    region: "Constantia Valley",
-    type: "Boutique Hotel",
-    capacity: "Up to 100",
-    price: "Luxury (R300k+)",
-    address: "Steenberg Road, Tokai, Cape Town",
-    phone: "021 713 2222",
-    website: "https://steenbergfarm.com/weddings/",
-    description:
-      "The elegant Steenberg Hotel sits on a historic 1682 farm in Constantia. The Conservatory venue features soaring glass ceilings and vineyard views, with 5-star hotel amenities for the perfect luxury wedding weekend.",
-    features: [
-      "5-Star Hotel",
-      "Glass Conservatory",
-      "Golf Course",
-      "Vineyard Views",
-      "Full Accommodation",
-      "Spa & Wellness",
-    ],
-    highlight: "5-star luxury on a 1682 historic farm",
-  },
-  {
-    id: 11,
+    id: 5,
     img: "https://images.unsplash.com/photo-1621151580036-80a52d86d0c3?auto=format&fit=crop&w=800&q=80",
     name: "Hawksmoor House",
     region: "Cape Town City",
@@ -476,27 +382,189 @@ const VENUES = [
     highlight: "Victorian elegance in Cape Town's leafy south",
   },
   {
-    id: 12,
-    img: "https://images.unsplash.com/photo-1720001854251-d539687c33bc?auto=format&fit=crop&w=800&q=80",
-    name: "Stanford Valley Guest Farm",
-    region: "Overberg",
-    type: "Farm & Country",
-    capacity: "Up to 45",
-    price: "Mid-Range (R50–150k)",
-    address: "R326, Stanford, Western Cape",
-    phone: "072 198 0862",
-    website: "https://stanfordvalley.co.za/weddings/",
+    id: 6,
+    img: "https://images.unsplash.com/photo-1640531783776-abf014a39f7f?auto=format&fit=crop&w=800&q=80",
+    name: "Nooitgedacht Wine Estate",
+    region: "Cape Winelands",
+    type: "Garden Estate",
+    capacity: "Up to 300",
+    price: "Contact Venue",
+    address: "Nooitgedacht Farm, Koelenhof, Stellenbosch",
+    phone: "021 865 2495",
+    website: "https://www.nooitgedachtestate.co.za/weddings",
     description:
-      "A magical fynbos and wheat-field farm near the Klein River, where countryside simplicity meets romantic charm. Stanford Valley offers rustic farm weddings with a genuine Overberg backdrop.",
+      "A sprawling Stellenbosch estate with beautiful rose gardens, a restored manor house, and charming farm atmosphere. Nooitgedacht offers a versatile setting for both intimate garden ceremonies and large celebrations.",
     features: [
-      "Fynbos Setting",
-      "Rustic Farm Aesthetic",
-      "River Views",
-      "Country Accommodation",
-      "Klein River Access",
-      "Farm Activities",
+      "Rose Gardens",
+      "Manor House",
+      "Large Capacity",
+      "Multiple Reception Areas",
+      "Flexible Packages",
+      "On-site Catering",
     ],
-    highlight: "Authentic fynbos countryside near the ocean",
+    highlight: "Famous rose gardens in full bloom",
+  },
+  {
+    id: 7,
+    img: "https://images.unsplash.com/photo-1621151580036-80a52d86d0c3?auto=format&fit=crop&w=800&q=80",
+    name: "Steenberg Farm",
+    region: "Constantia Valley",
+    type: "Boutique Hotel",
+    capacity: "Up to 100",
+    price: "Contact Venue",
+    address: "Steenberg Road, Tokai, Cape Town",
+    phone: "021 713 2222",
+    website: "https://steenbergfarm.com/weddings/",
+    description:
+      "The elegant Steenberg Hotel sits on a historic 1682 farm in Constantia. The Conservatory venue features soaring glass ceilings and vineyard views, with 5-star hotel amenities for the perfect luxury wedding weekend.",
+    features: [
+      "5-Star Hotel",
+      "Glass Conservatory",
+      "Golf Course",
+      "Vineyard Views",
+      "Full Accommodation",
+      "Spa & Wellness",
+    ],
+    highlight: "5-star luxury on a 1682 historic farm",
+  },
+  {
+    id: 8,
+    img: "https://images.unsplash.com/photo-1510824737382-5f31941bcb2d?auto=format&fit=crop&w=800&q=80",
+    name: "Zorgvliet Wines",
+    region: "Cape Winelands",
+    type: "Farm & Country",
+    capacity: "Up to 140",
+    price: "Premium (R150–300k)",
+    address: "Banhoek Valley, Stellenbosch",
+    phone: "021 885 1399",
+    website: "https://zorgvliet.com/weddings/",
+    description:
+      "Hidden in the lush Banhoek Valley between Stellenbosch and Franschhoek, Zorgvliet is a tranquil wine farm offering a beautifully intimate setting with magnificent mountain surrounds and indigenous gardens.",
+    features: [
+      "Banhoek Valley Setting",
+      "Indigenous Gardens",
+      "River Views",
+      "Rustic Barn Venue",
+      "Wine Tasting",
+      "Country Charm",
+    ],
+    highlight: "Secret valley charm with mountain backdrops",
+  },
+  {
+    id: 9,
+    img: "https://images.unsplash.com/photo-1615992290562-d81c200f05cf?auto=format&fit=crop&w=800&q=80",
+    name: "Holden Manz",
+    region: "Cape Winelands",
+    type: "Boutique Hotel",
+    capacity: "Contact venue",
+    price: "Contact Venue",
+    address: "Green Valley Rd, Franschhoek",
+    phone: "021 876 2738",
+    website: "https://holdenmanz.com/pages/weddings",
+    description:
+      "An intimate Franschhoek boutique wine estate where award-winning wines meet luxurious hospitality. Holden Manz offers an exclusive, personalised wedding experience surrounded by vineyards and mountain vistas.",
+    features: [
+      "Boutique Wine Estate",
+      "Award-winning Wines",
+      "Intimate Setting",
+      "Mountain Views",
+      "Luxury Accommodation",
+      "Personalised Service",
+    ],
+    highlight: "Intimate boutique estate in Franschhoek",
+  },
+  {
+    id: 10,
+    img: "https://images.unsplash.com/photo-1720001854251-d539687c33bc?auto=format&fit=crop&w=800&q=80",
+    name: "La Cotte Farm",
+    region: "Cape Winelands",
+    type: "Farm & Country",
+    capacity: "Up to 100",
+    price: "Luxury (R300k+)",
+    address: "24 La Cotte St, Franschhoek",
+    phone: "021 309 2709",
+    website: "https://www.lacottefarm.com/weddings",
+    description:
+      "A beautifully preserved historic farm in the heart of Franschhoek, offering rustic elegance in a setting steeped in Cape Winelands heritage. La Cotte combines farm authenticity with refined wedding hospitality.",
+    features: [
+      "Historic Farm Setting",
+      "Franschhoek Valley Views",
+      "Rustic Elegance",
+      "Heritage Character",
+      "Outdoor Ceremony Spaces",
+      "Catering On-site",
+    ],
+    highlight: "Historic Franschhoek farm with rustic elegance",
+  },
+  {
+    id: 11,
+    img: "https://images.unsplash.com/photo-1510824737382-5f31941bcb2d?auto=format&fit=crop&w=800&q=80",
+    name: "La Paris Estate",
+    region: "Cape Winelands",
+    type: "Wine Estate",
+    capacity: "Up to 200",
+    price: "Premium (R150–300k)",
+    address: "La Paris Estate, Wemmershoek Rd, R301, Franschhoek",
+    phone: "021 867 0171",
+    website: "https://www.laparis.co.za/weddings",
+    description:
+      "Nestled in the breathtaking Wemmershoek Valley, La Paris Estate offers sweeping mountain views, manicured grounds and a refined Cape Winelands setting. An elegant backdrop for both intimate and large-scale celebrations.",
+    features: [
+      "Wemmershoek Valley Views",
+      "Mountain Backdrop",
+      "Manicured Gardens",
+      "Large Capacity",
+      "Wine Estate Setting",
+      "Outdoor Ceremonies",
+    ],
+    highlight: "Sweeping Wemmershoek Valley views",
+  },
+  {
+    id: 12,
+    img: "https://images.unsplash.com/photo-1615992290562-d81c200f05cf?auto=format&fit=crop&w=800&q=80",
+    name: "La Roche Estate",
+    region: "Cape Winelands",
+    type: "Wine Estate",
+    capacity: "Up to 180",
+    price: "Contact Venue",
+    address: "Robertsvlei Rd, Franschhoek",
+    phone: "071 761 1354",
+    website: "https://www.larocheestate.com/weddings",
+    description:
+      "A serene Franschhoek wine estate set against dramatic mountain scenery. La Roche offers a timeless Cape Winelands backdrop with the intimacy of a private estate, ideal for medium to large celebrations.",
+    features: [
+      "Mountain Scenery",
+      "Private Estate Feel",
+      "Wine Estate Setting",
+      "Franschhoek Location",
+      "Ceremony & Reception",
+      "Vineyard Views",
+    ],
+    highlight: "Dramatic mountain scenery in Franschhoek",
+  },
+  {
+    id: 13,
+    img: "https://images.unsplash.com/photo-1510824737382-5f31941bcb2d?auto=format&fit=crop&w=800&q=80",
+    name: "Mont Rochelle Hotel & Vineyard",
+    region: "Cape Winelands",
+    type: "Boutique Hotel",
+    capacity: "Up to 80",
+    price: "Luxury (R300k+)",
+    address: "1412/9 Dassenberg Rd, Franschhoek",
+    phone: "021 876 2770",
+    website:
+      "https://www.virginlimitededition.com/mont-rochelle/celebrations/weddings/",
+    description:
+      "Sir Richard Branson's Virgin Limited Edition property in Franschhoek — a luxury boutique hotel and vineyard with panoramic valley views. Mont Rochelle offers an exclusive, world-class wedding experience in the Cape Winelands.",
+    features: [
+      "Virgin Limited Edition",
+      "Panoramic Valley Views",
+      "Boutique Luxury Hotel",
+      "Award-winning Restaurant",
+      "Exclusive-use Option",
+      "Vineyard Setting",
+    ],
+    highlight: "Sir Richard Branson's Franschhoek luxury estate",
   },
 ];
 
@@ -715,7 +783,12 @@ function VenueCard({ venue, onClick }) {
         <div className="card-title">{venue.name}</div>
         <div className="card-desc">{venue.description}</div>
         <div className="card-meta">
-          <span className="card-pill">👥 {venue.capacity} guests</span>
+          <span className="card-pill">
+            👥{" "}
+            {venue.capacity === "Contact venue"
+              ? "Contact venue"
+              : `${venue.capacity} guests`}
+          </span>
           <span className="card-pill green">✦ {venue.highlight}</span>
         </div>
       </div>
@@ -824,11 +897,19 @@ function VenueModal({ venue, onClose }) {
           <div className="modal-grid">
             <div className="modal-detail">
               <div className="modal-detail-label">Capacity</div>
-              <div className="modal-detail-value">{venue.capacity} guests</div>
+              <div className="modal-detail-value">
+                {venue.capacity === "Contact venue"
+                  ? "Contact venue"
+                  : `${venue.capacity} guests`}
+              </div>
             </div>
             <div className="modal-detail">
               <div className="modal-detail-label">Price Range</div>
-              <div className="modal-detail-value">{venue.price}</div>
+              <div className="modal-detail-value">
+                {venue.price === "Contact Venue"
+                  ? "Contact venue for pricing"
+                  : venue.price}
+              </div>
             </div>
             <div className="modal-detail">
               <div className="modal-detail-label">Address</div>
@@ -1313,7 +1394,7 @@ function HomePage({ setPage }) {
         </div>
         <div className="hero-stats">
           <div className="hero-stat">
-            <span className="hero-stat-n">10</span>
+            <span className="hero-stat-n">13</span>
             <span className="hero-stat-l">Venues Listed</span>
           </div>
           <div className="hero-stat">
