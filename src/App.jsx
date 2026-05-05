@@ -18,7 +18,6 @@ const css = `
     --gold:     #A07840;
     --gold2:    #C49A5A;
     --blush:    #E8CFC2;
-    --blush2:   #F2E4DC;
     --text:     #1C1C1A;
     --muted:    #7A7266;
     --border:   #DDD4C8;
@@ -29,15 +28,13 @@ const css = `
   }
   body { background: var(--cream); color: var(--text); font-family: var(--ff-body); font-size: 18px; line-height: 1.6; }
 
-  /* Nav */
-  nav { position: sticky; top: 0; z-index: 100; background: rgba(250,247,242,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; height: 64px; }
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(250,247,242,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; height: 64px; }
   .nav-logo { font-family: var(--ff-serif); font-size: 1.25rem; color: var(--green); font-style: italic; font-weight: 600; letter-spacing: 0.02em; cursor: pointer; text-decoration: none; }
   .nav-logo span { color: var(--gold); }
-  .nav-links { display: flex; gap: 0; }
+  .nav-links { display: flex; }
   .nav-link { font-family: var(--ff-sans); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.5rem 1rem; color: var(--muted); cursor: pointer; border: none; background: none; transition: color 0.2s; text-decoration: none; display: inline-flex; align-items: center; }
   .nav-link:hover, .nav-link.active { color: var(--green); }
 
-  /* Hero */
   .hero { position: relative; min-height: 88vh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; background: var(--green); padding-bottom: 3rem; }
   .hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #1a2e26 0%, #2D4A3E 40%, #3d6356 70%, #8a6b4a 100%); }
   .hero-pattern { position: absolute; inset: 0; opacity: 0.08; background-image: repeating-linear-gradient(45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%); background-size: 20px 20px; }
@@ -57,13 +54,6 @@ const css = `
   .hero-stat-n { font-family: var(--ff-serif); font-size: 2rem; color: var(--gold2); display: block; }
   .hero-stat-l { font-family: var(--ff-sans); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.7; }
 
-  /* About strip */
-  .about-strip { background: var(--cream2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 3.5rem 2.5rem; width: 100%; }
-  .about-strip-inner { max-width: 640px; margin: 0 auto; text-align: center; }
-  .about-strip-text { font-family: var(--ff-body); font-size: 1.15rem; color: var(--muted); line-height: 1.85; }
-  .about-strip-text strong { color: var(--green); font-weight: 500; }
-
-  /* Section */
   section { padding: 5rem 2.5rem; max-width: 1200px; margin: 0 auto; }
   .section-eyebrow { font-family: var(--ff-sans); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
   .section-title { font-family: var(--ff-serif); font-size: clamp(2rem, 4vw, 3rem); color: var(--green); line-height: 1.2; margin-bottom: 1rem; }
@@ -71,42 +61,76 @@ const css = `
   .section-desc { font-family: var(--ff-body); font-size: 1.1rem; color: var(--muted); max-width: 560px; line-height: 1.7; }
   .section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3rem; flex-wrap: wrap; gap: 1.5rem; }
 
+  /* Card banner — replaces image entirely */
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
+  .card { background: #fff; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; cursor: pointer; transition: all 0.3s; box-shadow: 0 2px 12px var(--shadow); display: flex; flex-direction: column; }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px var(--shadow); border-color: var(--gold); }
+  .card-banner { width: 100%; height: 156px; position: relative; display: flex; align-items: flex-end; padding: 1.1rem 1.25rem 1rem; flex-shrink: 0; }
+  .card-banner-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.06) 60%, transparent 100%); }
+  .card-banner-badge { position: absolute; top: 0.9rem; right: 0.9rem; font-family: var(--ff-sans); font-size: 0.57rem; letter-spacing: 0.14em; text-transform: uppercase; background: rgba(255,255,255,0.17); backdrop-filter: blur(4px); color: rgba(255,255,255,0.92); padding: 0.22rem 0.55rem; border-radius: 2px; border: 1px solid rgba(255,255,255,0.24); z-index: 1; }
+  .card-banner-name { font-family: var(--ff-serif); font-size: 1.3rem; font-style: italic; color: rgba(255,255,255,0.93); font-weight: 600; line-height: 1.2; text-shadow: 0 1px 6px rgba(0,0,0,0.28); z-index: 1; }
+  .card-body { padding: 1.2rem 1.5rem 0.9rem; flex: 1; }
+  .card-region { font-family: var(--ff-sans); font-size: 0.63rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.45rem; }
+  .card-title { font-family: var(--ff-serif); font-size: 1.2rem; color: var(--green); margin-bottom: 0.45rem; line-height: 1.2; }
+  .card-desc { font-family: var(--ff-body); font-size: 0.94rem; color: var(--muted); line-height: 1.55; margin-bottom: 0.9rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .card-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .card-pill { font-family: var(--ff-sans); font-size: 0.61rem; letter-spacing: 0.06em; background: var(--cream2); color: var(--muted); padding: 0.2rem 0.6rem; border-radius: 10px; }
+  .card-pill.green { background: rgba(45,74,62,0.08); color: var(--green); }
+  .card-footer { padding: 0.85rem 1.5rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  /* price and enquire are identical — both serif italic green */
+  .card-price  { font-family: var(--ff-serif); font-size: 1rem; color: var(--green); font-style: italic; }
+  .card-enquire { font-family: var(--ff-serif); font-size: 1rem; color: var(--green); font-style: italic; }
+  .card-link { font-family: var(--ff-sans); font-size: 0.67rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+
   /* Breadcrumb */
-  .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-family: var(--ff-sans); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; flex-wrap: wrap; }
+  .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-family: var(--ff-sans); font-size: 0.67rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.75rem; flex-wrap: wrap; }
   .breadcrumb-link { color: var(--muted); cursor: pointer; transition: color 0.2s; text-decoration: none; }
   .breadcrumb-link:hover { color: var(--green); }
   .breadcrumb-sep { opacity: 0.4; }
   .breadcrumb-current { color: var(--green); }
 
-  /* Venue Detail Page */
+  /* ── Venue Detail Page ── */
   .venue-page { max-width: 1200px; margin: 0 auto; padding: 3rem 2.5rem 5rem; }
-  .venue-hero { width: 100%; height: 420px; position: relative; border-radius: 6px; overflow: hidden; background: var(--green); margin-bottom: 2.5rem; }
-  .venue-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .venue-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(20,35,28,0.65) 0%, rgba(0,0,0,0.1) 60%, transparent 100%); }
-  .venue-hero-title { position: absolute; bottom: 1.75rem; left: 2rem; font-family: var(--ff-serif); font-size: clamp(1.75rem, 4vw, 2.5rem); color: #fff; font-style: italic; font-weight: 700; text-shadow: 0 2px 16px rgba(0,0,0,0.4); line-height: 1.15; }
-  .venue-hero-badge { position: absolute; top: 1.5rem; left: 1.5rem; font-family: var(--ff-sans); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; background: var(--gold); color: #fff; padding: 0.3rem 0.8rem; border-radius: 2px; }
-  .venue-hero-img-note { position: absolute; bottom: 1rem; right: 1.5rem; font-family: var(--ff-sans); font-size: 0.55rem; letter-spacing: 0.08em; text-transform: uppercase; background: rgba(0,0,0,0.45); color: rgba(255,255,255,0.7); padding: 0.2rem 0.5rem; border-radius: 2px; }
-  .venue-page-layout { display: grid; grid-template-columns: 1fr 340px; gap: 3rem; align-items: start; }
-  .venue-answer { font-family: var(--ff-body); font-size: 1.15rem; color: var(--text); line-height: 1.8; margin-bottom: 1.5rem; padding: 1.5rem; background: var(--cream2); border-left: 3px solid var(--gold); border-radius: 0 4px 4px 0; }
-  .venue-desc { font-family: var(--ff-body); font-size: 1.05rem; color: var(--muted); line-height: 1.8; margin-bottom: 2rem; }
-  .venue-features-title { font-family: var(--ff-sans); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; }
+
+  /* Identity banner — type-keyed gradient; replaces stock photo hero */
+  .venue-banner { width: 100%; border-radius: 6px; padding: 2.25rem 2.5rem 2rem; margin-bottom: 2.5rem; position: relative; overflow: hidden; }
+  .venue-banner::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.2) 100%); pointer-events: none; }
+  .venue-banner-eyebrow { font-family: var(--ff-sans); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.68); margin-bottom: 0.55rem; position: relative; z-index: 1; }
+  .venue-banner-title { font-family: var(--ff-serif); font-size: clamp(1.9rem, 5vw, 3rem); color: #fff; font-weight: 700; font-style: italic; line-height: 1.1; margin-bottom: 1.2rem; text-shadow: 0 2px 14px rgba(0,0,0,0.22); position: relative; z-index: 1; }
+  .venue-banner-chips { display: flex; gap: 0.55rem; flex-wrap: wrap; position: relative; z-index: 1; }
+  .venue-banner-chip { font-family: var(--ff-sans); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.28rem 0.75rem; border-radius: 2px; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.24); color: rgba(255,255,255,0.92); }
+
+  /* Two-column: description left, sticky details card right */
+  .venue-page-layout { display: grid; grid-template-columns: 1fr 310px; gap: 2.5rem; align-items: start; }
+  .venue-main { min-width: 0; }
   .venue-sidebar { position: sticky; top: 80px; }
-  .venue-details-card { background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 1.75rem; box-shadow: 0 4px 20px var(--shadow); }
-  .venue-details-card-title { font-family: var(--ff-sans); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; }
-  .venue-detail-row { display: flex; flex-direction: column; gap: 0.2rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
+  .venue-details-card { background: #fff; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; box-shadow: 0 4px 24px var(--shadow); }
+  .venue-details-card-header { padding: 1.2rem 1.5rem 1rem; border-bottom: 1px solid var(--border); }
+  .venue-details-card-name { font-family: var(--ff-serif); font-size: 1.15rem; color: var(--green); font-style: italic; line-height: 1.2; margin-bottom: 0.2rem; }
+  .venue-details-card-region { font-family: var(--ff-sans); font-size: 0.61rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+  .venue-details-rows { padding: 0 1.5rem; }
+  .venue-detail-row { display: flex; justify-content: space-between; align-items: baseline; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid var(--border); }
   .venue-detail-row:last-of-type { border-bottom: none; }
-  .venue-detail-label { font-family: var(--ff-sans); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-  .venue-detail-value { font-family: var(--ff-body); font-size: 1rem; color: var(--text); }
-  .venue-cta-group { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; }
+  .venue-detail-label { font-family: var(--ff-sans); font-size: 0.59rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); flex-shrink: 0; }
+  .venue-detail-value { font-family: var(--ff-body); font-size: 0.97rem; color: var(--text); text-align: right; }
+  .venue-detail-value.enquire { font-style: italic; color: var(--green); }
+  .venue-detail-value.phone a { color: var(--green); text-decoration: none; }
+  .venue-detail-value.phone a:hover { text-decoration: underline; }
+  .venue-cta-group { padding: 1.2rem 1.5rem 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; }
   .btn-green { font-family: var(--ff-sans); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; background: var(--green); color: #fff; border: none; cursor: pointer; padding: 0.85rem 1.75rem; border-radius: 2px; transition: all 0.2s; width: 100%; text-align: center; text-decoration: none; display: block; }
   .btn-green:hover { background: var(--green2); }
   .btn-ghost { font-family: var(--ff-sans); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; background: transparent; color: var(--green); border: 1.5px solid var(--green); cursor: pointer; padding: 0.85rem 1.75rem; border-radius: 2px; transition: all 0.2s; width: 100%; text-align: center; }
   .btn-ghost:hover { background: var(--cream2); }
+  .venue-desc { font-family: var(--ff-body); font-size: 1.1rem; color: var(--muted); line-height: 1.85; margin-bottom: 2rem; }
+  .venue-features-title { font-family: var(--ff-sans); font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; }
   .related-section { margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border); }
   .related-title { font-family: var(--ff-serif); font-size: 1.5rem; color: var(--green); margin-bottom: 1.75rem; }
   .related-title em { font-style: italic; }
 
-  /* Filter bar */
+  .tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .tag { font-family: var(--ff-sans); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.75rem; border-radius: 12px; border: 1px solid var(--border); background: var(--cream2); color: var(--muted); }
+  .tag.active { background: var(--green); color: #fff; border-color: var(--green); }
+
   .filter-bar { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2.5rem; padding: 1.25rem 1.5rem; background: #fff; border: 1px solid var(--border); border-radius: 4px; box-shadow: 0 2px 12px var(--shadow); }
   .filter-group { display: flex; flex-direction: column; gap: 0.3rem; min-width: 140px; }
   .filter-label { font-family: var(--ff-sans); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
@@ -118,29 +142,6 @@ const css = `
   .filter-clear { font-family: var(--ff-sans); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: none; border: none; cursor: pointer; padding: 0.3rem 0.5rem; margin-top: auto; transition: color 0.2s; }
   .filter-clear:hover { color: var(--green); }
 
-  /* Cards */
-  .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
-  .card { background: #fff; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; cursor: pointer; transition: all 0.3s; box-shadow: 0 2px 12px var(--shadow); }
-  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px var(--shadow); border-color: var(--gold); }
-  .card-img { width: 100%; height: 220px; position: relative; overflow: hidden; background: var(--green); }
-  .card-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-  .card:hover .card-img img { transform: scale(1.04); }
-  .card-img-placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--ff-serif); font-size: 3rem; color: rgba(255,255,255,0.3); font-style: italic; }
-  .card-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.28) 0%, transparent 50%); pointer-events: none; }
-  .card-badge { position: absolute; top: 1rem; right: 1rem; font-family: var(--ff-sans); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; background: var(--gold); color: #fff; padding: 0.25rem 0.6rem; border-radius: 1px; }
-  .card-body { padding: 1.5rem; }
-  .card-region { font-family: var(--ff-sans); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
-  .card-title { font-family: var(--ff-serif); font-size: 1.3rem; color: var(--green); margin-bottom: 0.5rem; line-height: 1.2; }
-  .card-desc { font-family: var(--ff-body); font-size: 0.95rem; color: var(--muted); line-height: 1.5; margin-bottom: 1rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-  .card-meta { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .card-pill { font-family: var(--ff-sans); font-size: 0.65rem; letter-spacing: 0.08em; background: var(--cream2); color: var(--muted); padding: 0.25rem 0.65rem; border-radius: 12px; }
-  .card-pill.green { background: rgba(45,74,62,0.08); color: var(--green); }
-  .card-footer { padding: 1rem 1.5rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-  .card-price { font-family: var(--ff-serif); font-size: 1rem; color: var(--green); font-style: italic; }
-  .card-enquire { font-family: var(--ff-sans); font-size: 0.72rem; letter-spacing: 0.08em; color: var(--gold); font-weight: 600; }
-  .card-link { font-family: var(--ff-sans); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
-
-  /* Modal (vendor only) */
   .modal-overlay { position: fixed; inset: 0; z-index: 200; background: rgba(20,30,25,0.75); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; padding: 1.5rem; animation: fadeIn 0.2s ease; }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   .modal { background: var(--cream); border-radius: 8px; max-width: 780px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 30px 80px rgba(0,0,0,0.3); animation: slideUp 0.25s ease; }
@@ -161,10 +162,8 @@ const css = `
   .modal-detail-label { font-family: var(--ff-sans); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.2rem; }
   .modal-detail-value { font-family: var(--ff-body); font-size: 1rem; color: var(--text); }
   .modal-actions { display: flex; gap: 1rem; flex-wrap: wrap; padding: 1.5rem 2.5rem 2rem; border-top: 1px solid var(--border); }
-  .modal-actions .btn-green { width: auto; }
-  .modal-actions .btn-ghost { width: auto; }
+  .modal-actions .btn-green, .modal-actions .btn-ghost { width: auto; }
 
-  /* Admin */
   .research-panel { background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 16px var(--shadow); }
   .research-title { font-family: var(--ff-serif); font-size: 1.5rem; color: var(--green); margin-bottom: 0.5rem; }
   .research-sub { font-family: var(--ff-body); font-size: 0.95rem; color: var(--muted); margin-bottom: 1.5rem; }
@@ -184,18 +183,11 @@ const css = `
   .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
   @keyframes bounce { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-6px); } }
 
-  /* Tabs */
-  .tabs { display: flex; gap: 0; border-bottom: 2px solid var(--border); margin-bottom: 2rem; }
+  .tabs { display: flex; border-bottom: 2px solid var(--border); margin-bottom: 2rem; }
   .tab { font-family: var(--ff-sans); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; padding: 0.75rem 1.5rem; cursor: pointer; border: none; background: none; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.2s; }
   .tab.active { color: var(--green); border-bottom-color: var(--green); }
   .tab:hover { color: var(--green); }
 
-  /* Tags */
-  .tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-  .tag { font-family: var(--ff-sans); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.75rem; border-radius: 12px; border: 1px solid var(--border); background: var(--cream2); color: var(--muted); }
-  .tag.active { background: var(--green); color: #fff; border-color: var(--green); }
-
-  /* Utility */
   .empty { text-align: center; padding: 4rem 2rem; }
   .empty-icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.3; }
   .empty-title { font-family: var(--ff-serif); font-size: 1.5rem; color: var(--green); margin-bottom: 0.5rem; }
@@ -206,16 +198,13 @@ const css = `
   .error-notice { background: rgba(200,60,60,0.08); border-left: 3px solid #c83c3c; padding: 0.75rem 1rem; border-radius: 0 3px 3px 0; font-family: var(--ff-sans); font-size: 0.82rem; color: #8a2222; margin-bottom: 1.5rem; }
   .success-notice { background: rgba(45,74,62,0.08); border-left: 3px solid var(--green); padding: 0.75rem 1rem; border-radius: 0 3px 3px 0; font-family: var(--ff-sans); font-size: 0.82rem; color: var(--green); margin-bottom: 1.5rem; }
 
-  /* Footer */
   footer { background: var(--green); color: rgba(255,255,255,0.7); text-align: center; padding: 3rem 1rem; margin-top: 4rem; width: 100%; }
   .footer-logo { font-family: var(--ff-serif); font-size: 1.5rem; color: var(--gold2); font-style: italic; margin-bottom: 0.75rem; }
   .footer-sub { font-family: var(--ff-sans); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.5; }
 
-  /* ── Responsive ──────────────────────────────────────────────────── */
-  @media (max-width: 900px) {
+  @media (max-width: 960px) {
     .venue-page-layout { grid-template-columns: 1fr; }
     .venue-sidebar { position: static; }
-    .venue-details-card { margin-bottom: 2rem; }
   }
   @media (max-width: 480px) {
     nav { padding: 0 1rem; }
@@ -223,10 +212,9 @@ const css = `
     .hero-content { padding: 2rem 1rem; }
     .hero-stats { gap: 1.5rem; margin-top: 2rem; }
     section { padding: 3rem 1rem; }
-    .about-strip { padding: 2.5rem 1.25rem; }
     .venue-page { padding: 2rem 1rem 4rem; }
-    .venue-hero { height: 260px; border-radius: 4px; }
-    .venue-hero-title { font-size: 1.4rem; left: 1rem; bottom: 1rem; }
+    .venue-banner { padding: 1.75rem 1.25rem 1.25rem; border-radius: 4px; }
+    .venue-banner-title { font-size: 1.75rem; }
     .filter-bar { padding: 1rem; }
     .modal-body { padding: 1.25rem 1rem; }
     .modal-actions { padding: 1rem 1rem 1.5rem; }
@@ -252,34 +240,40 @@ styleEl.textContent = css;
 document.head.appendChild(styleEl);
 
 // ─── Analytics ────────────────────────────────────────────────────────────────
-const track = (eventName, params = {}) => {
-  if (typeof window.gtag === "function")
-    window.gtag("event", eventName, params);
+const track = (e, p = {}) => {
+  if (typeof window.gtag === "function") window.gtag("event", e, p);
 };
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
-const toSlug = (name) =>
-  name
+const toSlug = (n) =>
+  n
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 
-const VENUE_IMGS = [
-  "https://images.unsplash.com/photo-1615992290562-d81c200f05cf?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1640531783776-abf014a39f7f?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1510824737382-5f31941bcb2d?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1621151580036-80a52d86d0c3?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1720001854251-d539687c33bc?auto=format&fit=crop&w=900&q=80",
-];
+// Type-keyed gradients — distinct per venue category
+const TYPE_GRADIENTS = {
+  "Wine Estate":
+    "linear-gradient(145deg, #3D1A1A 0%, #6B2E20 45%, #A07840 100%)",
+  "Historic Manor":
+    "linear-gradient(145deg, #1C2A3D 0%, #2D4060 45%, #5A7090 100%)",
+  "Boutique Hotel":
+    "linear-gradient(145deg, #1E1C18 0%, #3A332A 45%, #8B6B4A 100%)",
+  "Farm & Country":
+    "linear-gradient(145deg, #1E2E1E 0%, #2D4A2A 45%, #6B8A50 100%)",
+  "Garden Estate":
+    "linear-gradient(145deg, #1E3028 0%, #2D5040 45%, #6AAA80 100%)",
+  "Beach & Coastal":
+    "linear-gradient(145deg, #1A2A38 0%, #1E4A5A 45%, #4090A8 100%)",
+  "Mountain Retreat":
+    "linear-gradient(145deg, #282830 0%, #3A3848 45%, #7878A0 100%)",
+};
+const getGradient = (type) =>
+  TYPE_GRADIENTS[type] || "linear-gradient(145deg, #2D4A3E 0%, #3D6356 100%)";
 
-const gradients = [
-  "linear-gradient(135deg, #2D4A3E 0%, #3d6356 50%, #8a6b4a 100%)",
-  "linear-gradient(135deg, #3d2f4a 0%, #5c4475 50%, #8a6b9a 100%)",
-  "linear-gradient(135deg, #4a2d2d 0%, #754444 50%, #9a8068 100%)",
-  "linear-gradient(135deg, #2d3d4a 0%, #3d5a75 50%, #6a8a9a 100%)",
-  "linear-gradient(135deg, #3a4a2d 0%, #567544 50%, #8a9a6a 100%)",
-];
-const getGradient = (id) => gradients[id % gradients.length];
+const displayCapacity = (c) =>
+  c === "Contact venue" ? "Enquire for capacity" : `${c} guests`;
+const displayPrice = (p) => (p === "Contact Venue" ? "Enquire for pricing" : p);
 
 const PRICE_RANGES = [
   "Any Budget",
@@ -294,7 +288,6 @@ const VENUES = [
   {
     id: 1,
     slug: "babylonstoren",
-    img: VENUE_IMGS[0],
     name: "Babylonstoren",
     region: "Cape Winelands",
     type: "Wine Estate",
@@ -318,7 +311,6 @@ const VENUES = [
   {
     id: 2,
     slug: "boschendal-wine-estate",
-    img: VENUE_IMGS[1],
     name: "Boschendal Wine Estate",
     region: "Cape Winelands",
     type: "Wine Estate",
@@ -342,7 +334,6 @@ const VENUES = [
   {
     id: 3,
     slug: "cavalli-estate",
-    img: VENUE_IMGS[2],
     name: "Cavalli Estate",
     region: "Cape Winelands",
     type: "Wine Estate",
@@ -366,7 +357,6 @@ const VENUES = [
   {
     id: 4,
     slug: "groot-constantia",
-    img: VENUE_IMGS[3],
     name: "Groot Constantia",
     region: "Constantia Valley",
     type: "Historic Manor",
@@ -391,7 +381,6 @@ const VENUES = [
   {
     id: 5,
     slug: "hawksmoor-house",
-    img: VENUE_IMGS[4],
     name: "Hawksmoor House",
     region: "Cape Town City",
     type: "Historic Manor",
@@ -415,7 +404,6 @@ const VENUES = [
   {
     id: 6,
     slug: "nooitgedacht-wine-estate",
-    img: VENUE_IMGS[0],
     name: "Nooitgedacht Wine Estate",
     region: "Cape Winelands",
     type: "Garden Estate",
@@ -439,7 +427,6 @@ const VENUES = [
   {
     id: 7,
     slug: "steenberg-farm",
-    img: VENUE_IMGS[1],
     name: "Steenberg Farm",
     region: "Constantia Valley",
     type: "Boutique Hotel",
@@ -463,7 +450,6 @@ const VENUES = [
   {
     id: 8,
     slug: "zorgvliet-wines",
-    img: VENUE_IMGS[2],
     name: "Zorgvliet Wines",
     region: "Cape Winelands",
     type: "Farm & Country",
@@ -487,7 +473,6 @@ const VENUES = [
   {
     id: 9,
     slug: "holden-manz",
-    img: VENUE_IMGS[3],
     name: "Holden Manz",
     region: "Cape Winelands",
     type: "Boutique Hotel",
@@ -511,7 +496,6 @@ const VENUES = [
   {
     id: 10,
     slug: "la-cotte-farm",
-    img: VENUE_IMGS[4],
     name: "La Cotte Farm",
     region: "Cape Winelands",
     type: "Farm & Country",
@@ -535,7 +519,6 @@ const VENUES = [
   {
     id: 11,
     slug: "la-paris-estate",
-    img: VENUE_IMGS[0],
     name: "La Paris Estate",
     region: "Cape Winelands",
     type: "Wine Estate",
@@ -559,7 +542,6 @@ const VENUES = [
   {
     id: 12,
     slug: "la-roche-estate",
-    img: VENUE_IMGS[1],
     name: "La Roche Estate",
     region: "Cape Winelands",
     type: "Wine Estate",
@@ -583,7 +565,6 @@ const VENUES = [
   {
     id: 13,
     slug: "mont-rochelle",
-    img: VENUE_IMGS[2],
     name: "Mont Rochelle Hotel & Vineyard",
     region: "Cape Winelands",
     type: "Boutique Hotel",
@@ -608,7 +589,6 @@ const VENUES = [
   {
     id: 14,
     slug: "lanzerac-wine-estate",
-    img: VENUE_IMGS[3],
     name: "Lanzerac Wine Estate",
     region: "Cape Winelands",
     type: "Wine Estate",
@@ -632,7 +612,6 @@ const VENUES = [
   {
     id: 15,
     slug: "vrede-en-lust",
-    img: VENUE_IMGS[4],
     name: "Vrede en Lust Wine Estate",
     region: "Cape Winelands",
     type: "Wine Estate",
@@ -656,7 +635,6 @@ const VENUES = [
   {
     id: 16,
     slug: "the-cellars-hohenort",
-    img: VENUE_IMGS[0],
     name: "The Cellars-Hohenort",
     region: "Constantia Valley",
     type: "Boutique Hotel",
@@ -680,7 +658,6 @@ const VENUES = [
   {
     id: 17,
     slug: "belmond-mount-nelson",
-    img: VENUE_IMGS[1],
     name: "Belmond Mount Nelson Hotel",
     region: "Cape Town City",
     type: "Boutique Hotel",
@@ -705,7 +682,6 @@ const VENUES = [
   {
     id: 18,
     slug: "the-12-apostles-hotel",
-    img: VENUE_IMGS[2],
     name: "The 12 Apostles Hotel",
     region: "Atlantic Seaboard",
     type: "Boutique Hotel",
@@ -715,7 +691,7 @@ const VENUES = [
     phone: "021 437 9000",
     website: "https://12apostleshotel.com/events/weddings",
     description:
-      "Set dramatically between the Twelve Apostles Mountain Range and the Atlantic Ocean on the Camps Bay coastal drive, this luxury hotel offers an extraordinary natural setting. Every ceremony here is framed by the meeting of mountains and ocean — one of the most spectacular settings in South Africa.",
+      "Set dramatically between the Twelve Apostles Mountain Range and the Atlantic Ocean on the Camps Bay coastal drive, this luxury hotel offers an extraordinary natural setting. Every ceremony here is framed by the meeting of mountains and ocean.",
     features: [
       "Atlantic Ocean Views",
       "Twelve Apostles Mountain",
@@ -729,7 +705,6 @@ const VENUES = [
   {
     id: 19,
     slug: "saronsberg-wine-estate",
-    img: VENUE_IMGS[3],
     name: "Saronsberg Wine Estate",
     region: "Cape Winelands",
     type: "Wine Estate",
@@ -753,7 +728,6 @@ const VENUES = [
   {
     id: 20,
     slug: "cape-point-vineyards",
-    img: VENUE_IMGS[4],
     name: "Cape Point Vineyards",
     region: "Atlantic Seaboard",
     type: "Wine Estate",
@@ -777,7 +751,6 @@ const VENUES = [
   {
     id: 21,
     slug: "la-petite-ferme",
-    img: VENUE_IMGS[0],
     name: "La Petite Ferme",
     region: "Cape Winelands",
     type: "Farm & Country",
@@ -802,7 +775,6 @@ const VENUES = [
   {
     id: 22,
     slug: "elgin-ridge-wines",
-    img: VENUE_IMGS[1],
     name: "Elgin Ridge Wines",
     region: "Overberg",
     type: "Wine Estate",
@@ -826,7 +798,6 @@ const VENUES = [
   {
     id: 23,
     slug: "lourensford-wine-estate",
-    img: VENUE_IMGS[2],
     name: "Lourensford Wine Estate",
     region: "Cape Winelands",
     type: "Garden Estate",
@@ -850,7 +821,6 @@ const VENUES = [
   {
     id: 24,
     slug: "eikenhof-estate",
-    img: VENUE_IMGS[3],
     name: "Eikenhof Estate",
     region: "Cape Winelands",
     type: "Farm & Country",
@@ -1020,7 +990,7 @@ const VENDORS = [
   {
     id: 112,
     img: "https://images.unsplash.com/photo-1565043666747-69f6646db940?auto=format&fit=crop&w=800&q=80",
-    name: "Classic Wedding Cars Cape Town",
+    name: "Classic Wedding Cars CT",
     category: "Transport",
     region: "Cape Town City",
     description:
@@ -1035,57 +1005,37 @@ const VENDORS = [
 // ─── Router ────────────────────────────────────────────────────────────────────
 function useRouter() {
   const [path, setPath] = useState(() => window.location.pathname);
-
   useEffect(() => {
-    const handler = () => setPath(window.location.pathname);
-    window.addEventListener("popstate", handler);
-    return () => window.removeEventListener("popstate", handler);
+    const h = () => setPath(window.location.pathname);
+    window.addEventListener("popstate", h);
+    return () => window.removeEventListener("popstate", h);
   }, []);
-
   const navigate = useCallback((to) => {
     window.history.pushState({}, "", to);
     setPath(to);
     window.scrollTo({ top: 0, behavior: "instant" });
     track("page_view", { page_path: to });
   }, []);
-
   return { path, navigate };
 }
 
-// ─── Components ────────────────────────────────────────────────────────────────
+// ─── VenueCard ────────────────────────────────────────────────────────────────
 function VenueCard({ venue, navigate }) {
   return (
     <div
       className="card"
       onClick={() => {
-        track("venue_card_click", {
-          venue_name: venue.name,
-          venue_region: venue.region,
-        });
+        track("venue_card_click", { venue_name: venue.name });
         navigate(`/venues/${venue.slug}`);
       }}
     >
-      <div className="card-img">
-        <img src={venue.img} alt={venue.name} loading="lazy" />
-        <div className="card-img-overlay" />
-        <span className="card-badge">{venue.type}</span>
-        <span
-          style={{
-            position: "absolute",
-            bottom: "0.6rem",
-            left: "0.75rem",
-            fontFamily: "var(--ff-sans)",
-            fontSize: "0.55rem",
-            letterSpacing: "0.08em",
-            textTransform: "uppercase",
-            background: "rgba(0,0,0,0.5)",
-            color: "rgba(255,255,255,0.8)",
-            padding: "0.2rem 0.5rem",
-            borderRadius: "2px",
-          }}
-        >
-          Illustrative image
-        </span>
+      <div
+        className="card-banner"
+        style={{ background: getGradient(venue.type) }}
+      >
+        <div className="card-banner-overlay" />
+        <span className="card-banner-badge">{venue.type}</span>
+        <span className="card-banner-name">{venue.name}</span>
       </div>
       <div className="card-body">
         <div className="card-region">{venue.region}</div>
@@ -1093,26 +1043,20 @@ function VenueCard({ venue, navigate }) {
         <div className="card-desc">{venue.description}</div>
         <div className="card-meta">
           <span className="card-pill">
-            👥{" "}
-            {venue.capacity === "Contact venue"
-              ? "Contact venue"
-              : `${venue.capacity} guests`}
+            👥 {displayCapacity(venue.capacity)}
           </span>
           <span className="card-pill green">✦ {venue.highlight}</span>
         </div>
       </div>
       <div className="card-footer">
-        {venue.price === "Contact Venue" ? (
-          <span className="card-enquire">Enquire for pricing →</span>
-        ) : (
-          <span className="card-price">{venue.price}</span>
-        )}
+        <span className="card-price">{displayPrice(venue.price)}</span>
         <span className="card-link">View Details →</span>
       </div>
     </div>
   );
 }
 
+// ─── VendorCard ───────────────────────────────────────────────────────────────
 function VendorCard({ vendor, onClick }) {
   return (
     <div
@@ -1122,10 +1066,16 @@ function VendorCard({ vendor, onClick }) {
         onClick(vendor);
       }}
     >
-      <div className="card-img" style={{ height: "180px" }}>
-        <img src={vendor.img} alt={vendor.name} loading="lazy" />
-        <div className="card-img-overlay" />
-        <span className="card-badge">{vendor.category}</span>
+      <div
+        className="card-banner"
+        style={{
+          background:
+            "linear-gradient(145deg, #1E2A22 0%, #2D4A3E 50%, #3D6356 100%)",
+        }}
+      >
+        <div className="card-banner-overlay" />
+        <span className="card-banner-badge">{vendor.category}</span>
+        <span className="card-banner-name">{vendor.name}</span>
       </div>
       <div className="card-body">
         <div className="card-region">{vendor.region}</div>
@@ -1136,15 +1086,14 @@ function VendorCard({ vendor, onClick }) {
         </div>
       </div>
       <div className="card-footer">
-        <span className="card-price" style={{ fontSize: "0.85rem" }}>
-          {vendor.priceRange}
-        </span>
+        <span className="card-price">{vendor.priceRange}</span>
         <span className="card-link">View Details →</span>
       </div>
     </div>
   );
 }
 
+// ─── VendorModal ──────────────────────────────────────────────────────────────
 function VendorModal({ vendor, onClose }) {
   useEffect(() => {
     track("vendor_modal_open", { vendor_name: vendor.name });
@@ -1215,31 +1164,29 @@ function VendorModal({ vendor, onClose }) {
 
 // ─── Venue Detail Page ─────────────────────────────────────────────────────────
 function VenuePage({ venue, navigate, allVenues }) {
-  // SEO: update document title + meta description per venue
   useEffect(() => {
     document.title = `${venue.name} Wedding Venue — ${venue.region} | Cape Vows`;
-    const meta = document.querySelector('meta[name="description"]');
-    if (meta)
-      meta.setAttribute(
+    const m = document.querySelector('meta[name="description"]');
+    if (m)
+      m.setAttribute(
         "content",
         `${venue.name} is a ${venue.type.toLowerCase()} wedding venue in ${venue.region}, Western Cape. ${venue.description.substring(0, 130)}...`,
       );
     return () => {
       document.title = "Cape Vows | Western Cape Wedding Directory";
-      if (meta)
-        meta.setAttribute(
+      if (m)
+        m.setAttribute(
           "content",
           `Browse ${VENUES.length} hand-verified wedding venues in the Western Cape — Franschhoek, Stellenbosch, Cape Town and beyond.`,
         );
     };
   }, [venue]);
 
-  // JSON-LD structured data per venue
   useEffect(() => {
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.id = "venue-jsonld";
-    script.textContent = JSON.stringify({
+    const s = document.createElement("script");
+    s.type = "application/ld+json";
+    s.id = "venue-jsonld";
+    s.textContent = JSON.stringify({
       "@context": "https://schema.org",
       "@type": "EventVenue",
       name: venue.name,
@@ -1253,7 +1200,7 @@ function VenuePage({ venue, navigate, allVenues }) {
       telephone: venue.phone,
       url: venue.website,
     });
-    document.head.appendChild(script);
+    document.head.appendChild(s);
     return () => {
       const el = document.getElementById("venue-jsonld");
       if (el) el.remove();
@@ -1263,10 +1210,11 @@ function VenuePage({ venue, navigate, allVenues }) {
   const related = allVenues
     .filter((v) => v.id !== venue.id && v.region === venue.region)
     .slice(0, 3);
+  const enquireCap = venue.capacity === "Contact venue";
+  const enquirePrice = venue.price === "Contact Venue";
 
   return (
     <div className="venue-page">
-      {/* Breadcrumb */}
       <nav className="breadcrumb" aria-label="Breadcrumb">
         <span className="breadcrumb-link" onClick={() => navigate("/")}>
           Home
@@ -1279,112 +1227,85 @@ function VenuePage({ venue, navigate, allVenues }) {
         <span className="breadcrumb-current">{venue.name}</span>
       </nav>
 
-      {/* Hero */}
-      <div className="venue-hero">
-        <img src={venue.img} alt={`${venue.name} wedding venue`} />
-        <div className="venue-hero-overlay" />
-        <span className="venue-hero-badge">{venue.type}</span>
-        <span className="venue-hero-img-note">Illustrative image</span>
-        <h1 className="venue-hero-title">{venue.name}</h1>
+      {/* Identity banner — type-keyed gradient replaces stock photo */}
+      <div
+        className="venue-banner"
+        style={{ background: getGradient(venue.type) }}
+      >
+        <div className="venue-banner-eyebrow">
+          {venue.region} · Western Cape
+        </div>
+        <h1 className="venue-banner-title">{venue.name}</h1>
+        <div className="venue-banner-chips">
+          <span className="venue-banner-chip">{venue.type}</span>
+          <span className="venue-banner-chip">
+            {enquireCap ? "Enquire for capacity" : `${venue.capacity} guests`}
+          </span>
+          <span className="venue-banner-chip">
+            {enquirePrice ? "Enquire for pricing" : venue.price}
+          </span>
+        </div>
       </div>
 
-      {/* Two-column layout */}
+      {/* Two-column: description + features left, sticky details card + CTAs right */}
       <div className="venue-page-layout">
-        {/* Main content */}
-        <div>
-          <div className="section-eyebrow" style={{ marginBottom: "0.5rem" }}>
-            {venue.region} · Western Cape
-          </div>
-
-          {/* Answer-first paragraph for GEO/AI citation */}
-          <p className="venue-answer">
-            <strong>{venue.name}</strong> is a {venue.type.toLowerCase()}{" "}
-            wedding venue in {venue.region}, Western Cape, accommodating{" "}
-            {venue.capacity === "Contact venue"
-              ? "a number of guests (contact venue for capacity)"
-              : `${venue.capacity} guests`}{" "}
-            with a price range of{" "}
-            {venue.price === "Contact Venue"
-              ? "pricing available on enquiry"
-              : venue.price}
-            .
-          </p>
-
+        <div className="venue-main">
           <p className="venue-desc">{venue.description}</p>
-
           <div className="venue-features-title">Features &amp; Inclusions</div>
-          <div className="tags" style={{ marginBottom: "2rem" }}>
+          <div className="tags" style={{ marginBottom: "1rem" }}>
             {venue.features.map((f) => (
               <span key={f} className="tag active">
                 {f}
               </span>
             ))}
           </div>
-
-          <p
-            style={{
-              fontFamily: "var(--ff-sans)",
-              fontSize: "0.7rem",
-              color: "var(--muted)",
-              fontStyle: "italic",
-            }}
-          >
-            Images shown are illustrative — actual venue photography will vary.
-          </p>
         </div>
 
-        {/* Sidebar */}
         <div className="venue-sidebar">
           <div className="venue-details-card">
-            <div className="venue-details-card-title">Venue Details</div>
-
-            <div className="venue-detail-row">
-              <div className="venue-detail-label">Region</div>
-              <div className="venue-detail-value">
-                {venue.region}, Western Cape
+            <div className="venue-details-card-header">
+              <div className="venue-details-card-name">{venue.name}</div>
+              <div className="venue-details-card-region">{venue.region}</div>
+            </div>
+            <div className="venue-details-rows">
+              <div className="venue-detail-row">
+                <span className="venue-detail-label">Type</span>
+                <span className="venue-detail-value">{venue.type}</span>
               </div>
-            </div>
-            <div className="venue-detail-row">
-              <div className="venue-detail-label">Venue Type</div>
-              <div className="venue-detail-value">{venue.type}</div>
-            </div>
-            <div className="venue-detail-row">
-              <div className="venue-detail-label">Capacity</div>
-              <div className="venue-detail-value">
-                {venue.capacity === "Contact venue"
-                  ? "Contact venue"
-                  : `${venue.capacity} guests`}
-              </div>
-            </div>
-            <div className="venue-detail-row">
-              <div className="venue-detail-label">Price Range</div>
-              <div className="venue-detail-value">
-                {venue.price === "Contact Venue"
-                  ? "Enquire for pricing"
-                  : venue.price}
-              </div>
-            </div>
-            <div className="venue-detail-row">
-              <div className="venue-detail-label">Address</div>
-              <div
-                className="venue-detail-value"
-                style={{ fontSize: "0.9rem" }}
-              >
-                {venue.address}
-              </div>
-            </div>
-            <div className="venue-detail-row">
-              <div className="venue-detail-label">Phone</div>
-              <div className="venue-detail-value">
-                <a
-                  href={`tel:${venue.phone.replace(/\s/g, "")}`}
-                  style={{ color: "var(--green)", textDecoration: "none" }}
+              <div className="venue-detail-row">
+                <span className="venue-detail-label">Capacity</span>
+                <span
+                  className={`venue-detail-value${enquireCap ? " enquire" : ""}`}
                 >
-                  {venue.phone}
-                </a>
+                  {displayCapacity(venue.capacity)}
+                </span>
+              </div>
+              <div className="venue-detail-row">
+                <span className="venue-detail-label">Pricing</span>
+                <span
+                  className={`venue-detail-value${enquirePrice ? " enquire" : ""}`}
+                >
+                  {displayPrice(venue.price)}
+                </span>
+              </div>
+              <div className="venue-detail-row">
+                <span className="venue-detail-label">Address</span>
+                <span
+                  className="venue-detail-value"
+                  style={{ fontSize: "0.87rem" }}
+                >
+                  {venue.address}
+                </span>
+              </div>
+              <div className="venue-detail-row">
+                <span className="venue-detail-label">Phone</span>
+                <span className="venue-detail-value phone">
+                  <a href={`tel:${venue.phone.replace(/\s/g, "")}`}>
+                    {venue.phone}
+                  </a>
+                </span>
               </div>
             </div>
-
             <div className="venue-cta-group">
               <a
                 href={venue.website}
@@ -1392,10 +1313,7 @@ function VenuePage({ venue, navigate, allVenues }) {
                 rel="noopener noreferrer"
                 className="btn-green"
                 onClick={() =>
-                  track("outbound_click", {
-                    venue_name: venue.name,
-                    destination: venue.website,
-                  })
+                  track("outbound_click", { venue_name: venue.name })
                 }
               >
                 Visit Official Website
@@ -1408,7 +1326,6 @@ function VenuePage({ venue, navigate, allVenues }) {
         </div>
       </div>
 
-      {/* Related venues */}
       {related.length > 0 && (
         <div className="related-section">
           <h2 className="related-title">
@@ -1446,11 +1363,8 @@ function ResearchPanel({ onAddVenue, onAddVendor }) {
     setLoading(true);
     const prompt =
       type === "venue"
-        ? `You are a wedding venue researcher. URL: "${url}". Return ONLY valid JSON (no markdown):
-{"name":"","region":"Cape Winelands|Cape Town City|Atlantic Seaboard|Constantia Valley|Overberg|Garden Route|West Coast","type":"Wine Estate|Mountain Retreat|Beach & Coastal|Historic Manor|Garden Estate|Boutique Hotel|Farm & Country","capacity":"e.g. Up to 100","price":"Budget (< R50k)|Mid-Range (R50–150k)|Premium (R150–300k)|Luxury (R300k+)","address":"","phone":"","website":"${url}","description":"2-3 sentence description","highlight":"One key selling point max 8 words","features":["f1","f2","f3","f4"]}`
-        : `You are a wedding vendor researcher. URL: "${url}". Return ONLY valid JSON (no markdown):
-{"name":"","category":"Photography|Floristry|Catering|Entertainment|Coordination|Hair & Make-up|Décor & Hire|Cake & Desserts|Transport|Stationery","region":"Cape Winelands|Cape Town City|Atlantic Seaboard|Constantia Valley|Overberg|Garden Route|West Coast","description":"2-3 sentence description","priceRange":"","website":"${url}","phone":"","highlight":"One key selling point max 8 words"}`;
-
+        ? `You are a wedding venue researcher. URL: "${url}". Return ONLY valid JSON (no markdown):\n{"name":"","region":"Cape Winelands|Cape Town City|Atlantic Seaboard|Constantia Valley|Overberg|Garden Route|West Coast","type":"Wine Estate|Mountain Retreat|Beach & Coastal|Historic Manor|Garden Estate|Boutique Hotel|Farm & Country","capacity":"e.g. Up to 100","price":"Budget (< R50k)|Mid-Range (R50–150k)|Premium (R150–300k)|Luxury (R300k+)","address":"","phone":"","website":"${url}","description":"2-3 sentence description","highlight":"max 8 words","features":["f1","f2","f3","f4"]}`
+        : `You are a wedding vendor researcher. URL: "${url}". Return ONLY valid JSON (no markdown):\n{"name":"","category":"Photography|Floristry|Catering|Entertainment|Coordination|Hair & Make-up|Décor & Hire|Cake & Desserts|Transport|Stationery","region":"Cape Winelands|Cape Town City|Atlantic Seaboard|Constantia Valley|Overberg|Garden Route|West Coast","description":"2-3 sentence description","priceRange":"","website":"${url}","phone":"","highlight":"max 8 words"}`;
     try {
       const res = await fetch("https://api.anthropic.com/v1/messages", {
         method: "POST",
@@ -1723,7 +1637,6 @@ function HomePage({ navigate, allVenues }) {
 
   return (
     <>
-      {/* Hero */}
       <div className="hero">
         <div className="hero-bg" />
         <div className="hero-pattern" />
@@ -1777,21 +1690,6 @@ function HomePage({ navigate, allVenues }) {
         </div>
       </div>
 
-      {/* About strip */}
-      <div className="about-strip">
-        <div className="about-strip-inner">
-          <p className="about-strip-text">
-            Cape Vows started because we couldn't find a single, well-curated
-            place to discover Western Cape wedding venues — so we built one.{" "}
-            <strong>Every listing is hand-researched</strong>, with real contact
-            details and honest descriptions to make your planning easier. We're
-            a small Cape Town team, genuinely passionate about this corner of
-            the world and the weddings that happen here.
-          </p>
-        </div>
-      </div>
-
-      {/* Featured venues */}
       <section>
         <div className="section-header">
           <div>
@@ -1821,7 +1719,6 @@ function HomePage({ navigate, allVenues }) {
         </div>
       </section>
 
-      {/* Vendor band */}
       <div
         style={{
           background: "var(--green)",
@@ -1878,7 +1775,6 @@ function HomePage({ navigate, allVenues }) {
         </div>
       </div>
 
-      {/* List your business */}
       <section>
         <div
           style={{
@@ -1935,7 +1831,6 @@ function VenuesPage({ allVenues, navigate }) {
   const [price, setPrice] = useState("Any Budget");
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("Default");
-
   const availableRegions = [
     "All Regions",
     ...Array.from(new Set(allVenues.map((v) => v.region))).sort(),
@@ -1950,7 +1845,6 @@ function VenuesPage({ allVenues, navigate }) {
       allVenues.some((v) => v.price === p),
     ),
   ];
-
   const priceOrder = {
     "Budget (< R50k)": 1,
     "Mid-Range (R50–150k)": 2,
@@ -1958,7 +1852,6 @@ function VenuesPage({ allVenues, navigate }) {
     "Luxury (R300k+)": 4,
   };
   const capNum = (c) => parseInt((c || "0").replace(/\D/g, "")) || 0;
-
   const filtered = allVenues.filter((v) => {
     if (region !== "All Regions" && v.region !== region) return false;
     if (type !== "All Types" && v.type !== type) return false;
@@ -1971,7 +1864,6 @@ function VenuesPage({ allVenues, navigate }) {
       return false;
     return true;
   });
-
   const sorted = [...filtered].sort((a, b) => {
     if (sort === "Price: Low to High")
       return (priceOrder[a.price] || 0) - (priceOrder[b.price] || 0);
@@ -1984,7 +1876,6 @@ function VenuesPage({ allVenues, navigate }) {
     if (sort === "Name: A–Z") return a.name.localeCompare(b.name);
     return 0;
   });
-
   return (
     <section style={{ paddingTop: "3rem" }}>
       <div className="section-header">
@@ -1996,17 +1887,6 @@ function VenuesPage({ allVenues, navigate }) {
           <p className="section-desc">
             Browse {allVenues.length} hand-verified venues across the Western
             Cape — filter by region, style, size and budget.
-          </p>
-          <p
-            style={{
-              fontFamily: "var(--ff-sans)",
-              fontSize: "0.72rem",
-              color: "var(--muted)",
-              marginTop: "0.5rem",
-              fontStyle: "italic",
-            }}
-          >
-            Images shown are illustrative — real venue photography coming soon.
           </p>
         </div>
       </div>
@@ -2305,8 +2185,7 @@ function AdminPage({
             Admin <em>Panel</em>
           </h1>
           <p className="section-desc">
-            Add and manage venues and vendors. Use the AI Research Tool to
-            auto-extract details from official websites.
+            Add and manage venues and vendors using the AI Research Tool.
           </p>
         </div>
       </div>
@@ -2412,26 +2291,18 @@ export default function App() {
   const [showCookieBanner, setShowCookieBanner] = useState(
     () => !localStorage.getItem("cv_cookies_accepted"),
   );
-
   const allVenues = [...VENUES, ...extraVenues];
-
   const addVenue = (v) =>
-    setExtraVenues((e) => [
-      ...e,
-      { ...v, slug: toSlug(v.name), img: v.img || VENUE_IMGS[0] },
-    ]);
+    setExtraVenues((e) => [...e, { ...v, slug: toSlug(v.name) }]);
   const addVendor = (v) => setExtraVendors((e) => [...e, v]);
   const acceptCookies = () => {
     localStorage.setItem("cv_cookies_accepted", "true");
     setShowCookieBanner(false);
   };
-
-  // Route parsing
   const venueSlugMatch = path.match(/^\/venues\/([^/]+)$/);
   const activeVenue = venueSlugMatch
     ? allVenues.find((v) => v.slug === venueSlugMatch[1])
     : null;
-
   const currentPage =
     path === "/"
       ? "home"
