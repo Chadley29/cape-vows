@@ -15,8 +15,8 @@ const css = `
     --cream2:   #F3EDE3;
     --green:    #2D4A3E;
     --green2:   #3D6356;
-    --gold:     #B8895A;
-    --gold2:    #D4A87A;
+    --gold:     #A07840;
+    --gold2:    #C49A5A;
     --blush:    #E8CFC2;
     --blush2:   #F2E4DC;
     --text:     #1C1C1A;
@@ -43,7 +43,7 @@ const css = `
   .hero { position: relative; min-height: 88vh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; background: var(--green); padding-bottom: 3rem; }
   .hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #1a2e26 0%, #2D4A3E 40%, #3d6356 70%, #8a6b4a 100%); }
   .hero-pattern { position: absolute; inset: 0; opacity: 0.08; background-image: repeating-linear-gradient(45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%); background-size: 20px 20px; }
-  .hero-overlay { position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 50%, rgba(184,137,90,0.15) 0%, transparent 60%); }
+  .hero-overlay { position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 50%, rgba(160,120,64,0.15) 0%, transparent 60%); }
   .hero-content { position: relative; z-index: 2; text-align: center; padding: 2rem; max-width: 780px; }
   .hero-eyebrow { font-family: var(--ff-sans); font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold2); margin-bottom: 1.5rem; }
   .hero-title { font-family: var(--ff-serif); font-size: clamp(2.8rem, 7vw, 5.5rem); color: #fff; line-height: 1.1; font-weight: 700; margin-bottom: 0.5rem; }
@@ -53,8 +53,8 @@ const css = `
   .btn { font-family: var(--ff-sans); font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; border: none; cursor: pointer; transition: all 0.25s; border-radius: 2px; padding: 0.85rem 2rem; }
   .btn-primary { background: var(--gold); color: #fff; }
   .btn-primary:hover { background: var(--gold2); transform: translateY(-1px); }
-  .btn-outline { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.4); }
-  .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); }
+  .btn-outline { background: transparent; color: rgba(255,255,255,0.65); border: 1px solid rgba(255,255,255,0.25); font-size: 0.68rem; padding: 0.8rem 1.5rem; }
+  .btn-outline:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.45); color: rgba(255,255,255,0.9); }
   .hero-stats { position: relative; display: flex; justify-content: center; gap: 3rem; z-index: 2; margin-top: 3rem; padding-bottom: 1rem; }
   .hero-stat { text-align: center; color: rgba(255,255,255,0.8); }
   .hero-stat-n { font-family: var(--ff-serif); font-size: 2rem; color: var(--gold2); display: block; }
@@ -63,6 +63,12 @@ const css = `
   /* Section */
   section { padding: 5rem 2.5rem; max-width: 1200px; margin: 0 auto; }
 
+  /* About strip */
+  .about-strip { background: var(--cream2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 3.5rem 2.5rem; width: 100%; }
+  .about-strip-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+  .about-strip-text { font-family: var(--ff-body); font-size: 1.15rem; color: var(--muted); line-height: 1.85; }
+  .about-strip-text strong { color: var(--green); font-weight: 500; }
+
   /* ── Responsive ──────────────────────────────────────────────────── */
   @media (max-width: 480px) {
     nav { padding: 0 1rem; }
@@ -70,6 +76,7 @@ const css = `
     .hero-content { padding: 2rem 1rem; }
     .hero-stats { gap: 1.5rem; margin-top: 2rem; }
     section { padding: 3rem 1rem; }
+    .about-strip { padding: 2.5rem 1.25rem; }
     .filter-bar { padding: 1rem; }
     .modal-body { padding: 1.25rem 1rem; }
     .modal-actions { padding: 1rem 1rem 1.5rem; }
@@ -130,6 +137,7 @@ const css = `
   .card-pill.green { background: rgba(45,74,62,0.08); color: var(--green); }
   .card-footer { padding: 1rem 1.5rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
   .card-price { font-family: var(--ff-serif); font-size: 1rem; color: var(--green); font-style: italic; }
+  .card-enquire { font-family: var(--ff-sans); font-size: 0.72rem; letter-spacing: 0.08em; color: var(--gold); font-weight: 600; font-style: normal; cursor: pointer; }
   .card-link { font-family: var(--ff-sans); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
 
   /* Modal */
@@ -205,7 +213,7 @@ const css = `
   .divider { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
   .flex-between { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
   .results-count { font-family: var(--ff-sans); font-size: 0.75rem; color: var(--muted); letter-spacing: 0.05em; }
-  .notice { background: rgba(184,137,90,0.1); border-left: 3px solid var(--gold); padding: 0.75rem 1rem; border-radius: 0 3px 3px 0; font-family: var(--ff-sans); font-size: 0.82rem; color: var(--text); margin-bottom: 1.5rem; }
+  .notice { background: rgba(160,120,64,0.1); border-left: 3px solid var(--gold); padding: 0.75rem 1rem; border-radius: 0 3px 3px 0; font-family: var(--ff-sans); font-size: 0.82rem; color: var(--text); margin-bottom: 1.5rem; }
   .error-notice { background: rgba(200,60,60,0.08); border-left: 3px solid #c83c3c; padding: 0.75rem 1rem; border-radius: 0 3px 3px 0; font-family: var(--ff-sans); font-size: 0.82rem; color: #8a2222; margin-bottom: 1.5rem; }
   .success-notice { background: rgba(45,74,62,0.08); border-left: 3px solid var(--green); padding: 0.75rem 1rem; border-radius: 0 3px 3px 0; font-family: var(--ff-sans); font-size: 0.82rem; color: var(--green); margin-bottom: 1.5rem; }
 `;
@@ -793,7 +801,11 @@ function VenueCard({ venue, onClick }) {
         </div>
       </div>
       <div className="card-footer">
-        <span className="card-price">{venue.price}</span>
+        {venue.price === "Contact Venue" ? (
+          <span className="card-enquire">Enquire for pricing →</span>
+        ) : (
+          <span className="card-price">{venue.price}</span>
+        )}
         <span className="card-link">View Details →</span>
       </div>
     </div>
@@ -907,7 +919,7 @@ function VenueModal({ venue, onClose }) {
               <div className="modal-detail-label">Price Range</div>
               <div className="modal-detail-value">
                 {venue.price === "Contact Venue"
-                  ? "Contact venue for pricing"
+                  ? "Enquire for pricing"
                   : venue.price}
               </div>
             </div>
@@ -1355,6 +1367,8 @@ function HomePage({ setPage }) {
       {selected && (
         <VenueModal venue={selected} onClose={() => setSelected(null)} />
       )}
+
+      {/* ── Hero ── */}
       <div className="hero">
         <div className="hero-bg" />
         <div className="hero-pattern" />
@@ -1368,8 +1382,8 @@ function HomePage({ setPage }) {
             Awaits
           </h1>
           <p className="hero-sub">
-            The definitive directory of venues & vendors across the Cape
-            Winelands, Cape Town, and beyond — curated in one elegant place.
+            {VENUES.length} hand-verified venues across the Cape Winelands, Cape
+            Town, and the Overberg — beautifully curated in one place.
           </p>
           <div className="hero-actions">
             <button
@@ -1394,7 +1408,7 @@ function HomePage({ setPage }) {
         </div>
         <div className="hero-stats">
           <div className="hero-stat">
-            <span className="hero-stat-n">13</span>
+            <span className="hero-stat-n">{VENUES.length}</span>
             <span className="hero-stat-l">Venues Listed</span>
           </div>
           <div className="hero-stat">
@@ -1408,6 +1422,21 @@ function HomePage({ setPage }) {
         </div>
       </div>
 
+      {/* ── About strip ── */}
+      <div className="about-strip">
+        <div className="about-strip-inner">
+          <p className="about-strip-text">
+            Cape Vows started because we couldn't find a single, well-curated
+            place to discover Western Cape wedding venues — so we built one.{" "}
+            <strong>Every listing is hand-researched</strong>, with real contact
+            details and honest descriptions to make your planning easier. We're
+            a small Cape Town team, genuinely passionate about this corner of
+            the world and the weddings that happen here.
+          </p>
+        </div>
+      </div>
+
+      {/* ── Featured Venues ── */}
       <section>
         <div className="section-header">
           <div>
@@ -1447,6 +1476,7 @@ function HomePage({ setPage }) {
         </div>
       </section>
 
+      {/* ── Vendor band ── */}
       <div
         style={{
           background: "var(--green)",
@@ -1506,6 +1536,7 @@ function HomePage({ setPage }) {
         </div>
       </div>
 
+      {/* ── List your business ── */}
       <section>
         <div
           style={{
@@ -1529,7 +1560,6 @@ function HomePage({ setPage }) {
               business discovered by engaged couples planning their big day.
             </p>
           </div>
-          {/* ── Contact CTA ── */}
           <div>
             <p
               style={{
@@ -1569,7 +1599,6 @@ function VenuesPage({ extraVenues }) {
   const [selected, setSelected] = useState(null);
   const all = [...VENUES, ...extraVenues];
 
-  // Dynamic filters — only show values present in the data
   const availableRegions = [
     "All Regions",
     ...Array.from(new Set(all.map((v) => v.region))).sort(),
@@ -1629,8 +1658,8 @@ function VenuesPage({ extraVenues }) {
             Wedding <em>Venues</em>
           </h1>
           <p className="section-desc">
-            Browse {all.length} curated venues across the Western Cape — filter
-            by region, style, size and budget.
+            Browse {all.length} hand-verified venues across the Western Cape —
+            filter by region, style, size and budget.
           </p>
           <p
             style={{
