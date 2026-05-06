@@ -65,29 +65,29 @@ const css = `
   .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
   .card { background: #fff; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; cursor: pointer; transition: all 0.3s; box-shadow: 0 2px 12px var(--shadow); display: flex; flex-direction: column; }
   .card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px var(--shadow); border-color: var(--gold); }
-  .card-banner { width: 100%; height: 156px; position: relative; display: flex; align-items: flex-end; padding: 1.1rem 1.25rem 1rem; flex-shrink: 0; }
+  .card-banner { width: 100%; height: 140px; position: relative; display: flex; align-items: flex-end; padding: 0.9rem 1.25rem 0.8rem; flex-shrink: 0; }
   .card-banner-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.06) 60%, transparent 100%); }
   .card-banner-badge { position: absolute; top: 0.9rem; right: 0.9rem; font-family: var(--ff-sans); font-size: 0.57rem; letter-spacing: 0.14em; text-transform: uppercase; background: rgba(255,255,255,0.17); backdrop-filter: blur(4px); color: rgba(255,255,255,0.92); padding: 0.22rem 0.55rem; border-radius: 2px; border: 1px solid rgba(255,255,255,0.24); z-index: 1; }
   .card-banner-name { font-family: var(--ff-serif); font-size: 1.3rem; font-style: italic; color: rgba(255,255,255,0.93); font-weight: 600; line-height: 1.2; text-shadow: 0 1px 6px rgba(0,0,0,0.28); z-index: 1; }
-  .card-body { padding: 1.2rem 1.5rem 0.9rem; flex: 1; }
+  .card-body { padding: 1.15rem 1.5rem 0.85rem; flex: 1; }
   .card-region { font-family: var(--ff-sans); font-size: 0.63rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.45rem; }
   .card-title { font-family: var(--ff-serif); font-size: 1.2rem; color: var(--green); margin-bottom: 0.45rem; line-height: 1.2; }
   .card-desc { font-family: var(--ff-body); font-size: 0.94rem; color: var(--muted); line-height: 1.55; margin-bottom: 0.9rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
   .card-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; }
   .card-pill { font-family: var(--ff-sans); font-size: 0.61rem; letter-spacing: 0.06em; background: var(--cream2); color: var(--muted); padding: 0.2rem 0.6rem; border-radius: 10px; }
   .card-pill.green { background: rgba(45,74,62,0.08); color: var(--green); }
-  .card-footer { padding: 0.85rem 1.5rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .card-footer { padding: 0.8rem 1.5rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
   /* price and enquire are identical — both serif italic green */
   .card-price  { font-family: var(--ff-serif); font-size: 1rem; color: var(--green); font-style: italic; }
   .card-enquire { font-family: var(--ff-serif); font-size: 1rem; color: var(--green); font-style: italic; }
   .card-link { font-family: var(--ff-sans); font-size: 0.67rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
 
   /* Breadcrumb */
-  .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-family: var(--ff-sans); font-size: 0.67rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.75rem; flex-wrap: wrap; }
-  .breadcrumb-link { color: var(--muted); cursor: pointer; transition: color 0.2s; text-decoration: none; }
-  .breadcrumb-link:hover { color: var(--green); }
-  .breadcrumb-sep { opacity: 0.4; }
-  .breadcrumb-current { color: var(--green); }
+  .breadcrumb { display: inline-flex; align-items: center; gap: 0.35rem; font-family: var(--ff-sans); font-size: 0.61rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; flex-wrap: wrap; opacity: 0.75; }
+  .breadcrumb-link { color: var(--muted); cursor: pointer; transition: color 0.2s; text-decoration: none; padding: 0.15rem 0.25rem; }
+  .breadcrumb-link:hover { color: var(--green); opacity: 1; }
+  .breadcrumb-sep { opacity: 0.3; font-size: 0.5rem; }
+  .breadcrumb-current { color: var(--muted); opacity: 0.5; font-weight: 400; }
 
   /* ── Venue Detail Page ── */
   .venue-page { max-width: 1200px; margin: 0 auto; padding: 3rem 2.5rem 5rem; }
@@ -1035,7 +1035,6 @@ function VenueCard({ venue, navigate }) {
       >
         <div className="card-banner-overlay" />
         <span className="card-banner-badge">{venue.type}</span>
-        <span className="card-banner-name">{venue.name}</span>
       </div>
       <div className="card-body">
         <div className="card-region">{venue.region}</div>
@@ -1830,7 +1829,7 @@ function VenuesPage({ allVenues, navigate }) {
   const [type, setType] = useState("All Types");
   const [price, setPrice] = useState("Any Budget");
   const [search, setSearch] = useState("");
-  const [sort, setSort] = useState("Default");
+  const [sort, setSort] = useState("Name: A–Z");
   const availableRegions = [
     "All Regions",
     ...Array.from(new Set(allVenues.map((v) => v.region))).sort(),
@@ -1873,8 +1872,7 @@ function VenuesPage({ allVenues, navigate }) {
       return capNum(a.capacity) - capNum(b.capacity);
     if (sort === "Capacity: High to Low")
       return capNum(b.capacity) - capNum(a.capacity);
-    if (sort === "Name: A–Z") return a.name.localeCompare(b.name);
-    return 0;
+    return a.name.localeCompare(b.name); // Default to A–Z
   });
   return (
     <section style={{ paddingTop: "3rem" }}>
@@ -1964,17 +1962,16 @@ function VenuesPage({ allVenues, navigate }) {
             value={sort}
             onChange={(e) => {
               setSort(e.target.value);
-              if (e.target.value !== "Default")
+              if (e.target.value !== "Name: A–Z")
                 track("sort_used", { sort_value: e.target.value });
             }}
           >
             {[
-              "Default",
+              "Name: A–Z",
               "Price: Low to High",
               "Price: High to Low",
               "Capacity: Low to High",
               "Capacity: High to Low",
-              "Name: A–Z",
             ].map((s) => (
               <option key={s}>{s}</option>
             ))}
@@ -1987,7 +1984,7 @@ function VenuesPage({ allVenues, navigate }) {
             setType("All Types");
             setPrice("Any Budget");
             setSearch("");
-            setSort("Default");
+            setSort("Name: A–Z");
           }}
         >
           Clear All
