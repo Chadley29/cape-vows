@@ -82,12 +82,10 @@ const css = `
   .card-enquire { font-family: var(--ff-serif); font-size: 1rem; color: var(--green); font-style: italic; }
   .card-link { font-family: var(--ff-sans); font-size: 0.67rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
 
-  /* Breadcrumb */
-  .breadcrumb { display: inline-flex; align-items: center; gap: 0.35rem; font-family: var(--ff-sans); font-size: 0.61rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; flex-wrap: wrap; opacity: 0.75; }
-  .breadcrumb-link { color: var(--muted); cursor: pointer; transition: color 0.2s; text-decoration: none; padding: 0.15rem 0.25rem; }
-  .breadcrumb-link:hover { color: var(--green); opacity: 1; }
-  .breadcrumb-sep { opacity: 0.3; font-size: 0.5rem; }
-  .breadcrumb-current { color: var(--muted); opacity: 0.5; font-weight: 400; }
+  /* Back link — replaces breadcrumb on venue pages */
+  .venue-back { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--ff-sans); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); cursor: pointer; margin-bottom: 1.25rem; transition: gap 0.2s, color 0.2s; background: none; border: none; padding: 0; }
+  .venue-back:hover { color: var(--green); gap: 0.6rem; }
+  .venue-back svg { flex-shrink: 0; }
 
   /* ── Venue Detail Page ── */
   .venue-page { max-width: 1200px; margin: 0 auto; padding: 3rem 2.5rem 5rem; }
@@ -1214,17 +1212,28 @@ function VenuePage({ venue, navigate, allVenues }) {
 
   return (
     <div className="venue-page">
-      <nav className="breadcrumb" aria-label="Breadcrumb">
-        <span className="breadcrumb-link" onClick={() => navigate("/")}>
-          Home
-        </span>
-        <span className="breadcrumb-sep">›</span>
-        <span className="breadcrumb-link" onClick={() => navigate("/venues")}>
-          Venues
-        </span>
-        <span className="breadcrumb-sep">›</span>
-        <span className="breadcrumb-current">{venue.name}</span>
-      </nav>
+      <button
+        className="venue-back"
+        onClick={() => navigate("/venues")}
+        aria-label="Back to venues"
+      >
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 14 14"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M9 2L4 7L9 12"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+        All Venues
+      </button>
 
       {/* Identity banner — type-keyed gradient replaces stock photo */}
       <div
