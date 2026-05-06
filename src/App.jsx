@@ -82,6 +82,35 @@ const css = `
   .card-enquire { font-family: var(--ff-serif); font-size: 1rem; color: var(--green); font-style: italic; }
   .card-link { font-family: var(--ff-sans); font-size: 0.67rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
 
+  /* ── Favourite / Save ── */
+  .card-save-btn { position: absolute; top: 0.75rem; left: 0.75rem; z-index: 2; width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.28); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s, transform 0.15s; padding: 0; }
+  .card-save-btn:hover { background: rgba(255,255,255,0.32); transform: scale(1.12); }
+  .card-save-btn svg { transition: fill 0.2s, stroke 0.2s; }
+  .card-save-btn.saved { background: rgba(255,255,255,0.92); }
+  .nav-badge { display: inline-flex; align-items: center; justify-content: center; width: 17px; height: 17px; border-radius: 50%; background: var(--gold); color: #fff; font-family: var(--ff-sans); font-size: 0.6rem; font-weight: 600; margin-left: 4px; line-height: 1; }
+
+  /* ── Capacity Slider ── */
+  .filter-slider-group { display: flex; flex-direction: column; gap: 0.3rem; min-width: 180px; }
+  .filter-slider-val { font-family: var(--ff-body); font-size: 0.9rem; color: var(--text); font-style: italic; }
+  .cap-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 3px; border-radius: 2px; background: var(--border); outline: none; cursor: pointer; }
+  .cap-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--green); border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.18); cursor: pointer; transition: transform 0.15s; }
+  .cap-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+  .cap-slider::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; background: var(--green); border: 2px solid #fff; cursor: pointer; }
+
+  /* ── FAQ Accordion ── */
+  .faq-section { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+  .faq-title { font-family: var(--ff-sans); font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.85rem; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-q { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.85rem 0; background: none; border: none; cursor: pointer; text-align: left; font-family: var(--ff-body); font-size: 1rem; color: var(--green); font-weight: 500; line-height: 1.4; transition: color 0.2s; }
+  .faq-q:hover { color: var(--gold); }
+  .faq-chevron { flex-shrink: 0; transition: transform 0.25s; color: var(--gold); }
+  .faq-chevron.open { transform: rotate(180deg); }
+  .faq-a { font-family: var(--ff-body); font-size: 0.97rem; color: var(--muted); line-height: 1.7; padding-bottom: 0.9rem; }
+
+  /* ── Saved Page ── */
+  .saved-page { max-width: 1200px; margin: 0 auto; padding: 3rem 2.5rem 5rem; }
+  .saved-empty { text-align: center; padding: 5rem 2rem; }
+
   /* Back link — replaces breadcrumb on venue pages */
   .venue-back { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--ff-sans); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); cursor: pointer; margin-bottom: 1.25rem; transition: gap 0.2s, color 0.2s; background: none; border: none; padding: 0; }
   .venue-back:hover { color: var(--green); gap: 0.6rem; }
@@ -280,6 +309,149 @@ const PRICE_RANGES = [
   "Premium (R150–300k)",
   "Luxury (R300k+)",
 ];
+
+// ─── Favourites hook ───────────────────────────────────────────────────────────
+function useFavourites() {
+  const [saved, setSaved] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("cv_saved") || "[]");
+    } catch {
+      return [];
+    }
+  });
+  const toggle = (slug) => {
+    setSaved((prev) => {
+      const next = prev.includes(slug)
+        ? prev.filter((s) => s !== slug)
+        : [...prev, slug];
+      localStorage.setItem("cv_saved", JSON.stringify(next));
+      return next;
+    });
+  };
+  return { saved, toggle };
+}
+
+// ─── Per-venue FAQ generator ───────────────────────────────────────────────────
+const REGION_CONTEXT = {
+  "Cape Winelands": {
+    desc: "the Cape Winelands",
+    distance:
+      "between 45 minutes and 1.5 hours from Cape Town CBD, depending on whether the estate is closer to Stellenbosch (≈45 min), Franschhoek (≈75 min), or further afield like Tulbagh (≈90 min)",
+    character:
+      "rolling vineyards, Cape Dutch architecture, and mountain backdrops that the Winelands are famous for",
+  },
+  "Constantia Valley": {
+    desc: "the Constantia Wine Valley",
+    distance:
+      "roughly 20–25 minutes from Cape Town CBD, in the leafy southern suburbs",
+    character:
+      "established wine farms, towering oaks, and a quieter, more residential feel compared to the busier Winelands",
+  },
+  "Cape Town City": {
+    desc: "Cape Town City",
+    distance:
+      "in or immediately adjacent to the Cape Town city bowl — no travel from the city required",
+    character:
+      "urban sophistication, Table Mountain as a backdrop, and proximity to hotels, restaurants, and the V&A Waterfront",
+  },
+  "Atlantic Seaboard": {
+    desc: "the Cape Peninsula's Atlantic Seaboard",
+    distance:
+      "20–40 minutes from Cape Town CBD, depending on the exact location",
+    character:
+      "dramatic ocean views, the Twelve Apostles mountain range, and the rugged beauty of the Cape Peninsula coast",
+  },
+  Overberg: {
+    desc: "the Overberg region",
+    distance:
+      "approximately 60–90 minutes from Cape Town, over the Hottentots Holland Mountains",
+    character:
+      "cool-climate valleys, fynbos-covered hillsides, apple orchards, and a noticeably quieter, more off-the-beaten-track atmosphere",
+  },
+  "Garden Route": {
+    desc: "the Garden Route",
+    distance:
+      "roughly 4–5 hours from Cape Town by road, or accessible via George Airport",
+    character:
+      "indigenous forests, lagoons, and lush coastal scenery that make it a popular destination wedding choice",
+  },
+  "West Coast": {
+    desc: "the West Coast",
+    distance: "about 60–90 minutes north of Cape Town along the R27",
+    character:
+      "wild flowers in spring, a windswept coastline, and a more rugged, unspoiled character compared to the Winelands",
+  },
+};
+
+// Venues we know have on-site accommodation based on research
+const VENUES_WITH_ACCOMMODATION = new Set([
+  "babylonstoren",
+  "boschendal-wine-estate",
+  "steenberg-farm",
+  "holden-manz",
+  "mont-rochelle",
+  "lanzerac-wine-estate",
+  "vrede-en-lust",
+  "the-cellars-hohenort",
+  "belmond-mount-nelson",
+  "the-12-apostles-hotel",
+  "la-petite-ferme",
+  "eikenhof-estate",
+  "zorgvliet-wines",
+  "la-cotte-farm",
+  "saronsberg-wine-estate",
+  "lourensford-wine-estate",
+  "groot-constantia",
+  "hawksmoor-house",
+]);
+
+function getVenueFaqs(venue) {
+  const cap =
+    venue.capacity === "Contact venue"
+      ? null
+      : venue.capacity.replace("Up to ", "");
+  const price = venue.price === "Contact Venue" ? null : venue.price;
+  const region = REGION_CONTEXT[venue.region] || {
+    desc: venue.region,
+    distance: "within the Western Cape",
+    character: "the natural beauty of the Western Cape",
+  };
+  const hasAccomm =
+    VENUES_WITH_ACCOMMODATION.has(venue.slug) ||
+    venue.features.some((f) =>
+      /accommodation|suite|hotel|chalet|lodge|room/i.test(f),
+    );
+  const featureList = venue.features.slice(0, 4).join(", ");
+
+  return [
+    {
+      q: `How many guests can ${venue.name} accommodate?`,
+      a: cap
+        ? `${venue.name} can accommodate up to ${cap} guests. Exact numbers can vary depending on the ceremony layout, whether you're using indoor or outdoor spaces, and the time of year. It's worth calling the venue directly to confirm what works for your specific guest count and format.`
+        : `${venue.name} does not advertise a fixed guest capacity — available numbers depend on the specific event layout and space configuration. Contact the venue directly to discuss what's possible for your wedding size.`,
+    },
+    {
+      q: `Where is ${venue.name} located?`,
+      a: `${venue.name} is situated in ${region.desc}, Western Cape, at ${venue.address}. It is ${region.distance} — making it ${venue.region === "Cape Town City" ? "ideal for couples wanting a city wedding with easy access for all guests" : "accessible as a day trip or weekend destination from Cape Town"}. The setting is defined by ${region.character}.`,
+    },
+    {
+      q: `What type of venue is ${venue.name}?`,
+      a: `${venue.name} is a ${venue.type.toLowerCase()} in ${region.desc}. Key features include ${featureList}. ${venue.highlight}. This makes it particularly well-suited to couples who want ${venue.type === "Wine Estate" ? "a vineyard setting with estate wines on the day" : venue.type === "Boutique Hotel" ? "full hotel amenities and overnight accommodation for the wedding party" : venue.type === "Historic Manor" ? "a venue with genuine Cape heritage and architectural character" : venue.type === "Farm & Country" ? "an intimate, farm-style atmosphere with a relaxed, personal feel" : "a beautiful and distinct wedding setting in the Western Cape"}.`,
+    },
+    {
+      q: `What is the price range for a wedding at ${venue.name}?`,
+      a: price
+        ? `${venue.name} is categorised in the ${price} tier. This is a broad guide — your actual spend will depend on guest numbers, the season (December and April tend to be peak months), day of the week, and which catering and décor packages you select. We recommend contacting the venue for a personalised quote based on your specific requirements.`
+        : `${venue.name} does not publish a standard price list — costs are quoted on enquiry and vary based on guest count, date, and package selections. Contact the venue directly for a tailored quote.`,
+    },
+    {
+      q: `Does ${venue.name} have on-site accommodation?`,
+      a: hasAccomm
+        ? `Yes — ${venue.name} offers on-site accommodation, which is a significant practical advantage for wedding weekends. Guests and the wedding party can stay on the estate, removing the need for late-night transport arrangements and allowing the celebration to extend into the following morning.`
+        : `${venue.name} does not list on-site accommodation as a standard offering. However, the ${region.desc} area has a wide range of guesthouses, boutique hotels, and self-catering options within a short distance. It's worth discussing transport and nearby stay options with the venue when you enquire.`,
+    },
+  ];
+}
 
 // ─── Venue Data (24 venues — sourced from logbook_venues.xlsx) ─────────────────
 const VENUES = [
@@ -1017,8 +1189,44 @@ function useRouter() {
   return { path, navigate };
 }
 
+// ─── FAQ Accordion ────────────────────────────────────────────────────────────
+function FaqAccordion({ faqs }) {
+  const [open, setOpen] = useState(null);
+  return (
+    <div className="faq-section">
+      <div className="faq-title">Frequently Asked Questions</div>
+      {faqs.map((faq, i) => (
+        <div className="faq-item" key={i}>
+          <button
+            className="faq-q"
+            onClick={() => setOpen(open === i ? null : i)}
+          >
+            <span>{faq.q}</span>
+            <svg
+              className={`faq-chevron${open === i ? " open" : ""}`}
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+            >
+              <path
+                d="M4 6l4 4 4-4"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+          {open === i && <div className="faq-a">{faq.a}</div>}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // ─── VenueCard ────────────────────────────────────────────────────────────────
-function VenueCard({ venue, navigate }) {
+function VenueCard({ venue, navigate, isSaved, onToggleSave }) {
   return (
     <div
       className="card"
@@ -1033,6 +1241,37 @@ function VenueCard({ venue, navigate }) {
       >
         <div className="card-banner-overlay" />
         <span className="card-banner-badge">{venue.type}</span>
+        {onToggleSave && (
+          <button
+            className={`card-save-btn${isSaved ? " saved" : ""}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleSave(venue.slug);
+              track("venue_save_toggle", {
+                venue_name: venue.name,
+                saved: !isSaved,
+              });
+            }}
+            aria-label={isSaved ? "Remove from saved" : "Save venue"}
+            title={isSaved ? "Remove from saved" : "Save venue"}
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill={isSaved ? "#A07840" : "none"}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7 12S1.5 8.5 1.5 4.5a3 3 0 015.5-1.67A3 3 0 0112.5 4.5C12.5 8.5 7 12 7 12z"
+                stroke={isSaved ? "#A07840" : "rgba(255,255,255,0.9)"}
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        )}
       </div>
       <div className="card-body">
         <div className="card-region">{venue.region}</div>
@@ -1160,7 +1399,7 @@ function VendorModal({ vendor, onClose }) {
 }
 
 // ─── Venue Detail Page ─────────────────────────────────────────────────────────
-function VenuePage({ venue, navigate, allVenues }) {
+function VenuePage({ venue, navigate, allVenues, isSaved, onToggleSave }) {
   useEffect(() => {
     document.title = `${venue.name} Wedding Venue — ${venue.region} | Cape Vows`;
     const m = document.querySelector('meta[name="description"]');
@@ -1180,23 +1419,59 @@ function VenuePage({ venue, navigate, allVenues }) {
   }, [venue]);
 
   useEffect(() => {
+    const faqs = getVenueFaqs(venue);
     const s = document.createElement("script");
     s.type = "application/ld+json";
     s.id = "venue-jsonld";
-    s.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "EventVenue",
-      name: venue.name,
-      description: venue.description,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: venue.address,
-        addressRegion: "Western Cape",
-        addressCountry: "ZA",
+    s.textContent = JSON.stringify([
+      {
+        "@context": "https://schema.org",
+        "@type": "EventVenue",
+        name: venue.name,
+        description: venue.description,
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: venue.address,
+          addressRegion: "Western Cape",
+          addressCountry: "ZA",
+        },
+        telephone: venue.phone,
+        url: venue.website,
       },
-      telephone: venue.phone,
-      url: venue.website,
-    });
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://www.capevows.co.za/",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Venues",
+            item: "https://www.capevows.co.za/venues",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: venue.name,
+            item: `https://www.capevows.co.za/venues/${venue.slug}`,
+          },
+        ],
+      },
+    ]);
     document.head.appendChild(s);
     return () => {
       const el = document.getElementById("venue-jsonld");
@@ -1326,6 +1601,40 @@ function VenuePage({ venue, navigate, allVenues }) {
               >
                 Visit Official Website
               </a>
+              {onToggleSave && (
+                <button
+                  className="btn-ghost"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "0.5rem",
+                  }}
+                  onClick={() => {
+                    onToggleSave(venue.slug);
+                    track("venue_save_toggle", {
+                      venue_name: venue.name,
+                      saved: !isSaved,
+                    });
+                  }}
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    fill={isSaved ? "currentColor" : "none"}
+                  >
+                    <path
+                      d="M7 12S1.5 8.5 1.5 4.5a3 3 0 015.5-1.67A3 3 0 0112.5 4.5C12.5 8.5 7 12 7 12z"
+                      stroke="currentColor"
+                      strokeWidth="1.4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  {isSaved ? "Saved" : "Save Venue"}
+                </button>
+              )}
               <button className="btn-ghost" onClick={() => navigate("/venues")}>
                 ← All Venues
               </button>
@@ -1333,6 +1642,10 @@ function VenuePage({ venue, navigate, allVenues }) {
           </div>
         </div>
       </div>
+      {/* end venue-page-layout */}
+
+      {/* FAQ — full width below both columns, after CTAs */}
+      <FaqAccordion faqs={getVenueFaqs(venue)} />
 
       {related.length > 0 && (
         <div className="related-section">
@@ -1651,15 +1964,16 @@ function HomePage({ navigate, allVenues }) {
         <div className="hero-overlay" />
         <div className="hero-content">
           <h1 className="hero-title">
-            Your Perfect
+            You've Found
             <br />
-            <em>Cape Wedding</em>
+            <em>Each Other.</em>
             <br />
-            Awaits
+            Now Find the Venue.
           </h1>
           <p className="hero-sub">
-            {VENUES.length} hand-verified venues across the Cape Winelands, Cape
-            Town, and the Overberg — beautifully curated in one place.
+            24 hand-researched venues across the Western Cape — from
+            sun-drenched Winelands estates to hidden fynbos retreats, verified
+            and curated.
           </p>
           <div className="hero-actions">
             <button
@@ -1669,7 +1983,7 @@ function HomePage({ navigate, allVenues }) {
                 navigate("/venues");
               }}
             >
-              Explore Venues
+              Browse Venues
             </button>
             <button
               className="btn btn-outline"
@@ -1685,15 +1999,15 @@ function HomePage({ navigate, allVenues }) {
         <div className="hero-stats">
           <div className="hero-stat">
             <span className="hero-stat-n">{VENUES.length}</span>
-            <span className="hero-stat-l">Venues Listed</span>
-          </div>
-          <div className="hero-stat">
-            <span className="hero-stat-n">Soon</span>
-            <span className="hero-stat-l">Vendors Coming</span>
+            <span className="hero-stat-l">Verified Venues</span>
           </div>
           <div className="hero-stat">
             <span className="hero-stat-n">8</span>
             <span className="hero-stat-l">Regions Covered</span>
+          </div>
+          <div className="hero-stat">
+            <span className="hero-stat-n">Free</span>
+            <span className="hero-stat-l">No fees, no ads</span>
           </div>
         </div>
       </div>
@@ -1833,12 +2147,13 @@ function HomePage({ navigate, allVenues }) {
   );
 }
 
-function VenuesPage({ allVenues, navigate }) {
+function VenuesPage({ allVenues, navigate, saved, onToggleSave }) {
   const [region, setRegion] = useState("All Regions");
   const [type, setType] = useState("All Types");
   const [price, setPrice] = useState("Any Budget");
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("Name: A–Z");
+  const [minGuests, setMinGuests] = useState(0);
   const availableRegions = [
     "All Regions",
     ...Array.from(new Set(allVenues.map((v) => v.region))).sort(),
@@ -1870,6 +2185,12 @@ function VenuesPage({ allVenues, navigate }) {
       !v.description.toLowerCase().includes(search.toLowerCase())
     )
       return false;
+    if (
+      minGuests > 0 &&
+      v.capacity !== "Contact venue" &&
+      capNum(v.capacity) < minGuests
+    )
+      return false;
     return true;
   });
   const sorted = [...filtered].sort((a, b) => {
@@ -1881,7 +2202,7 @@ function VenuesPage({ allVenues, navigate }) {
       return capNum(a.capacity) - capNum(b.capacity);
     if (sort === "Capacity: High to Low")
       return capNum(b.capacity) - capNum(a.capacity);
-    return a.name.localeCompare(b.name); // Default to A–Z
+    return a.name.localeCompare(b.name);
   });
   return (
     <section style={{ paddingTop: "3rem" }}>
@@ -1964,6 +2285,40 @@ function VenuesPage({ allVenues, navigate }) {
             ))}
           </select>
         </div>
+        <div className="filter-slider-group">
+          <div className="filter-label">Min. Guests</div>
+          <div className="filter-slider-val">
+            {minGuests === 0 ? "Any size" : `${minGuests}+ guests`}
+          </div>
+          <input
+            type="range"
+            className="cap-slider"
+            min={0}
+            max={400}
+            step={25}
+            value={minGuests}
+            onChange={(e) => {
+              const v = Number(e.target.value);
+              setMinGuests(v);
+              if (v > 0)
+                track("filter_used", { filter_type: "min_guests", value: v });
+            }}
+          />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              fontFamily: "var(--ff-sans)",
+              fontSize: "0.55rem",
+              color: "var(--muted)",
+              letterSpacing: "0.06em",
+              marginTop: "2px",
+            }}
+          >
+            <span>Any</span>
+            <span>400+</span>
+          </div>
+        </div>
         <div className="filter-group">
           <div className="filter-label">Sort By</div>
           <select
@@ -1994,6 +2349,7 @@ function VenuesPage({ allVenues, navigate }) {
             setPrice("Any Budget");
             setSearch("");
             setSort("Name: A–Z");
+            setMinGuests(0);
           }}
         >
           Clear All
@@ -2013,7 +2369,13 @@ function VenuesPage({ allVenues, navigate }) {
       ) : (
         <div className="cards-grid">
           {sorted.map((v) => (
-            <VenueCard key={v.id} venue={v} navigate={navigate} />
+            <VenueCard
+              key={v.id}
+              venue={v}
+              navigate={navigate}
+              isSaved={saved.includes(v.slug)}
+              onToggleSave={onToggleSave}
+            />
           ))}
         </div>
       )}
@@ -2174,6 +2536,95 @@ function VendorsPage() {
   );
 }
 
+function SavedPage({ allVenues, navigate, saved, onToggleSave }) {
+  const savedVenues = allVenues.filter((v) => saved.includes(v.slug));
+  return (
+    <div className="saved-page">
+      <button
+        className="venue-back"
+        onClick={() => navigate("/venues")}
+        aria-label="Back to venues"
+      >
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path
+            d="M9 2L4 7L9 12"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+        All Venues
+      </button>
+      <div className="section-eyebrow" style={{ marginBottom: "0.5rem" }}>
+        Your Shortlist
+      </div>
+      <h1 className="section-title" style={{ marginBottom: "0.5rem" }}>
+        Saved <em>Venues</em>
+      </h1>
+      {savedVenues.length === 0 ? (
+        <div className="saved-empty">
+          <div
+            style={{ fontSize: "3rem", marginBottom: "1rem", opacity: 0.25 }}
+          >
+            ♡
+          </div>
+          <div
+            style={{
+              fontFamily: "var(--ff-serif)",
+              fontSize: "1.5rem",
+              color: "var(--green)",
+              marginBottom: "0.75rem",
+            }}
+          >
+            No venues saved yet
+          </div>
+          <p
+            style={{
+              fontFamily: "var(--ff-body)",
+              color: "var(--muted)",
+              marginBottom: "2rem",
+            }}
+          >
+            Tap the heart icon on any venue card to build your shortlist.
+          </p>
+          <button
+            className="btn btn-primary"
+            onClick={() => navigate("/venues")}
+          >
+            Browse Venues
+          </button>
+        </div>
+      ) : (
+        <>
+          <p
+            style={{
+              fontFamily: "var(--ff-body)",
+              fontSize: "1rem",
+              color: "var(--muted)",
+              marginBottom: "2.5rem",
+            }}
+          >
+            {savedVenues.length} venue{savedVenues.length !== 1 ? "s" : ""}{" "}
+            saved — tap a card to view details, or ♡ to remove.
+          </p>
+          <div className="cards-grid">
+            {savedVenues.map((v) => (
+              <VenueCard
+                key={v.id}
+                venue={v}
+                navigate={navigate}
+                isSaved={true}
+                onToggleSave={onToggleSave}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 function AdminPage({
   onAddVenue,
   onAddVendor,
@@ -2297,6 +2748,59 @@ export default function App() {
   const [showCookieBanner, setShowCookieBanner] = useState(
     () => !localStorage.getItem("cv_cookies_accepted"),
   );
+  const { saved, toggle: toggleSave } = useFavourites();
+
+  // Global schema — injected once on mount
+  useEffect(() => {
+    const s = document.createElement("script");
+    s.type = "application/ld+json";
+    s.id = "global-jsonld";
+    s.textContent = JSON.stringify([
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: "Cape Vows",
+        url: "https://www.capevows.co.za",
+        logo: "https://www.capevows.co.za/og-image.png",
+        contactPoint: {
+          "@type": "ContactPoint",
+          email: "hello@capevows.co.za",
+          contactType: "customer support",
+        },
+        sameAs: [
+          "https://www.instagram.com/capevows",
+          "https://www.pinterest.com/capevows",
+        ],
+        description:
+          "Cape Vows is South Africa's Western Cape wedding venue directory — 24 hand-verified venues across Franschhoek, Stellenbosch, Cape Town, Constantia and the Overberg.",
+        areaServed: {
+          "@type": "State",
+          name: "Western Cape",
+          containedInPlace: { "@type": "Country", name: "South Africa" },
+        },
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: "Cape Vows",
+        url: "https://www.capevows.co.za",
+        potentialAction: {
+          "@type": "SearchAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate:
+              "https://www.capevows.co.za/venues?q={search_term_string}",
+          },
+          "query-input": "required name=search_term_string",
+        },
+      },
+    ]);
+    document.head.appendChild(s);
+    return () => {
+      const el = document.getElementById("global-jsonld");
+      if (el) el.remove();
+    };
+  }, []);
   const allVenues = [...VENUES, ...extraVenues];
   const addVenue = (v) =>
     setExtraVenues((e) => [...e, { ...v, slug: toSlug(v.name) }]);
@@ -2314,13 +2818,15 @@ export default function App() {
       ? "home"
       : path === "/venues"
         ? "venues"
-        : path === "/vendors"
-          ? "vendors"
-          : path === "/admin"
-            ? "admin"
-            : venueSlugMatch
-              ? "venue"
-              : "home";
+        : path === "/venues/saved"
+          ? "saved"
+          : path === "/vendors"
+            ? "vendors"
+            : path === "/admin"
+              ? "admin"
+              : venueSlugMatch
+                ? "venue"
+                : "home";
 
   return (
     <div>
@@ -2366,6 +2872,35 @@ export default function App() {
           >
             Vendors
           </a>
+          <a
+            className={`nav-link${currentPage === "saved" ? " active" : ""}`}
+            href="/venues/saved"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/venues/saved");
+            }}
+            title="Saved venues"
+            style={{ gap: "2px" }}
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill={saved.length > 0 ? "var(--gold)" : "none"}
+              style={{ transition: "fill 0.2s" }}
+            >
+              <path
+                d="M7 12S1.5 8.5 1.5 4.5a3 3 0 015.5-1.67A3 3 0 0112.5 4.5C12.5 8.5 7 12 7 12z"
+                stroke={saved.length > 0 ? "var(--gold)" : "currentColor"}
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            {saved.length > 0 && (
+              <span className="nav-badge">{saved.length}</span>
+            )}
+          </a>
         </div>
       </nav>
 
@@ -2373,7 +2908,20 @@ export default function App() {
         <HomePage navigate={navigate} allVenues={allVenues} />
       )}
       {currentPage === "venues" && (
-        <VenuesPage allVenues={allVenues} navigate={navigate} />
+        <VenuesPage
+          allVenues={allVenues}
+          navigate={navigate}
+          saved={saved}
+          onToggleSave={toggleSave}
+        />
+      )}
+      {currentPage === "saved" && (
+        <SavedPage
+          allVenues={allVenues}
+          navigate={navigate}
+          saved={saved}
+          onToggleSave={toggleSave}
+        />
       )}
       {currentPage === "vendors" && <VendorsPage />}
       {currentPage === "admin" && (
@@ -2390,6 +2938,8 @@ export default function App() {
           venue={activeVenue}
           navigate={navigate}
           allVenues={allVenues}
+          isSaved={saved.includes(activeVenue.slug)}
+          onToggleSave={toggleSave}
         />
       )}
       {currentPage === "venue" && !activeVenue && (
