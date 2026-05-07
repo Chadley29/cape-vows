@@ -272,9 +272,13 @@ const css = `
     .venue-page-layout { grid-template-columns: 1fr; }
     .venue-sidebar { position: static; }
   }
+  @media (max-width: 600px) {
+    .nav-link-home { display: none; }
+    .nav-link { padding: 0.5rem 0.5rem; font-size: 0.64rem; letter-spacing: 0.06em; }
+  }
   @media (max-width: 480px) {
     nav { padding: 0 1rem; }
-    .nav-logo { font-size: 1.1rem; }
+    .nav-logo { font-size: 1.05rem; }
     .hero-content { padding: 2rem 1rem; }
     .hero-stats { gap: 1.5rem; margin-top: 2rem; }
     section { padding: 3rem 1rem; }
@@ -1273,7 +1277,11 @@ const POSTS = [
         ],
       },
     ],
-    cta: { label: "Browse Cape Winelands Venues", path: "/venues" },
+    cta: {
+      label: "Browse Cape Winelands Venues",
+      path: "/venues",
+      filters: { region: "Cape Winelands" },
+    },
   },
   {
     slug: "budget-friendly-winelands-venues",
@@ -1284,8 +1292,9 @@ const POSTS = [
     summary:
       "A Winelands wedding doesn't have to mean a seven-figure price tag. These mid-range venues offer genuine Cape character — mountain views, estate wines, and well-equipped event spaces — at more accessible price points.",
     heroImg:
-      "https://images.unsplash.com/photo-1519741347686-c1e0aadf4611?auto=format&fit=crop&w=1400&q=80",
-    heroCredit: "Photo: Photos by Lanty / Unsplash",
+      "https://images.unsplash.com/photo-1553783075-906930b08f36?auto=format&fit=crop&w=1400&q=80",
+    heroCredit:
+      "Photo: Mpho Mojapelo / Unsplash — Hidden Valley Wine Estate, Stellenbosch",
     metaDesc:
       "Planning a Winelands wedding on a tighter budget? Here are our verified mid-range Cape venues that offer excellent value without sacrificing mountain views or Cape character.",
     intro:
@@ -1327,7 +1336,11 @@ const POSTS = [
           "Venue pricing changes seasonally and annually. Always request a current quote directly from the venue — our tiers are a guide, not a guarantee.",
       },
     ],
-    cta: { label: "Browse Mid-Range Venues", path: "/venues" },
+    cta: {
+      label: "Browse Mid-Range Venues",
+      path: "/venues",
+      filters: { price: "Mid-Range (R50–150k)" },
+    },
   },
   {
     slug: "best-seasons-cape-wedding",
@@ -1338,8 +1351,9 @@ const POSTS = [
     summary:
       "In the Western Cape, your wedding date affects your photos, your guests' comfort, and your budget. Here's an honest breakdown of what each season actually delivers.",
     heroImg:
-      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1400&q=80",
-    heroCredit: "Photo: Avel Chuklanov / Unsplash",
+      "https://images.unsplash.com/photo-1704037178699-8d9d9bedcb52?auto=format&fit=crop&w=1400&q=80",
+    heroCredit:
+      "Photo: Matthias Wesselmann / Unsplash — Delheim Wine Estate, Stellenbosch",
     metaDesc:
       "When is the best time for a Western Cape wedding? From summer winds to winter mountain mists, here's what each season means for your Cape wedding day.",
     intro:
@@ -1662,7 +1676,14 @@ function BlogPostPage({ post, navigate }) {
       <div className="blog-post-cta">
         <button
           className="btn btn-primary"
-          onClick={() => navigate(post.cta.path)}
+          onClick={() => {
+            if (post.cta.filters)
+              sessionStorage.setItem(
+                "cv_pending_filters",
+                JSON.stringify(post.cta.filters),
+              );
+            navigate(post.cta.path);
+          }}
         >
           {post.cta.label}
         </button>
@@ -2647,12 +2668,34 @@ function HomePage({ navigate, allVenues }) {
 }
 
 function VenuesPage({ allVenues, navigate, saved, onToggleSave }) {
-  const [region, setRegion] = useState("All Regions");
+  const [region, setRegion] = useState(() => {
+    try {
+      const f = JSON.parse(
+        sessionStorage.getItem("cv_pending_filters") || "{}",
+      );
+      return f.region || "All Regions";
+    } catch {
+      return "All Regions";
+    }
+  });
   const [type, setType] = useState("All Types");
-  const [price, setPrice] = useState("Any Budget");
+  const [price, setPrice] = useState(() => {
+    try {
+      const f = JSON.parse(
+        sessionStorage.getItem("cv_pending_filters") || "{}",
+      );
+      return f.price && PRICE_RANGES.includes(f.price) ? f.price : "Any Budget";
+    } catch {
+      return "Any Budget";
+    }
+  });
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("Name: A–Z");
   const [minGuests, setMinGuests] = useState(0);
+
+  useEffect(() => {
+    sessionStorage.removeItem("cv_pending_filters");
+  }, []);
   const availableRegions = [
     "All Regions",
     ...Array.from(new Set(allVenues.map((v) => v.region))).sort(),
@@ -3350,7 +3393,7 @@ export default function App() {
         </a>
         <div className="nav-links">
           <a
-            className={`nav-link${currentPage === "home" ? " active" : ""}`}
+            className={`nav-link nav-link-home${currentPage === "home" ? " active" : ""}`}
             href="/"
             onClick={(e) => {
               e.preventDefault();
