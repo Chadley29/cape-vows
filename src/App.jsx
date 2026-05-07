@@ -43,6 +43,7 @@ const css = `
   .hero-title { font-family: var(--ff-serif); font-size: clamp(2.8rem, 7vw, 5.5rem); color: #fff; line-height: 1.1; font-weight: 700; margin-bottom: 0.5rem; }
   .hero-title em { font-style: italic; color: var(--gold2); }
   .hero-sub { font-family: var(--ff-body); font-size: clamp(1.1rem, 2vw, 1.4rem); color: rgba(255,255,255,0.75); font-weight: 300; margin: 1.5rem 0 2.5rem; letter-spacing: 0.02em; }
+  .hero-sub em { font-style: italic; color: var(--gold2); font-weight: 500; }
   .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
   .btn { font-family: var(--ff-sans); font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; border: none; cursor: pointer; transition: all 0.25s; border-radius: 2px; padding: 0.85rem 2rem; }
   .btn-primary { background: var(--gold); color: #fff; }
@@ -123,7 +124,7 @@ const css = `
   .blog-post-list { list-style: none; padding: 0; margin: 0.5rem 0 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
   .blog-post-li { background: var(--cream2); border-left: 3px solid var(--gold); padding: 1rem 1.25rem; border-radius: 0 3px 3px 0; }
   .blog-post-li strong { font-family: var(--ff-serif); font-size: 1.05rem; color: var(--green); display: block; margin-bottom: 0.25rem; }
-  .blog-post-li span { font-family: var(--ff-body); font-size: 0.95rem; color: var(--muted); line-height: 1.65; }
+  .blog-post-li span { font-family: var(--ff-body); font-size: 0.95rem; color: var(--text); line-height: 1.65; }
   .blog-venue-btn { display: flex; align-items: center; justify-content: flex-end; gap: 0.35rem; width: 100%; font-family: var(--ff-sans); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); cursor: pointer; background: none; border: none; padding: 0.55rem 0 0; margin-top: 0.65rem; transition: color 0.2s; font-weight: 500; }
   .blog-venue-btn:hover { color: var(--gold); }
   .blog-venue-link { background: none; border: none; padding: 0; color: var(--green); font-family: inherit; font-size: inherit; cursor: pointer; text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 3px; transition: color 0.2s; font-style: inherit; }
@@ -1292,9 +1293,9 @@ const POSTS = [
     summary:
       "A Winelands wedding doesn't have to mean a seven-figure price tag. These mid-range venues offer genuine Cape character — mountain views, estate wines, and well-equipped event spaces — at more accessible price points.",
     heroImg:
-      "https://images.unsplash.com/photo-1553783075-906930b08f36?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1704037178699-8d9d9bedcb52?auto=format&fit=crop&w=1400&q=80",
     heroCredit:
-      "Photo: Mpho Mojapelo / Unsplash — Hidden Valley Wine Estate, Stellenbosch",
+      "Photo: Matthias Wesselmann / Unsplash — Delheim Wine Estate, Stellenbosch",
     metaDesc:
       "Planning a Winelands wedding on a tighter budget? Here are our verified mid-range Cape venues that offer excellent value without sacrificing mountain views or Cape character.",
     intro:
@@ -1351,9 +1352,9 @@ const POSTS = [
     summary:
       "In the Western Cape, your wedding date affects your photos, your guests' comfort, and your budget. Here's an honest breakdown of what each season actually delivers.",
     heroImg:
-      "https://images.unsplash.com/photo-1704037178699-8d9d9bedcb52?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1553783075-906930b08f36?auto=format&fit=crop&w=1400&q=80",
     heroCredit:
-      "Photo: Matthias Wesselmann / Unsplash — Delheim Wine Estate, Stellenbosch",
+      "Photo: Mpho Mojapelo / Unsplash — Hidden Valley Wine Estate, Stellenbosch",
     metaDesc:
       "When is the best time for a Western Cape wedding? From summer winds to winter mountain mists, here's what each season means for your Cape wedding day.",
     intro:
@@ -1457,7 +1458,7 @@ const POSTS = [
         ],
       },
     ],
-    cta: { label: "Find Local Wedding Vendors", path: "/vendors" },
+    cta: { label: "Browse All Venues", path: "/venues" },
   },
   {
     slug: "mountain-backdrop-wedding-venues-western-cape",
@@ -2470,11 +2471,10 @@ function ResearchPanel({ onAddVenue, onAddVendor }) {
 
 // ─── Pages ─────────────────────────────────────────────────────────────────────
 function HomePage({ navigate, allVenues }) {
-  const featured = [
-    allVenues.find((v) => v.price === "Mid-Range (R50–150k)"),
-    allVenues.find((v) => v.price === "Premium (R150–300k)"),
-    allVenues.find((v) => v.price === "Luxury (R300k+)"),
-  ].filter(Boolean);
+  const featuredSlugs = ["eikenhof-estate", "la-paris-estate", "babylonstoren"];
+  const featured = featuredSlugs
+    .map((s) => allVenues.find((v) => v.slug === s))
+    .filter(Boolean);
 
   return (
     <>
@@ -2488,12 +2488,12 @@ function HomePage({ navigate, allVenues }) {
             <br />
             <em>Each Other.</em>
             <br />
-            Now Find the Venue.
+            Now Find the <em>Venue.</em>
           </h1>
           <p className="hero-sub">
             24 hand-researched venues across the Western Cape — from
             sun-drenched Winelands estates to hidden fynbos retreats, verified
-            and curated.
+            and curated for your Cape wedding.
           </p>
           <div className="hero-actions">
             <button
@@ -2504,15 +2504,6 @@ function HomePage({ navigate, allVenues }) {
               }}
             >
               Browse Venues
-            </button>
-            <button
-              className="btn btn-outline"
-              onClick={() => {
-                track("hero_cta_click", { button: "find_vendors" });
-                navigate("/vendors");
-              }}
-            >
-              Find Vendors
             </button>
           </div>
         </div>
