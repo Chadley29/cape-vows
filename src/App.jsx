@@ -2258,6 +2258,7 @@ function VenuePage({ venue, navigate, allVenues, isSaved, onToggleSave }) {
           <div
             onClick={(e) => e.stopPropagation()}
             style={{
+              position: "relative",
               background: "var(--cream)",
               borderRadius: 12,
               padding: 32,
@@ -2266,6 +2267,33 @@ function VenuePage({ venue, navigate, allVenues, isSaved, onToggleSave }) {
               boxShadow: "0 8px 40px rgba(0,0,0,0.2)",
             }}
           >
+            {/* X close button — top right */}
+            <button
+              onClick={() => {
+                setShowEnquiry(false);
+                setEnquiryStatus("idle");
+              }}
+              aria-label="Close enquiry form"
+              style={{
+                position: "absolute",
+                top: 14,
+                right: 14,
+                width: 30,
+                height: 30,
+                borderRadius: "50%",
+                background: "var(--cream2)",
+                border: "1px solid var(--border)",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: 14,
+                color: "var(--muted)",
+                lineHeight: 1,
+              }}
+            >
+              ✕
+            </button>
             <h3
               style={{
                 fontFamily: "var(--ff-serif)",
@@ -2407,25 +2435,6 @@ function VenuePage({ venue, navigate, allVenues, isSaved, onToggleSave }) {
                 )}
               </form>
             )}
-
-            <button
-              onClick={() => {
-                setShowEnquiry(false);
-                setEnquiryStatus("idle");
-              }}
-              style={{
-                background: "none",
-                border: "none",
-                color: "var(--muted)",
-                fontFamily: "var(--ff-sans)",
-                fontSize: 13,
-                cursor: "pointer",
-                marginTop: 16,
-                padding: 0,
-              }}
-            >
-              Close
-            </button>
           </div>
         </div>
       )}

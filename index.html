@@ -14,7 +14,7 @@
       name="keywords"
       content="wedding venues western cape, cape winelands wedding, cape town wedding venue, franschhoek wedding, stellenbosch wedding, south africa wedding directory"
     />
-    <!-- Canonical: no www — keep consistent with JSON-LD below -->
+    <!-- Canonical: no www — must match JSON-LD below -->
     <link rel="canonical" href="https://capevows.co.za" />
 
     <!-- Open Graph (Facebook, WhatsApp previews) -->
@@ -47,6 +47,9 @@
     />
     <meta name="twitter:image" content="https://capevows.co.za/og-image.jpg" />
 
+    <!-- Pinterest domain verification -->
+    <meta name="p:domain_verify" content="782bc3aa8b199dee7dd3b0d7d7b0d58f" />
+
     <!-- Favicons -->
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -70,11 +73,9 @@
     </script>
 
     <!--
-      JSON-LD: WebSite schema only.
-      NOTE: potentialAction / SearchAction removed — your SPA router has no
-      search endpoint to fulfil it. Add it back once /search is live.
-      NOTE: URL uses no-www to match the canonical above.
-      The App.jsx global-jsonld script handles Organization schema at runtime.
+      JSON-LD: WebSite schema only. URL uses no-www to match canonical.
+      SearchAction removed — SPA router has no real search endpoint.
+      Organization schema is injected at runtime by App.jsx global-jsonld.
     -->
     <script type="application/ld+json">
       {
