@@ -8,12 +8,13 @@
     <title>Cape Vows — Wedding Venues & Vendors in the Western Cape</title>
     <meta
       name="description"
-      content="Browse hand-verified wedding venues in Franschhoek, Stellenbosch, Cape Town, Constantia and the Overberg. South Africa's Western Cape wedding directory."
+      content="24 hand-verified wedding venues across the Western Cape — Franschhoek, Stellenbosch, Cape Town and the Overberg. No ads, no fees. Find your Cape venue."
     />
     <meta
       name="keywords"
       content="wedding venues western cape, cape winelands wedding, cape town wedding venue, franschhoek wedding, stellenbosch wedding, south africa wedding directory"
     />
+    <!-- Canonical: no www — keep consistent with JSON-LD below -->
     <link rel="canonical" href="https://capevows.co.za" />
 
     <!-- Open Graph (Facebook, WhatsApp previews) -->
@@ -25,19 +26,24 @@
     />
     <meta
       property="og:description"
-      content="Discover the Western Cape's finest wedding venues and vendors across the Cape Winelands, Cape Town and Constantia."
+      content="24 hand-verified wedding venues across the Western Cape — Franschhoek, Stellenbosch, Cape Town and the Overberg. No ads, no fees."
     />
     <meta property="og:image" content="https://capevows.co.za/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_ZA" />
+    <meta property="og:site_name" content="Cape Vows" />
 
     <!-- Twitter/X card -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://capevows.co.za" />
     <meta
       name="twitter:title"
       content="Cape Vows — Wedding Venues & Vendors in the Western Cape"
     />
     <meta
       name="twitter:description"
-      content="Discover the Western Cape's finest wedding venues and vendors."
+      content="24 hand-verified wedding venues across the Western Cape. No ads, no fees."
     />
     <meta name="twitter:image" content="https://capevows.co.za/og-image.jpg" />
 
@@ -62,17 +68,26 @@
       gtag("js", new Date());
       gtag("config", "G-70RTTPE121");
     </script>
+
+    <!--
+      JSON-LD: WebSite schema only.
+      NOTE: potentialAction / SearchAction removed — your SPA router has no
+      search endpoint to fulfil it. Add it back once /search is live.
+      NOTE: URL uses no-www to match the canonical above.
+      The App.jsx global-jsonld script handles Organization schema at runtime.
+    -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "Cape Vows",
-        "url": "https://www.capevows.co.za",
-        "description": "The Western Cape wedding venue and vendor directory",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://www.capevows.co.za/#venues?q={search_term_string}",
-          "query-input": "required name=search_term_string"
+        "url": "https://capevows.co.za",
+        "description": "The Western Cape wedding venue and vendor directory — 24 hand-verified venues across Franschhoek, Stellenbosch, Cape Town, Constantia and the Overberg.",
+        "inLanguage": "en-ZA",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Cape Vows",
+          "url": "https://capevows.co.za"
         }
       }
     </script>
