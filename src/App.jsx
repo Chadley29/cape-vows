@@ -62,7 +62,6 @@ const css = `
   .section-desc { font-family: var(--ff-body); font-size: 1.1rem; color: var(--muted); max-width: 560px; line-height: 1.7; }
   .section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3rem; flex-wrap: wrap; gap: 1.5rem; }
 
-  /* Card banner — replaces image entirely */
   .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
   .card { background: #fff; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; cursor: pointer; transition: all 0.3s; box-shadow: 0 2px 12px var(--shadow); display: flex; flex-direction: column; }
   .card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px var(--shadow); border-color: var(--gold); }
@@ -78,19 +77,16 @@ const css = `
   .card-pill { font-family: var(--ff-sans); font-size: 0.61rem; letter-spacing: 0.06em; background: var(--cream2); color: var(--muted); padding: 0.2rem 0.6rem; border-radius: 10px; }
   .card-pill.green { background: rgba(45,74,62,0.08); color: var(--green); }
   .card-footer { padding: 0.8rem 1.5rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-  /* price and enquire are identical — both serif italic green */
   .card-price  { font-family: var(--ff-serif); font-size: 1rem; color: var(--green); font-style: italic; }
   .card-enquire { font-family: var(--ff-serif); font-size: 1rem; color: var(--green); font-style: italic; }
   .card-link { font-family: var(--ff-sans); font-size: 0.67rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
 
-  /* ── Favourite / Save ── */
   .card-save-btn { position: absolute; top: 0.75rem; left: 0.75rem; z-index: 2; width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.28); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s, transform 0.15s; padding: 0; }
   .card-save-btn:hover { background: rgba(255,255,255,0.32); transform: scale(1.12); }
   .card-save-btn svg { transition: fill 0.2s, stroke 0.2s; }
   .card-save-btn.saved { background: rgba(255,255,255,0.92); }
   .nav-badge { display: inline-flex; align-items: center; justify-content: center; width: 17px; height: 17px; border-radius: 50%; background: var(--gold); color: #fff; font-family: var(--ff-sans); font-size: 0.6rem; font-weight: 600; margin-left: 4px; line-height: 1; }
 
-  /* ── Capacity Slider ── */
   .filter-slider-group { display: flex; flex-direction: column; gap: 0.3rem; min-width: 180px; }
   .filter-slider-val { font-family: var(--ff-body); font-size: 0.9rem; color: var(--text); font-style: italic; }
   .cap-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 3px; border-radius: 2px; background: var(--border); outline: none; cursor: pointer; }
@@ -98,7 +94,6 @@ const css = `
   .cap-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
   .cap-slider::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; background: var(--green); border: 2px solid #fff; cursor: pointer; }
 
-  /* ── Blog ── */
   .blog-page { max-width: 1200px; margin: 0 auto; padding: 3rem 2.5rem 5rem; }
   .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2rem; margin-top: 2.5rem; }
   .blog-card { background: #fff; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; cursor: pointer; transition: box-shadow 0.2s, transform 0.2s; display: flex; flex-direction: column; }
@@ -111,7 +106,6 @@ const css = `
   .blog-card-footer { padding: 1rem 1.5rem; border-top: 1px solid var(--border); font-family: var(--ff-sans); font-size: 0.65rem; letter-spacing: 0.06em; color: var(--muted); display: flex; align-items: center; justify-content: space-between; }
   .blog-card-read { color: var(--gold); font-weight: 500; }
 
-  /* Blog post page */
   .blog-post { max-width: 780px; margin: 0 auto; padding: 3rem 2.5rem 5rem; }
   .blog-post-hero { width: 100%; height: 380px; object-fit: cover; border-radius: 4px; margin-bottom: 0.6rem; display: block; background: var(--cream2); }
   .blog-hero-credit { font-family: var(--ff-sans); font-size: 0.58rem; color: var(--muted); letter-spacing: 0.06em; margin-bottom: 2rem; }
@@ -147,19 +141,15 @@ const css = `
   .faq-chevron.open { transform: rotate(180deg); }
   .faq-a { font-family: var(--ff-body); font-size: 0.97rem; color: var(--muted); line-height: 1.7; padding-bottom: 0.9rem; }
 
-  /* ── Saved Page ── */
   .saved-page { max-width: 1200px; margin: 0 auto; padding: 3rem 2.5rem 5rem; }
   .saved-empty { text-align: center; padding: 5rem 2rem; }
 
-  /* Back link — replaces breadcrumb on venue pages */
   .venue-back { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--ff-sans); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); cursor: pointer; margin-bottom: 1.25rem; transition: gap 0.2s, color 0.2s; background: none; border: none; padding: 0; }
   .venue-back:hover { color: var(--green); gap: 0.6rem; }
   .venue-back svg { flex-shrink: 0; }
 
-  /* ── Venue Detail Page ── */
   .venue-page { max-width: 1200px; margin: 0 auto; padding: 3rem 2.5rem 5rem; }
 
-  /* Identity banner — type-keyed gradient; replaces stock photo hero */
   .venue-banner { width: 100%; border-radius: 6px; padding: 2.25rem 2.5rem 2rem; margin-bottom: 2.5rem; position: relative; overflow: hidden; }
   .venue-banner::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.2) 100%); pointer-events: none; }
   .venue-banner-eyebrow { font-family: var(--ff-sans); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.68); margin-bottom: 0.55rem; position: relative; z-index: 1; }
@@ -167,7 +157,6 @@ const css = `
   .venue-banner-chips { display: flex; gap: 0.55rem; flex-wrap: wrap; position: relative; z-index: 1; }
   .venue-banner-chip { font-family: var(--ff-sans); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.28rem 0.75rem; border-radius: 2px; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.24); color: rgba(255,255,255,0.92); }
 
-  /* Two-column: description left, sticky details card right */
   .venue-page-layout { display: grid; grid-template-columns: 1fr 310px; gap: 2.5rem; align-items: start; }
   .venue-main { min-width: 0; }
   .venue-sidebar { position: sticky; top: 80px; }
@@ -322,7 +311,6 @@ const toSlug = (n) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 
-// Type-keyed gradients — distinct per venue category
 const TYPE_GRADIENTS = {
   "Wine Estate":
     "linear-gradient(145deg, #3D1A1A 0%, #6B2E20 45%, #A07840 100%)",
@@ -427,7 +415,6 @@ const REGION_CONTEXT = {
   },
 };
 
-// Venues we know have on-site accommodation based on research
 const VENUES_WITH_ACCOMMODATION = new Set([
   "babylonstoren",
   "boschendal-wine-estate",
@@ -497,7 +484,7 @@ function getVenueFaqs(venue) {
   ];
 }
 
-// ─── Venue Data (24 venues — sourced from logbook_venues.xlsx) ─────────────────
+// ─── Venue Data ────────────────────────────────────────────────────────────────
 const VENUES = [
   {
     id: 1,
@@ -1217,7 +1204,6 @@ const VENDORS = [
 ];
 
 // ─── Blog Posts ───────────────────────────────────────────────────────────────
-// Images: Unsplash free-to-use (unsplash.com/license). Credit each photo in production.
 const POSTS = [
   {
     slug: "best-wine-estate-venues-franschhoek",
@@ -1518,7 +1504,6 @@ const POSTS = [
   },
 ];
 
-// Replaces venue name strings in a paragraph with clickable inline links
 function linkifyVenues(text, venueLinks, navigate) {
   if (!venueLinks || !venueLinks.length) return text;
   let parts = [text];
@@ -1610,11 +1595,11 @@ function BlogPostPage({ post, navigate }) {
       publisher: {
         "@type": "Organization",
         name: "Cape Vows",
-        url: "https://www.capevows.co.za",
+        url: "https://capevows.co.za",
       },
       mainEntityOfPage: {
         "@type": "WebPage",
-        "@id": `https://www.capevows.co.za/blog/${post.slug}`,
+        "@id": `https://capevows.co.za/blog/${post.slug}`,
       },
     });
     document.head.appendChild(s);
@@ -1920,7 +1905,56 @@ function VendorModal({ vendor, onClose }) {
 }
 
 // ─── Venue Detail Page ─────────────────────────────────────────────────────────
+// CHANGED: Added Formspree enquiry modal. Primary CTA is now "Enquire About This Venue".
+// "Visit Official Website" demoted to ghost button.
+// www removed from all JSON-LD URLs for canonical consistency.
+// Formspree endpoint: https://formspree.io/f/mwvywnbp
 function VenuePage({ venue, navigate, allVenues, isSaved, onToggleSave }) {
+  const [showEnquiry, setShowEnquiry] = useState(false);
+  const [enquiryStatus, setEnquiryStatus] = useState("idle"); // idle | sending | sent | error
+
+  const inputStyle = {
+    display: "block",
+    width: "100%",
+    boxSizing: "border-box",
+    padding: "10px 12px",
+    marginBottom: 12,
+    border: "1px solid var(--border)",
+    borderRadius: 6,
+    fontFamily: "var(--ff-body)",
+    fontSize: 16,
+    background: "#fff",
+    color: "var(--text)",
+  };
+
+  async function handleEnquiry(e) {
+    e.preventDefault();
+    setEnquiryStatus("sending");
+    const form = e.target;
+    const data = new FormData(form);
+    data.append("venue", venue.name);
+    data.append("region", venue.region);
+    try {
+      const res = await fetch("https://formspree.io/f/mwvywnbp", {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+      if (res.ok) {
+        setEnquiryStatus("sent");
+        form.reset();
+        track("venue_enquiry", {
+          venue_name: venue.name,
+          venue_region: venue.region,
+        });
+      } else {
+        setEnquiryStatus("error");
+      }
+    } catch {
+      setEnquiryStatus("error");
+    }
+  }
+
   useEffect(() => {
     document.title = `${venue.name} Wedding Venue — ${venue.region} | Cape Vows`;
     const m = document.querySelector('meta[name="description"]');
@@ -1976,19 +2010,19 @@ function VenuePage({ venue, navigate, allVenues, isSaved, onToggleSave }) {
             "@type": "ListItem",
             position: 1,
             name: "Home",
-            item: "https://www.capevows.co.za/",
+            item: "https://capevows.co.za/",
           },
           {
             "@type": "ListItem",
             position: 2,
             name: "Venues",
-            item: "https://www.capevows.co.za/venues",
+            item: "https://capevows.co.za/venues",
           },
           {
             "@type": "ListItem",
             position: 3,
             name: venue.name,
-            item: `https://www.capevows.co.za/venues/${venue.slug}`,
+            item: `https://capevows.co.za/venues/${venue.slug}`,
           },
         ],
       },
@@ -2031,7 +2065,6 @@ function VenuePage({ venue, navigate, allVenues, isSaved, onToggleSave }) {
         All Venues
       </button>
 
-      {/* Identity banner — type-keyed gradient replaces stock photo */}
       <div
         className="venue-banner"
         style={{ background: getGradient(venue.type) }}
@@ -2051,7 +2084,6 @@ function VenuePage({ venue, navigate, allVenues, isSaved, onToggleSave }) {
         </div>
       </div>
 
-      {/* Two-column: description + features left, sticky details card + CTAs right */}
       <div className="venue-page-layout">
         <div className="venue-main">
           <p className="venue-desc">{venue.description}</p>
@@ -2067,9 +2099,59 @@ function VenuePage({ venue, navigate, allVenues, isSaved, onToggleSave }) {
 
         <div className="venue-sidebar">
           <div className="venue-details-card">
-            <div className="venue-details-card-header">
-              <div className="venue-details-card-name">{venue.name}</div>
-              <div className="venue-details-card-region">{venue.region}</div>
+            <div
+              className="venue-details-card-header"
+              style={{
+                display: "flex",
+                alignItems: "flex-start",
+                justifyContent: "space-between",
+                gap: "0.5rem",
+              }}
+            >
+              <div>
+                <div className="venue-details-card-name">{venue.name}</div>
+                <div className="venue-details-card-region">{venue.region}</div>
+              </div>
+              {onToggleSave && (
+                <button
+                  onClick={() => {
+                    onToggleSave(venue.slug);
+                    track("venue_save_toggle", {
+                      venue_name: venue.name,
+                      saved: !isSaved,
+                    });
+                  }}
+                  aria-label={isSaved ? "Remove from saved" : "Save venue"}
+                  title={
+                    isSaved ? "Saved — click to remove" : "Save this venue"
+                  }
+                  style={{
+                    flexShrink: 0,
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    padding: "2px 0 0",
+                    lineHeight: 1,
+                  }}
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 14 14"
+                    fill={isSaved ? "var(--gold)" : "none"}
+                    xmlns="http://www.w3.org/2000/svg"
+                    style={{ transition: "fill 0.2s" }}
+                  >
+                    <path
+                      d="M7 12S1.5 8.5 1.5 4.5a3 3 0 015.5-1.67A3 3 0 0112.5 4.5C12.5 8.5 7 12 7 12z"
+                      stroke={isSaved ? "var(--gold)" : "var(--muted)"}
+                      strokeWidth="1.4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+              )}
             </div>
             <div className="venue-details-rows">
               <div className="venue-detail-row">
@@ -2111,61 +2193,38 @@ function VenuePage({ venue, navigate, allVenues, isSaved, onToggleSave }) {
               </div>
             </div>
             <div className="venue-cta-group">
+              {/* PRIMARY: Enquiry modal — keeps users on capevows.co.za */}
+              <button
+                className="btn-green"
+                onClick={() => {
+                  setShowEnquiry(true);
+                  track("enquiry_open", { venue_name: venue.name });
+                }}
+              >
+                Enquire About This Venue
+              </button>
+              {/* SECONDARY: Official website */}
               <a
                 href={venue.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-green"
+                className="btn-ghost"
+                style={{
+                  display: "block",
+                  textAlign: "center",
+                  textDecoration: "none",
+                }}
                 onClick={() =>
                   track("outbound_click", { venue_name: venue.name })
                 }
               >
                 Visit Official Website
               </a>
-              {onToggleSave && (
-                <button
-                  className="btn-ghost"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "0.5rem",
-                  }}
-                  onClick={() => {
-                    onToggleSave(venue.slug);
-                    track("venue_save_toggle", {
-                      venue_name: venue.name,
-                      saved: !isSaved,
-                    });
-                  }}
-                >
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 14 14"
-                    fill={isSaved ? "currentColor" : "none"}
-                  >
-                    <path
-                      d="M7 12S1.5 8.5 1.5 4.5a3 3 0 015.5-1.67A3 3 0 0112.5 4.5C12.5 8.5 7 12 7 12z"
-                      stroke="currentColor"
-                      strokeWidth="1.4"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  {isSaved ? "Saved" : "Save Venue"}
-                </button>
-              )}
-              <button className="btn-ghost" onClick={() => navigate("/venues")}>
-                ← All Venues
-              </button>
             </div>
           </div>
         </div>
       </div>
-      {/* end venue-page-layout */}
 
-      {/* FAQ — full width below both columns, after CTAs */}
       <FaqAccordion faqs={getVenueFaqs(venue)} />
 
       {related.length > 0 && (
@@ -2177,6 +2236,196 @@ function VenuePage({ venue, navigate, allVenues, isSaved, onToggleSave }) {
             {related.map((v) => (
               <VenueCard key={v.id} venue={v} navigate={navigate} />
             ))}
+          </div>
+        </div>
+      )}
+
+      {/* ── Enquiry Modal ─────────────────────────────────────────────────────── */}
+      {showEnquiry && (
+        <div
+          onClick={() => setShowEnquiry(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "rgba(0,0,0,0.55)",
+            zIndex: 999,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 16,
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: "var(--cream)",
+              borderRadius: 12,
+              padding: 32,
+              width: "100%",
+              maxWidth: 460,
+              boxShadow: "0 8px 40px rgba(0,0,0,0.2)",
+            }}
+          >
+            <h3
+              style={{
+                fontFamily: "var(--ff-serif)",
+                color: "var(--green)",
+                marginTop: 0,
+                marginBottom: "0.2rem",
+              }}
+            >
+              Enquire — {venue.name}
+            </h3>
+            <p
+              style={{
+                fontFamily: "var(--ff-sans)",
+                fontSize: "0.72rem",
+                color: "var(--gold)",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                marginBottom: "1.5rem",
+              }}
+            >
+              {venue.region} · Western Cape
+            </p>
+
+            {enquiryStatus === "sent" ? (
+              <p
+                style={{
+                  color: "var(--green)",
+                  fontFamily: "var(--ff-body)",
+                  fontSize: 18,
+                  lineHeight: 1.6,
+                }}
+              >
+                ✓ Enquiry sent! We'll be in touch shortly.
+              </p>
+            ) : (
+              <form onSubmit={handleEnquiry}>
+                <input
+                  name="name"
+                  required
+                  placeholder="Your name"
+                  style={inputStyle}
+                />
+                <input
+                  name="email"
+                  type="email"
+                  required
+                  placeholder="Email address"
+                  style={inputStyle}
+                />
+                <input
+                  name="phone"
+                  type="tel"
+                  placeholder="Phone (optional)"
+                  style={inputStyle}
+                />
+                <textarea
+                  name="message"
+                  placeholder="Tell us about your wedding — date, guest count, any questions"
+                  rows={4}
+                  style={{ ...inputStyle, resize: "vertical" }}
+                />
+                {/* Consent checkbox — required for GDPR (EU users) and POPIA compliance */}
+                <label
+                  style={{
+                    display: "flex",
+                    gap: 10,
+                    alignItems: "flex-start",
+                    cursor: "pointer",
+                    margin: "14px 0 4px",
+                  }}
+                >
+                  <input
+                    type="checkbox"
+                    name="consent"
+                    required
+                    style={{
+                      marginTop: 3,
+                      flexShrink: 0,
+                      accentColor: "var(--green)",
+                      width: 15,
+                      height: 15,
+                      cursor: "pointer",
+                    }}
+                  />
+                  <span
+                    style={{
+                      fontFamily: "var(--ff-sans)",
+                      fontSize: "0.7rem",
+                      color: "var(--muted)",
+                      lineHeight: 1.55,
+                    }}
+                  >
+                    I consent to Cape Vows processing my details to handle this
+                    venue enquiry, in accordance with the{" "}
+                    <a
+                      href="/privacy-policy.html"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        color: "var(--gold)",
+                        textDecoration: "underline",
+                      }}
+                    >
+                      Privacy Policy
+                    </a>
+                    .
+                  </span>
+                </label>
+                <button
+                  type="submit"
+                  disabled={enquiryStatus === "sending"}
+                  style={{
+                    background: "var(--green)",
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: 6,
+                    padding: "12px 24px",
+                    width: "100%",
+                    fontFamily: "var(--ff-sans)",
+                    fontWeight: 600,
+                    fontSize: 15,
+                    cursor: "pointer",
+                    marginTop: 10,
+                  }}
+                >
+                  {enquiryStatus === "sending" ? "Sending…" : "Send Enquiry"}
+                </button>
+                {enquiryStatus === "error" && (
+                  <p
+                    style={{
+                      color: "#c83c3c",
+                      fontSize: 13,
+                      marginTop: 8,
+                      fontFamily: "var(--ff-sans)",
+                    }}
+                  >
+                    Something went wrong. Email us at hello@capevows.co.za
+                  </p>
+                )}
+              </form>
+            )}
+
+            <button
+              onClick={() => {
+                setShowEnquiry(false);
+                setEnquiryStatus("idle");
+              }}
+              style={{
+                background: "none",
+                border: "none",
+                color: "var(--muted)",
+                fontFamily: "var(--ff-sans)",
+                fontSize: 13,
+                cursor: "pointer",
+                marginTop: 16,
+                padding: 0,
+              }}
+            >
+              Close
+            </button>
           </div>
         </div>
       )}
@@ -2687,6 +2936,7 @@ function VenuesPage({ allVenues, navigate, saved, onToggleSave }) {
   useEffect(() => {
     sessionStorage.removeItem("cv_pending_filters");
   }, []);
+
   const availableRegions = [
     "All Regions",
     ...Array.from(new Set(allVenues.map((v) => v.region))).sort(),
@@ -2708,6 +2958,7 @@ function VenuesPage({ allVenues, navigate, saved, onToggleSave }) {
     "Luxury (R300k+)": 4,
   };
   const capNum = (c) => parseInt((c || "0").replace(/\D/g, "")) || 0;
+
   const filtered = allVenues.filter((v) => {
     if (region !== "All Regions" && v.region !== region) return false;
     if (type !== "All Types" && v.type !== type) return false;
@@ -2737,6 +2988,7 @@ function VenuesPage({ allVenues, navigate, saved, onToggleSave }) {
       return capNum(b.capacity) - capNum(a.capacity);
     return a.name.localeCompare(b.name);
   });
+
   return (
     <section style={{ paddingTop: "3rem" }}>
       <div className="section-header">
@@ -3283,7 +3535,7 @@ export default function App() {
   );
   const { saved, toggle: toggleSave } = useFavourites();
 
-  // Global schema — injected once on mount
+  // Global schema — www removed for canonical consistency
   useEffect(() => {
     const s = document.createElement("script");
     s.type = "application/ld+json";
@@ -3293,8 +3545,8 @@ export default function App() {
         "@context": "https://schema.org",
         "@type": "Organization",
         name: "Cape Vows",
-        url: "https://www.capevows.co.za",
-        logo: "https://www.capevows.co.za/og-image.png",
+        url: "https://capevows.co.za",
+        logo: "https://capevows.co.za/og-image.jpg",
         contactPoint: {
           "@type": "ContactPoint",
           email: "hello@capevows.co.za",
@@ -3316,13 +3568,12 @@ export default function App() {
         "@context": "https://schema.org",
         "@type": "WebSite",
         name: "Cape Vows",
-        url: "https://www.capevows.co.za",
+        url: "https://capevows.co.za",
         potentialAction: {
           "@type": "SearchAction",
           target: {
             "@type": "EntryPoint",
-            urlTemplate:
-              "https://www.capevows.co.za/venues?q={search_term_string}",
+            urlTemplate: "https://capevows.co.za/venues?q={search_term_string}",
           },
           "query-input": "required name=search_term_string",
         },
@@ -3334,6 +3585,7 @@ export default function App() {
       if (el) el.remove();
     };
   }, []);
+
   const allVenues = [...VENUES, ...extraVenues];
   const addVenue = (v) =>
     setExtraVenues((e) => [...e, { ...v, slug: toSlug(v.name) }]);
@@ -3342,6 +3594,7 @@ export default function App() {
     localStorage.setItem("cv_cookies_accepted", "true");
     setShowCookieBanner(false);
   };
+
   const venueSlugMatch = path.match(/^\/venues\/([^/]+)$/);
   const blogSlugMatch = path.match(/^\/blog\/([^/]+)$/);
   const activeVenue = venueSlugMatch
