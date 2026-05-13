@@ -3757,13 +3757,13 @@ export default function App() {
         <div className="footer-sub">
           The Western Cape Wedding Directory · South Africa
         </div>
-        <nav className="footer-nav">
+        <div className="footer-nav">
           <button className="footer-nav-link" onClick={() => navigate("/venues")}>Venues</button>
           <button className="footer-nav-link" onClick={() => navigate("/vendors")}>Vendors</button>
           <button className="footer-nav-link" onClick={() => navigate("/blog")}>Blog</button>
           <a href="/privacy-policy.html" className="footer-nav-link">Privacy Policy</a>
           <a href="mailto:hello@capevows.co.za" className="footer-nav-link">Contact</a>
-        </nav>
+        </div>
       </footer>
 
       {showCookieBanner && (
