@@ -94,6 +94,7 @@ const css = `
   .card-save-btn svg { transition: fill 0.2s, stroke 0.2s; }
   .card-save-btn.saved { background: rgba(255,255,255,0.92); }
   .nav-badge { display: inline-flex; align-items: center; justify-content: center; width: 17px; height: 17px; border-radius: 50%; background: var(--gold); color: #fff; font-family: var(--ff-sans); font-size: 0.68rem; font-weight: 600; margin-left: 4px; line-height: 1; }
+  .nav-soon-badge { font-family: var(--ff-sans); font-size: 0.58rem; letter-spacing: 0.05em; text-transform: uppercase; background: var(--cream2); color: var(--muted); border: 1px solid var(--border); padding: 0.1rem 0.35rem; border-radius: 3px; margin-left: 4px; vertical-align: middle; }
 
   .mobile-enquiry-bar { display: none; }
   @media (max-width: 960px) {
@@ -1053,165 +1054,6 @@ const VENUES = [
       "Private Setting",
     ],
     highlight: "Exclusive farm in the Bottelary Hills",
-  },
-];
-
-const VENDORS = [
-  {
-    id: 101,
-    img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80",
-    name: "Lad & Lass Photography",
-    category: "Photography",
-    region: "Cape Winelands",
-    description:
-      "Award-winning wedding photographers with over 10 years documenting love stories across the Western Cape wine estates. Known for a romantic, editorial style.",
-    priceRange: "R20 000–R45 000",
-    website: "https://ladandlass.co.za",
-    phone: "+27 72 123 4567",
-    highlight: "Editorial & Fine Art Style",
-  },
-  {
-    id: 102,
-    img: "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?auto=format&fit=crop&w=800&q=80",
-    name: "Jean-Pierre Uys Photography",
-    category: "Photography",
-    region: "Cape Town City",
-    description:
-      "Cape Town-based destination wedding photographer. Natural light specialist known for timeless, emotion-driven imagery.",
-    priceRange: "R25 000–R60 000",
-    website: "#",
-    phone: "+27 82 987 6543",
-    highlight: "Destination & Natural Light",
-  },
-  {
-    id: 103,
-    img: "https://images.unsplash.com/photo-1490750967868-88df5691cc47?auto=format&fit=crop&w=800&q=80",
-    name: "The Floristry by Claire",
-    category: "Floristry",
-    region: "Cape Winelands",
-    description:
-      "Bespoke floral design for discerning Cape brides. Specialising in lush, garden-gathered arrangements using local proteas, fynbos, and seasonal blooms.",
-    priceRange: "R15 000–R80 000",
-    website: "#",
-    phone: "+27 83 234 5678",
-    highlight: "Fynbos & Protea Specialists",
-  },
-  {
-    id: 104,
-    img: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=80",
-    name: "Petal & Stem Floral Design",
-    category: "Floristry",
-    region: "Cape Town City",
-    description:
-      "Contemporary floral studio creating bold, sculptural installations for modern Cape weddings. Featured in Brides SA and Style Me Pretty.",
-    priceRange: "R20 000–R120 000",
-    website: "#",
-    phone: "+27 71 345 6789",
-    highlight: "Sculptural Installations",
-  },
-  {
-    id: 105,
-    img: "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?auto=format&fit=crop&w=800&q=80",
-    name: "Nicolette Weddings & Events",
-    category: "Coordination",
-    region: "Cape Winelands",
-    description:
-      "Full-service wedding planning and coordination based in Stellenbosch. Over 200 weddings planned across the Cape. COZA-certified planner.",
-    priceRange: "R35 000–R85 000",
-    website: "#",
-    phone: "+27 82 456 7890",
-    highlight: "200+ Weddings Planned",
-  },
-  {
-    id: 106,
-    img: "https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&w=800&q=80",
-    name: "Confetti & Cake",
-    category: "Cake & Desserts",
-    region: "Constantia Valley",
-    description:
-      "Artisan wedding cakes and dessert tables handcrafted in Cape Town. Known for intricate sugar-flower work and flavour-forward designs.",
-    priceRange: "R8 000–R35 000",
-    website: "#",
-    phone: "+27 79 567 8901",
-    highlight: "Sugar Flower Artistry",
-  },
-  {
-    id: 107,
-    img: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=800&q=80",
-    name: "Cape String Quartet",
-    category: "Entertainment",
-    region: "Cape Town City",
-    description:
-      "Professional string ensemble performing classical to contemporary, perfect for ceremonies and cocktail hours. Customisable repertoire from Bach to Beyoncé.",
-    priceRange: "R12 000–R28 000",
-    website: "#",
-    phone: "+27 83 678 9012",
-    highlight: "Classical to Contemporary",
-  },
-  {
-    id: 108,
-    img: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=800&q=80",
-    name: "DJ André Visser",
-    category: "Entertainment",
-    region: "Cape Winelands",
-    description:
-      "Top Cape wedding DJ with over 15 years experience keeping dance floors packed. Specialises in seamless transitions and reading the energy of the room.",
-    priceRange: "R15 000–R30 000",
-    website: "#",
-    phone: "+27 72 789 0123",
-    highlight: "15+ Years Experience",
-  },
-  {
-    id: 109,
-    img: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80",
-    name: "The Wedding Table Co.",
-    category: "Décor & Hire",
-    region: "Cape Winelands",
-    description:
-      "Premium furniture, linen, and tableware hire for Western Cape weddings. From rustic farm tables to crystal-and-gold luxury, we dress your dream reception.",
-    priceRange: "R20 000–R100 000+",
-    website: "#",
-    phone: "+27 83 890 1234",
-    highlight: "Full Luxury Linen & Furniture",
-  },
-  {
-    id: 110,
-    img: "https://images.unsplash.com/photo-1522844990619-4951c40f7eda?auto=format&fit=crop&w=800&q=80",
-    name: "Glow & Grace Beauty Studio",
-    category: "Hair & Make-up",
-    region: "Atlantic Seaboard",
-    description:
-      "Bridal beauty team led by senior artist Mia Joubert. On-location services across the Western Cape, specialising in airbrush make-up and long-lasting bridal looks.",
-    priceRange: "R5 500–R18 000",
-    website: "#",
-    phone: "+27 71 901 2345",
-    highlight: "On-Location Airbrush Artistry",
-  },
-  {
-    id: 111,
-    img: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80",
-    name: "Winelands Catering Co.",
-    category: "Catering",
-    region: "Cape Winelands",
-    description:
-      "Bespoke catering for wine estate weddings. Farm-to-fork menus designed around seasonal Western Cape produce, with a team of chefs trained at world-class restaurants.",
-    priceRange: "R650–R1800 per head",
-    website: "#",
-    phone: "+27 82 012 3456",
-    highlight: "Farm-to-Fork Seasonal Menus",
-  },
-  {
-    id: 112,
-    img: "https://images.unsplash.com/photo-1565043666747-69f6646db940?auto=format&fit=crop&w=800&q=80",
-    name: "Classic Wedding Cars CT",
-    category: "Transport",
-    region: "Cape Town City",
-    description:
-      "A fleet of classic and vintage vehicles including Rolls-Royce Silver Shadow, Bentley, and 1960s Mercedes. Chauffeur-driven transfers across the Cape Peninsula and Winelands.",
-    priceRange: "R4 500–R15 000",
-    website: "#",
-    phone: "+27 83 123 6789",
-    highlight: "Rolls-Royce & Vintage Fleet",
   },
 ];
 
@@ -3649,7 +3491,7 @@ export default function App() {
               navigate("/vendors");
             }}
           >
-            Vendors
+            Vendors <span className="nav-soon-badge">Soon</span>
           </a>
           <a
             className={`nav-link${currentPage === "blog" || currentPage === "blogpost" ? " active" : ""}`}
