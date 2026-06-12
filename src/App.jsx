@@ -98,8 +98,7 @@ const css = `
 
   .mobile-enquiry-bar { display: none; }
   @media (max-width: 960px) {
-    .mobile-enquiry-bar { display: flex; position: fixed; bottom: 0; left: 0; right: 0; z-index: 500; background: var(--cream); border-top: 1px solid var(--border); padding: 0.75rem 1.5rem; align-items: center; justify-content: space-between; gap: 1rem; box-shadow: 0 -4px 20px rgba(45,74,62,0.12); }
-    .mobile-enquiry-name { font-family: var(--ff-serif); font-size: 0.95rem; color: var(--green); font-style: italic; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; min-width: 0; }
+    .mobile-enquiry-bar { display: flex; position: fixed; bottom: 0; left: 0; right: 0; z-index: 500; background: var(--cream); border-top: 1px solid var(--border); padding: 0.75rem 1.5rem calc(0.75rem + env(safe-area-inset-bottom)); align-items: center; justify-content: center; box-shadow: 0 -4px 20px rgba(45,74,62,0.12); }
     .venue-page { padding-bottom: 80px; }
   }
 
@@ -2096,16 +2095,15 @@ function VenuePage({ venue, navigate, allVenues, isSaved, onToggleSave }) {
 
       {/* Mobile sticky enquiry bar — reuses modal state */}
       <div className="mobile-enquiry-bar">
-        <span className="mobile-enquiry-name">{venue.name}</span>
         <button
           className="btn-green"
-          style={{ flexShrink: 0, fontSize: "0.72rem", padding: "0.7rem 1.25rem" }}
+          style={{ width: "100%", maxWidth: 400, fontSize: "0.72rem", padding: "0.85rem 1.5rem" }}
           onClick={() => {
             setShowEnquiry(true);
             track("enquiry_open", { venue_name: venue.name, source: "mobile_bar" });
           }}
         >
-          Enquire
+          Enquire About This Venue
         </button>
       </div>
 
