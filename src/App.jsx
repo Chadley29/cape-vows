@@ -58,6 +58,11 @@ const css = `
   .hero-scroll-line { width: 1px; height: 36px; background: linear-gradient(to bottom, rgba(255,255,255,0.35), transparent); animation: scrollPulse 2.2s ease-in-out infinite; }
   @keyframes scrollPulse { 0%, 100% { opacity: 0.35; transform: scaleY(1); } 55% { opacity: 0.7; transform: scaleY(1.12); } }
 
+  .trust-strip { background: var(--cream2); border-bottom: 1px solid var(--border); padding: 0.65rem 2.5rem; display: flex; align-items: center; justify-content: center; gap: 2.5rem; flex-wrap: wrap; }
+  .trust-strip-item { font-family: var(--ff-sans); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 0.4rem; }
+  .trust-strip-item::before { content: '✓'; color: var(--gold); font-weight: 600; }
+  @media (max-width: 600px) { .trust-strip { gap: 1.25rem; padding: 0.65rem 1.5rem; } }
+
   section { padding: 5rem 2.5rem; max-width: 1200px; margin: 0 auto; }
   .section-eyebrow { font-family: var(--ff-sans); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
   .section-title { font-family: var(--ff-serif); font-size: clamp(2rem, 4vw, 3rem); color: var(--green); line-height: 1.2; margin-bottom: 1rem; }
@@ -2765,6 +2770,12 @@ function HomePage({ navigate, allVenues }) {
           <span className="hero-scroll-label">Scroll</span>
           <div className="hero-scroll-line" />
         </div>
+      </div>
+
+      <div className="trust-strip">
+        <span className="trust-strip-item">No ads</span>
+        <span className="trust-strip-item">No venue fees</span>
+        <span className="trust-strip-item">Every venue hand-verified</span>
       </div>
 
       <section>
