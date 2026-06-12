@@ -2852,106 +2852,42 @@ function HomePage({ navigate, allVenues }) {
 
       <div
         style={{
-          background: "var(--green)",
-          padding: "4rem 2.5rem",
-          textAlign: "center",
-          width: "100%",
+          borderTop: "1px solid var(--border)",
+          padding: "1.75rem 2.5rem",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          gap: "1.5rem",
+          maxWidth: 1200,
+          margin: "0 auto",
         }}
       >
-        <div style={{ maxWidth: "640px", margin: "0 auto" }}>
-          <div
-            style={{
-              fontFamily: "var(--ff-sans)",
-              fontSize: "0.68rem",
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              color: "var(--gold2)",
-              marginBottom: "1rem",
-            }}
-          >
-            Wedding Suppliers
+        <div>
+          <div className="section-eyebrow" style={{ marginBottom: "0.3rem" }}>
+            For Venue Owners &amp; Suppliers
           </div>
-          <h2
-            style={{
-              fontFamily: "var(--ff-serif)",
-              fontSize: "clamp(2rem, 4vw, 3rem)",
-              color: "#fff",
-              marginBottom: "1rem",
-              lineHeight: 1.2,
-            }}
-          >
-            Every Expert You <em>Need</em>
-          </h2>
           <p
             style={{
               fontFamily: "var(--ff-body)",
-              color: "rgba(255,255,255,0.7)",
-              marginBottom: "2.5rem",
-              fontSize: "1.1rem",
+              fontSize: "1rem",
+              color: "var(--muted)",
+              margin: 0,
             }}
           >
-            Photographers, florists, caterers, DJs, planners and more, all
-            hand-selected for the Western Cape market. Vendor profiles coming
-            soon.
+            Get discovered by engaged couples planning their Cape wedding.
           </p>
-          <a
-            href="mailto:hello@capevows.co.za?subject=Vendor Listing Enquiry"
-            style={{ textDecoration: "none" }}
-            onClick={() =>
-              track("email_cta_click", { button: "register_interest" })
-            }
-          >
-            <button className="btn btn-primary">Register Your Interest</button>
-          </a>
         </div>
-      </div>
-
-      <section>
-        <div
-          style={{
-            background: "var(--cream2)",
-            border: "1px solid var(--border)",
-            borderRadius: "6px",
-            padding: "2.5rem",
-            display: "flex",
-            gap: "2rem",
-            flexWrap: "wrap",
-            alignItems: "center",
-          }}
+        <a
+          href="mailto:hello@capevows.co.za?subject=Listing Enquiry"
+          style={{ textDecoration: "none" }}
+          onClick={() => track("email_cta_click", { button: "get_listed" })}
         >
-          <div style={{ flex: 1, minWidth: "260px" }}>
-            <div className="section-eyebrow">For Venue Owners & Vendors</div>
-            <h2 className="section-title" style={{ fontSize: "1.75rem" }}>
-              List Your <em>Business</em>
-            </h2>
-            <p className="section-desc" style={{ fontSize: "1rem" }}>
-              Are you a venue or wedding supplier in the Western Cape? Get
-              discovered by engaged couples planning their big day.
-            </p>
-          </div>
-          <div>
-            <p
-              style={{
-                fontFamily: "var(--ff-sans)",
-                fontSize: "0.8rem",
-                color: "var(--muted)",
-                marginBottom: "1rem",
-              }}
-            >
-              Contact us to get listed
-            </p>
-            <a
-              href="mailto:hello@capevows.co.za?subject=Listing Enquiry"
-              style={{ textDecoration: "none" }}
-              onClick={() => track("email_cta_click", { button: "get_listed" })}
-            >
-              <button className="btn-green" style={{ width: "auto" }}>
-                hello@capevows.co.za
-              </button>
-            </a>
-          </div>
-        </div>
-      </section>
+          <button className="btn-green" style={{ width: "auto" }}>
+            Get Listed
+          </button>
+        </a>
+      </div>
     </>
   );
 }
