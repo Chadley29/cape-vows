@@ -95,6 +95,13 @@ const css = `
   .card-save-btn.saved { background: rgba(255,255,255,0.92); }
   .nav-badge { display: inline-flex; align-items: center; justify-content: center; width: 17px; height: 17px; border-radius: 50%; background: var(--gold); color: #fff; font-family: var(--ff-sans); font-size: 0.68rem; font-weight: 600; margin-left: 4px; line-height: 1; }
 
+  .mobile-enquiry-bar { display: none; }
+  @media (max-width: 960px) {
+    .mobile-enquiry-bar { display: flex; position: fixed; bottom: 0; left: 0; right: 0; z-index: 500; background: var(--cream); border-top: 1px solid var(--border); padding: 0.75rem 1.5rem; align-items: center; justify-content: space-between; gap: 1rem; box-shadow: 0 -4px 20px rgba(45,74,62,0.12); }
+    .mobile-enquiry-name { font-family: var(--ff-serif); font-size: 0.95rem; color: var(--green); font-style: italic; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; min-width: 0; }
+    .venue-page { padding-bottom: 80px; }
+  }
+
   .filter-slider-group { display: flex; flex-direction: column; gap: 0.3rem; min-width: 180px; }
   .filter-slider-val { font-family: var(--ff-body); font-size: 0.9rem; color: var(--text); font-style: italic; }
   .cap-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 3px; border-radius: 2px; background: var(--border); outline: none; cursor: pointer; }
@@ -2244,6 +2251,21 @@ function VenuePage({ venue, navigate, allVenues, isSaved, onToggleSave }) {
           </div>
         </div>
       )}
+
+      {/* Mobile sticky enquiry bar — reuses modal state */}
+      <div className="mobile-enquiry-bar">
+        <span className="mobile-enquiry-name">{venue.name}</span>
+        <button
+          className="btn-green"
+          style={{ flexShrink: 0, fontSize: "0.72rem", padding: "0.7rem 1.25rem" }}
+          onClick={() => {
+            setShowEnquiry(true);
+            track("enquiry_open", { venue_name: venue.name, source: "mobile_bar" });
+          }}
+        >
+          Enquire
+        </button>
+      </div>
 
       {/* ── Enquiry Modal ─────────────────────────────────────────────────────── */}
       {showEnquiry && (
