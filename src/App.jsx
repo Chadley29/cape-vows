@@ -3872,22 +3872,6 @@ export default function App() {
             >
               Got it
             </button>
-            <button
-              onClick={acceptCookies}
-              style={{
-                fontFamily: "var(--ff-sans)",
-                fontSize: "0.68rem",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                background: "transparent",
-                color: "rgba(255,255,255,0.4)",
-                border: "none",
-                cursor: "pointer",
-                padding: "0.5rem",
-              }}
-            >
-              Dismiss
-            </button>
           </div>
         </div>
       )}
