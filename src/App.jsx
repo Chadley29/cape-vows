@@ -2345,16 +2345,37 @@ function VenuePage({ venue, navigate, allVenues, isSaved, onToggleSave }) {
             </p>
 
             {enquiryStatus === "sent" ? (
-              <p
-                style={{
-                  color: "var(--green)",
-                  fontFamily: "var(--ff-body)",
-                  fontSize: 18,
-                  lineHeight: 1.6,
-                }}
-              >
-                ✓ Enquiry sent! We'll be in touch shortly.
-              </p>
+              <div>
+                <p style={{ color: "var(--green)", fontFamily: "var(--ff-body)", fontSize: 18, lineHeight: 1.6, marginBottom: "0.5rem" }}>
+                  ✓ Enquiry sent for {venue.name}!
+                </p>
+                <p style={{ fontFamily: "var(--ff-sans)", fontSize: "0.78rem", color: "var(--muted)", letterSpacing: "0.04em", lineHeight: 1.6, marginBottom: "1.5rem" }}>
+                  We typically respond within 1–2 business days.
+                </p>
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                  <button
+                    className="btn-green"
+                    onClick={() => {
+                      sessionStorage.setItem("cv_pending_filters", JSON.stringify({ region: venue.region }));
+                      navigate("/venues");
+                    }}
+                  >
+                    Browse more venues in {venue.region}
+                  </button>
+                  {!isSaved && (
+                    <button
+                      className="btn-ghost"
+                      style={{ display: "block", textAlign: "center" }}
+                      onClick={() => {
+                        onToggleSave(venue.slug);
+                        track("venue_save_toggle", { venue_name: venue.name, saved: true });
+                      }}
+                    >
+                      ♡ Save to your shortlist
+                    </button>
+                  )}
+                </div>
+              </div>
             ) : (
               <form onSubmit={handleEnquiry}>
                 <input
