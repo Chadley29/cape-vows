@@ -57,6 +57,7 @@ const css = `
   .hero-scroll-label { font-family: var(--ff-sans); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
   .hero-scroll-line { width: 1px; height: 36px; background: linear-gradient(to bottom, rgba(255,255,255,0.35), transparent); animation: scrollPulse 2.2s ease-in-out infinite; }
   @keyframes scrollPulse { 0%, 100% { opacity: 0.35; transform: scaleY(1); } 55% { opacity: 0.7; transform: scaleY(1.12); } }
+  @media (min-width: 961px) { .hero-scroll { display: none; } }
 
   .trust-strip { background: var(--cream2); border-bottom: 1px solid var(--border); padding: 0.65rem 2.5rem; display: flex; align-items: center; justify-content: center; gap: 2.5rem; flex-wrap: wrap; }
   .trust-strip-item { font-family: var(--ff-sans); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 0.4rem; }
