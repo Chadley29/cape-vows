@@ -2759,6 +2759,118 @@ function HomePage({ navigate, allVenues }) {
         </section>
       </Reveal>
 
+      <Reveal>
+        <section>
+          <div
+            style={{
+              background: "var(--cream2)",
+              border: "1px solid var(--border)",
+              borderRadius: "6px",
+              padding: "3rem",
+              display: "flex",
+              gap: "3rem",
+              flexWrap: "wrap",
+              alignItems: "center",
+            }}
+          >
+            <div
+              style={{
+                flexShrink: 0,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "0.85rem",
+                minWidth: 120,
+                margin: "0 auto",
+              }}
+            >
+              <div
+                style={{
+                  width: 92,
+                  height: 92,
+                  borderRadius: "50%",
+                  border: "1.5px solid var(--gold)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontFamily: "var(--ff-serif)",
+                  fontSize: "2rem",
+                  fontStyle: "italic",
+                  color: "var(--green)",
+                }}
+              >
+                CV
+              </div>
+              <div
+                style={{
+                  fontFamily: "var(--ff-sans)",
+                  fontSize: "0.68rem",
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                  color: "var(--gold)",
+                }}
+              >
+                Cape Vows
+              </div>
+            </div>
+            <div style={{ flex: 1, minWidth: 280 }}>
+              <div className="section-eyebrow">A Note From the Founder</div>
+              <h2
+                className="section-title"
+                style={{ fontSize: "1.75rem", marginBottom: "1.25rem" }}
+              >
+                How Every Venue Is <em>Verified</em>
+              </h2>
+              <p
+                style={{
+                  fontFamily: "var(--ff-body)",
+                  fontSize: "1.1rem",
+                  color: "var(--text)",
+                  lineHeight: 1.8,
+                  marginBottom: "1rem",
+                }}
+              >
+                Cape Vows began with a frustration. Most wedding directories are
+                pay-to-play: the estates with the biggest marketing budgets sit
+                at the top, and the hidden gems never get a look in. Couples
+                planning a Cape wedding deserve better, so I built the directory
+                I wished I'd had.
+              </p>
+              <p
+                style={{
+                  fontFamily: "var(--ff-body)",
+                  fontSize: "1.1rem",
+                  color: "var(--text)",
+                  lineHeight: 1.8,
+                  marginBottom: "1rem",
+                }}
+              >
+                Every venue here has been personally researched. I work through
+                all the information each venue publishes on its own website, the
+                capacities, the package and pricing documents, the features and
+                the practical details that actually matter when you're choosing
+                where to marry, and verify it before the venue is listed. No
+                venue pays to be included. No venue pays to rank higher. What you
+                see is verified information, not paid placement.
+              </p>
+              <p
+                style={{
+                  fontFamily: "var(--ff-body)",
+                  fontSize: "1.1rem",
+                  color: "var(--text)",
+                  lineHeight: 1.8,
+                }}
+              >
+                The Western Cape is, to my mind, the most beautiful corner of
+                the world to say your vows. My promise is a simple one: honest
+                information, no advertising, and no fees, just every venue worth
+                knowing about, gathered in one place.
+              </p>
+            </div>
+          </div>
+        </section>
+      </Reveal>
+
       <div
         style={{
           borderTop: "1px solid var(--border)",
