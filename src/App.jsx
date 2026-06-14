@@ -74,7 +74,8 @@ const css = `
 
   .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
   .card { background: #fff; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; cursor: pointer; transition: all 0.3s; box-shadow: 0 2px 12px var(--shadow); display: flex; flex-direction: column; }
-  .card:hover { transform: scale(1.025); box-shadow: 0 10px 30px var(--shadow); border-color: var(--gold); }
+  .card:hover { transform: scale(1.025); box-shadow: 0 0 0 1.5px var(--card-accent, var(--gold)), 0 10px 30px var(--shadow); border-color: var(--card-accent, var(--gold)); }
+  .card:focus-visible { box-shadow: 0 0 0 2px var(--card-accent, var(--gold)), 0 10px 30px var(--shadow); border-color: var(--card-accent, var(--gold)); outline: none; }
 
   .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
   .reveal.reveal-in { opacity: 1; transform: translateY(0); }
@@ -349,6 +350,10 @@ const TYPE_GRADIENTS = {
 };
 const getGradient = (type) =>
   TYPE_GRADIENTS[type] || "linear-gradient(145deg, #2D4A3E 0%, #3D6356 100%)";
+const getAccent = (type) => {
+  const m = getGradient(type).match(/#[0-9a-fA-F]{6}/g);
+  return m ? m[m.length - 1] : "#A07840";
+};
 
 const displayCapacity = (c) =>
   c === "Contact venue" ? "Enquire for capacity" : `${c} guests`;
@@ -1637,6 +1642,16 @@ function VenueCard({ venue, navigate, isSaved, onToggleSave }) {
     <div
       ref={revealRef}
       className={`card reveal${revealed ? " reveal-in" : ""}`}
+      style={{ "--card-accent": getAccent(venue.type) }}
+      tabIndex={0}
+      role="button"
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          track("venue_card_click", { venue_name: venue.name });
+          navigate(`/venues/${venue.slug}`);
+        }
+      }}
       onClick={() => {
         track("venue_card_click", { venue_name: venue.name });
         navigate(`/venues/${venue.slug}`);
