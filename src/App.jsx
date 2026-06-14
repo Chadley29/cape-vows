@@ -1765,6 +1765,18 @@ function VendorModal({ vendor, onClose }) {
 function VenuePage({ venue, navigate, allVenues, isSaved, onToggleSave }) {
   const [showEnquiry, setShowEnquiry] = useState(false);
   const [enquiryStatus, setEnquiryStatus] = useState("idle"); // idle | sending | sent | error
+  const [mobileBarVisible, setMobileBarVisible] = useState(true);
+
+  useEffect(() => {
+    const footer = document.querySelector("footer");
+    if (!footer) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setMobileBarVisible(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
 
   const inputStyle = {
     display: "block",
@@ -2093,19 +2105,21 @@ function VenuePage({ venue, navigate, allVenues, isSaved, onToggleSave }) {
         </div>
       )}
 
-      {/* Mobile sticky enquiry bar — reuses modal state */}
-      <div className="mobile-enquiry-bar">
-        <button
-          className="btn-green"
-          style={{ width: "100%", maxWidth: 400, fontSize: "0.72rem", padding: "0.85rem 1.5rem" }}
-          onClick={() => {
-            setShowEnquiry(true);
-            track("enquiry_open", { venue_name: venue.name, source: "mobile_bar" });
-          }}
-        >
-          Enquire About This Venue
-        </button>
-      </div>
+      {/* Mobile sticky enquiry bar — hidden when footer scrolls into view */}
+      {mobileBarVisible && (
+        <div className="mobile-enquiry-bar">
+          <button
+            className="btn-green"
+            style={{ width: "100%", maxWidth: 400, fontSize: "0.72rem", padding: "0.85rem 1.5rem" }}
+            onClick={() => {
+              setShowEnquiry(true);
+              track("enquiry_open", { venue_name: venue.name, source: "mobile_bar" });
+            }}
+          >
+            Enquire About This Venue
+          </button>
+        </div>
+      )}
 
       {/* ── Enquiry Modal ─────────────────────────────────────────────────────── */}
       {showEnquiry && (
