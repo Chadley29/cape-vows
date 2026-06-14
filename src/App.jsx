@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 // ─── Google Fonts ──────────────────────────────────────────────────────────────
 const fontLink = document.createElement("link");
@@ -73,7 +73,13 @@ const css = `
 
   .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
   .card { background: #fff; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; cursor: pointer; transition: all 0.3s; box-shadow: 0 2px 12px var(--shadow); display: flex; flex-direction: column; }
-  .card:hover { transform: scale(1.01); box-shadow: 0 8px 28px var(--shadow); border-color: var(--gold); }
+  .card:hover { transform: scale(1.025); box-shadow: 0 10px 30px var(--shadow); border-color: var(--gold); }
+
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+  .reveal.reveal-in { opacity: 1; transform: translateY(0); }
+  .card.reveal { transition: opacity 0.45s ease-out, transform 0.4s ease-out, box-shadow 0.3s ease, border-color 0.3s ease; }
+  .card.reveal-in:hover { transform: scale(1.025); }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1 !important; transform: none !important; transition: none !important; } }
   .card-banner { width: 100%; height: 140px; position: relative; display: flex; align-items: flex-end; padding: 0.9rem 1.25rem 0.8rem; flex-shrink: 0; }
   .card-banner-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.06) 60%, transparent 100%); }
   .card-banner-badge { position: absolute; top: 0.9rem; right: 0.9rem; font-family: var(--ff-sans); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; background: rgba(255,255,255,0.17); backdrop-filter: blur(4px); color: rgba(255,255,255,0.92); padding: 0.22rem 0.55rem; border-radius: 2px; border: 1px solid rgba(255,255,255,0.24); z-index: 1; }
@@ -1548,6 +1554,44 @@ function useRouter() {
   return { path, navigate };
 }
 
+// ─── Scroll reveal ────────────────────────────────────────────────────────────
+function useReveal() {
+  const ref = useRef(null);
+  const [shown, setShown] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (
+      typeof IntersectionObserver === "undefined" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      setShown(true);
+      return;
+    }
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShown(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return [ref, shown];
+}
+
+function Reveal({ children }) {
+  const [ref, shown] = useReveal();
+  return (
+    <div ref={ref} className={`reveal${shown ? " reveal-in" : ""}`}>
+      {children}
+    </div>
+  );
+}
+
 // ─── FAQ Accordion ────────────────────────────────────────────────────────────
 function FaqAccordion({ faqs }) {
   const [open, setOpen] = useState(null);
@@ -1586,9 +1630,11 @@ function FaqAccordion({ faqs }) {
 
 // ─── VenueCard ────────────────────────────────────────────────────────────────
 function VenueCard({ venue, navigate, isSaved, onToggleSave }) {
+  const [revealRef, revealed] = useReveal();
   return (
     <div
-      className="card"
+      ref={revealRef}
+      className={`card reveal${revealed ? " reveal-in" : ""}`}
       onClick={() => {
         track("venue_card_click", { venue_name: venue.name });
         navigate(`/venues/${venue.slug}`);
@@ -2675,34 +2721,37 @@ function HomePage({ navigate, allVenues }) {
         <span className="trust-strip-item">Every venue hand-verified</span>
       </div>
 
-      <section>
-        <div className="section-header">
-          <div>
-            <div className="section-eyebrow">Curated Selection</div>
-            <h2 className="section-title">
-              Featured <em>Venues</em>
-            </h2>
-            <p className="section-desc">
-              From historic Cape Dutch wine estates to dramatic coastal
-              retreats, the Western Cape's most celebrated wedding destinations.
-            </p>
+      <Reveal>
+        <section>
+          <div className="section-header">
+            <div>
+              <div className="section-eyebrow">Curated Selection</div>
+              <h2 className="section-title">
+                Featured <em>Venues</em>
+              </h2>
+              <p className="section-desc">
+                From historic Cape Dutch wine estates to dramatic coastal
+                retreats, the Western Cape's most celebrated wedding
+                destinations.
+              </p>
+            </div>
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                track("cta_click", { button: "view_all_venues" });
+                navigate("/venues");
+              }}
+            >
+              View All Venues
+            </button>
           </div>
-          <button
-            className="btn btn-primary"
-            onClick={() => {
-              track("cta_click", { button: "view_all_venues" });
-              navigate("/venues");
-            }}
-          >
-            View All Venues
-          </button>
-        </div>
-        <div className="cards-grid">
-          {featured.map((v) => (
-            <VenueCard key={v.id} venue={v} navigate={navigate} />
-          ))}
-        </div>
-      </section>
+          <div className="cards-grid">
+            {featured.map((v) => (
+              <VenueCard key={v.id} venue={v} navigate={navigate} />
+            ))}
+          </div>
+        </section>
+      </Reveal>
 
       <div
         style={{
