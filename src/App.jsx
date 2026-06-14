@@ -2694,6 +2694,223 @@ function ResearchPanel({ onAddVenue, onAddVendor }) {
 }
 
 // ─── Pages ─────────────────────────────────────────────────────────────────────
+function InlineContactForm({
+  subject,
+  formType,
+  trackEvent,
+  extraField,
+  triggerLabel,
+  triggerClass,
+  triggerStyle,
+  messagePlaceholder,
+}) {
+  const [open, setOpen] = useState(false);
+  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+
+  const inputStyle = {
+    display: "block",
+    width: "100%",
+    boxSizing: "border-box",
+    padding: "10px 12px",
+    marginBottom: 12,
+    border: "1px solid var(--border)",
+    borderRadius: 6,
+    fontFamily: "var(--ff-body)",
+    fontSize: 16,
+    background: "#fff",
+    color: "var(--text)",
+  };
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setStatus("sending");
+    const form = e.target;
+    const data = new FormData(form);
+    try {
+      const res = await fetch("https://formspree.io/f/mwvywnbp", {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+      if (res.ok) {
+        setStatus("sent");
+        form.reset();
+        track(trackEvent, { type: formType });
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  if (!open) {
+    return (
+      <button
+        className={triggerClass}
+        style={triggerStyle}
+        onClick={() => setOpen(true)}
+      >
+        {triggerLabel}
+      </button>
+    );
+  }
+
+  return (
+    <div
+      style={{
+        background: "#fff",
+        border: "1px solid var(--border)",
+        borderRadius: 8,
+        padding: "1.5rem",
+        width: "100%",
+        maxWidth: 420,
+        boxShadow: "0 4px 24px var(--shadow)",
+      }}
+    >
+      {status === "sent" ? (
+        <p
+          style={{
+            color: "var(--green)",
+            fontFamily: "var(--ff-body)",
+            fontSize: 17,
+            lineHeight: 1.6,
+            margin: 0,
+          }}
+        >
+          ✓ Thank you! We'll be in touch shortly.
+        </p>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <input type="hidden" name="_subject" value={subject} />
+          <input type="hidden" name="type" value={formType} />
+          <input
+            name="name"
+            required
+            placeholder="Your name"
+            style={inputStyle}
+          />
+          <input
+            name="email"
+            type="email"
+            required
+            placeholder="Email address"
+            style={inputStyle}
+          />
+          {extraField && (
+            <input
+              name="business"
+              required
+              placeholder="Business / venue name"
+              style={inputStyle}
+            />
+          )}
+          <textarea
+            name="message"
+            placeholder={messagePlaceholder}
+            rows={3}
+            style={{ ...inputStyle, resize: "vertical" }}
+          />
+          <label
+            style={{
+              display: "flex",
+              gap: 10,
+              alignItems: "flex-start",
+              cursor: "pointer",
+              margin: "4px 0 14px",
+            }}
+          >
+            <input
+              type="checkbox"
+              name="consent"
+              required
+              style={{
+                marginTop: 3,
+                flexShrink: 0,
+                accentColor: "var(--green)",
+                width: 15,
+                height: 15,
+                cursor: "pointer",
+              }}
+            />
+            <span
+              style={{
+                fontFamily: "var(--ff-sans)",
+                fontSize: "0.7rem",
+                color: "var(--muted)",
+                lineHeight: 1.55,
+              }}
+            >
+              I consent to Cape Vows processing my details to handle this
+              enquiry, in accordance with the{" "}
+              <a
+                href="/privacy-policy.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "var(--gold)", textDecoration: "underline" }}
+              >
+                Privacy Policy
+              </a>
+              .
+            </span>
+          </label>
+          <div style={{ display: "flex", gap: "0.6rem", alignItems: "center" }}>
+            <button
+              type="submit"
+              disabled={status === "sending"}
+              style={{
+                background: "var(--green)",
+                color: "#fff",
+                border: "none",
+                borderRadius: 6,
+                padding: "11px 22px",
+                fontFamily: "var(--ff-sans)",
+                fontWeight: 600,
+                fontSize: 14,
+                cursor: "pointer",
+              }}
+            >
+              {status === "sending" ? "Sending…" : "Send"}
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setOpen(false);
+                setStatus("idle");
+              }}
+              style={{
+                background: "none",
+                border: "none",
+                fontFamily: "var(--ff-sans)",
+                fontSize: "0.72rem",
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "var(--muted)",
+                cursor: "pointer",
+                padding: "0.5rem",
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+          {status === "error" && (
+            <p
+              style={{
+                color: "#c83c3c",
+                fontSize: 13,
+                marginTop: 8,
+                fontFamily: "var(--ff-sans)",
+              }}
+            >
+              Something went wrong. Email us at hello@capevows.co.za
+            </p>
+          )}
+        </form>
+      )}
+    </div>
+  );
+}
+
 function HomePage({ navigate, allVenues }) {
   const featuredSlugs = ["eikenhof-estate", "la-paris-estate", "babylonstoren"];
   const featured = featuredSlugs
@@ -2915,15 +3132,16 @@ function HomePage({ navigate, allVenues }) {
             Get discovered by engaged couples planning their Cape wedding.
           </p>
         </div>
-        <a
-          href="mailto:hello@capevows.co.za?subject=Listing Enquiry"
-          style={{ textDecoration: "none" }}
-          onClick={() => track("email_cta_click", { button: "get_listed" })}
-        >
-          <button className="btn-green" style={{ width: "auto" }}>
-            Get Listed
-          </button>
-        </a>
+        <InlineContactForm
+          subject="Get Listed Request — Cape Vows"
+          formType="listing"
+          trackEvent="get_listed_submit"
+          extraField
+          triggerLabel="Get Listed"
+          triggerClass="btn-green"
+          triggerStyle={{ width: "auto" }}
+          messagePlaceholder="Tell us about your venue or business"
+        />
       </div>
     </>
   );
@@ -3392,13 +3610,14 @@ function VendorsPage() {
             Get listed when we launch <em>vendor profiles</em>
           </div>
         </div>
-        <a
-          href="mailto:hello@capevows.co.za?subject=Vendor Listing Enquiry"
-          style={{ textDecoration: "none" }}
-          onClick={() => track("email_cta_click", { button: "get_in_touch" })}
-        >
-          <button className="btn btn-primary">Get in Touch</button>
-        </a>
+        <InlineContactForm
+          subject="General Enquiry — Cape Vows"
+          formType="contact"
+          trackEvent="contact_submit"
+          triggerLabel="Get in Touch"
+          triggerClass="btn btn-primary"
+          messagePlaceholder="How can we help?"
+        />
       </div>
     </section>
   );
