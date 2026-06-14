@@ -2913,36 +2913,24 @@ function HomePage({ navigate, allVenues }) {
   );
 }
 
+// URL param maps for shareable /venues filter links
+const PRICE_PARAM = {
+  "Budget (< R50k)": "budget",
+  "Mid-Range (R50–150k)": "mid-range",
+  "Premium (R150–300k)": "premium",
+  "Luxury (R300k+)": "luxury",
+};
+const SORT_PARAM = {
+  "Price: Low to High": "price-asc",
+  "Price: High to Low": "price-desc",
+  "Capacity: Low to High": "cap-asc",
+  "Capacity: High to Low": "cap-desc",
+};
+const SORT_FROM_PARAM = Object.fromEntries(
+  Object.entries(SORT_PARAM).map(([k, v]) => [v, k]),
+);
+
 function VenuesPage({ allVenues, navigate, saved, onToggleSave }) {
-  const [region, setRegion] = useState(() => {
-    try {
-      const f = JSON.parse(
-        sessionStorage.getItem("cv_pending_filters") || "{}",
-      );
-      return f.region || "All Regions";
-    } catch {
-      return "All Regions";
-    }
-  });
-  const [type, setType] = useState("All Types");
-  const [price, setPrice] = useState(() => {
-    try {
-      const f = JSON.parse(
-        sessionStorage.getItem("cv_pending_filters") || "{}",
-      );
-      return f.price && PRICE_RANGES.includes(f.price) ? f.price : "Any Budget";
-    } catch {
-      return "Any Budget";
-    }
-  });
-  const [search, setSearch] = useState("");
-  const [sort, setSort] = useState("Name: A–Z");
-  const [minGuests, setMinGuests] = useState(0);
-
-  useEffect(() => {
-    sessionStorage.removeItem("cv_pending_filters");
-  }, []);
-
   const availableRegions = [
     "All Regions",
     ...Array.from(new Set(allVenues.map((v) => v.region))).sort(),
@@ -2957,6 +2945,79 @@ function VenuesPage({ allVenues, navigate, saved, onToggleSave }) {
       allVenues.some((v) => v.price === p),
     ),
   ];
+
+  // Hydrate filters once: blog-CTA sessionStorage wins, then URL params, then defaults
+  const initRef = useRef(null);
+  if (initRef.current === null) {
+    let pending = {};
+    try {
+      pending = JSON.parse(
+        sessionStorage.getItem("cv_pending_filters") || "{}",
+      );
+    } catch {}
+    const p = new URLSearchParams(window.location.search);
+    const priceFromParam = (raw) => {
+      if (!raw) return null;
+      const key = raw.toLowerCase();
+      const hit = Object.entries(PRICE_PARAM).find(([, v]) => v === key);
+      return hit && availablePrices.includes(hit[0]) ? hit[0] : null;
+    };
+    const urlRegion = p.get("region");
+    const urlType = p.get("type");
+    const urlSort = p.get("sort");
+    const g = parseInt(p.get("guests"), 10);
+    initRef.current = {
+      region:
+        (pending.region &&
+          availableRegions.includes(pending.region) &&
+          pending.region) ||
+        (urlRegion && availableRegions.includes(urlRegion) ? urlRegion : null) ||
+        "All Regions",
+      type: urlType && availableTypes.includes(urlType) ? urlType : "All Types",
+      price:
+        (pending.price &&
+          availablePrices.includes(pending.price) &&
+          pending.price) ||
+        priceFromParam(p.get("price")) ||
+        "Any Budget",
+      search: p.get("q") || "",
+      sort: (urlSort && SORT_FROM_PARAM[urlSort]) || "Name: A–Z",
+      guests: Number.isFinite(g) && g > 0 ? Math.min(g, 400) : 0,
+    };
+  }
+  const init = initRef.current;
+
+  const [region, setRegion] = useState(init.region);
+  const [type, setType] = useState(init.type);
+  const [price, setPrice] = useState(init.price);
+  const [search, setSearch] = useState(init.search);
+  const [sort, setSort] = useState(init.sort);
+  const [minGuests, setMinGuests] = useState(init.guests);
+
+  // Clear one-shot blog-CTA filters once consumed
+  useEffect(() => {
+    sessionStorage.removeItem("cv_pending_filters");
+  }, []);
+
+  // Mirror filters to the URL (replace-style, debounced — no history spam)
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (region !== "All Regions") params.set("region", region);
+    if (type !== "All Types") params.set("type", type);
+    if (price !== "Any Budget" && PRICE_PARAM[price])
+      params.set("price", PRICE_PARAM[price]);
+    if (minGuests > 0) params.set("guests", String(minGuests));
+    if (search.trim()) params.set("q", search.trim());
+    if (sort !== "Name: A–Z" && SORT_PARAM[sort])
+      params.set("sort", SORT_PARAM[sort]);
+    const qs = params.toString();
+    const url = qs ? `/venues?${qs}` : "/venues";
+    const t = setTimeout(() => {
+      window.history.replaceState({}, "", url);
+    }, 300);
+    return () => clearTimeout(t);
+  }, [region, type, price, minGuests, search, sort]);
+
   const priceOrder = {
     "Budget (< R50k)": 1,
     "Mid-Range (R50–150k)": 2,
