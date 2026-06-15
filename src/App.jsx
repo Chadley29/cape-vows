@@ -3471,6 +3471,20 @@ function VenuesPage({ allVenues, navigate, saved, onToggleSave }) {
 
 function VendorsPage() {
   const [selected, setSelected] = useState(null);
+  // M2 (SEO-AUDIT.md): /vendors is a "Coming Soon" placeholder — keep it out of the
+  // index until real vendor content ships. When the page has real content, REMOVE
+  // this effect AND re-add the /vendors entry to public/sitemap.xml.
+  useEffect(() => {
+    const m = document.createElement("meta");
+    m.name = "robots";
+    m.content = "noindex";
+    m.id = "vendors-noindex";
+    document.head.appendChild(m);
+    return () => {
+      const el = document.getElementById("vendors-noindex");
+      if (el) el.remove();
+    };
+  }, []);
   return (
     <section style={{ paddingTop: "3rem" }}>
       {selected && (
