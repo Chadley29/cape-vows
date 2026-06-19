@@ -13,8 +13,9 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@sparticuz/chromium": "^131.0.0",
     "@vitejs/plugin-react": "^4.2.0",
-    "puppeteer": "^23.0.0",
+    "puppeteer-core": "^23.11.1",
     "vite": "^5.0.0"
   }
 }

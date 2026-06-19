@@ -18,7 +18,7 @@ import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import puppeteer from "puppeteer";
+import puppeteer from "puppeteer-core";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DIST = path.join(ROOT, "dist");
@@ -69,6 +69,25 @@ function startServer(shell) {
   );
 }
 
+// On Linux (Vercel/CI) launch the Amazon-Linux-compatible Chromium from
+// @sparticuz/chromium (a normal Chromium build can't load libnss3.so etc. in
+// Vercel's container). Locally (Windows/macOS) launch an installed Chrome.
+async function getBrowser() {
+  if (process.platform === "linux") {
+    const chromium = (await import("@sparticuz/chromium")).default;
+    return puppeteer.launch({
+      args: chromium.args,
+      executablePath: await chromium.executablePath(),
+      headless: true,
+    });
+  }
+  return puppeteer.launch({
+    headless: true,
+    channel: "chrome",
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
+}
+
 async function main() {
   if (!existsSync(path.join(DIST, "index.html"))) {
     console.error("✗ dist/index.html not found — run `vite build` first.");
@@ -82,10 +101,7 @@ async function main() {
   const port = server.address().port;
   const base = `http://127.0.0.1:${port}`;
 
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
-  });
+  const browser = await getBrowser();
 
   const failed = [];
   let ok = 0;
