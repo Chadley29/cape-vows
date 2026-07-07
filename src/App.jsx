@@ -148,7 +148,7 @@ const css = `
   .blog-venue-link { background: none; border: none; padding: 0; color: var(--green); font-family: inherit; font-size: inherit; cursor: pointer; text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 3px; transition: color 0.2s; font-style: inherit; }
   .blog-venue-link:hover { color: var(--gold); }
   .blog-post-notice { background: rgba(160,120,64,0.09); border-left: 3px solid var(--gold); padding: 1rem 1.25rem; border-radius: 0 3px 3px 0; font-family: var(--ff-body); font-size: 0.93rem; color: var(--text); line-height: 1.7; margin: 1.5rem 0; }
-  .blog-post-cta { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+  .blog-post-cta { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
   @media (max-width: 480px) {
     .blog-post { padding: 2rem 1rem 4rem; }
     .blog-post-title { font-size: 1.65rem; }
@@ -1368,6 +1368,78 @@ const POSTS = [
     ],
     cta: { label: "Browse Venues with a View", path: "/venues" },
   },
+  {
+    slug: "wedding-venue-bottelary-road-stellenbosch",
+    title: "Wedding Venues Near Bottelary Road, Stellenbosch",
+    category: "Venue Guides",
+    date: "July 2026",
+    summary:
+      "The Bottelary Hills are a quieter, less-photographed pocket of the Stellenbosch winelands. Here's what makes the area special for a wedding, and the one boutique farm estate we've hand-verified there.",
+    heroImg:
+      "https://images.unsplash.com/photo-1706700700231-91a762a35531?auto=format&fit=crop&w=1400&q=80",
+    heroCredit: "Photo: Ben Gerber / Unsplash, Stellenbosch",
+    metaDesc:
+      "Eikenhof Estate is a boutique wine and olive farm wedding venue on Fischers Road in the Bottelary Hills, Stellenbosch. Here's what makes the area special.",
+    intro:
+      "Eikenhof Estate sits on Fischers Road in the Bottelary Hills, a quieter, less-photographed corner of the Stellenbosch winelands just north of the town itself. If you've searched for a wedding venue on Bottelary Road, Eikenhof is the boutique farm estate hand-verified in our directory for this specific pocket of the Cape Winelands, and the Bottelary Hills area is worth understanding before you book anywhere nearby.",
+    sections: [
+      {
+        h2: "Where Exactly Are the Bottelary Hills?",
+        paras: [
+          "The Bottelary Hills rise gently between Stellenbosch and Kuils River, a range of low, vine-covered slopes that get far less tourist traffic than Franschhoek or the main Stellenbosch wine route. The area is known among winemakers for old-vine Pinotage and Chenin Blanc, with a quiet reputation for producing some of the most characterful reds in the Cape. For a wedding, that translates into rolling vineyard views without the crowds of the more famous routes, and a genuinely local, unpolished feel.",
+        ],
+      },
+      {
+        h2: "Eikenhof Estate: The Hand-Verified Option on Fischers Road",
+        venueLinks: [{ name: "Eikenhof Estate", slug: "eikenhof-estate" }],
+        paras: [
+          "Eikenhof Estate is a boutique wine and olive farm tucked into the Bottelary Hills, offering an exclusive-use setting for up to 80 guests. It's a mid-range venue (roughly R50k to R150k), which makes it one of the more accessible options in the greater Stellenbosch area without sacrificing the farm-estate atmosphere couples want.",
+          "What sets it apart in this specific pocket of the Winelands: characterful, unpretentious spaces rather than a grand manor-house production, rolling Bottelary Hills views without the premium price tag of more famous addresses, and a genuinely warm, personal hosting style. This is a smaller, working farm where you deal directly with people who know the property, not a corporate events team.",
+          "If Bottelary Road or the Bottelary Hills is the area you've set your heart on, Eikenhof is currently the one venue in our hand-verified directory in this exact location.",
+        ],
+      },
+      {
+        h2: "What if You Want More Options in the Area?",
+        venueLinks: [
+          {
+            name: "Nooitgedacht Wine Estate",
+            slug: "nooitgedacht-wine-estate",
+          },
+        ],
+        notice:
+          "We only list venues we've personally verified, so we won't pad this guide with venues we haven't researched just to make the list longer.",
+        paras: [
+          "If your search brought you here because you love the idea of the Stellenbosch winelands generally rather than Bottelary Road specifically, it's worth widening your search slightly. Nearby Koelenhof, a few minutes from Bottelary, is home to Nooitgedacht Wine Estate, one of our most popular hand-verified venues, with sweeping rose gardens and capacity for up to 300 guests.",
+        ],
+      },
+      {
+        h2: "Getting Married in the Bottelary Hills: Practical Notes",
+        items: [
+          {
+            title: "Distance",
+            desc: "Roughly 15 to 20 minutes from Stellenbosch town centre, and around 45 minutes from the Cape Town CBD depending on traffic.",
+          },
+          {
+            title: "Best season",
+            desc: "The same seasonal considerations as the rest of the Winelands apply, though the Bottelary Hills' slightly higher elevation can mean marginally cooler evenings than the Stellenbosch valley floor.",
+          },
+          {
+            title: "Accessibility",
+            desc: "The roads through the hills are well-maintained but rural. Confirm transport arrangements for guests unfamiliar with the area, especially for an evening reception.",
+          },
+        ],
+      },
+    ],
+    cta: {
+      label: "Enquire About Eikenhof Estate",
+      path: "/venues/eikenhof-estate",
+      secondary: {
+        label: "Browse Cape Winelands Venues",
+        path: "/venues",
+        filters: { region: "Cape Winelands" },
+      },
+    },
+  },
 ];
 
 function linkifyVenues(text, venueLinks, navigate) {
@@ -1475,6 +1547,12 @@ function BlogPostPage({ post, navigate }) {
     };
   }, [post]);
 
+  const goCta = (c) => {
+    if (c.filters)
+      sessionStorage.setItem("cv_pending_filters", JSON.stringify(c.filters));
+    navigate(c.path);
+  };
+
   return (
     <div className="blog-post">
       <button className="venue-back" onClick={() => navigate("/blog")}>
@@ -1526,19 +1604,18 @@ function BlogPostPage({ post, navigate }) {
         </div>
       ))}
       <div className="blog-post-cta">
-        <button
-          className="btn btn-primary"
-          onClick={() => {
-            if (post.cta.filters)
-              sessionStorage.setItem(
-                "cv_pending_filters",
-                JSON.stringify(post.cta.filters),
-              );
-            navigate(post.cta.path);
-          }}
-        >
+        <button className="btn btn-primary" onClick={() => goCta(post.cta)}>
           {post.cta.label}
         </button>
+        {post.cta.secondary && (
+          <button
+            className="btn-ghost"
+            style={{ width: "auto" }}
+            onClick={() => goCta(post.cta.secondary)}
+          >
+            {post.cta.secondary.label}
+          </button>
+        )}
       </div>
     </div>
   );
