@@ -456,9 +456,10 @@ const VENUES_WITH_ACCOMMODATION = new Set([
   "zorgvliet-wines",
   "la-cotte-farm",
   "saronsberg-wine-estate",
-  "lourensford-wine-estate",
   "groot-constantia",
   "hawksmoor-house",
+  "elgin-vintners",
+  "la-paris-estate",
 ]);
 
 function getVenueFaqs(venue) {
@@ -635,8 +636,8 @@ const VENUES = [
     type: "Garden Estate",
     capacity: "Up to 300",
     price: "Contact Venue",
-    address: "Nooitgedacht Farm, Koelenhof, Stellenbosch",
-    phone: "021 865 2495",
+    address: "R304 Koelenhof Rd, Stellenbosch, 7605",
+    phone: "021 865 2407",
     website: "https://www.nooitgedachtestate.co.za/weddings",
     description:
       "A sprawling Stellenbosch estate with beautiful rose gardens, a restored manor house, and charming farm atmosphere. Nooitgedacht offers a versatile setting for both intimate garden ceremonies and large celebrations.",
@@ -725,7 +726,7 @@ const VENUES = [
     name: "La Cotte Farm",
     region: "Cape Winelands",
     type: "Farm & Country",
-    capacity: "Up to 100",
+    capacity: "Up to 80",
     price: "Luxury (R300k+)",
     address: "24 La Cotte St, Franschhoek",
     phone: "021 309 2709",
@@ -748,18 +749,22 @@ const VENUES = [
     name: "La Paris Estate",
     region: "Cape Winelands",
     type: "Wine Estate",
-    capacity: "Up to 200",
+    // Capacity set to "Contact venue" pending follow-up: the only source on file
+    // (/_local/venue-details/la-paris-estate.pdf) confirms a 50-guest "Intimate
+    // Wedding Package" (R187k-R214k), not a 200-guest capacity. Need to confirm
+    // directly with La Paris Estate whether larger packages exist.
+    capacity: "Contact venue",
     price: "Premium (R150–300k)",
     address: "La Paris Estate, Wemmershoek Rd, R301, Franschhoek",
     phone: "021 867 0171",
     website: "https://www.laparis.co.za/weddings",
     description:
-      "Nestled in the breathtaking Wemmershoek Valley, La Paris Estate offers sweeping mountain views, manicured grounds and a refined Cape Winelands setting. An elegant backdrop for both intimate and large-scale celebrations.",
+      "Nestled in the breathtaking Wemmershoek Valley, La Paris Estate offers sweeping mountain views, manicured grounds and a refined Cape Winelands setting. An elegant backdrop for intimate celebrations, with larger events available on enquiry.",
     features: [
       "Wemmershoek Valley Views",
       "Mountain Backdrop",
       "Manicured Gardens",
-      "Large Capacity",
+      "Intimate Wedding Packages",
       "Wine Estate Setting",
       "Outdoor Ceremonies",
     ],
@@ -1000,8 +1005,8 @@ const VENUES = [
   },
   {
     id: 22,
-    slug: "elgin-ridge-wines",
-    name: "Elgin Ridge Wines",
+    slug: "elgin-vintners",
+    name: "Elgin Vintners",
     region: "Overberg",
     type: "Wine Estate",
     capacity: "Up to 50",
@@ -1010,7 +1015,7 @@ const VENUES = [
     phone: "021 848 9587",
     website: "https://elginvintners.co.za/experiences/weddings-functions/",
     description:
-      "A characterful wine estate in the cool-climate Elgin Valley, set amid rolling apple orchards and indigenous fynbos in the Overberg. Elgin Ridge offers a tranquil, unhurried wedding experience well away from the Winelands crowds: award-winning cool-climate wines and an authentically pastoral atmosphere.",
+      "A characterful wine estate in the cool-climate Elgin Valley, set amid rolling apple orchards and indigenous fynbos in the Overberg. Elgin Vintners offers a tranquil, unhurried wedding experience well away from the Winelands crowds: award-winning cool-climate wines and an authentically pastoral atmosphere.",
     features: [
       "Elgin Valley Setting",
       "Cool-climate Estate",
@@ -1027,7 +1032,7 @@ const VENUES = [
     name: "Lourensford Wine Estate",
     region: "Cape Winelands",
     type: "Garden Estate",
-    capacity: "Up to 120",
+    capacity: "Up to 200",
     price: "Luxury (R300k+)",
     address: "Lourensford Rd, Somerset West",
     phone: "064 782 9864",
@@ -1050,7 +1055,7 @@ const VENUES = [
     name: "Eikenhof Estate",
     region: "Cape Winelands",
     type: "Farm & Country",
-    capacity: "Up to 80",
+    capacity: "Up to 180",
     price: "Mid-Range (R50–150k)",
     address: "Fischers Rd, Bottelary Hills, Stellenbosch Farms",
     phone: "021 204 9383",
@@ -1103,7 +1108,7 @@ const POSTS = [
           {
             title: "La Paris Estate",
             slug: "la-paris-estate",
-            desc: "Best for larger celebrations. With capacity for up to 200 guests, sweeping Wemmershoek Valley views, and manicured grounds, La Paris handles scale without losing its Winelands character.",
+            desc: "Best for a refined, intimate celebration. With sweeping Wemmershoek Valley views, manicured grounds, and a confirmed Intimate Wedding Package for up to 50 guests, La Paris pairs genuine Winelands character with a more personal scale; larger events available on enquiry.",
           },
           {
             title: "La Roche Estate",
@@ -1164,9 +1169,9 @@ const POSTS = [
         h2: "Three Verified Mid-Range Venues Worth Considering",
         items: [
           {
-            title: "Nooitgedacht Wine Estate (Paarl)",
+            title: "Nooitgedacht Wine Estate (Stellenbosch)",
             slug: "nooitgedacht-wine-estate",
-            desc: "A Mid-Range wine estate with genuine Cape Dutch charm, rustic barn spaces, and a relaxed atmosphere that keeps décor costs down. The setting does much of the work. Located just outside Paarl on the R44.",
+            desc: "A Mid-Range wine estate with genuine Cape Dutch charm, rustic barn spaces, and a relaxed atmosphere that keeps décor costs down. The setting does much of the work. Located on the R304 in Koelenhof, Stellenbosch.",
           },
           {
             title: "Eikenhof Estate (Stellenbosch / Bottelary Hills)",
@@ -1338,10 +1343,10 @@ const POSTS = [
         ],
       },
       {
-        h2: "Winelands Intimacy: The Banghoek Valley",
+        h2: "Winelands Intimacy: The Banhoek Valley",
         venueLinks: [{ name: "Zorgvliet Wines", slug: "zorgvliet-wines" }],
         paras: [
-          "The mountains around Stellenbosch feel closer and steeper than the wider Cape landscape, particularly in the Banghoek Valley east of the town, where the peaks turn a deep purple as the sun drops.",
+          "The mountains around Stellenbosch feel closer and steeper than the wider Cape landscape, particularly in the Banhoek Valley east of the town, where the peaks turn a deep purple as the sun drops.",
           "Zorgvliet Wines sits in this valley, tucked away with Blue Ridge mountain views on multiple sides. It is a deliberately off-the-main-road estate, the kind of venue where the mountain setting feels private rather than panoramic.",
         ],
       },
