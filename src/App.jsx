@@ -359,6 +359,49 @@ const displayCapacity = (c) =>
   c === "Contact venue" ? "Enquire for capacity" : `${c} guests`;
 const displayPrice = (p) => (p === "Contact Venue" ? "Enquire for pricing" : p);
 
+// Standard ISO 8601 week number (1-53), used as the rotation seed below.
+const getISOWeek = (date) => {
+  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  return Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
+};
+
+// Deterministic weekly rotation for the homepage's "A Few We'd Start With"
+// section. No randomness, no backend: venues are grouped into a lower-tier
+// bucket (Budget/Mid-Range), a higher-tier bucket (Premium/Luxury), and an
+// "other" bucket (Contact Venue), then the ISO week number picks one venue
+// from each bucket (offset per bucket so the three picks don't move in
+// lockstep). Same week always produces the same 3 venues; different weeks
+// produce different, budget-balanced combinations. The "other" pick nudges
+// away from a region already used by the first two, where the bucket allows it.
+const getFeaturedVenues = (venues, date = new Date()) => {
+  const week = getISOWeek(date);
+  const lowerTier = venues.filter(
+    (v) => v.price.startsWith("Budget") || v.price.startsWith("Mid-Range"),
+  );
+  const higherTier = venues.filter(
+    (v) => v.price.startsWith("Premium") || v.price.startsWith("Luxury"),
+  );
+  const otherTier = venues.filter((v) => v.price === "Contact Venue");
+  if (!lowerTier.length || !higherTier.length || !otherTier.length) return [];
+
+  const lowPick = lowerTier[week % lowerTier.length];
+  const highPick = higherTier[(week + 3) % higherTier.length];
+
+  const usedRegions = new Set([lowPick.region, highPick.region]);
+  let otherPick = otherTier[(week + 6) % otherTier.length];
+  for (let i = 0; i < otherTier.length; i++) {
+    const candidate = otherTier[(week + 6 + i) % otherTier.length];
+    if (!usedRegions.has(candidate.region)) {
+      otherPick = candidate;
+      break;
+    }
+  }
+
+  return [lowPick, highPick, otherPick];
+};
+
 const PRICE_RANGES = [
   "Any Budget",
   "Budget (< R50k)",
@@ -2994,10 +3037,7 @@ function InlineContactForm({
 }
 
 function HomePage({ navigate, allVenues }) {
-  const featuredSlugs = ["eikenhof-estate", "la-paris-estate", "babylonstoren"];
-  const featured = featuredSlugs
-    .map((s) => allVenues.find((v) => v.slug === s))
-    .filter(Boolean);
+  const featured = getFeaturedVenues(allVenues);
 
   return (
     <>
@@ -3048,8 +3088,20 @@ function HomePage({ navigate, allVenues }) {
             <div>
               <div className="section-eyebrow">Curated Selection</div>
               <h2 className="section-title">
-                Featured <em>Venues</em>
+                A Few We'd <em>Start With</em>
               </h2>
+              <p
+                style={{
+                  fontFamily: "var(--ff-sans)",
+                  fontSize: "0.75rem",
+                  color: "var(--muted)",
+                  letterSpacing: "0.04em",
+                  marginBottom: "0.75rem",
+                }}
+              >
+                No venue pays to appear here — these rotate periodically and
+                span different budgets and regions.
+              </p>
               <p className="section-desc">
                 From historic Cape Dutch wine estates to dramatic coastal
                 retreats, the Western Cape's most celebrated wedding
