@@ -35,7 +35,8 @@ const css = `
   .nav-link { font-family: var(--ff-sans); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.5rem 1rem; min-height: 44px; color: var(--muted); cursor: pointer; border: none; background: none; transition: color 0.2s; text-decoration: none; display: inline-flex; align-items: center; }
   .nav-link:hover, .nav-link.active { color: var(--green); }
 
-  .hero { position: relative; min-height: 88vh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; background: var(--green); padding-bottom: 3rem; }
+  .hero-viewport { display: flex; flex-direction: column; min-height: calc(100vh - 64px); }
+  .hero { position: relative; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; background: var(--green); padding-bottom: 3rem; }
   .hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #1a2e26 0%, #2D4A3E 40%, #3d6356 70%, #8a6b4a 100%); }
   .hero-pattern { position: absolute; inset: 0; opacity: 0.08; background-image: repeating-linear-gradient(45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%); background-size: 20px 20px; }
   .hero-overlay { position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 50%, rgba(160,120,64,0.15) 0%, transparent 60%); }
@@ -2090,6 +2091,11 @@ function VenuePage({ venue, navigate, allVenues, isSaved, onToggleSave }) {
   const related = allVenues
     .filter((v) => v.id !== venue.id && v.region === venue.region)
     .slice(0, 3);
+  const relatedPosts = POSTS.filter((post) =>
+    post.sections.some((sec) =>
+      sec.venueLinks?.some((link) => link.slug === venue.slug),
+    ),
+  );
   const enquireCap = venue.capacity === "Contact venue";
   const enquirePrice = venue.price === "Contact Venue";
 
@@ -2284,6 +2290,39 @@ function VenuePage({ venue, navigate, allVenues, isSaved, onToggleSave }) {
       </div>
 
       <FaqAccordion faqs={getVenueFaqs(venue)} />
+
+      {relatedPosts.length > 0 && (
+        <div className="related-section">
+          <h2 className="related-title">
+            Related <em>Reading</em>
+          </h2>
+          <div className="blog-grid">
+            {relatedPosts.map((post) => (
+              <div
+                className="blog-card"
+                key={post.slug}
+                onClick={() => navigate(`/blog/${post.slug}`)}
+              >
+                <img
+                  className="blog-card-img"
+                  src={post.heroImg}
+                  alt={post.title}
+                  loading="lazy"
+                />
+                <div className="blog-card-body">
+                  <div className="blog-card-cat">{post.category}</div>
+                  <div className="blog-card-title">{post.title}</div>
+                  <div className="blog-card-summary">{post.summary}</div>
+                </div>
+                <div className="blog-card-footer">
+                  <span>{post.date}</span>
+                  <span className="blog-card-read">Read more →</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {related.length > 0 && (
         <div className="related-section">
@@ -3041,45 +3080,47 @@ function HomePage({ navigate, allVenues }) {
 
   return (
     <>
-      <div className="hero">
-        <div className="hero-bg" />
-        <div className="hero-pattern" />
-        <div className="hero-overlay" />
-        <div className="hero-content">
-          <h1 className="hero-title">
-            You've Found
-            <br />
-            <em>Each Other.</em>
-            <br />
-            Now Find the <em>Venue.</em>
-          </h1>
-          <p className="hero-sub">
-            24 hand-researched venues across the Western Cape, from
-            sun-drenched Winelands estates to hidden fynbos retreats, verified
-            and curated for your Cape wedding.
-          </p>
-          <div className="hero-actions">
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                track("hero_cta_click", { button: "explore_venues" });
-                navigate("/venues");
-              }}
-            >
-              Browse Venues
-            </button>
+      <div className="hero-viewport">
+        <div className="hero">
+          <div className="hero-bg" />
+          <div className="hero-pattern" />
+          <div className="hero-overlay" />
+          <div className="hero-content">
+            <h1 className="hero-title">
+              You've Found
+              <br />
+              <em>Each Other.</em>
+              <br />
+              Now Find the <em>Venue.</em>
+            </h1>
+            <p className="hero-sub">
+              {VENUES.length} hand-researched venues across the Western Cape,
+              from sun-drenched Winelands estates to hidden fynbos retreats,
+              verified and curated for your Cape wedding.
+            </p>
+            <div className="hero-actions">
+              <button
+                className="btn btn-primary"
+                onClick={() => {
+                  track("hero_cta_click", { button: "explore_venues" });
+                  navigate("/venues");
+                }}
+              >
+                Browse Venues
+              </button>
+            </div>
+          </div>
+          <div className="hero-scroll">
+            <span className="hero-scroll-label">Scroll</span>
+            <div className="hero-scroll-line" />
           </div>
         </div>
-        <div className="hero-scroll">
-          <span className="hero-scroll-label">Scroll</span>
-          <div className="hero-scroll-line" />
-        </div>
-      </div>
 
-      <div className="trust-strip">
-        <span className="trust-strip-item">No ads</span>
-        <span className="trust-strip-item">No venue fees</span>
-        <span className="trust-strip-item">Every venue hand-verified</span>
+        <div className="trust-strip">
+          <span className="trust-strip-item">No ads</span>
+          <span className="trust-strip-item">No fees</span>
+          <span className="trust-strip-item">Every venue hand-verified</span>
+        </div>
       </div>
 
       <Reveal>
@@ -3099,7 +3140,7 @@ function HomePage({ navigate, allVenues }) {
                   marginBottom: "0.75rem",
                 }}
               >
-                No venue pays to appear here — these rotate periodically and
+                No venue pays to appear here. These rotate periodically and
                 span different budgets and regions.
               </p>
               <p className="section-desc">
@@ -4007,7 +4048,7 @@ export default function App() {
           "https://www.pinterest.com/capevows",
         ],
         description:
-          "Cape Vows is South Africa's Western Cape wedding venue directory — 24 hand-verified venues across Franschhoek, Stellenbosch, Cape Town, Constantia and the Overberg.",
+          `Cape Vows is South Africa's Western Cape wedding venue directory — ${VENUES.length} hand-verified venues across Franschhoek, Stellenbosch, Cape Town, Constantia and the Overberg.`,
         areaServed: {
           "@type": "State",
           name: "Western Cape",
