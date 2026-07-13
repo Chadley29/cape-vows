@@ -3125,30 +3125,28 @@ function HomePage({ navigate, allVenues }) {
 
       <Reveal>
         <section>
-          <div className="section-header">
-            <div>
-              <div className="section-eyebrow">Curated Selection</div>
-              <h2 className="section-title">
-                A Few We'd <em>Start With</em>
-              </h2>
-              <p
-                style={{
-                  fontFamily: "var(--ff-sans)",
-                  fontSize: "0.75rem",
-                  color: "var(--muted)",
-                  letterSpacing: "0.04em",
-                  marginBottom: "0.75rem",
-                }}
-              >
-                No venue pays to appear here. These rotate periodically and
-                span different budgets and regions.
-              </p>
-              <p className="section-desc">
-                From historic Cape Dutch wine estates to dramatic coastal
-                retreats, the Western Cape's most celebrated wedding
-                destinations.
-              </p>
-            </div>
+          <div className="section-eyebrow">Curated Selection</div>
+          <h2 className="section-title">
+            A Few We'd <em>Start With</em>
+          </h2>
+          <p
+            style={{
+              fontFamily: "var(--ff-sans)",
+              fontSize: "0.75rem",
+              color: "var(--muted)",
+              letterSpacing: "0.04em",
+              marginBottom: "3rem",
+            }}
+          >
+            No venue pays to appear here. These rotate periodically and
+            span different budgets and regions.
+          </p>
+          <div className="cards-grid">
+            {featured.map((v) => (
+              <VenueCard key={v.id} venue={v} navigate={navigate} />
+            ))}
+          </div>
+          <div style={{ display: "flex", justifyContent: "center", marginTop: "3rem" }}>
             <button
               className="btn btn-primary"
               onClick={() => {
@@ -3158,11 +3156,6 @@ function HomePage({ navigate, allVenues }) {
             >
               View All Venues
             </button>
-          </div>
-          <div className="cards-grid">
-            {featured.map((v) => (
-              <VenueCard key={v.id} venue={v} navigate={navigate} />
-            ))}
           </div>
         </section>
       </Reveal>
