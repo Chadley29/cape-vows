@@ -1569,6 +1569,16 @@ function BlogPostPage({ post, navigate }) {
       document.head.appendChild(m);
     }
     m.content = post.metaDesc;
+    const url = `https://capevows.co.za/blog/${post.slug}`;
+    let link = document.querySelector("link[rel='canonical']");
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "canonical";
+      document.head.appendChild(link);
+    }
+    link.setAttribute("href", url);
+    const og = document.querySelector("meta[property='og:url']");
+    if (og) og.setAttribute("content", url);
     const s = document.createElement("script");
     s.type = "application/ld+json";
     s.id = "blog-jsonld";
@@ -1593,6 +1603,8 @@ function BlogPostPage({ post, navigate }) {
     return () => {
       const el = document.getElementById("blog-jsonld");
       if (el) el.remove();
+      if (link) link.setAttribute("href", "https://capevows.co.za");
+      if (og) og.setAttribute("content", "https://capevows.co.za");
     };
   }, [post]);
 
@@ -2017,6 +2029,16 @@ function VenuePage({ venue, navigate, allVenues, isSaved, onToggleSave }) {
         "content",
         `${venue.name} is a ${venue.type.toLowerCase()} wedding venue in ${venue.region}, Western Cape. ${venue.description.substring(0, 130)}...`,
       );
+    const url = `https://capevows.co.za/venues/${venue.slug}`;
+    let link = document.querySelector('link[rel="canonical"]');
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "canonical";
+      document.head.appendChild(link);
+    }
+    link.setAttribute("href", url);
+    const og = document.querySelector('meta[property="og:url"]');
+    if (og) og.setAttribute("content", url);
     return () => {
       document.title = "Cape Vows | Western Cape Wedding Directory";
       if (m)
@@ -2024,6 +2046,8 @@ function VenuePage({ venue, navigate, allVenues, isSaved, onToggleSave }) {
           "content",
           `Browse ${VENUES.length} hand-verified wedding venues in the Western Cape, Franschhoek, Stellenbosch, Cape Town and beyond.`,
         );
+      if (link) link.setAttribute("href", "https://capevows.co.za");
+      if (og) og.setAttribute("content", "https://capevows.co.za");
     };
   }, [venue]);
 
