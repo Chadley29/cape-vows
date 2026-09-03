@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import VendorContactForm from '../components/VendorContactForm.jsx';
 
 const title = 'Wedding Vendors in the Western Cape | Cape Vows';
 const description =
@@ -81,9 +82,7 @@ const categories = [
           Get listed when we launch <em>vendor profiles</em>
         </div>
       </div>
-      <a href="mailto:hello@capevows.co.za?subject=General%20Enquiry%20%E2%80%94%20Cape%20Vows" class="btn btn-primary">
-        Get in Touch
-      </a>
+      <VendorContactForm client:visible />
     </div>
   </section>
 </Base>
