@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import SavedVenues from '../../components/SavedVenues.jsx';
+
+const title = 'Saved Venues | Cape Vows';
+const description = 'Your saved Western Cape wedding venues.';
+const canonical = 'https://capevows.co.za/venues/saved';
+---
+
+<Base title={title} description={description} canonical={canonical}>
+  <section style="padding-top: 3rem;">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow">Your Shortlist</div>
+        <h1 class="section-title">Saved <em>Venues</em></h1>
+      </div>
+    </div>
+
+    <div id="saved-app">
+      <p class="saved-empty" style="display:none" id="saved-loading">
+        Loading saved venues...
+      </p>
+    </div>
+    <SavedVenues client:load />
+  </section>
+</Base>

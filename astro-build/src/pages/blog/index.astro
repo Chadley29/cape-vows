@@ -1,0 +1,42 @@
+---
+import Base from '../../layouts/Base.astro';
+import { POSTS } from '../../data/posts.js';
+
+const title = 'Wedding Planning Blog | Cape Vows';
+const description =
+  'Planning advice, venue guides, and local expertise for Western Cape weddings.';
+const canonical = 'https://capevows.co.za/blog';
+---
+
+<Base title={title} description={description} canonical={canonical}>
+  <div class="blog-page">
+    <div class="section-eyebrow">Cape Vows</div>
+    <h1 class="section-title">Wedding <em>Planning</em> Guides</h1>
+    <p class="section-desc" style="max-width: 600px;">
+      Honest, local advice for planning your Western Cape wedding: venue guides,
+      seasonal tips, and the legal information no one explains clearly.
+    </p>
+
+    <div class="blog-grid">
+      {POSTS.map((post) => (
+        <a href={`/blog/${post.slug}`} class="blog-card" style="text-decoration: none;">
+          <img
+            class="blog-card-img"
+            src={post.heroImg}
+            alt={post.title}
+            loading="lazy"
+          />
+          <div class="blog-card-body">
+            <div class="blog-card-cat">{post.category}</div>
+            <div class="blog-card-title">{post.title}</div>
+            <div class="blog-card-summary">{post.summary}</div>
+          </div>
+          <div class="blog-card-footer">
+            <span>{post.date}</span>
+            <span class="blog-card-read">Read more →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</Base>

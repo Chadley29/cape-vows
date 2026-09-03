@@ -1,0 +1,247 @@
+---
+import Base from '../../layouts/Base.astro';
+import { VENUES } from '../../data/venues.js';
+import { POSTS } from '../../data/posts.js';
+import FaqAccordion from '../../components/FaqAccordion.jsx';
+import EnquiryModal from '../../components/EnquiryModal.jsx';
+import Favourites from '../../components/Favourites.jsx';
+import {
+  getVenueFaqs,
+  getGradient,
+  getAccent,
+  displayCapacity,
+  displayPrice,
+  REGION_CONTEXT,
+  VENUES_WITH_ACCOMMODATION,
+} from '../../data/constants.js';
+
+export function getStaticPaths() {
+  return VENUES.map((v) => ({
+    params: { slug: v.slug },
+    props: { venue: v },
+  }));
+}
+
+const { venue } = Astro.props;
+
+const gradient = getGradient(venue.type);
+const accent = getAccent(venue.type);
+const faqs = getVenueFaqs(venue);
+const title = `${venue.name} Wedding Venue — ${venue.region} | Cape Vows`;
+const description = `${venue.name} is a ${venue.type.toLowerCase()} wedding venue in ${venue.region}, Western Cape. ${venue.description.substring(0, 130)}...`;
+const canonical = `https://capevows.co.za/venues/${venue.slug}`;
+const relatedVenues = VENUES.filter(
+  (v) => v.region === venue.region && v.slug !== venue.slug,
+).slice(0, 3);
+
+const relatedPosts = POSTS.filter((post) =>
+  post.sections.some((sec) =>
+    sec.venueLinks?.some((link) => link.slug === venue.slug),
+  ),
+);
+
+const enquireCap = venue.capacity === 'Contact venue';
+const enquirePrice = venue.price === 'Contact Venue';
+const telHref = 'tel:' + venue.phone.split(' ').join('');
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'EventVenue',
+    name: venue.name,
+    description: venue.description,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: venue.address,
+      addressRegion: 'Western Cape',
+      addressCountry: 'ZA',
+    },
+    telephone: venue.phone,
+    url: venue.website,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://capevows.co.za/',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Venues',
+        item: 'https://capevows.co.za/venues',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: venue.name,
+        item: canonical,
+      },
+    ],
+  },
+]);
+---
+
+<Base title={title} description={description} canonical={canonical}>
+  <script slot="head" type="application/ld+json" is:inline set:html={jsonLd} />
+
+  <div class="venue-page">
+    <a href="/venues" class="venue-back">← Back to all venues</a>
+
+    <div class="venue-banner" style={`background: ${gradient}; --card-accent: ${accent};`}>
+      <div class="venue-banner-eyebrow">{venue.region} · Western Cape</div>
+      <h1 class="venue-banner-title">{venue.name}</h1>
+      <div class="venue-banner-chips">
+        <span class="venue-banner-chip">{venue.type}</span>
+        <span class="venue-banner-chip">{displayCapacity(venue.capacity)}</span>
+        <span class="venue-banner-chip">{displayPrice(venue.price)}</span>
+      </div>
+    </div>
+
+    <div class="venue-page-layout">
+      <div class="venue-main">
+        <p class="venue-desc">{venue.description}</p>
+
+        <div class="venue-features-title">Features &amp; Inclusions</div>
+        <div class="tags" style="margin-bottom: 1rem;">
+          {venue.features.map((f) => <span class="tag active">{f}</span>)}
+        </div>
+
+        <FaqAccordion faqs={faqs} client:visible />
+      </div>
+
+      <div class="venue-sidebar">
+        <div class="venue-details-card">
+          <div class="venue-details-card-header">
+            <div>
+              <div class="venue-details-card-name">{venue.name}</div>
+              <div class="venue-details-card-region">{venue.region}</div>
+            </div>
+          </div>
+
+          <div class="venue-details-rows">
+            <div class="venue-detail-row">
+              <span class="venue-detail-label">Type</span>
+              <span class="venue-detail-value">{venue.type}</span>
+            </div>
+            <div class="venue-detail-row">
+              <span class="venue-detail-label">Capacity</span>
+              <span class={'venue-detail-value' + (enquireCap ? ' enquire' : '')}>
+                {displayCapacity(venue.capacity)}
+              </span>
+            </div>
+            <div class="venue-detail-row">
+              <span class="venue-detail-label">Pricing</span>
+              <span class={'venue-detail-value' + (enquirePrice ? ' enquire' : '')}>
+                {displayPrice(venue.price)}
+              </span>
+            </div>
+            <div class="venue-detail-row">
+              <span class="venue-detail-label">Address</span>
+              <span class="venue-detail-value" style="font-size: 0.87rem;">
+                {venue.address}
+              </span>
+            </div>
+            <div class="venue-detail-row">
+              <span class="venue-detail-label">Phone</span>
+              <span class="venue-detail-value phone">
+                <a href={telHref}>{venue.phone}</a>
+              </span>
+            </div>
+          </div>
+
+          <div class="venue-cta-group">
+            <button class="btn-green" data-enquire>
+              Enquire About This Venue
+            </button>
+            {venue.website && (
+              <a
+                href={venue.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-ghost"
+                style="display: block; text-align: center; text-decoration: none;"
+              >
+                Visit Website
+              </a>
+            )}
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <EnquiryModal venue={venue} showTrigger={true} client:load />
+
+    {relatedPosts.length > 0 && (
+      <div class="related-section">
+        <h2 class="related-title">Related <em>Reading</em></h2>
+        <div class="blog-grid">
+          {relatedPosts.map((post) => (
+            <a href={`/blog/${post.slug}`} class="blog-card" style="text-decoration: none;">
+              <img class="blog-card-img" src={post.heroImg} alt={post.title} loading="lazy" />
+              <div class="blog-card-body">
+                <div class="blog-card-cat">{post.category}</div>
+                <div class="blog-card-title">{post.title}</div>
+                <div class="blog-card-summary">{post.summary}</div>
+              </div>
+              <div class="blog-card-footer">
+                <span>{post.date}</span>
+                <span class="blog-card-read">Read more →</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {relatedVenues.length > 0 && (
+      <div class="related-section">
+        <h2 class="related-title">More venues in <em>{venue.region}</em></h2>
+        <div class="cards-grid">
+          {relatedVenues.map((v) => (
+            <div style="position: relative;">
+            <a
+              href={`/venues/${v.slug}`}
+              class="card"
+              style={`--card-accent: ${getAccent(v.type)}; text-decoration: none;`}
+            >
+              <div class="card-banner" style={`background: ${getGradient(v.type)};`}>
+                <div class="card-banner-overlay"></div>
+                <span class="card-banner-badge">{v.type}</span>
+              </div>
+              <div class="card-body">
+                <div class="card-region">{v.region}</div>
+                <div class="card-title">{v.name}</div>
+                <div class="card-desc">{v.description}</div>
+                <div class="card-meta">
+                  <span class="card-pill">👥 {displayCapacity(v.capacity)}</span>
+                  <span class="card-pill green">✦ {v.highlight}</span>
+                </div>
+              </div>
+              <div class="card-footer">
+                <span class="card-price">{displayPrice(v.price)}</span>
+                <span class="card-link">View Details →</span>
+              </div>
+            </a>
+            <Favourites slug={v.slug} client:visible />
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</Base>

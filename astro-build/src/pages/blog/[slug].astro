@@ -1,0 +1,141 @@
+---
+import Base from '../../layouts/Base.astro';
+import { POSTS } from '../../data/posts.js';
+import { VENUES } from '../../data/venues.js';
+import { toSlug } from '../../data/constants.js';
+
+export function getStaticPaths() {
+  return POSTS.map((p) => ({
+    params: { slug: p.slug },
+    props: { post: p },
+  }));
+}
+
+const { post } = Astro.props;
+
+const title = post.title + ' | Cape Vows';
+const description = post.metaDesc;
+const canonical = `https://capevows.co.za/blog/${post.slug}`;
+
+function escapeHtml(s) {
+  return s.split('&').join('&amp;').split('<').join('&lt;').split('>').join('&gt;');
+}
+
+// Build-time port of linkifyVenues() from App.jsx. Splits a paragraph on each
+// venue name in the section's venueLinks and swaps it for an anchor. Already
+// linked segments are not rescanned, matching the flatMap behaviour in App.jsx.
+function linkifyVenues(text, venueLinks) {
+  if (!venueLinks || !venueLinks.length) return escapeHtml(text);
+  let parts = [{ text, isLink: false }];
+  venueLinks.forEach(({ name, slug }) => {
+    const next = [];
+    for (const part of parts) {
+      if (part.isLink) {
+        next.push(part);
+        continue;
+      }
+      const segments = part.text.split(name);
+      segments.forEach((seg, i) => {
+        if (seg) next.push({ text: seg, isLink: false });
+        if (i < segments.length - 1) next.push({ text: name, isLink: true, slug });
+      });
+    }
+    parts = next;
+  });
+  return parts
+    .map((p) =>
+      p.isLink
+        ? `<a href="/venues/${p.slug}" class="blog-venue-link">${escapeHtml(p.text)}</a>`
+        : escapeHtml(p.text),
+    )
+    .join('');
+}
+
+// sessionStorage pre-filtering does not exist in a static build, so CTA filters
+// travel as URL query params instead. VenuesPage already reads these.
+function ctaHref(cta) {
+  if (!cta) return '/venues';
+  if (cta.filters && cta.filters.price) {
+    return `${cta.path}?price=${encodeURIComponent(cta.filters.price)}`;
+  }
+  if (cta.filters && cta.filters.region) {
+    return `${cta.path}?region=${encodeURIComponent(cta.filters.region)}`;
+  }
+  return cta.path;
+}
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.title,
+  description: post.metaDesc,
+  image: post.heroImg,
+  datePublished: post.date,
+  url: canonical,
+  mainEntityOfPage: canonical,
+  publisher: {
+    '@type': 'Organization',
+    name: 'Cape Vows',
+    url: 'https://capevows.co.za',
+  },
+});
+---
+
+<Base title={title} description={description} canonical={canonical}>
+  <script slot="head" type="application/ld+json" is:inline set:html={jsonLd} />
+
+  <div class="blog-post">
+    <a href="/blog" class="venue-back">← All Articles</a>
+
+    <div class="blog-post-cat">{post.category}</div>
+    <h1 class="blog-post-title">{post.title}</h1>
+    <div class="blog-post-meta">{post.date} · Cape Vows Editorial</div>
+
+    <img class="blog-post-hero" src={post.heroImg} alt={post.title} />
+    <div class="blog-hero-credit">{post.heroCredit}</div>
+
+    <p class="blog-post-intro" set:html={post.intro} />
+
+    {post.sections.map((sec) => (
+      <div>
+        <h2 class="blog-post-h2">{sec.h2}</h2>
+
+        {sec.notice && <div class="blog-post-notice" set:html={sec.notice} />}
+
+        {sec.paras &&
+          sec.paras.map((p) => (
+            <p class="blog-post-p" set:html={linkifyVenues(p, sec.venueLinks)} />
+          ))}
+
+        {sec.items && (
+          <ul class="blog-post-list">
+            {sec.items.map((item) => (
+              <li class="blog-post-li">
+                <strong>{item.title}</strong>
+                <span>{item.desc}</span>
+                {item.slug && (
+                  <a href={`/venues/${item.slug}`} class="blog-venue-btn">
+                    View venue →
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    ))}
+
+    <div class="blog-post-cta">
+      <a href={ctaHref(post.cta)} class="btn btn-primary">{post.cta.label}</a>
+      {post.cta.secondary && (
+        <a
+          href={ctaHref(post.cta.secondary)}
+          class="btn-ghost"
+          style="width: auto;"
+        >
+          {post.cta.secondary.label}
+        </a>
+      )}
+    </div>
+  </div>
+</Base>

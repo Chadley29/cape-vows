@@ -1,0 +1,7 @@
+{
+  "buildCommand": "cd astro-build && npm run build",
+  "outputDirectory": "astro-build/dist",
+  "installCommand": "cd astro-build && npm install",
+  "trailingSlash": false,
+  "cleanUrls": true
+}

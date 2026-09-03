@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+
+const title = 'Page Not Found | Cape Vows';
+const description = "The page you're looking for doesn't exist.";
+---
+
+<Base title={title} description={description} canonical={null}>
+  <meta name="robots" content="noindex" slot="head" />
+
+  <div class="empty" style="padding: 8rem 2rem;">
+    <div class="empty-icon">🌿</div>
+    <div class="empty-title">Venue not found</div>
+    <div class="empty-sub" style="margin-bottom: 2rem;">
+      This page doesn't exist or the venue may have moved.
+    </div>
+    <a href="/venues" class="btn btn-primary">Browse All Venues</a>
+  </div>
+</Base>

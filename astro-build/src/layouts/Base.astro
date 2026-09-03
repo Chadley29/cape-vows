@@ -1,0 +1,143 @@
+---
+import CookieBanner from '../components/CookieBanner.jsx';
+import { NavSavedBadge } from '../components/Favourites.jsx';
+
+const {
+  title = "Cape Vows — Wedding Venues & Vendors in the Western Cape",
+  description = "24 hand-verified wedding venues across the Western Cape — Franschhoek, Stellenbosch, Cape Town and the Overberg. No ads, no fees. Find your Cape venue.",
+  canonical = "https://capevows.co.za",
+} = Astro.props;
+
+const path = Astro.url.pathname;
+const isHome = path === "/";
+const isSaved = path === "/venues/saved";
+const isVenues = !isSaved && (path === "/venues" || path.startsWith("/venues/"));
+const isVendors = path === "/vendors";
+const isBlog = path === "/blog" || path.startsWith("/blog/");
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap"
+    />
+
+    <style is:global>@import '../styles/global.css';</style>
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+
+    <meta property="og:type" content="website" />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://capevows.co.za/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_ZA" />
+    <meta property="og:site_name" content="Cape Vows" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    {canonical && <meta name="twitter:url" content={canonical} />}
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://capevows.co.za/og-image.jpg" />
+
+    <meta name="p:domain_verify" content="782bc3aa8b199dee7dd3b0d7d7b0d58f" />
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Cape Vows" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <script
+      is:inline
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-70RTTPE121"
+    ></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-70RTTPE121");
+    </script>
+
+    <script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Cape Vows",
+        "url": "https://capevows.co.za",
+        "description": "The Western Cape wedding venue and vendor directory — 24 hand-verified venues across Franschhoek, Stellenbosch, Cape Town, Constantia and the Overberg.",
+        "inLanguage": "en-ZA",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Cape Vows",
+          "url": "https://capevows.co.za"
+        }
+      }
+    </script>
+
+    <slot name="head" />
+  </head>
+  <body>
+    <nav>
+      <a class="nav-logo" href="/">Cape <span>Vows</span></a>
+      <div class="nav-links">
+        <a class={"nav-link nav-link-home" + (isHome ? " active" : "")} href="/">Home</a>
+        <a class={"nav-link" + (isVenues ? " active" : "")} href="/venues">Venues</a>
+        <a class={"nav-link" + (isVendors ? " active" : "")} href="/vendors"
+          >Vendors <span class="nav-soon-badge">Soon</span></a
+        >
+        <a class={"nav-link" + (isBlog ? " active" : "")} href="/blog">Blog</a>
+        <a
+          class={"nav-link" + (isSaved ? " active" : "")}
+          href="/venues/saved"
+          title="Saved venues"
+          style="gap: 2px"
+        >
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="transition: fill 0.2s">
+            <path
+              d="M7 12S1.5 8.5 1.5 4.5a3 3 0 015.5-1.67A3 3 0 0112.5 4.5C12.5 8.5 7 12 7 12z"
+              stroke="currentColor"
+              stroke-width="1.4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </svg>
+          <span id="nav-saved-badge" class="nav-badge" style="display: none"></span>
+        </a>
+      </div>
+    </nav>
+
+    <NavSavedBadge client:load />
+
+    <slot />
+
+    <footer>
+      <div class="footer-logo">Cape Vows</div>
+      <div class="footer-sub">
+        The Western Cape Wedding Directory · South Africa
+      </div>
+      <div class="footer-nav">
+        <a href="/venues" class="footer-nav-link">Venues</a>
+        <a href="/vendors" class="footer-nav-link">Vendors</a>
+        <a href="/blog" class="footer-nav-link">Blog</a>
+        <a href="/privacy-policy.html" class="footer-nav-link">Privacy Policy</a>
+        <a href="mailto:hello@capevows.co.za" class="footer-nav-link">Contact</a>
+      </div>
+    </footer>
+
+    <CookieBanner client:load />
+  </body>
+</html>

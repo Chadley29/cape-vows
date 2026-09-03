@@ -1,0 +1,225 @@
+---
+import Base from '../layouts/Base.astro';
+import Favourites from '../components/Favourites.jsx';
+import { VENUES } from '../data/venues.js';
+import { POSTS } from '../data/posts.js';
+import {
+  getFeaturedVenues,
+  getGradient,
+  getAccent,
+  displayCapacity,
+  displayPrice,
+} from '../data/constants.js';
+
+const featured = getFeaturedVenues(VENUES);
+const regions = [...new Set(VENUES.map((v) => v.region))];
+const teaserPosts = POSTS.slice(0, 3);
+
+const title = 'Cape Vows — Wedding Venues & Vendors in the Western Cape';
+const description =
+  '24 hand-verified wedding venues across the Western Cape — Franschhoek, Stellenbosch, Cape Town and the Overberg. No ads, no fees. Find your Cape venue.';
+const canonical = 'https://capevows.co.za';
+---
+
+<Base title={title} description={description} canonical={canonical}>
+  <div class="hero-viewport">
+    <div class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-pattern"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">
+          You've Found
+          <br />
+          <em>Each Other.</em>
+          <br />
+          Now Find the <em>Venue.</em>
+        </h1>
+        <p class="hero-sub">
+          {VENUES.length} hand-researched venues across the Western Cape, from
+          sun-drenched Winelands estates to hidden fynbos retreats, verified and
+          curated for your Cape wedding.
+        </p>
+        <div class="hero-actions">
+          <a href="/venues" class="btn btn-primary" style="text-decoration: none;">
+            Browse Venues
+          </a>
+          <a href="/blog" class="btn-ghost" style="text-decoration: none; width: auto;">
+            Planning Guides
+          </a>
+        </div>
+      </div>
+      <div class="hero-scroll">
+        <span class="hero-scroll-label">Scroll</span>
+        <div class="hero-scroll-line"></div>
+      </div>
+    </div>
+
+    <div class="trust-strip">
+      <span class="trust-strip-item">No ads</span>
+      <span class="trust-strip-item">No fees</span>
+      <span class="trust-strip-item">Every venue hand-verified</span>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-eyebrow">Curated Selection</div>
+    <h2 class="section-title">A Few We'd <em>Start With</em></h2>
+    <p
+      style="font-family: var(--ff-sans); font-size: 0.75rem; color: var(--muted); letter-spacing: 0.04em; margin-bottom: 3rem;"
+    >
+      No venue pays to appear here. These rotate periodically and span different
+      budgets and regions.
+    </p>
+
+    <div class="cards-grid">
+      {featured.map((v) => (
+        <div style="position: relative;">
+          <a
+            href={`/venues/${v.slug}`}
+            class="card"
+            style={`--card-accent: ${getAccent(v.type)}; text-decoration: none;`}
+          >
+            <div class="card-banner" style={`background: ${getGradient(v.type)};`}>
+              <div class="card-banner-overlay"></div>
+              <span class="card-banner-badge">{v.type}</span>
+            </div>
+            <div class="card-body">
+              <div class="card-region">{v.region}</div>
+              <div class="card-title">{v.name}</div>
+              <div class="card-desc">{v.description}</div>
+              <div class="card-meta">
+                <span class="card-pill">👥 {displayCapacity(v.capacity)}</span>
+                <span class="card-pill green">✦ {v.highlight}</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span class="card-price">{displayPrice(v.price)}</span>
+              <span class="card-link">View Details →</span>
+            </div>
+          </a>
+          <Favourites slug={v.slug} client:visible />
+        </div>
+      ))}
+    </div>
+
+    <div style="display: flex; justify-content: center; margin-top: 3rem;">
+      <a href="/venues" class="btn btn-primary" style="text-decoration: none;">
+        View All Venues
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-eyebrow">Where to Look</div>
+    <h2 class="section-title">Explore by <em>Region</em></h2>
+    <p
+      style="font-family: var(--ff-sans); font-size: 0.75rem; color: var(--muted); letter-spacing: 0.04em; margin-bottom: 2rem;"
+    >
+      Five regions across the Western Cape, each with its own character.
+    </p>
+    <div class="tags">
+      {regions.map((r) => (
+        <a
+          href={`/venues?region=${encodeURIComponent(r)}`}
+          class="tag active"
+          style="text-decoration: none;"
+        >
+          {r}
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <div
+      style="background: var(--cream2); border: 1px solid var(--border); border-radius: 6px; padding: 3rem; display: flex; gap: 3rem; flex-wrap: wrap; align-items: center;"
+    >
+      <div
+        style="flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 0.85rem; min-width: 120px; margin: 0 auto;"
+      >
+        <div
+          style="width: 92px; height: 92px; border-radius: 50%; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center; font-family: var(--ff-serif); font-size: 2rem; font-style: italic; color: var(--green);"
+        >
+          CV
+        </div>
+        <div
+          style="font-family: var(--ff-sans); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold);"
+        >
+          Cape Vows
+        </div>
+      </div>
+      <div style="flex: 1; min-width: 280px;">
+        <div class="section-eyebrow">A Note From the Founder</div>
+        <h2 class="section-title" style="font-size: 1.75rem; margin-bottom: 1.25rem;">
+          How Every Venue Is <em>Verified</em>
+        </h2>
+        <p
+          style="font-family: var(--ff-body); font-size: 1.1rem; color: var(--text); line-height: 1.8; margin-bottom: 1rem;"
+        >
+          Cape Vows began with a frustration. Most wedding directories are
+          pay-to-play: the estates with the biggest marketing budgets sit at the
+          top, and the hidden gems never get a look in. Couples planning a Cape
+          wedding deserve better, so I built the directory I wished I'd had.
+        </p>
+        <p
+          style="font-family: var(--ff-body); font-size: 1.1rem; color: var(--text); line-height: 1.8; margin-bottom: 1rem;"
+        >
+          Every venue here has been personally researched. I work through all the
+          information each venue publishes on its own website, the capacities,
+          the package and pricing documents, the features and the practical
+          details that actually matter when you're choosing where to marry, and
+          verify it before the venue is listed. No venue pays to be included. No
+          venue pays to rank higher. What you see is verified information, not
+          paid placement.
+        </p>
+        <p
+          style="font-family: var(--ff-body); font-size: 1.1rem; color: var(--text); line-height: 1.8;"
+        >
+          The Western Cape is, to my mind, the most beautiful corner of the world
+          to say your vows. My promise is a simple one: honest information, no
+          advertising, and no fees, just every venue worth knowing about,
+          gathered in one place.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-eyebrow">Planning Guides</div>
+    <h2 class="section-title">Advice Worth <em>Reading</em></h2>
+    <p
+      style="font-family: var(--ff-sans); font-size: 0.75rem; color: var(--muted); letter-spacing: 0.04em; margin-bottom: 3rem;"
+    >
+      Honest, local advice for planning your Western Cape wedding.
+    </p>
+
+    <div class="blog-grid">
+      {teaserPosts.map((post) => (
+        <a href={`/blog/${post.slug}`} class="blog-card" style="text-decoration: none;">
+          <img
+            class="blog-card-img"
+            src={post.heroImg}
+            alt={post.title}
+            loading="lazy"
+          />
+          <div class="blog-card-body">
+            <div class="blog-card-cat">{post.category}</div>
+            <div class="blog-card-title">{post.title}</div>
+            <div class="blog-card-summary">{post.summary}</div>
+          </div>
+          <div class="blog-card-footer">
+            <span>{post.date}</span>
+            <span class="blog-card-read">Read more →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div style="display: flex; justify-content: center; margin-top: 3rem;">
+      <a href="/blog" class="btn btn-primary" style="text-decoration: none;">
+        Read All Posts
+      </a>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,32 @@
+# Cape Vows robots.txt
+# Strategic goal: AI / GEO citation — we explicitly welcome AI crawlers.
+#
+# IMPORTANT: Cloudflare's "Managed robots.txt" / "Block AI Scrapers and Crawlers"
+# (AI Audit) feature can inject its own robots.txt at the edge and override this
+# file. After deploying, verify with:  curl https://capevows.co.za/robots.txt
+# If Disallow rules for AI bots still appear, disable that Cloudflare feature.
+
+# Standard search crawlers — full access
+User-agent: *
+Allow: /
+
+# AI citation crawlers we explicitly welcome (strategic GEO goal)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://capevows.co.za/sitemap.xml

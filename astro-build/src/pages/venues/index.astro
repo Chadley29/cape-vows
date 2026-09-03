@@ -1,0 +1,73 @@
+---
+import Base from '../../layouts/Base.astro';
+import { VENUES } from '../../data/venues.js';
+import VenuesApp from '../../components/VenuesApp.jsx';
+import {
+  PRICE_RANGES,
+  getGradient,
+  getAccent,
+  displayCapacity,
+  displayPrice,
+} from '../../data/constants.js';
+
+const title = 'Wedding Venues in the Western Cape | Cape Vows';
+const description = `Browse ${VENUES.length} hand-verified wedding venues across the Western Cape — Franschhoek, Stellenbosch, Cape Town, Constantia and the Overberg.`;
+const canonical = 'https://capevows.co.za/venues';
+
+const venuesJson = JSON.stringify(VENUES);
+---
+
+<Base title={title} description={description} canonical={canonical}>
+  <section style="padding-top: 3rem;">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow">The Directory</div>
+        <h1 class="section-title">Western Cape <em>Venues</em></h1>
+        <p class="section-desc">
+          {VENUES.length} hand-verified wedding venues across the Cape Winelands,
+          Constantia Valley, Cape Town City, the Atlantic Seaboard and the Overberg.
+        </p>
+      </div>
+    </div>
+
+    <div id="venues-app">
+      <script
+        type="application/json"
+        id="venues-data"
+        is:inline
+        set:html={venuesJson}
+      />
+      <VenuesApp client:load />
+    </div>
+
+    <noscript>
+      <div class="cards-grid">
+        {VENUES.map((v) => (
+          <a
+            href={`/venues/${v.slug}`}
+            class="card"
+            style={`--card-accent: ${getAccent(v.type)}; text-decoration: none;`}
+          >
+            <div class="card-banner" style={`background: ${getGradient(v.type)};`}>
+              <div class="card-banner-overlay"></div>
+              <span class="card-banner-badge">{v.type}</span>
+            </div>
+            <div class="card-body">
+              <div class="card-region">{v.region}</div>
+              <div class="card-title">{v.name}</div>
+              <div class="card-desc">{v.description}</div>
+              <div class="card-meta">
+                <span class="card-pill">👥 {displayCapacity(v.capacity)}</span>
+                <span class="card-pill green">✦ {v.highlight}</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span class="card-price">{displayPrice(v.price)}</span>
+              <span class="card-link">View Details →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </noscript>
+  </section>
+</Base>

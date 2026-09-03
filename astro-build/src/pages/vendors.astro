@@ -1,0 +1,89 @@
+---
+import Base from '../layouts/Base.astro';
+
+const title = 'Wedding Vendors in the Western Cape | Cape Vows';
+const description =
+  'Cape wedding photographers, florists, caterers and more — coming soon to Cape Vows.';
+const canonical = 'https://capevows.co.za/vendors';
+
+const categories = [
+  'Photography',
+  'Floristry',
+  'Catering',
+  'Coordination',
+  'Entertainment',
+  'Hair & Make-up',
+  'Décor & Hire',
+  'Cake & Desserts',
+];
+---
+
+<Base title={title} description={description} canonical={canonical}>
+  <meta slot="head" name="robots" content="noindex" />
+
+  <section style="padding-top: 3rem;">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow">Wedding Suppliers</div>
+        <h1 class="section-title">Cape <em>Vendors</em></h1>
+        <p class="section-desc">
+          Photographers, florists, caterers, planners and more, all hand-selected
+          for the Western Cape market.
+        </p>
+      </div>
+    </div>
+
+    <div
+      style="background: var(--cream2); border: 1px solid var(--border); border-radius: 8px; padding: 4rem 2.5rem; text-align: center; margin: 2rem 0;"
+    >
+      <div style="font-size: 2.5rem; margin-bottom: 1.25rem;">✦</div>
+      <div
+        style="font-family: var(--ff-sans); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem;"
+      >
+        Coming Soon
+      </div>
+      <h2
+        style="font-family: var(--ff-serif); font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--green); margin-bottom: 1rem; line-height: 1.2;"
+      >
+        Our Vendor Directory
+        <br />
+        <em>Is on Its Way</em>
+      </h2>
+      <p
+        style="font-family: var(--ff-body); font-size: 1.05rem; color: var(--muted); max-width: 480px; margin: 0 auto 2rem; line-height: 1.75;"
+      >
+        We're carefully curating the Western Cape's best photographers, florists,
+        caterers, planners and more. Check back soon.
+      </p>
+      <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+        {categories.map((cat) => (
+          <span
+            style="font-family: var(--ff-sans); font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; background: #fff; border: 1px solid var(--border); color: var(--muted); padding: 0.3rem 0.75rem; border-radius: 12px;"
+          >
+            {cat}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <div
+      style="background: var(--green); border-radius: 6px; padding: 2rem 2.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;"
+    >
+      <div>
+        <div
+          style="font-family: var(--ff-sans); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold2); margin-bottom: 0.5rem;"
+        >
+          Are you a wedding supplier?
+        </div>
+        <div
+          style="font-family: var(--ff-serif); font-size: 1.3rem; color: #fff; line-height: 1.2;"
+        >
+          Get listed when we launch <em>vendor profiles</em>
+        </div>
+      </div>
+      <a href="mailto:hello@capevows.co.za?subject=General%20Enquiry%20%E2%80%94%20Cape%20Vows" class="btn btn-primary">
+        Get in Touch
+      </a>
+    </div>
+  </section>
+</Base>
