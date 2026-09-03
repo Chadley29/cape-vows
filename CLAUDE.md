@@ -321,6 +321,32 @@ Factual, not promotional. AI search engines prefer to cite factual sources. Avoi
 
 ---
 
+## Social Media
+
+**Pinterest:** https://za.pinterest.com/0t84vkqdc2vm2cbzbuh7w1cjgtd0p3/
+
+- Board: "Western Cape Wedding Venues"
+- Strategy: keyword-first pin titles, 3 hashtags max, no em dashes, no exact venue counts
+- Domain verified via the `p:domain_verify` meta tag in `astro-build/src/layouts/Base.astro` (renders on every page). The copy in the legacy `index.html` is no longer deployed.
+- Posting cadence has lapsed, needs restart
+
+**Instagram:** https://www.instagram.com/capevows/ (@capevows)
+
+- Linktree: linktr.ee/capevows
+- Content pillars: Education 40%, Curation 30%, Opinion 20%, Behind the scenes 10%
+- Cadence target: 2x feed posts per week + 2-3 stories
+- Posts 1-8 designed; posting has lapsed, needs restart
+- Templates built in Illustrator (Template A cream carousel, Template B green statement post)
+
+**Content rules (both platforms):**
+
+- No em dashes
+- No exact venue counts (use "dozens" or similar, since the count can change and posts cannot be auto-updated)
+- SA English throughout
+- Never fabricate venue details
+
+---
+
 ## Fact-check status (source-verified against venue-supplied material)
 
 21 of 24 venues have been cross-checked against official PDFs/web content saved in `_local/venue-details/` (see below). **3 venues remain unverified — no source material available:** Hawksmoor House (site has a form-gated brochure, extraction failed), The Cellars-Hohenort (only a thin third-party booking widget exists), Belmond Mount Nelson (marketing copy only, no concrete facts). Treat any data for these three as unverified until sourced.
