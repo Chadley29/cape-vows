@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Favourites from '../components/Favourites.jsx';
+import GetListedForm from '../components/GetListedForm.jsx';
 import { VENUES } from '../data/venues.js';
 import { POSTS } from '../data/posts.js';
 import {
@@ -182,6 +183,22 @@ const canonical = 'https://capevows.co.za';
           gathered in one place.
         </p>
       </div>
+    </div>
+  </section>
+
+  <section>
+    <div
+      style="border-top: 1px solid var(--border); padding: 1.75rem 2.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; max-width: 1200px; margin: 0 auto;"
+    >
+      <div>
+        <div class="section-eyebrow" style="margin-bottom: 0.3rem;">
+          For Venue Owners &amp; Suppliers
+        </div>
+        <p style="font-family: var(--ff-body); font-size: 1rem; color: var(--muted); margin: 0;">
+          Get discovered by engaged couples planning their Cape wedding.
+        </p>
+      </div>
+      <GetListedForm client:visible />
     </div>
   </section>
 
