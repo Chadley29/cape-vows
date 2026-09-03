@@ -1,4 +1,5 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  a { text-decoration: none; color: inherit; }
   :root {
     --cream:    #FAF7F2;
     --cream2:   #F3EDE3;
