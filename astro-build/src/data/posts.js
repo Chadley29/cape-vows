@@ -380,8 +380,8 @@ export const POSTS = [
     summary:
       "Real pricing tiers for wedding venues in Stellenbosch and the Cape Winelands in 2026, from budget-friendly farms to luxury wine estates.",
     heroImg:
-      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80",
-    heroCredit: "Photo: Tobias Tullius / Unsplash",
+      "https://images.unsplash.com/photo-1640029415046-27115baeb07d?w=1200&q=80",
+    heroCredit: "Photo: Jason Leung / Unsplash",
     metaDesc:
       "Real pricing tiers for wedding venues in Stellenbosch and the Cape Winelands in 2026: from budget-friendly farms to luxury wine estates, with honest capacity and cost guidance.",
     intro:
