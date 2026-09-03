@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 const STORAGE_KEY = "cv_cookies";
+const LEGACY_KEY = "cv_cookies_accepted";
 
 // Mirrors the track() helper in App.jsx: fire-and-forget GA4, no import.
 function track(event, params = {}) {
@@ -13,13 +14,24 @@ export default function CookieBanner() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    let value = null;
     try {
-      value = localStorage.getItem(STORAGE_KEY);
+      const value = localStorage.getItem(STORAGE_KEY);
+      if (value === "accepted" || value === "declined") {
+        setShow(false);
+        return;
+      }
+      // Migrate the Vite app's key forward so prior consent is not re-prompted.
+      if (localStorage.getItem(LEGACY_KEY) === "true") {
+        localStorage.setItem(STORAGE_KEY, "accepted");
+        setShow(false);
+        return;
+      }
+      setShow(true);
     } catch {
-      /* storage unavailable (private mode, blocked cookies) */
+      // Storage unavailable (private mode, blocked cookies): show the banner
+      // rather than silently assuming consent.
+      setShow(true);
     }
-    setShow(value !== "accepted" && value !== "declined");
   }, []);
 
   function persist(value) {
