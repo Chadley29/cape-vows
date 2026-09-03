@@ -31,7 +31,11 @@ export default function FaqAccordion({ faqs = [] }) {
               />
             </svg>
           </button>
-          {openIndex === i && <div className="faq-a">{faq.a}</div>}
+          {openIndex === i && (
+            <div className="faq-a" style={{ color: "var(--muted)" }}>
+              {faq.a}
+            </div>
+          )}
         </div>
       ))}
     </div>
