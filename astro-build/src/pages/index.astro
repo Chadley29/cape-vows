@@ -16,6 +16,24 @@ const featured = getFeaturedVenues(VENUES);
 const regions = [...new Set(VENUES.map((v) => v.region))];
 const teaserPosts = POSTS.slice(0, 3);
 
+const steps = [
+  {
+    step: 'Step 1',
+    heading: 'Browse & Filter',
+    body: 'Every venue has been personally researched. Filter by region, budget, capacity, or venue type to narrow down what actually fits your wedding.',
+  },
+  {
+    step: 'Step 2',
+    heading: 'Read Honest Descriptions',
+    body: 'No paid placements, no inflated claims. Each listing shows real details: capacity, pricing tier, features, and what makes the venue worth considering.',
+  },
+  {
+    step: 'Step 3',
+    heading: 'Enquire Directly',
+    body: 'Found a venue you like? Submit an enquiry straight from the listing. No booking fees, no commissions. Just a direct introduction to the venue.',
+  },
+];
+
 const title = 'Cape Vows — Wedding Venues & Vendors in the Western Cape';
 const description =
   '24 hand-verified wedding venues across the Western Cape — Franschhoek, Stellenbosch, Cape Town and the Overberg. No ads, no fees. Find your Cape venue.';
@@ -128,6 +146,36 @@ const canonical = 'https://capevows.co.za';
         >
           {r}
         </a>
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <div class="section-eyebrow">How It Works</div>
+    <h2 class="section-title">Simple. <em>Honest.</em> Free.</h2>
+    <div
+      style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; margin-top: 2.5rem;"
+    >
+      {steps.map((s) => (
+        <div
+          style="background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 1.75rem; box-shadow: 0 2px 12px var(--shadow);"
+        >
+          <div
+            style="font-family: var(--ff-sans); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);"
+          >
+            {s.step}
+          </div>
+          <h3
+            style="font-family: var(--ff-serif); font-size: 1.2rem; color: var(--green); margin: 0.5rem 0;"
+          >
+            {s.heading}
+          </h3>
+          <p
+            style="font-family: var(--ff-body); font-size: 1rem; color: var(--muted); line-height: 1.7;"
+          >
+            {s.body}
+          </p>
+        </div>
       ))}
     </div>
   </section>
