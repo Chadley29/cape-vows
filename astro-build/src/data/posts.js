@@ -371,4 +371,93 @@ export const POSTS = [
       },
     },
   },
+  {
+    slug: "wedding-venue-prices-stellenbosch-winelands",
+    title:
+      "Wedding Venue Prices in Stellenbosch and the Winelands: What to Budget in 2026",
+    category: "Budget Planning",
+    date: "September 2026",
+    summary:
+      "Real pricing tiers for wedding venues in Stellenbosch and the Cape Winelands in 2026, from budget-friendly farms to luxury wine estates.",
+    heroImg:
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80",
+    heroCredit: "Photo: Tobias Tullius / Unsplash",
+    metaDesc:
+      "Real pricing tiers for wedding venues in Stellenbosch and the Cape Winelands in 2026: from budget-friendly farms to luxury wine estates, with honest capacity and cost guidance.",
+    intro:
+      "Wedding venues in Stellenbosch and the broader Cape Winelands span a wide range, from mid-range farm estates around R50,000 to flagship wine estates at R300,000 and above. The region is South Africa's most sought-after wedding destination, which means both genuine value and genuine price inflation exist side by side. This guide breaks down what you actually get at each price tier, using verified venues from the Cape Vows directory.",
+    sections: [
+      {
+        h2: "Why Winelands Pricing Is Confusing",
+        venueLinks: [
+          { name: "Nooitgedacht Wine Estate", slug: "nooitgedacht-wine-estate" },
+        ],
+        paras: [
+          "Most venues do not publish their pricing online. What you find when you search is either outdated blog posts quoting 2021 figures, or venue websites that tell you to enquire for a personalised quote. Neither helps you plan a budget.",
+          "The honest answer: Winelands venue costs depend on four variables: guest count, day of the week, time of year, and what is included in the venue fee. A Saturday in December at a flagship estate is a fundamentally different product from a Tuesday in July at a working farm. Both can be wonderful. They are not the same price.",
+          "Some of the region's best-known estates sit outside published tiers entirely. Nooitgedacht Wine Estate near Koelenhof quotes on enquiry rather than advertising a package price, which is common for venues that handle a wide range of event sizes. Its capacity runs to 300 guests, so the same venue can produce very different quotes depending on what you are planning.",
+        ],
+      },
+      {
+        h2: "Under R50,000: What Is Realistic",
+        venueLinks: [
+          { name: "La Petite Ferme", slug: "la-petite-ferme" },
+          { name: "Elgin Vintners", slug: "elgin-vintners" },
+        ],
+        paras: [
+          "Cape Vows does not currently list a single venue in the under-R50,000 tier, and that is deliberate. Every venue in the directory has been checked against what the venue itself publishes, and none of the Winelands estates we have verified advertise a package that lands reliably below that figure.",
+          "That does not mean sub-R50,000 Winelands weddings are impossible. It means the venues that make them possible are usually private farms, community halls, or family properties that do not market themselves as wedding venues at all. If your budget is genuinely under R50,000, expect to build the day yourself rather than book a package.",
+          "Within the directory, the closest equivalents are the smallest-capacity mid-range venues. La Petite Ferme in Franschhoek caps at 45 guests and Elgin Vintners at 50. A small guest count is the single most effective lever on total spend, because catering and bar costs scale per head.",
+        ],
+      },
+      {
+        h2: "Mid-Range: R50,000 to R150,000",
+        venueLinks: [
+          { name: "Eikenhof Estate", slug: "eikenhof-estate" },
+          { name: "Lanzerac Wine Estate", slug: "lanzerac-wine-estate" },
+        ],
+        paras: [
+          "This is where most Cape Winelands weddings actually land, and it is the deepest tier in the directory with eight verified venues. The mid-range tier gives you access to established wine estates with mountain views, professional venue coordinators, and proper facilities without the exclusivity premium of the top-tier estates.",
+          "Eikenhof Estate on Bottelary Road in Stellenbosch offers exclusive use of a working farm with ceremony and reception spaces, accommodation on site, and capacity for up to 180 guests. Lanzerac Wine Estate, closer to Stellenbosch town, is a five-star hotel and working wine estate with Cape Dutch architecture and mountain backdrops, seating up to 250. Both sit in this tier despite very different levels of polish, which is a useful reminder that the tier describes price rather than prestige.",
+          "The mid-range tier is also where flexibility pays off most. Weekday and off-peak dates consistently come in lower; ask each venue directly for seasonal rate differences.",
+        ],
+      },
+      {
+        h2: "Premium: R150,000 to R300,000",
+        venueLinks: [
+          { name: "Zorgvliet Wines", slug: "zorgvliet-wines" },
+          { name: "La Paris Estate", slug: "la-paris-estate" },
+        ],
+        paras: [
+          "At the premium tier, the venue itself becomes a significant part of what guests experience. You are paying for the full estate atmosphere: often exclusive use, on-site accommodation for the wedding party, award-winning wines poured at the reception, and a level of service infrastructure that removes most of the logistical burden from the couple.",
+          "The directory currently holds two verified premium venues, both in the Winelands. Zorgvliet Wines in the Banhoek Valley offers dramatic mountain scenery and an intimate feel, seating up to 140. La Paris Estate in the Franschhoek Valley pairs sweeping Wemmershoek Valley views with manicured grounds, and quotes capacity on enquiry rather than publishing a single figure.",
+        ],
+      },
+      {
+        h2: "Luxury: R300,000 and Above",
+        venueLinks: [
+          { name: "Babylonstoren", slug: "babylonstoren" },
+          { name: "Boschendal Wine Estate", slug: "boschendal-wine-estate" },
+          { name: "Cavalli Estate", slug: "cavalli-estate" },
+        ],
+        paras: [
+          "Babylonstoren in the Franschhoek Valley and Boschendal Wine Estate are the reference points at this tier. Both are internationally recognised. Both have been photographed extensively. Both come with a level of operational excellence, from farm-to-table catering to heritage accommodation, that justifies the price for couples for whom the venue is the centrepiece of the day.",
+          "At this level, you are not just booking a space. You are booking an experience that the venue has refined over years. The trade-off is less flexibility: peak dates book years in advance, minimum spends apply, and the venue's vision of a wedding is likely more structured than at smaller estates.",
+          "Worth noting on capacity: Babylonstoren seats up to 100 and Boschendal up to 200, so the luxury tier is not automatically the large-wedding tier. Cavalli Estate, in the mid-range tier, seats up to 400.",
+        ],
+      },
+      {
+        h2: "What the Price Does Not Include",
+        paras: [
+          "Regardless of tier, most Winelands venue fees cover the space and basic furniture only. Budget separately for: catering (R350 to R800 per head depending on the menu), bar and wine (often a separate package or corkage fee), decor and flowers, a Marriage Officer (South African law requires a registered Marriage Officer to solemnise the ceremony), photography, and transport for guests.",
+          "The venue fee is typically 20 to 35 percent of total wedding spend. Planning on three to five times the venue fee as your total budget is a reasonable starting point.",
+        ],
+      },
+    ],
+    cta: {
+      label: "Browse Mid-Range Winelands Venues",
+      path: "/venues",
+      filters: { price: "Mid-Range (R50–150k)" },
+    },
+  },
 ];
