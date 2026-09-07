@@ -460,4 +460,75 @@ export const POSTS = [
       filters: { price: "Mid-Range (R50–150k)" },
     },
   },
+  {
+    slug: "coastal-wedding-venues-cape-peninsula",
+    title:
+      "Coastal Wedding Venues on the Cape Peninsula: Ocean, Mountain and Open Sky",
+    category: "Venue Guides",
+    date: "September 2026",
+    summary:
+      "Coastal wedding venues on the Cape Peninsula offer dramatic ocean views, mountain backdrops and Atlantic light, from the Atlantic Seaboard to Constantia Valley.",
+    heroImg:
+      "https://images.unsplash.com/photo-1730196729929-be3a6e95ccfc?w=1200&q=80",
+    heroCredit: "Photo: Martijn Vonk / Unsplash",
+    metaDesc:
+      "Coastal wedding venues on the Cape Peninsula offer dramatic ocean views, mountain backdrops and Atlantic light. Here are the verified options from Cape Point to the Atlantic Seaboard.",
+    intro:
+      "The Cape Peninsula offers something no Winelands estate can replicate: the Atlantic Ocean on one side, the Indian Ocean on the other, and Table Mountain as a backdrop to both. Coastal weddings in this part of the Western Cape trade vineyard rows for cliff edges, fynbos, and the particular quality of light that comes off the sea in the late afternoon. This guide covers the verified coastal and near-coastal venues in the Cape Vows directory, with honest notes on what each actually delivers.",
+    sections: [
+      {
+        h2: "What Makes a Coastal Cape Wedding Different",
+        paras: [
+          "The Cape Peninsula is not a gentle coastline. The Atlantic Seaboard is dramatic: rocky, windswept, and strikingly beautiful in a way that photographs do not fully capture. That drama is exactly what draws couples to it, and it comes with practical realities worth understanding before you book.",
+          "The Cape Doctor, the southeasterly wind that sweeps through between November and March, is the single most important planning factor for outdoor coastal ceremonies. It is not a gentle breeze. Atlantic Seaboard venues that offer outdoor ceremonies on peak summer dates will either have a solid wind break, a sheltered courtyard, or a Plan B. Ask which one before signing anything.",
+          "The other consideration is distance from Cape Town. Chapman's Peak, Cape Point, and the southern peninsula venues are 45 to 60 minutes from the city centre, longer with summer traffic. Guest transport is less optional here than at a Stellenbosch venue 40 minutes out.",
+        ],
+      },
+      {
+        h2: "Atlantic Seaboard: Drama at Altitude",
+        venueLinks: [
+          { name: "The 12 Apostles Hotel", slug: "the-12-apostles-hotel" },
+          { name: "Cape Point Vineyards", slug: "cape-point-vineyards" },
+        ],
+        paras: [
+          "The Atlantic Seaboard runs from Sea Point down through Camps Bay, Llandudno, and Hout Bay to Chapman's Peak. The aesthetic is cliffs, boulders, fynbos, and ocean horizon.",
+          "The 12 Apostles Hotel and Spa sits on this coastline between Camps Bay and Hout Bay, built into the mountainside with the Atlantic below. It is one of the few venues on the Peninsula that combines five-star hotel infrastructure with a genuinely coastal setting: ceremony spaces with ocean views, on-site accommodation for the wedding party, and the kind of operational reliability that comes from a hotel that has been running weddings for years. Capacity is available on enquiry.",
+          "Cape Point Vineyards in Noordhoek offers a different version of the Atlantic proposition: a working vineyard on the slopes above the valley floor, with Chapman's Peak and the Noordhoek Valley as the backdrop. It seats up to 200 guests and sits in the mid-range tier, a strong value proposition for the setting.",
+        ],
+      },
+      {
+        h2: "The Southern Peninsula: Fynbos and Open Sky",
+        paras: [
+          "Further south, the Peninsula opens up into the Cape of Good Hope Nature Reserve and the fynbos-covered hills above Simon's Town and Fish Hoek. The character here is wilder and less manicured than the Atlantic Seaboard: fewer hotels, more farm-style settings, more sky.",
+          "This is genuinely beautiful terrain for a wedding, but venue options in the directory are limited in this specific area. If your heart is set on a southern Peninsula location, the practical approach is to combine a venue search with a site visit. Several private properties in this area do host weddings on an informal basis without marketing themselves as venues.",
+        ],
+      },
+      {
+        h2: "Constantia Valley: Coastal Adjacent",
+        venueLinks: [
+          { name: "The Cellars-Hohenort", slug: "the-cellars-hohenort" },
+          { name: "Steenberg Farm", slug: "steenberg-farm" },
+          { name: "Groot Constantia", slug: "groot-constantia" },
+        ],
+        paras: [
+          "Constantia sits at the foot of the Constantiaberg, less than 20 minutes from the Atlantic and with its own strong aesthetic case: old-money green, mature oak trees, and vineyards that have been producing wine since the 17th century.",
+          "It is not strictly coastal, but couples who want the Peninsula location without the full wind exposure of the Atlantic Seaboard often land here. The Cellars-Hohenort offers two restored Cape Dutch manor houses set within manicured gardens, one of the most photographed settings in the Cape, with a level of service that matches its reputation. Steenberg Farm in Tokai combines a 17th-century wine estate with a boutique hotel and golf course, with more flexibility on capacity and configuration than many of the smaller Peninsula venues.",
+          "Groot Constantia is the oldest wine estate in South Africa, established in 1685. The historic cellar and manor house grounds offer a setting with genuine weight. This is not a venue that needs decoration to make an impression.",
+        ],
+      },
+      {
+        h2: "Practical Notes for Coastal Weddings",
+        paras: [
+          "Sunset timing matters more on the Atlantic than anywhere else in the Cape. The sun sets over the ocean on the Atlantic Seaboard, which produces extraordinary golden-hour light from February through April and again in September and October. December and January sunsets are later and often hazier.",
+          "Guest transport from Cape Town to southern Peninsula venues is a genuine logistical item, not an afterthought. Budget for a shuttle rather than assuming guests will self-drive after a reception.",
+          "The wind plan is non-negotiable. Any outdoor ceremony on the Atlantic Seaboard between November and March needs a fallback space confirmed in the contract, not offered verbally on the day.",
+        ],
+      },
+    ],
+    cta: {
+      label: "Browse Atlantic Seaboard Venues",
+      path: "/venues",
+      filters: { region: "Atlantic Seaboard" },
+    },
+  },
 ];
