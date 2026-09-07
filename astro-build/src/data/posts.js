@@ -469,7 +469,7 @@ export const POSTS = [
     summary:
       "Coastal wedding venues on the Cape Peninsula offer dramatic ocean views, mountain backdrops and Atlantic light, from the Atlantic Seaboard to Constantia Valley.",
     heroImg:
-      "https://images.unsplash.com/photo-1730196729929-be3a6e95ccfc?w=1200&q=80",
+      "https://images.unsplash.com/photo-1730234349607-bad0cecb42e1?w=1200&q=80",
     heroCredit: "Photo: Martijn Vonk / Unsplash",
     metaDesc:
       "Coastal wedding venues on the Cape Peninsula offer dramatic ocean views, mountain backdrops and Atlantic light. Here are the verified options from Cape Point to the Atlantic Seaboard.",
