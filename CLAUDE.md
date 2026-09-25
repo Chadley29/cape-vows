@@ -307,7 +307,7 @@ Factual, not promotional. AI search engines prefer to cite factual sources. Avoi
 - Hero copy and section titles use `<em>` for the highlighted word (renders in gold italic)
 - Marriage Act 25 of 1961 and Civil Union Act 17 of 2006 are the legal sources for the marriage officer blog post — facts here have been verified, do not regenerate from memory
 
-### Blog posts (8, as of this update)
+### Blog posts (9, as of this update)
 
 | Slug                                            | Category          | Notes                                                                                                                                                                                                          |
 | ----------------------------------------------- | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -319,6 +319,7 @@ Factual, not promotional. AI search engines prefer to cite factual sources. Avoi
 | `wedding-venue-bottelary-road-stellenbosch`     | Venue Guides      | New. Anchored on Eikenhof Estate (the only verified venue in that specific area) with an honest note about not padding the list; secondary mention of Nooitgedacht for the broader Koelenhof/Stellenbosch area |
 | `wedding-venue-prices-stellenbosch-winelands`   | Budget Planning   | New. Pricing-tier guide. Venue tier claims verified against `venues.js`: Lanzerac and Eikenhof are Mid-Range, Zorgvliet and La Paris are Premium, Babylonstoren and Boschendal are Luxury. The "under R50,000" section names no venue, because the directory has zero Budget-tier venues.                        |
 | `coastal-wedding-venues-cape-peninsula`         | Venue Guides      | New. Peninsula coastal guide. Links The 12 Apostles, Cape Point Vineyards, The Cellars-Hohenort, Steenberg Farm, Groot Constantia. The "Southern Peninsula" section names no venue, because the directory has none in that area. Note: The Cellars-Hohenort and Steenberg Farm claims are descriptive only, both are on the unverified/stale-source list.                        |
+| `wedding-venues-stellenbosch-town`              | Venue Guides      | New. Disambiguates Stellenbosch town from the wider "Winelands" region tag. Links the 4 venues genuinely in/near Stellenbosch by address: Lanzerac, Zorgvliet, Eikenhof, Nooitgedacht. Closing section links to the Franschhoek guide via a raw HTML link in a `notice` field, not `venueLinks` (which hardcodes `/venues/` and would break on a blog-post slug).                        |
 
 ---
 

@@ -531,4 +531,72 @@ export const POSTS = [
       filters: { region: "Atlantic Seaboard" },
     },
   },
+  {
+    slug: "wedding-venues-stellenbosch-town",
+    title: "Wedding Venues in Stellenbosch: The Verified Options in Town",
+    category: "Venue Guides",
+    date: "September 2026",
+    summary:
+      "Wedding venues genuinely in Stellenbosch town, not the wider Winelands: Lanzerac, Zorgvliet, Eikenhof and Nooitgedacht, verified by address.",
+    heroImg:
+      "https://images.unsplash.com/photo-1560493676-04071c5f467b?w=1200&q=80",
+    heroCredit: "Photo: Unsplash",
+    metaDesc:
+      "Wedding venues genuinely in Stellenbosch, not the wider Winelands: Lanzerac, Zorgvliet, Eikenhof and Nooitgedacht, verified by address, with honest notes on what's actually in town versus a short drive away.",
+    intro:
+      "Wedding venues in Stellenbosch is often used loosely to mean the whole Cape Winelands, including Franschhoek, Paarl and Somerset West, all a short drive from Stellenbosch town but not actually in it. If you want a venue with a genuine Stellenbosch address, four verified options in the Cape Vows directory qualify: Lanzerac Wine Estate, Zorgvliet Wines, Eikenhof Estate and Nooitgedacht Wine Estate. This guide covers what each offers, and where to look if your search is really the wider Winelands region.",
+    sections: [
+      {
+        h2: "What Counts as Stellenbosch",
+        paras: [
+          "Stellenbosch is a specific town, not a synonym for the whole Winelands. Franschhoek, Paarl, and Somerset West are separate towns, each roughly 20 to 40 minutes from Stellenbosch by car, each with its own wedding-venue scene. If your priority is Stellenbosch itself, four venues in our directory have a Stellenbosch address. If your priority is broadly somewhere in the Winelands, the options widen considerably, and it's worth deciding which matters more before you start comparing venues.",
+        ],
+      },
+      {
+        h2: "Lanzerac Wine Estate",
+        venueLinks: [
+          { name: "Lanzerac Wine Estate", slug: "lanzerac-wine-estate" },
+        ],
+        paras: [
+          "Lanzerac Wine Estate sits at 1 Lanzerac Road, inside Stellenbosch town itself, at the base of the Jonkershoek mountains. It's a five-star hotel and working wine estate with Cape Dutch architecture, on-site accommodation, and seating for up to 250 guests. It sits in the Mid-Range price tier, which makes it one of the more accessible five-star settings in the area. Being in-town means shorter transfers for guests staying in Stellenbosch itself, a genuine convenience over venues further out.",
+        ],
+      },
+      {
+        h2: "Zorgvliet Wines",
+        venueLinks: [{ name: "Zorgvliet Wines", slug: "zorgvliet-wines" }],
+        paras: [
+          "Zorgvliet Wines is in the Banhoek Valley, part of greater Stellenbosch, with dramatic mountain scenery and a more intimate feel than Lanzerac's scale. It seats up to 140 guests and sits in the Premium tier. The Banhoek Valley setting means a slightly more rural, secluded atmosphere while still being within Stellenbosch's boundaries.",
+        ],
+      },
+      {
+        h2: "Eikenhof Estate",
+        venueLinks: [{ name: "Eikenhof Estate", slug: "eikenhof-estate" }],
+        paras: [
+          "Eikenhof Estate is on Fischers Road in the Bottelary Hills, on Stellenbosch farmland. It's a working farm offering exclusive use, on-site accommodation, and capacity for up to 180 guests, in the Mid-Range tier. This is the venue behind our most detailed Bottelary Road guide, if you want a closer look at what it and the surrounding area offer.",
+        ],
+      },
+      {
+        h2: "Nooitgedacht Wine Estate",
+        venueLinks: [
+          {
+            name: "Nooitgedacht Wine Estate",
+            slug: "nooitgedacht-wine-estate",
+          },
+        ],
+        paras: [
+          "Nooitgedacht Wine Estate is on the R304, Koelenhof Road, on the northern edge of Stellenbosch. It's a large working estate with capacity up to 300 guests and quotes on enquiry rather than a published price tier, which is worth knowing before you reach out. Its scale makes it a strong option for larger guest lists within Stellenbosch's boundaries.",
+        ],
+      },
+      {
+        h2: "If You Meant the Wider Winelands",
+        notice:
+          'Most of what people call Winelands weddings actually happens in Franschhoek, not Stellenbosch. If four venues feels limiting, Franschhoek is a 25 minute drive away and has the deepest concentration of wine estate venues in the Cape Vows directory, across every price tier from Mid-Range to Luxury. Our <a href="/blog/best-wine-estate-venues-franschhoek" class="blog-venue-link">Franschhoek guide</a> covers those in detail.',
+      },
+    ],
+    cta: {
+      label: "Browse All Cape Winelands Venues",
+      path: "/venues",
+      filters: { region: "Cape Winelands" },
+    },
+  },
 ];
