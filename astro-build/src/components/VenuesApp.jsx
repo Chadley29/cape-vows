@@ -94,8 +94,6 @@ export default function VenuesApp() {
     setMinGuests(0);
   }
 
-  if (!ready) return null;
-
   return (
     <>
       <div className="filter-bar">
@@ -106,6 +104,7 @@ export default function VenuesApp() {
             placeholder="Search by name or keyword…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
+            disabled={!ready}
           />
         </div>
 
@@ -122,6 +121,7 @@ export default function VenuesApp() {
                   value: e.target.value,
                 });
             }}
+            disabled={!ready}
           >
             {availableRegions.map((r) => (
               <option key={r}>{r}</option>
@@ -142,6 +142,7 @@ export default function VenuesApp() {
                   value: e.target.value,
                 });
             }}
+            disabled={!ready}
           >
             {availableTypes.map((t) => (
               <option key={t}>{t}</option>
@@ -162,6 +163,7 @@ export default function VenuesApp() {
                   value: e.target.value,
                 });
             }}
+            disabled={!ready}
           >
             {availablePrices.map((p) => (
               <option key={p}>{p}</option>
@@ -187,6 +189,7 @@ export default function VenuesApp() {
               if (v > 0)
                 track("filter_used", { filter_type: "min_guests", value: v });
             }}
+            disabled={!ready}
           />
           <div
             style={{
@@ -204,65 +207,74 @@ export default function VenuesApp() {
           </div>
         </div>
 
-        <button className="filter-clear" type="button" onClick={clearAll}>
+        <button
+          className="filter-clear"
+          type="button"
+          onClick={clearAll}
+          disabled={!ready}
+        >
           Clear All
         </button>
       </div>
 
-      <div className="flex-between" style={{ marginBottom: "1.5rem" }}>
-        <span className="results-count">
-          {sorted.length} venue{sorted.length !== 1 ? "s" : ""} found
-        </span>
-      </div>
+      {ready && (
+        <>
+          <div className="flex-between" style={{ marginBottom: "1.5rem" }}>
+            <span className="results-count">
+              {sorted.length} venue{sorted.length !== 1 ? "s" : ""} found
+            </span>
+          </div>
 
-      {sorted.length === 0 ? (
-        <div className="empty">
-          <div className="empty-icon">🌿</div>
-          <div className="empty-title">No venues match your filters</div>
-          <div className="empty-sub">Try broadening your search criteria</div>
-        </div>
-      ) : (
-        <div className="cards-grid">
-          {sorted.map((v) => (
-            <div
-              className="card"
-              key={v.slug}
-              style={{ "--card-accent": getAccent(v.type), position: "relative" }}
-            >
-              <div
-                className="card-banner"
-                style={{ background: getGradient(v.type) }}
-              >
-                <div className="card-banner-overlay" />
-                <span className="card-banner-badge">{v.type}</span>
-                <Favourites slug={v.slug} />
-              </div>
-              <a
-                href={`/venues/${v.slug}`}
-                style={{ textDecoration: "none", color: "inherit", display: "block" }}
-                onClick={() =>
-                  track("venue_card_click", { venue_name: v.name })
-                }
-              >
-                <div className="card-body">
-                  <div className="card-region">{v.region}</div>
-                  <div className="card-title">{v.name}</div>
-                  <div className="card-desc">{v.description}</div>
-                  <div className="card-meta">
-                    <span className="card-pill">
-                      👥 {displayCapacity(v.capacity)}
-                    </span>
-                    <span className="card-pill green">✦ {v.highlight}</span>
-                  </div>
-                </div>
-                <div className="card-footer">
-                  <span className="card-price">{displayPrice(v.price)}</span>
-                  <span className="card-link">View Details →</span>
-                </div>
-              </a>
+          {sorted.length === 0 ? (
+            <div className="empty">
+              <div className="empty-icon">🌿</div>
+              <div className="empty-title">No venues match your filters</div>
+              <div className="empty-sub">Try broadening your search criteria</div>
             </div>
-          ))}
-        </div>
+          ) : (
+            <div className="cards-grid">
+              {sorted.map((v) => (
+                <div
+                  className="card"
+                  key={v.slug}
+                  style={{ "--card-accent": getAccent(v.type), position: "relative" }}
+                >
+                  <div
+                    className="card-banner"
+                    style={{ background: getGradient(v.type) }}
+                  >
+                    <div className="card-banner-overlay" />
+                    <span className="card-banner-badge">{v.type}</span>
+                    <Favourites slug={v.slug} />
+                  </div>
+                  <a
+                    href={`/venues/${v.slug}`}
+                    style={{ textDecoration: "none", color: "inherit", display: "block" }}
+                    onClick={() =>
+                      track("venue_card_click", { venue_name: v.name })
+                    }
+                  >
+                    <div className="card-body">
+                      <div className="card-region">{v.region}</div>
+                      <div className="card-title">{v.name}</div>
+                      <div className="card-desc">{v.description}</div>
+                      <div className="card-meta">
+                        <span className="card-pill">
+                          👥 {displayCapacity(v.capacity)}
+                        </span>
+                        <span className="card-pill green">✦ {v.highlight}</span>
+                      </div>
+                    </div>
+                    <div className="card-footer">
+                      <span className="card-price">{displayPrice(v.price)}</span>
+                      <span className="card-link">View Details →</span>
+                    </div>
+                  </a>
+                </div>
+              ))}
+            </div>
+          )}
+        </>
       )}
     </>
   );
