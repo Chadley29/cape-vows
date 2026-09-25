@@ -31,11 +31,12 @@ export default function FaqAccordion({ faqs = [] }) {
               />
             </svg>
           </button>
-          {openIndex === i && (
-            <div className="faq-a" style={{ color: "var(--muted)" }}>
-              {faq.a}
-            </div>
-          )}
+          <div
+            className={`faq-a${openIndex === i ? " open" : ""}`}
+            style={{ color: "var(--muted)" }}
+          >
+            {faq.a}
+          </div>
         </div>
       ))}
     </div>

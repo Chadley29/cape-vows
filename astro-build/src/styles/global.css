@@ -154,7 +154,8 @@
   .faq-q:hover { color: var(--gold); }
   .faq-chevron { flex-shrink: 0; transition: transform 0.25s; color: var(--gold); }
   .faq-chevron.open { transform: rotate(180deg); }
-  .faq-a { font-family: var(--ff-body); font-size: 0.97rem; color: var(--muted); line-height: 1.7; padding-bottom: 0.9rem; }
+  .faq-a { font-family: var(--ff-body); font-size: 0.97rem; color: var(--muted); line-height: 1.7; max-height: 0; overflow: hidden; padding-bottom: 0; transition: max-height 0.3s ease, padding-bottom 0.3s ease; }
+  .faq-a.open { max-height: 600px; padding-bottom: 0.9rem; }
 
   .saved-page { max-width: 1200px; margin: 0 auto; padding: 3rem 2.5rem 5rem; }
   .saved-empty { text-align: center; padding: 5rem 2rem; }
