@@ -97,7 +97,7 @@ export const POSTS = [
           {
             title: "Nooitgedacht Wine Estate (Stellenbosch)",
             slug: "nooitgedacht-wine-estate",
-            desc: "A Mid-Range wine estate with genuine Cape Dutch charm, rustic barn spaces, and a relaxed atmosphere that keeps décor costs down. The setting does much of the work. Located on the R304 in Koelenhof, Stellenbosch.",
+            desc: "A wine estate with genuine Cape Dutch charm, rustic barn spaces, and a relaxed atmosphere that keeps décor costs down, with pricing available on enquiry. The setting does much of the work. Located on the R304 in Koelenhof, Stellenbosch.",
           },
           {
             title: "Eikenhof Estate (Stellenbosch / Bottelary Hills)",
@@ -324,7 +324,7 @@ export const POSTS = [
         h2: "Eikenhof Estate: The Hand-Verified Option on Fischers Road",
         venueLinks: [{ name: "Eikenhof Estate", slug: "eikenhof-estate" }],
         paras: [
-          "Eikenhof Estate is a boutique wine and olive farm tucked into the Bottelary Hills, offering an exclusive-use setting for up to 80 guests. It's a mid-range venue (roughly R50k to R150k), which makes it one of the more accessible options in the greater Stellenbosch area without sacrificing the farm-estate atmosphere couples want.",
+          "Eikenhof Estate is a boutique wine and olive farm tucked into the Bottelary Hills, offering an exclusive-use setting for up to 180 guests. It's a mid-range venue (roughly R50k to R150k), which makes it one of the more accessible options in the greater Stellenbosch area without sacrificing the farm-estate atmosphere couples want.",
           "What sets it apart in this specific pocket of the Winelands: characterful, unpretentious spaces rather than a grand manor-house production, rolling Bottelary Hills views without the premium price tag of more famous addresses, and a genuinely warm, personal hosting style. This is a smaller, working farm where you deal directly with people who know the property, not a corporate events team.",
           "If Bottelary Road or the Bottelary Hills is the area you've set your heart on, Eikenhof is currently the one venue in our hand-verified directory in this exact location.",
         ],

@@ -21,3 +21,12 @@ yarn-error.log*
 
 # Local-only reference material — see /_local/README.md
 /_local/
+
+# Claude Code agent coordination (not project content)
+.agents/
+.claude/worktrees/
+
+# Audit raw data dumps (large, disposable API responses)
+audits/*/_*.json
+audits/*/_*.err
+audits/*/_*.txt
