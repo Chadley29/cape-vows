@@ -301,7 +301,7 @@ Factual, not promotional. AI search engines prefer to cite factual sources. Avoi
 ## Content rules
 
 - Blog posts may only reference the 24 venues in `VENUES[]` — never fabricate venues. If a search-demand area only has one verified venue nearby (e.g. Bottelary Road → Eikenhof Estate only), write an honest single-venue-anchored piece rather than padding with unlisted venues.
-- **No em dashes anywhere in site content** (venue descriptions, blog posts, UI copy). Rewrite using a full stop, colon, comma, or restructured sentence depending on context — never a blanket find-replace.
+- **No em dashes anywhere in site content** (venue descriptions, blog posts, UI copy). Rewrite using a full stop, colon, comma, or restructured sentence depending on context — never a blanket find-replace. This applies to body prose (venue descriptions, blog paragraphs, UI copy, meta descriptions). The em dash used as a title separator in venue page titles and the site tagline is an intentional exemption; see the Answer-first principle section.
 - **No exact venue count in copy that can't be kept in sync automatically** (see "Venue count — dynamic, not hardcoded" above).
 - All blog images are sourced from Unsplash with photographer credit rendered below the hero
 - Hero copy and section titles use `<em>` for the highlighted word (renders in gold italic)
@@ -397,6 +397,7 @@ Factual, not promotional. AI search engines prefer to cite factual sources. Avoi
 2. Confirm La Paris Estate's actual full capacity range directly with the venue (currently "Contact venue" pending this)
 3. If the venue count ever changes, two hardcoded `24`s need manual updating, both in `astro-build/src/layouts/Base.astro`: line 7 (fallback meta description) and line 81 (WebSite JSON-LD description). Everything else is already dynamic via `VENUES.length` — the homepage hero subtitle and both `/venues` strings.
 4. Ongoing: Instagram posting cadence, Pinterest pin scheduling, Google Business Profile posts, venue photography outreach
+5. `--gold` (#A07840) fails WCAG AA at 3.74:1 on cream. Proposed #8F6B39 (4.54:1, delta-E 5.57). Deferred until Pinterest/Instagram brand templates are next revised, since gold is baked into those assets.
 
 ---
 

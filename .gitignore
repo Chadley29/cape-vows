@@ -25,6 +25,7 @@ yarn-error.log*
 # Claude Code agent coordination (not project content)
 .agents/
 .claude/worktrees/
+.claude/settings.local.json
 
 # Audit raw data dumps (large, disposable API responses)
 audits/*/_*.json
