@@ -53,6 +53,12 @@ function linkifyVenues(text, venueLinks) {
 
 // sessionStorage pre-filtering does not exist in a static build, so CTA filters
 // travel as URL query params instead. VenuesPage already reads these.
+// Requests a smaller Unsplash render than the stored heroImg URL (which may be
+// reused at other sizes elsewhere): ~2x the 700px hero display width, for retina.
+function resizeHero(url) {
+  return url.replace(/([?&])w=\d+/, '$1w=700');
+}
+
 function ctaHref(cta) {
   if (!cta) return '/venues';
   if (cta.filters && cta.filters.price) {
@@ -91,7 +97,14 @@ const jsonLd = JSON.stringify({
     <h1 class="blog-post-title">{post.title}</h1>
     <div class="blog-post-meta">{post.date} · Cape Vows Editorial</div>
 
-    <img class="blog-post-hero" src={post.heroImg} alt={post.title} />
+    <img
+      class="blog-post-hero"
+      src={resizeHero(post.heroImg)}
+      alt={post.title}
+      fetchpriority="high"
+      width="700"
+      height="380"
+    />
     <div class="blog-hero-credit">{post.heroCredit}</div>
 
     <p class="blog-post-intro" set:html={post.intro} />
