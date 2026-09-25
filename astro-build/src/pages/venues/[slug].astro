@@ -28,7 +28,10 @@ const gradient = getGradient(venue.type);
 const accent = getAccent(venue.type);
 const faqs = getVenueFaqs(venue);
 const title = `${venue.name} Wedding Venue — ${venue.region} | Cape Vows`;
-const description = `${venue.name} is a ${venue.type.toLowerCase()} wedding venue in ${venue.region}, Western Cape. ${venue.description.substring(0, 130)}...`;
+const descPrefix = `${venue.name} is a ${venue.type.toLowerCase()} wedding venue in ${venue.region}, Western Cape. `;
+const descBudget = Math.max(40, 155 - descPrefix.length - 3);
+const descExcerpt = venue.description.substring(0, descBudget).trim();
+const description = `${descPrefix}${descExcerpt}...`;
 const canonical = `https://capevows.co.za/venues/${venue.slug}`;
 const relatedVenues = VENUES.filter(
   (v) => v.region === venue.region && v.slug !== venue.slug,
