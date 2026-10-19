@@ -199,7 +199,11 @@ Both buttons previously called `acceptCookies()` regardless of label — fixed s
 
 ### Related Reading (venue pages)
 
-Placed between the FAQ accordion and the "More venues in [region]" section. Derived by filtering `POSTS[]` for any post whose `sections[].venueLinks` includes the current venue's slug — **no new data field**, purely derived from the existing blog `venueLinks` structure. Reuses the existing `.blog-card` markup verbatim. Renders nothing if there are no matches (currently true for 16 of 24 venues).
+Placed between the FAQ accordion and the related-venues block (see below). Derived by filtering `POSTS[]` for any post whose `sections[].venueLinks` includes the current venue's slug — **no new data field**, purely derived from the existing blog `venueLinks` structure. Reuses the existing `.blog-card` markup verbatim. Renders nothing if there are no matches (currently true for 16 of 24 venues).
+
+### Related venues (venue pages)
+
+Related-venues block (`venues/[slug].astro`): deterministic rotation, not the first three same-region venues. Takes same-region venues in `venues.js` order starting after the current venue (wrapping), up to 3. Small regions are topped up from other regions by fewest inbound links so far, ties broken by `venues.js` order. Result: every venue receives exactly 3 internal links from other venue pages. Heading is 'More venues in {region}' only when all three are same-region, otherwise 'More venues to consider'. Do not revert to `slice(0, 3)`; that concentrated links on the first three venues and left later-listed ones with none. Inbound-link tables: `audits/2026-10-19/inbound-before.md` and `inbound-after.md`.
 
 ### FAQ accordion (per venue page)
 

@@ -33,9 +33,34 @@ const descBudget = Math.max(40, 155 - descPrefix.length - 3);
 const descExcerpt = venue.description.substring(0, descBudget).trim();
 const description = `${descPrefix}${descExcerpt}...`;
 const canonical = `https://capevows.co.za/venues/${venue.slug}`;
-const relatedVenues = VENUES.filter(
-  (v) => v.region === venue.region && v.slug !== venue.slug,
-).slice(0, 3);
+// Deterministic "more venues" rotation, so internal links spread across every
+// venue instead of the first three listed in each region. Pass 1: same-region
+// venues after each venue in VENUES order, wrapping, up to 3. Pass 2: small
+// regions top up from other regions, least-linked venue first, ties broken by
+// VENUES order after the current venue.
+const afterIndex = (i) => [...VENUES.slice(i + 1), ...VENUES.slice(0, i)];
+const inbound = Object.fromEntries(VENUES.map((v) => [v.slug, 0]));
+const relatedBySlug = {};
+VENUES.forEach((v, i) => {
+  relatedBySlug[v.slug] = afterIndex(i)
+    .filter((o) => o.region === v.region)
+    .slice(0, 3);
+  relatedBySlug[v.slug].forEach((o) => inbound[o.slug]++);
+});
+VENUES.forEach((v, i) => {
+  const picks = relatedBySlug[v.slug];
+  const candidates = afterIndex(i).filter((o) => o.region !== v.region);
+  while (picks.length < 3) {
+    const next = candidates
+      .filter((o) => !picks.includes(o))
+      .reduce((best, o) => (!best || inbound[o.slug] < inbound[best.slug] ? o : best), null);
+    if (!next) break;
+    picks.push(next);
+    inbound[next.slug]++;
+  }
+});
+const relatedVenues = relatedBySlug[venue.slug];
+const relatedSameRegion = relatedVenues.every((v) => v.region === venue.region);
 
 const relatedPosts = POSTS.filter((post) =>
   post.sections.some((sec) =>
@@ -213,7 +238,11 @@ const jsonLd = JSON.stringify([
 
     {relatedVenues.length > 0 && (
       <div class="related-section">
-        <h2 class="related-title">More venues in <em>{venue.region}</em></h2>
+        {relatedSameRegion ? (
+          <h2 class="related-title">More venues in <em>{venue.region}</em></h2>
+        ) : (
+          <h2 class="related-title">More venues to <em>consider</em></h2>
+        )}
         <div class="cards-grid">
           {relatedVenues.map((v) => (
             <div style="position: relative;">
