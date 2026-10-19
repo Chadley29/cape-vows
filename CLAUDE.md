@@ -203,7 +203,7 @@ Placed between the FAQ accordion and the related-venues block (see below). Deriv
 
 ### Related venues (venue pages)
 
-Related-venues block (`venues/[slug].astro`): deterministic rotation, not the first three same-region venues. Takes same-region venues in `venues.js` order starting after the current venue (wrapping), up to 3. Small regions are topped up from other regions by fewest inbound links so far, ties broken by `venues.js` order. Result: every venue receives exactly 3 internal links from other venue pages. Heading is 'More venues in {region}' only when all three are same-region, otherwise 'More venues to consider'. Do not revert to `slice(0, 3)`; that concentrated links on the first three venues and left later-listed ones with none. Inbound-link tables: `audits/2026-10-19/inbound-before.md` and `inbound-after.md`.
+Related-venues block (`venues/[slug].astro`): deterministic rotation, not the first three same-region venues. Takes same-region venues in `venues.js` order starting after the current venue (wrapping), up to 3. Small regions are topped up from other regions by fewest inbound links so far, ties broken by `venues.js` order. Result: every venue receives exactly 3 internal links from other venue pages. Heading is 'More venues in {region}' only when all three are same-region, otherwise 'More venues to consider'. Do not revert to `slice(0, 3)`; that concentrated links on the first three venues and left later-listed ones with none. Inbound-link tables: `_local/audits/2026-10-19/inbound-before.md` and `inbound-after.md`.
 
 ### FAQ accordion (per venue page)
 

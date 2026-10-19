@@ -27,7 +27,5 @@ yarn-error.log*
 .claude/worktrees/
 .claude/settings.local.json
 
-# Audit raw data dumps (large, disposable API responses)
-audits/*/_*.json
-audits/*/_*.err
-audits/*/_*.txt
+# Audits live in /_local/audits/; safety net if a tool writes to audits/ by default
+/audits/
