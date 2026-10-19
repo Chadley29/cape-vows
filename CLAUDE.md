@@ -300,6 +300,11 @@ Note: Vercel's build container cannot launch Chromium (`@sparticuz/chromium` tes
 
 Factual, not promotional. AI search engines prefer to cite factual sources. Avoid adjective inflation.
 
+### GSC measurement method
+
+- Use page-level pulls (`--dimensions page`) for venue-page metrics. Query-level rows miss most clicks (26 of 29 in the 21 Sep–16 Oct 2026 window) and undercount venue pages.
+- Run SEO scripts with `py -3.13`; the default Python 3.11 lacks `google-api-python-client`.
+
 ---
 
 ## Content rules
