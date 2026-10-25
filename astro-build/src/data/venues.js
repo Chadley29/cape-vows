@@ -114,6 +114,7 @@ export const VENUES = [
       "Exclusive Estate Buyout",
       "Swimming Pool",
       "16 Guest Rooms",
+      "Rose and Herb Gardens",
     ],
     highlight: "Cape Dutch country retreat on a working farm",
   },
@@ -554,7 +555,7 @@ export const VENUES = [
     phone: "021 204 9383",
     website: "https://www.eikenhofestate.co.za/weddings/",
     description:
-      "A farm wedding venue nestled in the scenic Bottelary Hills between Stellenbosch and Cape Town. Eikenhof offers an exclusive-use farm wedding experience, combining the warmth of Cape Winelands farm life with beautifully maintained event spaces and views across the rolling hills.",
+      "A farm wedding venue embraced by vineyards in the scenic Bottelary Hills between Stellenbosch and Cape Town. Eikenhof offers an exclusive-use farm wedding experience, combining the warmth of Cape Winelands farm life with beautifully maintained event spaces and views across the rolling hills.",
     features: [
       "Exclusive-use Venue",
       "Bottelary Hills Views",
