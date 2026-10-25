@@ -548,8 +548,8 @@ export const POSTS = [
     summary:
       "Wedding venues genuinely in Stellenbosch town, not the wider Winelands: Lanzerac, Zorgvliet, Eikenhof and Nooitgedacht, verified by address.",
     heroImg:
-      "https://images.unsplash.com/photo-1560493676-04071c5f467b?w=1200&q=80",
-    heroCredit: "Photo: Unsplash",
+      "https://images.unsplash.com/photo-1638012858969-fac36ad2ea32?w=1200&q=80",
+    heroCredit: "Photo: Nenad Gataric / Unsplash, Stellenbosch",
     metaDesc:
       "Wedding venues genuinely in Stellenbosch, not the wider Winelands: Lanzerac, Zorgvliet, Eikenhof and Nooitgedacht, verified by address, with honest notes on what's actually in town versus a short drive away.",
     intro:
