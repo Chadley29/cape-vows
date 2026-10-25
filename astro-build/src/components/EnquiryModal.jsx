@@ -51,6 +51,16 @@ export default function EnquiryModal({ venue, onClose, showTrigger = false }) {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
+  // Lock page scroll behind the modal; restored on close and on unmount.
+  useEffect(() => {
+    if (!open) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [open]);
+
   // Static [data-enquire] triggers live in the Astro page, outside this React
   // tree, so they are bound imperatively after hydration.
   useEffect(() => {
@@ -105,7 +115,7 @@ export default function EnquiryModal({ venue, onClose, showTrigger = false }) {
 
   return (
     <>
-      {showTrigger && (
+      {showTrigger && !open && (
         <div className="mobile-enquiry-bar">
           <button
             className="btn-green"
