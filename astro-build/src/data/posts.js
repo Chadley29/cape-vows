@@ -145,7 +145,6 @@ export const POSTS = [
     sections: [
       {
         h2: "Summer (December – February): Golden but Windy",
-        venueLinks: [{ name: "La Paris Estate", slug: "la-paris-estate" }],
         paras: [
           "Long evenings, warm temperatures, and sunsets as late as 8:00 PM make summer visually spectacular. The Cape's infamous South-Easterly wind, the 'Cape Doctor', is, however, at its most persistent during these months.",
           "If you're considering a coastal venue on the Atlantic Seaboard, ensure there is a solid indoor alternative. Inland Winelands estates are generally more sheltered, but wind can still be a factor in exposed valley locations. Whatever the venue, ask what shelter it can offer an outdoor ceremony if the wind picks up.",
@@ -415,8 +414,8 @@ export const POSTS = [
         ],
         paras: [
           "Our price tiers are broad guides, and the lowest tier we use is Mid-Range, so you will not see a Budget label on any venue page. That does not mean everything in the directory costs more than R50,000. Some venues publish venue-hire rates or small-wedding packages below that figure, before catering, bar and accommodation, so check each venue's current rate card.",
-          "If your budget is under R50,000, the practical levers are a small guest count, a weekday or off-peak date, and a venue that publishes a small-wedding package. Catering and bar costs scale per head, so guest count matters most.",
-          "Within the directory, the closest equivalents are the smallest-capacity mid-range venues. La Petite Ferme in Franschhoek caps at 45 guests and Elgin Vintners at 50. A small guest count is the single most effective lever on total spend, because catering and bar costs scale per head.",
+          "If your budget is under R50,000, the practical levers are a small guest count, a weekday or off-peak date, and a venue that publishes a small-wedding package.",
+          "Within the directory, the smallest-capacity venues are the natural place to start. La Petite Ferme in Franschhoek caps at 45 guests and Elgin Vintners at 50. A small guest count is the single most effective lever on total spend, because catering and bar costs scale per head.",
         ],
       },
       {
