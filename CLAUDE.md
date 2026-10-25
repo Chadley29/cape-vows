@@ -434,7 +434,7 @@ All 24 venues now have source material from the venue itself in `_local/venue-de
 3. If the venue count ever changes, two hardcoded `24`s need manual updating, both in `astro-build/src/layouts/Base.astro`: line 7 (fallback meta description) and line 81 (WebSite JSON-LD description). Everything else is already dynamic via `VENUES.length` — the homepage hero subtitle and both `/venues` strings.
 4. Ongoing: Instagram posting cadence, Pinterest pin scheduling, Google Business Profile posts, venue photography outreach
 5. `--gold` (#A07840) fails WCAG AA at 3.74:1 on cream. Proposed #8F6B39 (4.54:1, delta-E 5.57). Deferred until Pinterest/Instagram brand templates are next revised, since gold is baked into those assets.
-6. Phase 2 after the 17 Nov read: apply the rule 'published venue fee plus published minimum catering, Contact Venue where nothing is published' to Cavalli and La Petite Ferme (both become Premium); add a short method note to the pricing post; show published fees with as-of dates on venue pages; add concrete under-R50k examples (Eikenhof hire from R18,000 before catering; Elgin Vintners packages from R15,000, Feb 2025 source)
+6. Phase 2 after the 17 Nov read: apply the rule 'published venue fee plus published minimum catering, Contact Venue where nothing is published' to Cavalli and La Petite Ferme (both become Premium); add a short method note to the pricing post; show published fees with as-of dates on venue pages; add concrete under-R50k examples (Eikenhof venue hire from about R21,100 before catering (2027 off-peak, Sunday to Friday, January 2025 rate card; confirm current rates); Elgin Vintners packages from R15,000, Feb 2025 source). Elgin Vintners figures come from a February 2025 source with no validity period stated.
 
 ---
 

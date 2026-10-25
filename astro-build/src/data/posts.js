@@ -425,7 +425,7 @@ export const POSTS = [
           { name: "Lanzerac Wine Estate", slug: "lanzerac-wine-estate" },
         ],
         paras: [
-          "This is where most Cape Winelands weddings actually land, and it is the deepest tier in the directory, with seven Cape Winelands venues. The mid-range tier gives you access to established wine estates with mountain views, professional venue coordinators, and proper facilities without the exclusivity premium of the top-tier estates.",
+          "This is where most Cape Winelands weddings actually land, and it is the deepest tier with published prices, with seven Cape Winelands venues. The mid-range tier gives you access to established wine estates with mountain views, professional venue coordinators, and proper facilities without the exclusivity premium of the top-tier estates.",
           "Eikenhof Estate on Bottelary Road in Stellenbosch offers exclusive use of a farm with ceremony and reception spaces, accommodation on site, and capacity for up to 180 guests. Lanzerac Wine Estate, closer to Stellenbosch town, is a five-star hotel and working wine estate with Cape Dutch architecture and mountain backdrops, seating up to 250. Both sit in this tier despite very different levels of polish, which is a useful reminder that the tier describes price rather than prestige.",
           "The mid-range tier is also where flexibility pays off most. Weekday and off-peak dates consistently come in lower; ask each venue directly for seasonal rate differences.",
         ],
