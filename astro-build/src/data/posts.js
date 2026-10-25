@@ -189,28 +189,31 @@ export const POSTS = [
     heroCredit: "Photo: Zoriana Stakhniv / Unsplash",
     metaDesc:
       "A practical guide to the legal requirements for getting married in South Africa, covering Marriage Officers, documentation, and what international couples need to know.",
+    notice:
+      "Last reviewed 25 October 2026. This is general information, not legal advice. Laws and Home Affairs procedures change, so confirm current requirements with your Marriage Officer, Home Affairs or an attorney.",
     intro:
-      "Between choosing flowers and tasting Sauvignon Blancs, the legal side of your wedding can feel like a chore. But ensuring your marriage is legally valid in South Africa requires specific steps. Missing any of them can cause real problems later. Here's what you need, based on the Marriage Act 25 of 1961 and the Civil Union Act 17 of 2006.",
+      "Between choosing flowers and tasting Sauvignon Blancs, the legal side of your wedding can feel like a chore. But a legally valid marriage in South Africa requires specific steps, and missing one can cause real problems later. Here's what you need, based on the Marriage Act 25 of 1961 and the Civil Union Act 17 of 2006. A new Marriage Bill that would replace these laws with a single Act is still before Parliament, and this guide reflects the law as it currently stands.",
     sections: [
       {
         h2: "Who Can Legally Marry You?",
         paras: [
-          "In South Africa, only a registered Marriage Officer can make your union legally binding. Marriage Officers fall into three categories: Home Affairs officials, designated religious ministers (registered with the Department of Home Affairs), and private civil Marriage Officers registered under the Civil Union Act. The last category includes secular officiants, useful for couples who want a non-religious ceremony.",
-          "Always ask to see your officiant's appointment certificate (Form BI-30) before the ceremony. This confirms their authority covers your type of marriage: civil, civil union, or customary. Source: Gawie le Roux Institute of Law / DHA.",
+          "In South Africa, only a Marriage Officer can make your marriage legally binding. There are two routes: Home Affairs officials, who can marry couples as part of their role, and ministers of religion or office-bearers of a religious organisation whom the Department of Home Affairs has designated as Marriage Officers, under the Marriage Act or, for civil unions, the Civil Union Act.",
+          "There is no separate category of secular Marriage Officer. Many privately booked Marriage Officers are designated through a religious organisation even when they offer non-religious ceremonies, so if a secular ceremony matters to you, ask about the wording they use.",
+          "Before you book, ask your Marriage Officer to confirm their designation, and that it covers your type of union: a marriage under the Marriage Act or a civil union under the Civil Union Act. Customary marriages follow a different process and are registered with Home Affairs under the Recognition of Customary Marriages Act.",
         ],
         notice:
-          "⚠️ If a person performs your ceremony without proper DHA registration, your marriage may not be legally valid, regardless of how meaningful the ceremony was.",
+          "If the person conducting your ceremony is not a designated Marriage Officer, your marriage may not be legally valid, however meaningful the ceremony.",
       },
       {
         h2: "What Documents Do You Need?",
         items: [
           {
             title: "South African citizens",
-            desc: "Your SA green ID book or Smart ID Card. If previously married, the original decree of divorce or death certificate of former spouse.",
+            desc: "Your Smart ID card or green ID book. Green ID books remain valid until 31 March 2028, but Home Affairs is phasing them out, so a Smart ID card is the safer choice. If you were previously married, bring the final decree of divorce or the death certificate of your former spouse.",
           },
           {
             title: "Foreign nationals",
-            desc: "Valid passport with entry stamp. A completed BI-31 form (Declaration for the Purpose of Marriage / Letter of No Impediment). If one partner is SA and one is foreign, both passports are required.",
+            desc: "A valid passport. Where a foreign national marries a South African, both partners present valid passports and a completed BI-31 form (Declaration for the Purpose of Marriage). You may also need a letter of no impediment from your home country confirming you are free to marry, so check with your Marriage Officer early, as these can take time to obtain.",
           },
           {
             title: "Two witnesses",
@@ -219,16 +222,17 @@ export const POSTS = [
         ],
       },
       {
-        h2: "The Home Affairs Route vs. Private Marriage Officers",
+        h2: "Getting Married by Home Affairs or a Private Marriage Officer",
         paras: [
-          "If you use a Home Affairs official, you must give formal written notice of intention to marry at a Home Affairs office at least three months before your ceremony. Private marriage officers typically handle this notice process on your behalf, making them far more practical for venue weddings.",
-          "Importantly, you can have your meaningful ceremony at your chosen venue and use a private Marriage Officer. No requirement to appear at Home Affairs on your wedding day.",
+          "If you want a Home Affairs official to marry you, book an appointment with your nearest Home Affairs office well in advance. Many couples allow at least three months. Couples where one partner is a foreign national may also be asked to attend an interview, which can take weeks to schedule.",
+          "A designated private Marriage Officer can marry you at your chosen venue, so there is no need to appear at Home Affairs on the day. They submit the marriage register to Home Affairs afterwards, and you receive a handwritten marriage certificate (BI-27) on the day.",
         ],
       },
       {
         h2: "Antenuptial Contracts: Read This Before You Sign",
         paras: [
-          "South African marriages are automatically 'in community of property' unless you sign an Antenuptial Contract (ANC) with a notary before the ceremony. In community of property means all assets and debts from both partners are joined into a shared estate. If either partner has debts, the other becomes liable. An ANC must be signed and registered at the Deeds Office before your wedding day. It cannot be done retroactively.",
+          "Civil marriages in South Africa are in community of property unless you sign an Antenuptial Contract (ANC) before the ceremony. In community of property, both partners' assets and debts form one joint estate, so the creditors of either spouse can claim against it.",
+          "An ANC must be signed before a notary before you marry, and registered at the Deeds Office within three months of signing. Registration can happen after the wedding, as long as it falls within those three months. Changing your property regime after the wedding requires a High Court application, which is slower and more expensive, so arrange your ANC early.",
         ],
         notice:
           "If you intend to marry 'out of community of property,' consult an attorney to draw up your ANC before the wedding date. This is one of the most financially consequential decisions you will make.",
@@ -236,9 +240,14 @@ export const POSTS = [
       {
         h2: "For International Couples: Getting Your Marriage Recognised Abroad",
         paras: [
-          "After your ceremony, you can apply for an Unabridged Marriage Certificate from Home Affairs (form BI-130). This typically takes six to eight weeks and is the document most foreign countries require to register your marriage abroad.",
-          "For most countries, this certificate will then need to be authenticated. South Africa is a signatory to the Hague Convention Abolishing the Requirement of Legalisation, meaning an Apostille stamp is the correct authentication route for countries also party to this convention. For countries not party to the Hague Convention, full legalisation through the Legalisation Section of the Department of International Relations and Cooperation (DIRCO) is required. Check which process applies to your home country before your wedding date.",
+          "After your marriage is registered, apply for an unabridged marriage certificate at any Home Affairs office using form BI-130. Allow six to eight weeks. Foreign authorities usually require this certificate rather than the handwritten one issued on the day.",
+          "To use the certificate abroad, it usually needs to be legalised by the Legalisation Section of the Department of International Relations and Cooperation (DIRCO). For countries party to the Hague Apostille Convention, DIRCO attaches an Apostille. For other countries, DIRCO issues a Certificate of Authentication, and the destination country's embassy in South Africa may then need to legalise it too. Check your home country's requirements before your wedding date.",
         ],
+      },
+      {
+        h2: "Official Sources",
+        notice:
+          '<a href="https://www.gov.za/services/services-residents/relationships/getting-married" class="blog-venue-link" target="_blank" rel="noopener noreferrer">South African Government: Getting married</a><br /><a href="https://www.gov.za/faq/government-services/how-do-i-obtain-marriage-certificate" class="blog-venue-link" target="_blank" rel="noopener noreferrer">South African Government: How do I obtain a marriage certificate?</a><br /><a href="https://dirco.gov.za/legalisation-services/" class="blog-venue-link" target="_blank" rel="noopener noreferrer">DIRCO: Legalisation of official documents</a><br /><a href="https://lawlibrary.org.za/akn/za/act/1961/25" class="blog-venue-link" target="_blank" rel="noopener noreferrer">Marriage Act 25 of 1961 (full text)</a>',
       },
     ],
     cta: { label: "Browse All Venues", path: "/venues" },

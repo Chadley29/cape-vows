@@ -107,6 +107,8 @@ const jsonLd = JSON.stringify({
     />
     <div class="blog-hero-credit">{post.heroCredit}</div>
 
+    {post.notice && <div class="blog-post-notice" set:html={post.notice} />}
+
     <p class="blog-post-intro" set:html={post.intro} />
 
     {post.sections.map((sec) => (

@@ -253,7 +253,7 @@ navigate("/venues");
 ```js
 {
   slug, title, category, date, summary,
-  heroImg, heroCredit, metaDesc, intro,
+  heroImg, heroCredit, metaDesc, notice?, intro,
   sections: [{ h2, paras?, items?, venueLinks?, notice? }],
   cta: { label, path, filters? }
 }
@@ -262,6 +262,8 @@ navigate("/venues");
 `venueLinks: [{ name, slug }]` on a section enables `linkifyVenues()` — replaces venue name strings in paragraph text with inline gold-underlined clickable buttons, and also powers the Related Reading section on venue pages.
 
 `items[].slug` adds a right-aligned "View venue →" button below each item.
+
+`notice` (post-level): Optional. Raw HTML rendered after the hero credit and before the intro. Used for the legal review/disclaimer line on marriage-officer-guide-cape-weddings. Must not contain em dashes.
 
 ### AI Research Tool (Admin, `/admin`)
 
