@@ -147,7 +147,7 @@ export const VENUES = [
     name: "Steenberg Farm",
     region: "Constantia Valley",
     type: "Boutique Hotel",
-    capacity: "Up to 100",
+    capacity: "Contact venue",
     price: "Contact Venue",
     address: "Steenberg Road, Tokai, Cape Town",
     phone: "021 713 2222",
@@ -163,6 +163,7 @@ export const VENUES = [
       "Spa & Wellness",
     ],
     highlight: "5-star luxury on a 1682 historic farm",
+    driveTime: "about 30 minutes from the Cape Town city centre",
   },
   {
     id: 8,
@@ -249,7 +250,7 @@ export const VENUES = [
     phone: "021 867 0171",
     website: "https://www.laparis.co.za/weddings",
     description:
-      "Nestled in the breathtaking Wemmershoek Valley, La Paris Estate offers sweeping mountain views, manicured grounds and a refined Cape Winelands setting. An elegant backdrop for intimate celebrations, with larger events available on enquiry.",
+      "Nestled in the breathtaking Wemmershoek Valley, La Paris Estate offers sweeping mountain views, manicured grounds and a refined Cape Winelands setting. An elegant backdrop for intimate celebrations.",
     features: [
       "Wemmershoek Valley Views",
       "Mountain Backdrop",
@@ -301,8 +302,8 @@ export const VENUES = [
       "Virgin Limited Edition",
       "Panoramic Valley Views",
       "Boutique Luxury Hotel",
-      "Award-winning Restaurant",
-      "Exclusive-use Option",
+      "Signature Restaurant",
+      "Wedding Packages",
       "Vineyard Setting",
     ],
     highlight: "Sir Richard Branson's Franschhoek luxury estate",
@@ -422,7 +423,7 @@ export const VENUES = [
       "Unique Coastal Venue",
     ],
     highlight: "Dramatic setting between mountains and ocean",
-    driveTime: "about 15 to 25 minutes from the Cape Town CBD",
+    driveTime: "only minutes from the V&A Waterfront and the city centre",
   },
   {
     id: 19,
@@ -432,7 +433,7 @@ export const VENUES = [
     type: "Wine Estate",
     capacity: "Up to 120",
     price: "Mid-Range (R50–150k)",
-    address: "Saronsberg Rd, Tulbagh",
+    address: "Waveren Road, Tulbagh",
     phone: "023 230 0707",
     website: "https://www.saronsberg.com/saronsberg-weddings",
     description:
@@ -484,12 +485,12 @@ export const VENUES = [
     website:
       "https://lapetiteferme.co.za/la-petite-ferme-franschhoek-weddings-functions/",
     description:
-      "Perched high on the Franschhoek Mountain Pass with arguably the finest vineyard views in the Cape Winelands, La Petite Ferme is a beloved Franschhoek institution. With an award-winning restaurant, its own wine label, and charming guest chalets, it is perfect for an intimate, deeply personal wedding.",
+      "Perched high on the Franschhoek Mountain Pass with arguably the finest vineyard views in the Cape Winelands, La Petite Ferme is a beloved Franschhoek institution. With an acclaimed country restaurant, its own wine label, and individually designed guest rooms, it is perfect for an intimate, deeply personal wedding.",
     features: [
       "Franschhoek Pass Views",
-      "Award-winning Restaurant",
+      "Acclaimed Restaurant",
       "Own Wine Label",
-      "Guest Chalets",
+      "Guest Rooms and Suites",
       "Intimate Scale",
       "Farm-to-table Dining",
     ],
@@ -536,7 +537,7 @@ export const VENUES = [
       "Expansive Estate",
       "Award-winning Wines",
       "Beautiful Gardens",
-      "Multiple Venues",
+      "After-party Lounge",
       "Somerset West",
     ],
     highlight: "Grand estate under the Hottentots Holland",

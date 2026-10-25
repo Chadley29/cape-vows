@@ -212,7 +212,11 @@ Related-venues block (`venues/[slug].astro`): deterministic rotation, not the fi
 
 - `getVenueFaqs(venue)` generates 5 questions dynamically
 - Topics: capacity, location (with driving times from `REGION_CONTEXT`), venue type, price, accommodation
-- `VENUES_WITH_ACCOMMODATION` is a Set of slugs controlling the accommodation answer — membership has changed since initial launch (see fact-check history below) and should be kept in sync with verified venue facts, not just a static count
+- The accommodation answer has three states, all in `constants.js`. Keep membership in sync with source-verified venue facts, not just a static count.
+  - **Yes (confirmed):** `VENUES_WITH_ACCOMMODATION` (18 slugs). Renders the standard "Yes, … offers on-site accommodation" answer.
+  - **No (confirmed):** `ACCOMMODATION_NO` (lourensford-wine-estate only). Renders "[Name] does not offer on-site accommodation." plus a nearby-stays sentence.
+  - **Unconfirmed:** any slug in neither Set (currently cavalli-estate, groot-constantia, holden-manz, hawksmoor-house, cape-point-vineyards). Renders "We have not yet confirmed whether [Name] offers on-site accommodation, so ask the venue when you enquire." plus the nearby-stays sentence.
+  - All three answers also feed the `FAQPage` JSON-LD. The nearby-stays sentence uses `venue.region` ("The Cape Winelands area"), not `REGION_CONTEXT.desc`, which already starts with "the".
 - `FAQPage` JSON-LD injected per venue page on mount, removed on unmount
 - Because FAQs are fully derived from `VENUES[]` fields, correcting a venue's data (capacity, accommodation Set membership, etc.) automatically corrects its FAQ answers — no separate FAQ edit needed
 
@@ -375,9 +379,10 @@ Factual, not promotional. AI search engines prefer to cite factual sources. Avoi
 - Elgin Vintners and La Paris Estate added to `VENUES_WITH_ACCOMMODATION`
 - Eikenhof Estate capacity: corrected to "Up to 180" (verified twice against source PDF — this is a real reception/lawn figure, not an error)
 - La Paris Estate capacity: changed to "Contact venue" (only a 50-guest "Intimate Package" was evidenced in the available source; asserting 200 was unverified — needs a direct follow-up with the venue to confirm their full range)
+- Steenberg Farm capacity: changed to "Contact venue" pending confirmation. The only source (August 2024 brochure) gives 100 for the Manor Lawn ceremony space, but reception seats 40, or 60 standing.
 - Nooitgedacht Wine Estate address/phone corrected via Google Business listing: `R304 Koelenhof Rd, Stellenbosch, 7605` / `021 865 2407`
 - "Banghoek" → "Banhoek" spelling standardized (Zorgvliet Wines entry + mountain-backdrop blog post)
-- The FAQ accommodation answer now depends only on `VENUES_WITH_ACCOMMODATION`. The feature-regex fallback was removed because "Bridal Suite" matched it for Cavalli Estate, which made the FAQ wrongly claim on-site accommodation.
+- The FAQ accommodation answer no longer uses a feature regex (it matched "Bridal Suite" for Cavalli Estate and wrongly claimed on-site accommodation). It now uses the three explicit states described under "FAQ accordion" above. After the 2026-10-25 source check, groot-constantia, holden-manz and hawksmoor-house moved to unconfirmed, and nooitgedacht-wine-estate and la-roche-estate were added as confirmed.
 
 **Stale-source flags (worth requesting updated brochures):** Lanzerac's source PDF is dated for the 2025–2026 season (others are 2026–2027 or later); Steenberg Farm's is dated August 2024; Cape Point Vineyards' source (a Canva deck, not a PDF) is titled "2025" and only 3 of 4 named packages were captured.
 
@@ -413,6 +418,7 @@ Factual, not promotional. AI search engines prefer to cite factual sources. Avoi
 - 2026-10-25: marriage guide corrected; privacy policy updated
 - 2026-10-25: FAQ and blog factual fixes (29 routes, see sitemap lastmod)
 - 2026-10-25: Stellenbosch-town hero image replaced (photo by Nenad Gataric)
+- 2026-10-25: source-check fixes
 
 ---
 
@@ -423,6 +429,8 @@ Factual, not promotional. AI search engines prefer to cite factual sources. Avoi
 3. If the venue count ever changes, two hardcoded `24`s need manual updating, both in `astro-build/src/layouts/Base.astro`: line 7 (fallback meta description) and line 81 (WebSite JSON-LD description). Everything else is already dynamic via `VENUES.length` — the homepage hero subtitle and both `/venues` strings.
 4. Ongoing: Instagram posting cadence, Pinterest pin scheduling, Google Business Profile posts, venue photography outreach
 5. `--gold` (#A07840) fails WCAG AA at 3.74:1 on cream. Proposed #8F6B39 (4.54:1, delta-E 5.57). Deferred until Pinterest/Instagram brand templates are next revised, since gold is baked into those assets.
+6. Refresh stale sources (Babylonstoren, Eikenhof, Elgin Vintners, Lanzerac, Nooitgedacht, Steenberg, Cape Point Vineyards)
+7. Decide the price tier definition (venue fee vs total cost): Eikenhof and Elgin publish rates under R50k; Lourensford's published hire is R40k to R79k excl VAT
 
 ---
 
@@ -433,7 +441,7 @@ Factual, not promotional. AI search engines prefer to cite factual sources. Avoi
 - Don't introduce new dependencies without confirming first
 - `App.jsx` is legacy and not deployed. Edit `astro-build/src/` for all application changes.
 - Read the existing route map before adding new routes (slug matches must come last)
-- When adding new venues, also update `VENUES_WITH_ACCOMMODATION` if relevant, and the sitemap
+- When adding new venues, also update `VENUES_WITH_ACCOMMODATION` or `ACCOMMODATION_NO` if relevant, and the sitemap
 - When making multi-part changes, show diffs incrementally (one logical change at a time) rather than batching everything into one uneditable diff — this has been the working pattern throughout and should continue
 - Don't run git commands (add/commit/push) unless explicitly asked — commits are made via GitHub Desktop after manual review
 

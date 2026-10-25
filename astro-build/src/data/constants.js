@@ -137,11 +137,12 @@ export const REGION_CONTEXT = {
   },
 };
 
+// Accommodation has three states. Confirmed yes: this Set. Confirmed no:
+// ACCOMMODATION_NO. Anything else is unconfirmed and says so.
 export const VENUES_WITH_ACCOMMODATION = new Set([
   "babylonstoren",
   "boschendal-wine-estate",
   "steenberg-farm",
-  "holden-manz",
   "mont-rochelle",
   "lanzerac-wine-estate",
   "vrede-en-lust",
@@ -153,11 +154,13 @@ export const VENUES_WITH_ACCOMMODATION = new Set([
   "zorgvliet-wines",
   "la-cotte-farm",
   "saronsberg-wine-estate",
-  "groot-constantia",
-  "hawksmoor-house",
   "elgin-vintners",
   "la-paris-estate",
+  "nooitgedacht-wine-estate",
+  "la-roche-estate",
 ]);
+
+export const ACCOMMODATION_NO = new Set(["lourensford-wine-estate"]);
 
 export function getVenueFaqs(venue) {
   const cap =
@@ -170,7 +173,12 @@ export function getVenueFaqs(venue) {
     distance: "within the Western Cape",
     character: "the natural beauty of the Western Cape",
   };
-  const hasAccomm = VENUES_WITH_ACCOMMODATION.has(venue.slug);
+  const accomm = VENUES_WITH_ACCOMMODATION.has(venue.slug)
+    ? "yes"
+    : ACCOMMODATION_NO.has(venue.slug)
+      ? "no"
+      : "unconfirmed";
+  const nearbyStays = `The ${venue.region} area has a wide range of guesthouses, boutique hotels, and self-catering options within a short distance.`;
   const distance = venue.driveTime || region.distance;
   const featureList = venue.features.slice(0, 4).join(", ");
 
@@ -197,9 +205,12 @@ export function getVenueFaqs(venue) {
     },
     {
       q: `Does ${venue.name} have on-site accommodation?`,
-      a: hasAccomm
-        ? `Yes, ${venue.name} offers on-site accommodation, which is a significant practical advantage for wedding weekends. Guests and the wedding party can stay on the estate, removing the need for late-night transport arrangements and allowing the celebration to extend into the following morning.`
-        : `${venue.name} does not list on-site accommodation as a standard offering. However, the ${region.desc} area has a wide range of guesthouses, boutique hotels, and self-catering options within a short distance. It's worth discussing transport and nearby stay options with the venue when you enquire.`,
+      a:
+        accomm === "yes"
+          ? `Yes, ${venue.name} offers on-site accommodation, which is a significant practical advantage for wedding weekends. Guests and the wedding party can stay on the estate, removing the need for late-night transport arrangements and allowing the celebration to extend into the following morning.`
+          : accomm === "no"
+            ? `${venue.name} does not offer on-site accommodation. ${nearbyStays}`
+            : `We have not yet confirmed whether ${venue.name} offers on-site accommodation, so ask the venue when you enquire. ${nearbyStays}`,
     },
   ];
 }

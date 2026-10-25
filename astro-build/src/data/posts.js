@@ -34,7 +34,7 @@ export const POSTS = [
           {
             title: "La Paris Estate",
             slug: "la-paris-estate",
-            desc: "Best for a refined, intimate celebration. With sweeping Wemmershoek Valley views, manicured grounds, and a confirmed Intimate Wedding Package for up to 50 guests, La Paris pairs genuine Winelands character with a more personal scale; larger events available on enquiry.",
+            desc: "Best for a refined, intimate celebration. With sweeping Wemmershoek Valley views, manicured grounds, and a confirmed Intimate Wedding Package for up to 50 guests, La Paris pairs genuine Winelands character with a more personal scale.",
           },
           {
             title: "La Roche Estate",
@@ -44,7 +44,7 @@ export const POSTS = [
           {
             title: "Mont Rochelle Hotel & Vineyard",
             slug: "mont-rochelle",
-            desc: "Sir Richard Branson's Virgin Limited Edition property on the Franschhoek hillside. Panoramic valley views, boutique hotel amenities, and an exclusive-use option for up to 80 guests who want a genuinely world-class experience.",
+            desc: "Sir Richard Branson's Virgin Limited Edition property on the Franschhoek hillside. Panoramic valley views, boutique hotel amenities, and capacity for up to 80 guests who want a genuinely world-class experience.",
           },
           {
             title: "Vrede en Lust Wine Estate",
@@ -148,7 +148,7 @@ export const POSTS = [
         venueLinks: [{ name: "La Paris Estate", slug: "la-paris-estate" }],
         paras: [
           "Long evenings, warm temperatures, and sunsets as late as 8:00 PM make summer visually spectacular. The Cape's infamous South-Easterly wind, the 'Cape Doctor', is, however, at its most persistent during these months.",
-          "If you're considering a coastal venue on the Atlantic Seaboard, ensure there is a solid indoor alternative. Inland Winelands estates are generally more sheltered, but wind can still be a factor in exposed valley locations. La Paris Estate is a good example of a Winelands venue with enough mature tree cover and garden structure to soften the breeze.",
+          "If you're considering a coastal venue on the Atlantic Seaboard, ensure there is a solid indoor alternative. Inland Winelands estates are generally more sheltered, but wind can still be a factor in exposed valley locations. Whatever the venue, ask what shelter it can offer an outdoor ceremony if the wind picks up.",
         ],
       },
       {
@@ -414,8 +414,8 @@ export const POSTS = [
           { name: "Elgin Vintners", slug: "elgin-vintners" },
         ],
         paras: [
-          "Cape Vows does not currently list a single venue in the under-R50,000 tier, and that is deliberate. Every Cape Winelands estate in the directory has been checked against what the venue itself publishes, and none of the Winelands estates we have verified advertise a package that lands reliably below that figure.",
-          "That does not mean sub-R50,000 Winelands weddings are impossible. It means the venues that make them possible are usually private farms, community halls, or family properties that do not market themselves as wedding venues at all. If your budget is genuinely under R50,000, expect to build the day yourself rather than book a package.",
+          "Our price tiers are broad guides, and the lowest tier we use is Mid-Range, so you will not see a Budget label on any venue page. That does not mean everything in the directory costs more than R50,000. Some venues publish venue-hire rates or small-wedding packages below that figure, before catering, bar and accommodation, so check each venue's current rate card.",
+          "If your budget is under R50,000, the practical levers are a small guest count, a weekday or off-peak date, and a venue that publishes a small-wedding package. Catering and bar costs scale per head, so guest count matters most.",
           "Within the directory, the closest equivalents are the smallest-capacity mid-range venues. La Petite Ferme in Franschhoek caps at 45 guests and Elgin Vintners at 50. A small guest count is the single most effective lever on total spend, because catering and bar costs scale per head.",
         ],
       },
@@ -521,7 +521,7 @@ export const POSTS = [
         ],
         paras: [
           "Constantia sits at the foot of the Constantiaberg, less than 20 minutes from the Atlantic and with its own strong aesthetic case: old-money green, mature oak trees, and vineyards that have been producing wine since the 17th century.",
-          "It is not strictly coastal, but couples who want the Peninsula location without the full wind exposure of the Atlantic Seaboard often land here. The Cellars-Hohenort offers two restored Cape Dutch manor houses set within manicured gardens, one of the most photographed settings in the Cape, with a level of service that matches its reputation. Steenberg Farm in Tokai combines a 17th-century wine estate with a boutique hotel and golf course, with more flexibility on capacity and configuration than many of the smaller Peninsula venues.",
+          "It is not strictly coastal, but couples who want the Peninsula location without the full wind exposure of the Atlantic Seaboard often land here. The Cellars-Hohenort offers two restored Cape Dutch manor houses set within manicured gardens, one of the most photographed settings in the Cape, with a level of service that matches its reputation. Steenberg Farm in Tokai is a historic wine farm with a hotel and spa on the estate.",
           "Groot Constantia is the oldest wine estate in South Africa, established in 1685. The historic cellar and manor house grounds offer a setting with genuine weight. This is not a venue that needs decoration to make an impression.",
         ],
       },
