@@ -110,6 +110,7 @@ export default function EnquiryModal({ venue, onClose, showTrigger = false }) {
           <button
             className="btn-green"
             type="button"
+            aria-label={`Enquire about ${venue.name}`}
             style={{
               width: "100%",
               maxWidth: 400,
@@ -124,7 +125,7 @@ export default function EnquiryModal({ venue, onClose, showTrigger = false }) {
               });
             }}
           >
-            Enquire About This Venue
+            Enquire
           </button>
         </div>
       )}

@@ -184,13 +184,13 @@ The section itself is titled **"A Few We'd Start With"** (not "Featured Venues" 
 ### Venue enquiry modal
 
 - Located in `VenuePage` component
-- Two-CTA hierarchy: primary "Enquire About This Venue" (green), secondary "Visit Official Website" (ghost)
+- Two-CTA hierarchy: primary "Enquire" (green, `aria-label="Enquire about [venue name]"`) with a muted line beneath it, "Free to enquire. No booking fees." (existing `.results-count` class); secondary "Visit Website" (ghost)
 - Modal closes via ✕ icon button top-right (not a text "Close" button)
 - Posts to Formspree endpoint `mwvywnbp`
 - Requires consent checkbox (HTML5 `required` — POPIA/GDPR compliance), links to `/privacy-policy.html`
 - Success state includes an expectation-setting line ("we typically respond within 1–2 business days") and a forward path (browse more venues in the same region, using the existing `sessionStorage` filter pattern)
 - GA4 event: `venue_enquiry` on successful submit
-- **Mobile:** a sticky bottom bar (≤960px) shows the venue name + an Enquire button that opens this same modal — reuses existing state/handlers, doesn't duplicate logic
+- **Mobile:** a sticky bottom bar (≤960px) shows an "Enquire" button (same aria-label, no muted line) that opens this same modal. It reuses existing state and handlers rather than duplicating logic.
 
 ### "Get Listed" and "Get in Touch" forms
 
@@ -424,6 +424,7 @@ All 24 venues now have source material from the venue itself in `_local/venue-de
 - 2026-10-25: Eikenhof wording and Stellenbosch-town location wording
 - 2026-10-25: Babylonstoren feature; Stellenbosch-town title
 - 2026-10-25: price tiers aligned with published figures (Zorgvliet, La Cotte, Mont Rochelle to Contact Venue; Lourensford to Mid-Range; Belmond to Premium)
+- 2026-10-25: primary venue CTA shortened to 'Enquire' (aria-label keeps the venue name); no sitemap lastmod change because a label tweak is not a significant content change
 
 ---
 

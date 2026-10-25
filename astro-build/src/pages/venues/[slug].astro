@@ -192,9 +192,10 @@ const jsonLd = JSON.stringify([
           </div>
 
           <div class="venue-cta-group">
-            <button class="btn-green" data-enquire>
-              Enquire About This Venue
+            <button class="btn-green" data-enquire aria-label={`Enquire about ${venue.name}`}>
+              Enquire
             </button>
+            <p class="results-count" style="text-align: center;">Free to enquire. No booking fees.</p>
             {venue.website && (
               <a
                 href={venue.website}
