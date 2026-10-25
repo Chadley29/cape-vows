@@ -541,7 +541,7 @@ export const POSTS = [
   },
   {
     slug: "wedding-venues-stellenbosch-town",
-    title: "Wedding Venues in Stellenbosch: The Verified Options in Town",
+    title: "Wedding Venues in Stellenbosch: The Verified Options",
     category: "Venue Guides",
     date: "September 2026",
     summary:

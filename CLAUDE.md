@@ -422,6 +422,7 @@ All 24 venues now have source material from the venue itself in `_local/venue-de
 - 2026-10-25: source-check fixes
 - 2026-10-25: web-check fixes (Hawksmoor relocated; Cellars, Belmond, Steenberg, Mont Rochelle corrected; Holden Manz accommodation confirmed)
 - 2026-10-25: Eikenhof wording and Stellenbosch-town location wording
+- 2026-10-25: Babylonstoren feature; Stellenbosch-town title
 
 ---
 

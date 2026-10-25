@@ -19,7 +19,7 @@ export const VENUES = [
       "Wine Tasting",
       "On-site Accommodation",
       "Farm-to-Table Catering",
-      "Bridal Suite",
+      "Nine-bedroom Farmhouse",
       "Mountain Views",
       "Outdoor Ceremony",
     ],
