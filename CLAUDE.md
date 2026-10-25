@@ -213,9 +213,9 @@ Related-venues block (`venues/[slug].astro`): deterministic rotation, not the fi
 - `getVenueFaqs(venue)` generates 5 questions dynamically
 - Topics: capacity, location (with driving times from `REGION_CONTEXT`), venue type, price, accommodation
 - The accommodation answer has three states, all in `constants.js`. Keep membership in sync with source-verified venue facts, not just a static count.
-  - **Yes (confirmed):** `VENUES_WITH_ACCOMMODATION` (18 slugs). Renders the standard "Yes, … offers on-site accommodation" answer.
+  - **Yes (confirmed):** `VENUES_WITH_ACCOMMODATION` (20 slugs). Renders the standard "Yes, … offers on-site accommodation" answer.
   - **No (confirmed):** `ACCOMMODATION_NO` (lourensford-wine-estate only). Renders "[Name] does not offer on-site accommodation." plus a nearby-stays sentence.
-  - **Unconfirmed:** any slug in neither Set (currently cavalli-estate, groot-constantia, holden-manz, hawksmoor-house, cape-point-vineyards). Renders "We have not yet confirmed whether [Name] offers on-site accommodation, so ask the venue when you enquire." plus the nearby-stays sentence.
+  - **Unconfirmed:** any slug in neither Set (currently cavalli-estate, groot-constantia, cape-point-vineyards). Renders "We have not yet confirmed whether [Name] offers on-site accommodation, so ask the venue when you enquire." plus the nearby-stays sentence.
   - All three answers also feed the `FAQPage` JSON-LD. The nearby-stays sentence uses `venue.region` ("The Cape Winelands area"), not `REGION_CONTEXT.desc`, which already starts with "the".
 - `FAQPage` JSON-LD injected per venue page on mount, removed on unmount
 - Because FAQs are fully derived from `VENUES[]` fields, correcting a venue's data (capacity, accommodation Set membership, etc.) automatically corrects its FAQ answers — no separate FAQ edit needed
@@ -336,8 +336,8 @@ Factual, not promotional. AI search engines prefer to cite factual sources. Avoi
 | `mountain-backdrop-wedding-venues-western-cape` | Venue Guides      | "Banghoek" corrected to "Banhoek" throughout                                                                                                                                                                   |
 | `wedding-venue-bottelary-road-stellenbosch`     | Venue Guides      | New. Anchored on Eikenhof Estate (the only verified venue in that specific area) with an honest note about not padding the list; secondary mention of Nooitgedacht for the broader Koelenhof/Stellenbosch area |
 | `wedding-venue-prices-stellenbosch-winelands`   | Budget Planning   | New. Pricing-tier guide. Venue tier claims verified against `venues.js`: Lanzerac and Eikenhof are Mid-Range, Zorgvliet and La Paris are Premium, Babylonstoren and Boschendal are Luxury. The "under R50,000" section names no venue, because the directory has zero Budget-tier venues.                        |
-| `coastal-wedding-venues-cape-peninsula`         | Venue Guides      | New. Peninsula coastal guide. Links The 12 Apostles, Cape Point Vineyards, The Cellars-Hohenort, Steenberg Farm, Groot Constantia. The "Southern Peninsula" section names no venue, because the directory has none in that area. Note: The Cellars-Hohenort and Steenberg Farm claims are descriptive only, both are on the unverified/stale-source list.                        |
-| `wedding-venues-stellenbosch-town`              | Venue Guides      | New. Disambiguates Stellenbosch town from the wider "Winelands" region tag. Links the 4 venues genuinely in/near Stellenbosch by address: Lanzerac, Zorgvliet, Eikenhof, Nooitgedacht. Closing section links to the Franschhoek guide via a raw HTML link in a `notice` field, not `venueLinks` (which hardcodes `/venues/` and would break on a blog-post slug).                        |
+| `coastal-wedding-venues-cape-peninsula`         | Venue Guides      | New. Peninsula coastal guide. Links The 12 Apostles, Cape Point Vineyards, The Cellars-Hohenort, Steenberg Farm, Groot Constantia. The "Southern Peninsula" section names no venue, because the directory has none in that area. Note: The Cellars-Hohenort and Steenberg Farm sentences were rewritten on 2026-10-25 from the venues' own websites.                        |
+| `wedding-venues-stellenbosch-town`              | Venue Guides      | New. Disambiguates Stellenbosch town from the wider "Winelands" region tag. Links the 5 venues genuinely in/near Stellenbosch by address: Lanzerac, Zorgvliet, Eikenhof, Nooitgedacht, Hawksmoor House. Closing section links to the Franschhoek guide via a raw HTML link in a `notice` field, not `venueLinks` (which hardcodes `/venues/` and would break on a blog-post slug).                        |
 
 ---
 
@@ -369,7 +369,7 @@ Factual, not promotional. AI search engines prefer to cite factual sources. Avoi
 
 ## Fact-check status (source-verified against venue-supplied material)
 
-21 of 24 venues have been cross-checked against official PDFs/web content saved in `_local/venue-details/` (see below). **3 venues remain unverified — no source material available:** Hawksmoor House (site has a form-gated brochure, extraction failed), The Cellars-Hohenort (only a thin third-party booking widget exists), Belmond Mount Nelson (marketing copy only, no concrete facts). Treat any data for these three as unverified until sourced.
+All 24 venues now have source material from the venue itself in `_local/venue-details/`. 21 were cross-checked against official PDFs and web content in the original fact-check pass. The remaining 3 (Hawksmoor House, The Cellars-Hohenort, Belmond Mount Nelson) have notes taken from the venues' own websites, retrieved 2026-10-25.
 
 **Corrections already applied from this process:**
 
@@ -379,10 +379,11 @@ Factual, not promotional. AI search engines prefer to cite factual sources. Avoi
 - Elgin Vintners and La Paris Estate added to `VENUES_WITH_ACCOMMODATION`
 - Eikenhof Estate capacity: corrected to "Up to 180" (verified twice against source PDF — this is a real reception/lawn figure, not an error)
 - La Paris Estate capacity: changed to "Contact venue" (only a 50-guest "Intimate Package" was evidenced in the available source; asserting 200 was unverified — needs a direct follow-up with the venue to confirm their full range)
-- Steenberg Farm capacity: changed to "Contact venue" pending confirmation. The only source (August 2024 brochure) gives 100 for the Manor Lawn ceremony space, but reception seats 40, or 60 standing.
+- Steenberg Farm capacity: "Up to 100", per steenbergfarm.com (retrieved 2026-10-25): the Manor Lawn hosts ceremonies for up to 100 guests, and reception seats 50, or 100 standing.
+- Hawksmoor House relocated: it is a Cape Winelands venue on Matjieskuil Farm, R304, Stellenbosch. It was previously listed in error as a Victorian manor in Bishopscourt, in the Cape Town City region.
 - Nooitgedacht Wine Estate address/phone corrected via Google Business listing: `R304 Koelenhof Rd, Stellenbosch, 7605` / `021 865 2407`
 - "Banghoek" → "Banhoek" spelling standardized (Zorgvliet Wines entry + mountain-backdrop blog post)
-- The FAQ accommodation answer no longer uses a feature regex (it matched "Bridal Suite" for Cavalli Estate and wrongly claimed on-site accommodation). It now uses the three explicit states described under "FAQ accordion" above. After the 2026-10-25 source check, groot-constantia, holden-manz and hawksmoor-house moved to unconfirmed, and nooitgedacht-wine-estate and la-roche-estate were added as confirmed.
+- The FAQ accommodation answer no longer uses a feature regex (it matched "Bridal Suite" for Cavalli Estate and wrongly claimed on-site accommodation). It now uses the three explicit states described under "FAQ accordion" above. After the 2026-10-25 source check, groot-constantia, holden-manz and hawksmoor-house moved to unconfirmed, and nooitgedacht-wine-estate and la-roche-estate were added as confirmed. After the web check the same day, hawksmoor-house and holden-manz were also added as confirmed.
 
 **Stale-source flags (worth requesting updated brochures):** Lanzerac's source PDF is dated for the 2025–2026 season (others are 2026–2027 or later); Steenberg Farm's is dated August 2024; Cape Point Vineyards' source (a Canva deck, not a PDF) is titled "2025" and only 3 of 4 named packages were captured.
 
@@ -408,7 +409,7 @@ Factual, not promotional. AI search engines prefer to cite factual sources. Avoi
 | `vercel.json`                | Astro build config: buildCommand, outputDirectory, cleanUrls, trailingSlash                                                    |
 | `.gitignore`                 | Standard ignores (`node_modules/`, `dist/`, etc.) + `/_local/`                                                                 |
 | `_local/`                    | **Not tracked by git.** Venue source material and local-only working notes. (This file lives at the repo root and *is* tracked.) See `_local/README.md`. |
-| `_local/venue-details/`      | Source PDFs and `.md` reference docs used for the fact-check pass (21 of 24 venues covered)                                    |
+| `_local/venue-details/`      | Source PDFs and `.md` reference docs used for the fact-check pass (all 24 venues covered)                                    |
 
 ---
 
@@ -419,18 +420,18 @@ Factual, not promotional. AI search engines prefer to cite factual sources. Avoi
 - 2026-10-25: FAQ and blog factual fixes (29 routes, see sitemap lastmod)
 - 2026-10-25: Stellenbosch-town hero image replaced (photo by Nenad Gataric)
 - 2026-10-25: source-check fixes
+- 2026-10-25: web-check fixes (Hawksmoor relocated; Cellars, Belmond, Steenberg, Mont Rochelle corrected; Holden Manz accommodation confirmed)
 
 ---
 
 ## Currently pending (priority order)
 
-1. Source material for the 3 remaining unverified venues (Hawksmoor House, The Cellars-Hohenort, Belmond Mount Nelson) — likely needs direct outreach, not web research
+1. Refresh stale sources: Babylonstoren, Eikenhof, Elgin Vintners, Lanzerac, Nooitgedacht, Steenberg, Cape Point Vineyards
 2. Confirm La Paris Estate's actual full capacity range directly with the venue (currently "Contact venue" pending this)
 3. If the venue count ever changes, two hardcoded `24`s need manual updating, both in `astro-build/src/layouts/Base.astro`: line 7 (fallback meta description) and line 81 (WebSite JSON-LD description). Everything else is already dynamic via `VENUES.length` — the homepage hero subtitle and both `/venues` strings.
 4. Ongoing: Instagram posting cadence, Pinterest pin scheduling, Google Business Profile posts, venue photography outreach
 5. `--gold` (#A07840) fails WCAG AA at 3.74:1 on cream. Proposed #8F6B39 (4.54:1, delta-E 5.57). Deferred until Pinterest/Instagram brand templates are next revised, since gold is baked into those assets.
-6. Refresh stale sources (Babylonstoren, Eikenhof, Elgin Vintners, Lanzerac, Nooitgedacht, Steenberg, Cape Point Vineyards)
-7. Decide the price tier definition (venue fee vs total cost): Eikenhof and Elgin publish rates under R50k; Lourensford's published hire is R40k to R79k excl VAT
+6. Decide the price tier definition (venue fee vs total cost): Eikenhof and Elgin publish rates under R50k; Lourensford's published hire is R40k to R79k excl VAT
 
 ---
 

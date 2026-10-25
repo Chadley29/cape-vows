@@ -44,7 +44,7 @@ export const POSTS = [
           {
             title: "Mont Rochelle Hotel & Vineyard",
             slug: "mont-rochelle",
-            desc: "Sir Richard Branson's Virgin Limited Edition property on the Franschhoek hillside. Panoramic valley views, boutique hotel amenities, and capacity for up to 80 guests who want a genuinely world-class experience.",
+            desc: "Sir Richard Branson's Virgin Limited Edition property on the Franschhoek hillside. Panoramic valley views, boutique hotel amenities, and an exclusive-use option for up to 80 guests who want a genuinely world-class experience.",
           },
           {
             title: "Vrede en Lust Wine Estate",
@@ -97,12 +97,12 @@ export const POSTS = [
           {
             title: "Nooitgedacht Wine Estate (Stellenbosch)",
             slug: "nooitgedacht-wine-estate",
-            desc: "A wine estate with genuine Cape Dutch charm, rustic barn spaces, and a relaxed atmosphere that keeps décor costs down, with pricing available on enquiry. The setting does much of the work. Located on the R304 in Koelenhof, Stellenbosch.",
+            desc: "A wine estate with genuine Cape Dutch charm, a rustic cellar and a grand banqueting hall, and a relaxed atmosphere that keeps décor costs down, with pricing available on enquiry. The setting does much of the work. Located on the R304 in Koelenhof, Stellenbosch.",
           },
           {
             title: "Eikenhof Estate (Stellenbosch / Bottelary Hills)",
             slug: "eikenhof-estate",
-            desc: "A privately-owned exclusive-use wine and olive farm in the Bottelary Hills, sitting at the Mid-Range tier. You get the whole property: ideal for couples who want a private farm feel without the premium estate price.",
+            desc: "An exclusive-use farm in the Bottelary Hills, sitting at the Mid-Range tier. You get the whole property: ideal for couples who want a private farm feel without the premium estate price.",
           },
           {
             title: "Lanzerac Wine Estate (Stellenbosch)",
@@ -318,7 +318,7 @@ export const POSTS = [
       "https://images.unsplash.com/photo-1706700700231-91a762a35531?auto=format&fit=crop&w=1400&q=80",
     heroCredit: "Photo: Ben Gerber / Unsplash, Stellenbosch",
     metaDesc:
-      "Eikenhof Estate is a boutique wine and olive farm wedding venue on Fischers Road in the Bottelary Hills, Stellenbosch. Here's what makes the area special.",
+      "Eikenhof Estate is a boutique farm wedding venue on Fischers Road in the Bottelary Hills, Stellenbosch. Here's what makes the area special.",
     intro:
       "Eikenhof Estate sits on Fischers Road in the Bottelary Hills, a quieter, less-photographed corner of the Stellenbosch winelands just north of the town itself. If you've searched for a wedding venue on Bottelary Road, Eikenhof is the boutique farm estate hand-verified in our directory for this specific pocket of the Cape Winelands, and the Bottelary Hills area is worth understanding before you book anywhere nearby.",
     sections: [
@@ -332,8 +332,8 @@ export const POSTS = [
         h2: "Eikenhof Estate: The Hand-Verified Option on Fischers Road",
         venueLinks: [{ name: "Eikenhof Estate", slug: "eikenhof-estate" }],
         paras: [
-          "Eikenhof Estate is a boutique wine and olive farm tucked into the Bottelary Hills, offering an exclusive-use setting for up to 180 guests. It's a mid-range venue (roughly R50k to R150k), which makes it one of the more accessible options in the greater Stellenbosch area without sacrificing the farm-estate atmosphere couples want.",
-          "What sets it apart in this specific pocket of the Winelands: characterful, unpretentious spaces rather than a grand manor-house production, rolling Bottelary Hills views without the premium price tag of more famous addresses, and a genuinely warm, personal hosting style. This is a smaller, working farm where you deal directly with people who know the property, not a corporate events team.",
+          "Eikenhof Estate is a boutique farm tucked into the Bottelary Hills, offering an exclusive-use setting for up to 180 guests. It's a mid-range venue (roughly R50k to R150k), which makes it one of the more accessible options in the greater Stellenbosch area without sacrificing the farm-estate atmosphere couples want.",
+          "What sets it apart in this specific pocket of the Winelands: characterful, unpretentious spaces rather than a grand manor-house production, rolling Bottelary Hills views without the premium price tag of more famous addresses, and a genuinely warm, personal hosting style. This is a smaller farm where you deal directly with people who know the property, not a corporate events team.",
           "If Bottelary Road or the Bottelary Hills is the area you've set your heart on, Eikenhof is currently the one venue in our hand-verified directory in this exact location.",
         ],
       },
@@ -348,7 +348,7 @@ export const POSTS = [
         notice:
           "We only list venues we've personally verified, so we won't pad this guide with venues we haven't researched just to make the list longer.",
         paras: [
-          "If your search brought you here because you love the idea of the Stellenbosch winelands generally rather than Bottelary Road specifically, it's worth widening your search slightly. Nearby Koelenhof, a few minutes from Bottelary, is home to Nooitgedacht Wine Estate, a larger Stellenbosch estate, with sweeping rose gardens and capacity for up to 300 guests.",
+          "If your search brought you here because you love the idea of the Stellenbosch winelands generally rather than Bottelary Road specifically, it's worth widening your search slightly. Nearby Koelenhof, a few minutes from Bottelary, is home to Nooitgedacht Wine Estate, a larger Stellenbosch estate, with pristine gardens and capacity for up to 300 guests.",
         ],
       },
       {
@@ -425,8 +425,8 @@ export const POSTS = [
           { name: "Lanzerac Wine Estate", slug: "lanzerac-wine-estate" },
         ],
         paras: [
-          "This is where most Cape Winelands weddings actually land, and it is the deepest tier in the directory, with five Cape Winelands venues. The mid-range tier gives you access to established wine estates with mountain views, professional venue coordinators, and proper facilities without the exclusivity premium of the top-tier estates.",
-          "Eikenhof Estate on Bottelary Road in Stellenbosch offers exclusive use of a working farm with ceremony and reception spaces, accommodation on site, and capacity for up to 180 guests. Lanzerac Wine Estate, closer to Stellenbosch town, is a five-star hotel and working wine estate with Cape Dutch architecture and mountain backdrops, seating up to 250. Both sit in this tier despite very different levels of polish, which is a useful reminder that the tier describes price rather than prestige.",
+          "This is where most Cape Winelands weddings actually land, and it is the deepest tier in the directory, with six Cape Winelands venues. The mid-range tier gives you access to established wine estates with mountain views, professional venue coordinators, and proper facilities without the exclusivity premium of the top-tier estates.",
+          "Eikenhof Estate on Bottelary Road in Stellenbosch offers exclusive use of a farm with ceremony and reception spaces, accommodation on site, and capacity for up to 180 guests. Lanzerac Wine Estate, closer to Stellenbosch town, is a five-star hotel and working wine estate with Cape Dutch architecture and mountain backdrops, seating up to 250. Both sit in this tier despite very different levels of polish, which is a useful reminder that the tier describes price rather than prestige.",
           "The mid-range tier is also where flexibility pays off most. Weekday and off-peak dates consistently come in lower; ask each venue directly for seasonal rate differences.",
         ],
       },
@@ -520,7 +520,7 @@ export const POSTS = [
         ],
         paras: [
           "Constantia sits at the foot of the Constantiaberg, less than 20 minutes from the Atlantic and with its own strong aesthetic case: old-money green, mature oak trees, and vineyards that have been producing wine since the 17th century.",
-          "It is not strictly coastal, but couples who want the Peninsula location without the full wind exposure of the Atlantic Seaboard often land here. The Cellars-Hohenort offers two restored Cape Dutch manor houses set within manicured gardens, one of the most photographed settings in the Cape, with a level of service that matches its reputation. Steenberg Farm in Tokai is a historic wine farm with a hotel and spa on the estate.",
+          "It is not strictly coastal, but couples who want the Peninsula location without the full wind exposure of the Atlantic Seaboard often land here. The Cellars-Hohenort is a hotel in the gardens of the Constantia Valley, about 15 minutes from the city centre, with wedding venues for up to 60 guests. Steenberg Farm in Tokai is a historic wine farm with a hotel and spa on the estate.",
           "Groot Constantia is the oldest wine estate in South Africa, established in 1685. The historic cellar and manor house grounds offer a setting with genuine weight. This is not a venue that needs decoration to make an impression.",
         ],
       },
@@ -545,19 +545,19 @@ export const POSTS = [
     category: "Venue Guides",
     date: "September 2026",
     summary:
-      "Wedding venues genuinely in Stellenbosch town, not the wider Winelands: Lanzerac, Zorgvliet, Eikenhof and Nooitgedacht, verified by address.",
+      "Wedding venues genuinely in Stellenbosch town, not the wider Winelands: Lanzerac, Zorgvliet, Eikenhof, Nooitgedacht and Hawksmoor House, verified by address.",
     heroImg:
       "https://images.unsplash.com/photo-1638012858969-fac36ad2ea32?w=1200&q=80",
     heroCredit: "Photo: Nenad Gataric / Unsplash, Stellenbosch",
     metaDesc:
-      "Wedding venues genuinely in Stellenbosch, not the wider Winelands: Lanzerac, Zorgvliet, Eikenhof and Nooitgedacht, verified by address, with honest notes on what's actually in town versus a short drive away.",
+      "Wedding venues genuinely in Stellenbosch, not the wider Winelands: Lanzerac, Zorgvliet, Eikenhof, Nooitgedacht and Hawksmoor House, verified by address.",
     intro:
-      "Wedding venues in Stellenbosch is often used loosely to mean the whole Cape Winelands, including Franschhoek, Paarl and Somerset West, all a short drive from Stellenbosch town but not actually in it. If you want a venue with a genuine Stellenbosch address, four verified options in the Cape Vows directory qualify: Lanzerac Wine Estate, Zorgvliet Wines, Eikenhof Estate and Nooitgedacht Wine Estate. This guide covers what each offers, and where to look if your search is really the wider Winelands region.",
+      "Wedding venues in Stellenbosch is often used loosely to mean the whole Cape Winelands, including Franschhoek, Paarl and Somerset West, all a short drive from Stellenbosch town but not actually in it. If you want a venue with a genuine Stellenbosch address, five verified options in the Cape Vows directory qualify: Lanzerac Wine Estate, Zorgvliet Wines, Eikenhof Estate, Nooitgedacht Wine Estate and Hawksmoor House. This guide covers what each offers, and where to look if your search is really the wider Winelands region.",
     sections: [
       {
         h2: "What Counts as Stellenbosch",
         paras: [
-          "Stellenbosch is a specific town, not a synonym for the whole Winelands. Franschhoek, Paarl, and Somerset West are separate towns, each roughly 20 to 40 minutes from Stellenbosch by car, each with its own wedding-venue scene. If your priority is Stellenbosch itself, four venues in our directory have a Stellenbosch address. If your priority is broadly somewhere in the Winelands, the options widen considerably, and it's worth deciding which matters more before you start comparing venues.",
+          "Stellenbosch is a specific town, not a synonym for the whole Winelands. Franschhoek, Paarl, and Somerset West are separate towns, each roughly 20 to 40 minutes from Stellenbosch by car, each with its own wedding-venue scene. If your priority is Stellenbosch itself, five venues in our directory have a Stellenbosch address. If your priority is broadly somewhere in the Winelands, the options widen considerably, and it's worth deciding which matters more before you start comparing venues.",
         ],
       },
       {
@@ -580,7 +580,7 @@ export const POSTS = [
         h2: "Eikenhof Estate",
         venueLinks: [{ name: "Eikenhof Estate", slug: "eikenhof-estate" }],
         paras: [
-          "Eikenhof Estate is on Fischers Road in the Bottelary Hills, on Stellenbosch farmland. It's a working farm offering exclusive use, on-site accommodation, and capacity for up to 180 guests, in the Mid-Range tier. This is the venue behind our most detailed Bottelary Road guide, if you want a closer look at what it and the surrounding area offer.",
+          "Eikenhof Estate is on Fischers Road in the Bottelary Hills, on Stellenbosch farmland. It's a farm offering exclusive use, on-site accommodation, and capacity for up to 180 guests, in the Mid-Range tier. This is the venue behind our most detailed Bottelary Road guide, if you want a closer look at what it and the surrounding area offer.",
         ],
       },
       {
@@ -596,9 +596,16 @@ export const POSTS = [
         ],
       },
       {
+        h2: "Hawksmoor House",
+        venueLinks: [{ name: "Hawksmoor House", slug: "hawksmoor-house" }],
+        paras: [
+          "Hawksmoor House is on Matjieskuil Farm on the R304, a Cape Dutch style country retreat on a 220-hectare working farm. It has 16 en-suite guest rooms on site, a swimming pool with a view of Table Mountain, and capacity for up to 150 guests, with an exclusive estate buyout option. Its published wedding packages fall in our Mid-Range tier, and catering is an optional extra.",
+        ],
+      },
+      {
         h2: "If You Meant the Wider Winelands",
         notice:
-          'Most of what people call Winelands weddings actually happens in Franschhoek, not Stellenbosch. If four venues feels limiting, Franschhoek is roughly a 30 minute drive away and has the deepest concentration of wine estate venues in the Cape Vows directory, across every price tier from Mid-Range to Luxury. Our <a href="/blog/best-wine-estate-venues-franschhoek" class="blog-venue-link">Franschhoek guide</a> covers those in detail.',
+          'Most of what people call Winelands weddings actually happens in Franschhoek, not Stellenbosch. If five venues feels limiting, Franschhoek is roughly a 30 minute drive away and has the deepest concentration of wine estate venues in the Cape Vows directory, across every price tier from Mid-Range to Luxury. Our <a href="/blog/best-wine-estate-venues-franschhoek" class="blog-venue-link">Franschhoek guide</a> covers those in detail.',
       },
     ],
     cta: {

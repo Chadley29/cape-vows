@@ -158,6 +158,8 @@ export const VENUES_WITH_ACCOMMODATION = new Set([
   "la-paris-estate",
   "nooitgedacht-wine-estate",
   "la-roche-estate",
+  "hawksmoor-house",
+  "holden-manz",
 ]);
 
 export const ACCOMMODATION_NO = new Set(["lourensford-wine-estate"]);
