@@ -8,7 +8,7 @@ export const POSTS = [
     category: "Venue Guides",
     date: "May 2026",
     summary:
-      "Franschhoek is widely considered the wedding capital of the Western Cape. These five hand-verified estates cover a range of capacities and price points, all set against the Drakenstein Mountains.",
+      "Franschhoek is one of the Western Cape's best-known wedding destinations. These five hand-verified estates cover a range of capacities and price points, all set against the mountains that ring the valley.",
     heroImg:
       "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=1400&q=80",
     heroCredit: "Photo: Roberta Sorge / Unsplash",
@@ -20,7 +20,7 @@ export const POSTS = [
       {
         h2: "What Makes Franschhoek Different",
         paras: [
-          "Franschhoek venues are known for their all-in-one approach. Most offer on-site chapels, luxury accommodation for the bridal party, and catering that leans heavily into local produce. As a tourism hub, the valley also means your guests have their pick of boutique guesthouses and world-class restaurants for the rest of the weekend.",
+          "Franschhoek venues are known for their all-in-one approach. Many offer luxury accommodation for the bridal party and catering that leans heavily into local produce. As a tourism hub, the valley also means your guests have their pick of boutique guesthouses and world-class restaurants for the rest of the weekend.",
         ],
       },
       {
@@ -74,13 +74,13 @@ export const POSTS = [
     category: "Budget Planning",
     date: "May 2026",
     summary:
-      "A Winelands wedding doesn't have to mean a seven-figure price tag. These mid-range venues offer genuine Cape character, mountain views, estate wines, and well-equipped event spaces, at more accessible price points.",
+      "A Winelands wedding doesn't have to mean a seven-figure price tag. These three verified Stellenbosch venues offer genuine Cape character, mountain views, estate wines, and well-equipped event spaces: two sit in our Mid-Range tier, and one quotes on enquiry.",
     heroImg:
       "https://images.unsplash.com/photo-1704037178699-8d9d9bedcb52?auto=format&fit=crop&w=1400&q=80",
     heroCredit:
       "Photo: Matthias Wesselmann / Unsplash, Delheim Wine Estate, Stellenbosch",
     metaDesc:
-      "Planning a Winelands wedding on a tighter budget? Here are our verified mid-range Cape venues that offer excellent value without sacrificing mountain views or Cape character.",
+      "Planning a Winelands wedding on a tighter budget? Three verified Stellenbosch venues, two Mid-Range and one priced on enquiry, with real Cape character.",
     intro:
       "Let's be honest: 'Winelands' and 'budget' don't often appear in the same sentence. Most estates in Franschhoek and Stellenbosch fall in the mid-range to luxury tier. But with the right knowledge, and a bit of flexibility on date and format, you can get a genuine Cape Winelands wedding without overspending.",
     sections: [
@@ -92,7 +92,7 @@ export const POSTS = [
         ],
       },
       {
-        h2: "Three Verified Mid-Range Venues Worth Considering",
+        h2: "Three Verified Venues Worth Considering",
         items: [
           {
             title: "Nooitgedacht Wine Estate (Stellenbosch)",
@@ -282,7 +282,7 @@ export const POSTS = [
         venueLinks: [{ name: "Zorgvliet Wines", slug: "zorgvliet-wines" }],
         paras: [
           "The mountains around Stellenbosch feel closer and steeper than the wider Cape landscape, particularly in the Banhoek Valley east of the town, where the peaks turn a deep purple as the sun drops.",
-          "Zorgvliet Wines sits in this valley, tucked away with Blue Ridge mountain views on multiple sides. It is a deliberately off-the-main-road estate, the kind of venue where the mountain setting feels private rather than panoramic.",
+          "Zorgvliet Wines sits in this valley, tucked away with mountain views on multiple sides. It is a deliberately off-the-main-road estate, the kind of venue where the mountain setting feels private rather than panoramic.",
         ],
       },
       {
@@ -349,7 +349,7 @@ export const POSTS = [
         notice:
           "We only list venues we've personally verified, so we won't pad this guide with venues we haven't researched just to make the list longer.",
         paras: [
-          "If your search brought you here because you love the idea of the Stellenbosch winelands generally rather than Bottelary Road specifically, it's worth widening your search slightly. Nearby Koelenhof, a few minutes from Bottelary, is home to Nooitgedacht Wine Estate, one of our most popular hand-verified venues, with sweeping rose gardens and capacity for up to 300 guests.",
+          "If your search brought you here because you love the idea of the Stellenbosch winelands generally rather than Bottelary Road specifically, it's worth widening your search slightly. Nearby Koelenhof, a few minutes from Bottelary, is home to Nooitgedacht Wine Estate, a larger Stellenbosch estate, with sweeping rose gardens and capacity for up to 300 guests.",
         ],
       },
       {
@@ -414,7 +414,7 @@ export const POSTS = [
           { name: "Elgin Vintners", slug: "elgin-vintners" },
         ],
         paras: [
-          "Cape Vows does not currently list a single venue in the under-R50,000 tier, and that is deliberate. Every venue in the directory has been checked against what the venue itself publishes, and none of the Winelands estates we have verified advertise a package that lands reliably below that figure.",
+          "Cape Vows does not currently list a single venue in the under-R50,000 tier, and that is deliberate. Every Cape Winelands estate in the directory has been checked against what the venue itself publishes, and none of the Winelands estates we have verified advertise a package that lands reliably below that figure.",
           "That does not mean sub-R50,000 Winelands weddings are impossible. It means the venues that make them possible are usually private farms, community halls, or family properties that do not market themselves as wedding venues at all. If your budget is genuinely under R50,000, expect to build the day yourself rather than book a package.",
           "Within the directory, the closest equivalents are the smallest-capacity mid-range venues. La Petite Ferme in Franschhoek caps at 45 guests and Elgin Vintners at 50. A small guest count is the single most effective lever on total spend, because catering and bar costs scale per head.",
         ],
@@ -426,7 +426,7 @@ export const POSTS = [
           { name: "Lanzerac Wine Estate", slug: "lanzerac-wine-estate" },
         ],
         paras: [
-          "This is where most Cape Winelands weddings actually land, and it is the deepest tier in the directory with eight verified venues. The mid-range tier gives you access to established wine estates with mountain views, professional venue coordinators, and proper facilities without the exclusivity premium of the top-tier estates.",
+          "This is where most Cape Winelands weddings actually land, and it is the deepest tier in the directory, with five Cape Winelands venues. The mid-range tier gives you access to established wine estates with mountain views, professional venue coordinators, and proper facilities without the exclusivity premium of the top-tier estates.",
           "Eikenhof Estate on Bottelary Road in Stellenbosch offers exclusive use of a working farm with ceremony and reception spaces, accommodation on site, and capacity for up to 180 guests. Lanzerac Wine Estate, closer to Stellenbosch town, is a five-star hotel and working wine estate with Cape Dutch architecture and mountain backdrops, seating up to 250. Both sit in this tier despite very different levels of polish, which is a useful reminder that the tier describes price rather than prestige.",
           "The mid-range tier is also where flexibility pays off most. Weekday and off-peak dates consistently come in lower; ask each venue directly for seasonal rate differences.",
         ],
@@ -599,7 +599,7 @@ export const POSTS = [
       {
         h2: "If You Meant the Wider Winelands",
         notice:
-          'Most of what people call Winelands weddings actually happens in Franschhoek, not Stellenbosch. If four venues feels limiting, Franschhoek is a 25 minute drive away and has the deepest concentration of wine estate venues in the Cape Vows directory, across every price tier from Mid-Range to Luxury. Our <a href="/blog/best-wine-estate-venues-franschhoek" class="blog-venue-link">Franschhoek guide</a> covers those in detail.',
+          'Most of what people call Winelands weddings actually happens in Franschhoek, not Stellenbosch. If four venues feels limiting, Franschhoek is roughly a 30 minute drive away and has the deepest concentration of wine estate venues in the Cape Vows directory, across every price tier from Mid-Range to Luxury. Our <a href="/blog/best-wine-estate-venues-franschhoek" class="blog-venue-link">Franschhoek guide</a> covers those in detail.',
       },
     ],
     cta: {

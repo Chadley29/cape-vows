@@ -104,10 +104,9 @@ export const REGION_CONTEXT = {
   },
   "Cape Town City": {
     desc: "Cape Town City",
-    distance:
-      "in or immediately adjacent to the Cape Town city bowl: no travel from the city required",
+    distance: "within Cape Town itself, so there is no long transfer from the city",
     character:
-      "urban sophistication, Table Mountain as a backdrop, and proximity to hotels, restaurants, and the V&A Waterfront",
+      "Table Mountain as a backdrop and the city's hotels and restaurants within easy reach",
   },
   "Atlantic Seaboard": {
     desc: "the Cape Peninsula's Atlantic Seaboard",
@@ -171,11 +170,8 @@ export function getVenueFaqs(venue) {
     distance: "within the Western Cape",
     character: "the natural beauty of the Western Cape",
   };
-  const hasAccomm =
-    VENUES_WITH_ACCOMMODATION.has(venue.slug) ||
-    venue.features.some((f) =>
-      /accommodation|suite|hotel|chalet|lodge|room/i.test(f),
-    );
+  const hasAccomm = VENUES_WITH_ACCOMMODATION.has(venue.slug);
+  const distance = venue.driveTime || region.distance;
   const featureList = venue.features.slice(0, 4).join(", ");
 
   return [
@@ -187,7 +183,7 @@ export function getVenueFaqs(venue) {
     },
     {
       q: `Where is ${venue.name} located?`,
-      a: `${venue.name} is situated in ${region.desc}, Western Cape, at ${venue.address}. It is ${region.distance}, making it ${venue.region === "Cape Town City" ? "ideal for couples wanting a city wedding with easy access for all guests" : "accessible as a day trip or weekend destination from Cape Town"}. The setting is defined by ${region.character}.`,
+      a: `${venue.name} is situated in ${region.desc}, Western Cape, at ${venue.address}. It is ${distance}, making it ${venue.region === "Cape Town City" ? "ideal for couples wanting a city wedding with easy access for all guests" : "accessible as a day trip or weekend destination from Cape Town"}. The setting is defined by ${region.character}.`,
     },
     {
       q: `What type of venue is ${venue.name}?`,
@@ -196,7 +192,7 @@ export function getVenueFaqs(venue) {
     {
       q: `What is the price range for a wedding at ${venue.name}?`,
       a: price
-        ? `${venue.name} is categorised in the ${price} tier. This is a broad guide: your actual spend will depend on guest numbers, the season (December and April tend to be peak months), day of the week, and which catering and décor packages you select. We recommend contacting the venue for a personalised quote based on your specific requirements.`
+        ? `${venue.name} is categorised in the ${price} tier. This is a broad guide: your actual spend will depend on guest numbers, the season (October to April is peak wedding season in the Cape, and Saturdays in those months book out first), day of the week, and which catering and décor packages you select. We recommend contacting the venue for a personalised quote based on your specific requirements.`
         : `${venue.name} does not publish a standard price list: costs are quoted on enquiry and vary based on guest count, date, and package selections. Contact the venue directly for a tailored quote.`,
     },
     {

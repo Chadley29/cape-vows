@@ -374,7 +374,7 @@ export const VENUES = [
       "Fine Dining",
       "Spa On-site",
     ],
-    highlight: "Liz McGrath's exquisite Constantia manor",
+    highlight: "Constantia manor hotel in the Liz McGrath Collection",
   },
   {
     id: 17,
@@ -422,6 +422,7 @@ export const VENUES = [
       "Unique Coastal Venue",
     ],
     highlight: "Dramatic setting between mountains and ocean",
+    driveTime: "about 15 to 25 minutes from the Cape Town CBD",
   },
   {
     id: 19,
@@ -468,6 +469,7 @@ export const VENUES = [
       "Outdoor Ceremonies",
     ],
     highlight: "Chapman's Peak views in Noordhoek",
+    driveTime: "about 40 to 50 minutes from the Cape Town CBD, depending on traffic",
   },
   {
     id: 21,

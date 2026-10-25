@@ -123,9 +123,12 @@ CSS variables are defined on `:root`. **Never use hardcoded hex colours in compo
 ```js
 {
   id, slug, name, region, type, capacity, price,
-  address, phone, website, description, features[], highlight
+  address, phone, website, description, features[], highlight,
+  driveTime?
 }
 ```
+
+`driveTime` (optional): Optional per-venue override of the REGION_CONTEXT drive time, used by getVenueFaqs. Set for the-12-apostles-hotel and cape-point-vineyards because the Atlantic Seaboard region text was too coarse for them.
 
 **Regions:** Cape Winelands · Constantia Valley · Cape Town City · Atlantic Seaboard · Overberg (5 regions — not 8; older content/social copy referencing "8 regions" is wrong and should be corrected if found)
 
@@ -374,6 +377,7 @@ Factual, not promotional. AI search engines prefer to cite factual sources. Avoi
 - La Paris Estate capacity: changed to "Contact venue" (only a 50-guest "Intimate Package" was evidenced in the available source; asserting 200 was unverified — needs a direct follow-up with the venue to confirm their full range)
 - Nooitgedacht Wine Estate address/phone corrected via Google Business listing: `R304 Koelenhof Rd, Stellenbosch, 7605` / `021 865 2407`
 - "Banghoek" → "Banhoek" spelling standardized (Zorgvliet Wines entry + mountain-backdrop blog post)
+- The FAQ accommodation answer now depends only on `VENUES_WITH_ACCOMMODATION`. The feature-regex fallback was removed because "Bridal Suite" matched it for Cavalli Estate, which made the FAQ wrongly claim on-site accommodation.
 
 **Stale-source flags (worth requesting updated brochures):** Lanzerac's source PDF is dated for the 2025–2026 season (others are 2026–2027 or later); Steenberg Farm's is dated August 2024; Cape Point Vineyards' source (a Canva deck, not a PDF) is titled "2025" and only 3 of 4 named packages were captured.
 
@@ -400,6 +404,15 @@ Factual, not promotional. AI search engines prefer to cite factual sources. Avoi
 | `.gitignore`                 | Standard ignores (`node_modules/`, `dist/`, etc.) + `/_local/`                                                                 |
 | `_local/`                    | **Not tracked by git.** Venue source material and local-only working notes. (This file lives at the repo root and *is* tracked.) See `_local/README.md`. |
 | `_local/venue-details/`      | Source PDFs and `.md` reference docs used for the fact-check pass (21 of 24 venues covered)                                    |
+
+---
+
+## Change log for the 17 Nov measurement
+
+- 2026-10-19: related-venues block rotated so every venue gets 3 internal links
+- 2026-10-25: marriage guide corrected; privacy policy updated
+- 2026-10-25: FAQ and blog factual fixes (29 routes, see sitemap lastmod)
+- 2026-10-25: Stellenbosch-town hero image replaced (photo by Nenad Gataric)
 
 ---
 
