@@ -136,7 +136,7 @@ CSS variables are defined on `:root`. **Never use hardcoded hex colours in compo
 
 **Price tiers:** `Budget (< R50k)` · `Mid-Range (R50–150k)` · `Premium (R150–300k)` · `Luxury (R300k+)` · `Contact Venue`
 
-**Known data gap:** there are currently zero Budget-tier venues, and the entire Premium/Luxury bucket is Cape Winelands-only (no coastal/Constantia luxury venue exists in the data yet). This constrains the featured-venue rotation's regional variety — not a bug, a real content gap worth closing if a suitable venue is added later.
+**Known data gap:** there are currently zero Budget-tier venues. Tier counts (2026-10-25): Luxury 2 (Babylonstoren, Boschendal), Premium 2 (La Paris Estate, Belmond Mount Nelson), Mid-Range 9, Contact Venue 11. Venues that publish no wedding price are listed as Contact Venue. Belmond (Cape Town City) is the only non-Winelands venue in the Premium/Luxury bucket, so that bucket still limits the featured-venue rotation's regional variety. This is a real content gap, not a bug.
 
 ### Fallbacks
 
@@ -162,7 +162,7 @@ Static assets outside React's reach still have the count hardcoded and require m
 - No `Math.random`, no state — deterministic by construction
 - **Runs at build time**, in `astro-build/src/pages/index.astro` frontmatter. The ISO week is whatever week Vercel last built, so featured venues rotate **on deploy, not automatically each week** — no push for a month means the same three venues for a month. A scheduled weekly Vercel deploy hook would restore automatic rotation if wanted.
 - Venues are grouped into price-tier buckets (lower/Mid-Range, higher/Premium-Luxury, "Contact Venue" tier) and one is deterministically picked per bucket per week, so every week guarantees one from each tier by construction — duplicates are structurally impossible
-- Region variance is attempted but constrained by the data gap noted above (Premium/Luxury bucket is Winelands-only)
+- Region variance is attempted but constrained by the data gap noted above (the Premium/Luxury bucket has only one non-Winelands venue, Belmond Mount Nelson)
 
 The section itself is titled **"A Few We'd Start With"** (not "Featured Venues" — the word "featured" reads as paid placement to most visitors) with a micro-disclosure line directly beneath the heading: "No venue pays to appear here. These rotate periodically and span different budgets and regions." (no em dash — see content policy below).
 
@@ -335,7 +335,7 @@ Factual, not promotional. AI search engines prefer to cite factual sources. Avoi
 | `marriage-officer-guide-cape-weddings`          | Legal & Practical | No venue links — legal content only                                                                                                                                                                            |
 | `mountain-backdrop-wedding-venues-western-cape` | Venue Guides      | "Banghoek" corrected to "Banhoek" throughout                                                                                                                                                                   |
 | `wedding-venue-bottelary-road-stellenbosch`     | Venue Guides      | New. Anchored on Eikenhof Estate (the only verified venue in that specific area) with an honest note about not padding the list; secondary mention of Nooitgedacht for the broader Koelenhof/Stellenbosch area |
-| `wedding-venue-prices-stellenbosch-winelands`   | Budget Planning   | New. Pricing-tier guide. Venue tier claims verified against `venues.js`: Lanzerac and Eikenhof are Mid-Range, Zorgvliet and La Paris are Premium, Babylonstoren and Boschendal are Luxury. The "under R50,000" section names no venue, because the directory has zero Budget-tier venues.                        |
+| `wedding-venue-prices-stellenbosch-winelands`   | Budget Planning   | New. Pricing-tier guide. Venue tier claims verified against `venues.js`: Lanzerac and Eikenhof are Mid-Range, La Paris is Premium (Zorgvliet is Contact Venue), Babylonstoren and Boschendal are Luxury. The "under R50,000" section names no Budget-tier venue (there are none); it points to the smallest-capacity venues, La Petite Ferme and Elgin Vintners.                        |
 | `coastal-wedding-venues-cape-peninsula`         | Venue Guides      | New. Peninsula coastal guide. Links The 12 Apostles, Cape Point Vineyards, The Cellars-Hohenort, Steenberg Farm, Groot Constantia. The "Southern Peninsula" section names no venue, because the directory has none in that area. Note: The Cellars-Hohenort and Steenberg Farm sentences were rewritten on 2026-10-25 from the venues' own websites.                        |
 | `wedding-venues-stellenbosch-town`              | Venue Guides      | New. Disambiguates Stellenbosch town from the wider "Winelands" region tag. Links the 5 venues genuinely in/near Stellenbosch by address: Lanzerac, Zorgvliet, Eikenhof, Nooitgedacht, Hawksmoor House. Closing section links to the Franschhoek guide via a raw HTML link in a `notice` field, not `venueLinks` (which hardcodes `/venues/` and would break on a blog-post slug).                        |
 
@@ -423,6 +423,7 @@ All 24 venues now have source material from the venue itself in `_local/venue-de
 - 2026-10-25: web-check fixes (Hawksmoor relocated; Cellars, Belmond, Steenberg, Mont Rochelle corrected; Holden Manz accommodation confirmed)
 - 2026-10-25: Eikenhof wording and Stellenbosch-town location wording
 - 2026-10-25: Babylonstoren feature; Stellenbosch-town title
+- 2026-10-25: price tiers aligned with published figures (Zorgvliet, La Cotte, Mont Rochelle to Contact Venue; Lourensford to Mid-Range; Belmond to Premium)
 
 ---
 
@@ -433,7 +434,7 @@ All 24 venues now have source material from the venue itself in `_local/venue-de
 3. If the venue count ever changes, two hardcoded `24`s need manual updating, both in `astro-build/src/layouts/Base.astro`: line 7 (fallback meta description) and line 81 (WebSite JSON-LD description). Everything else is already dynamic via `VENUES.length` — the homepage hero subtitle and both `/venues` strings.
 4. Ongoing: Instagram posting cadence, Pinterest pin scheduling, Google Business Profile posts, venue photography outreach
 5. `--gold` (#A07840) fails WCAG AA at 3.74:1 on cream. Proposed #8F6B39 (4.54:1, delta-E 5.57). Deferred until Pinterest/Instagram brand templates are next revised, since gold is baked into those assets.
-6. Decide the price tier definition (venue fee vs total cost): Eikenhof and Elgin publish rates under R50k; Lourensford's published hire is R40k to R79k excl VAT
+6. Phase 2 after the 17 Nov read: apply the rule 'published venue fee plus published minimum catering, Contact Venue where nothing is published' to Cavalli and La Petite Ferme (both become Premium); add a short method note to the pricing post; show published fees with as-of dates on venue pages; add concrete under-R50k examples (Eikenhof hire from R18,000 before catering; Elgin Vintners packages from R15,000, Feb 2025 source)
 
 ---
 

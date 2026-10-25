@@ -425,7 +425,7 @@ export const POSTS = [
           { name: "Lanzerac Wine Estate", slug: "lanzerac-wine-estate" },
         ],
         paras: [
-          "This is where most Cape Winelands weddings actually land, and it is the deepest tier in the directory, with six Cape Winelands venues. The mid-range tier gives you access to established wine estates with mountain views, professional venue coordinators, and proper facilities without the exclusivity premium of the top-tier estates.",
+          "This is where most Cape Winelands weddings actually land, and it is the deepest tier in the directory, with seven Cape Winelands venues. The mid-range tier gives you access to established wine estates with mountain views, professional venue coordinators, and proper facilities without the exclusivity premium of the top-tier estates.",
           "Eikenhof Estate on Bottelary Road in Stellenbosch offers exclusive use of a farm with ceremony and reception spaces, accommodation on site, and capacity for up to 180 guests. Lanzerac Wine Estate, closer to Stellenbosch town, is a five-star hotel and working wine estate with Cape Dutch architecture and mountain backdrops, seating up to 250. Both sit in this tier despite very different levels of polish, which is a useful reminder that the tier describes price rather than prestige.",
           "The mid-range tier is also where flexibility pays off most. Weekday and off-peak dates consistently come in lower; ask each venue directly for seasonal rate differences.",
         ],
@@ -438,7 +438,7 @@ export const POSTS = [
         ],
         paras: [
           "At the premium tier, the venue itself becomes a significant part of what guests experience. You are paying for the full estate atmosphere: often exclusive use, on-site accommodation for the wedding party, award-winning wines poured at the reception, and a level of service infrastructure that removes most of the logistical burden from the couple.",
-          "The directory currently holds two verified premium venues, both in the Winelands. Zorgvliet Wines in the Banhoek Valley offers dramatic mountain scenery and an intimate feel, seating up to 140. La Paris Estate in the Franschhoek Valley pairs sweeping Wemmershoek Valley views with manicured grounds, and quotes capacity on enquiry rather than publishing a single figure.",
+          "In the Cape Winelands, the directory currently holds one venue in this tier: La Paris Estate in the Franschhoek Valley, which pairs sweeping Wemmershoek Valley views with manicured grounds and quotes capacity on enquiry rather than publishing a single figure. Other well-known estates, such as Zorgvliet Wines in the Banhoek Valley, do not publish their wedding prices, so we list them as Contact Venue rather than guess.",
         ],
       },
       {
@@ -573,7 +573,7 @@ export const POSTS = [
         h2: "Zorgvliet Wines",
         venueLinks: [{ name: "Zorgvliet Wines", slug: "zorgvliet-wines" }],
         paras: [
-          "Zorgvliet Wines is in the Banhoek Valley, part of greater Stellenbosch, with dramatic mountain scenery and a more intimate feel than Lanzerac's scale. It seats up to 140 guests and sits in the Premium tier. The Banhoek Valley setting means a slightly more rural, secluded atmosphere while still being within Stellenbosch's boundaries.",
+          "Zorgvliet Wines is in the Banhoek Valley, part of greater Stellenbosch, with dramatic mountain scenery and a more intimate feel than Lanzerac's scale. It seats up to 140 guests and does not publish its wedding prices, so we list it as Contact Venue. The Banhoek Valley setting means a slightly more rural, secluded atmosphere while still being within Stellenbosch's boundaries.",
         ],
       },
       {
