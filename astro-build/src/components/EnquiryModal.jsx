@@ -145,7 +145,7 @@ export default function EnquiryModal({ venue, onClose, showTrigger = false }) {
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <div
           className="modal-hero"
-          style={{ background: getGradient(venue.type), height: 140 }}
+          style={{ background: getGradient(venue.type) }}
         >
           <div className="modal-hero-overlay" />
           <span className="modal-badge">{venue.type}</span>
@@ -229,13 +229,29 @@ export default function EnquiryModal({ venue, onClose, showTrigger = false }) {
                 onChange={(e) => setPhone(e.target.value)}
                 style={inputStyle}
               />
+              <label
+                htmlFor="enquiry-date"
+                className="modal-detail-label"
+                style={{ display: "block" }}
+              >
+                Preferred date (optional)
+              </label>
               <input
+                id="enquiry-date"
                 name="date"
                 type="date"
                 placeholder="Preferred date (optional)"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                style={inputStyle}
+                style={{
+                  ...inputStyle,
+                  maxWidth: "100%",
+                  minWidth: 0,
+                  WebkitAppearance: "none",
+                  appearance: "none",
+                  minHeight: 44,
+                  textAlign: "left",
+                }}
               />
               <input
                 name="guests"
