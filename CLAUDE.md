@@ -191,7 +191,7 @@ The section itself is titled **"A Few We'd Start With"** (not "Featured Venues" 
 - Success state includes an expectation-setting line ("we typically respond within 1–2 business days") and a forward path (browse more venues in the same region, using the existing `sessionStorage` filter pattern)
 - GA4 event: `venue_enquiry` on successful submit
 - **Mobile:** a sticky bottom bar (≤960px) shows an "Enquire" button (same aria-label, no muted line) that opens this same modal. It reuses existing state and handlers rather than duplicating logic.
-- **Stacking order** (highest first): `.modal-overlay` 1000 > cookie banner 999 (inline in `CookieBanner.jsx`) > `.mobile-enquiry-bar` 500 > `nav` 100. The sticky bar is also not rendered while the modal is open. On screens ≤960px the modal is capped at `calc(100dvh - 3rem)` (vh fallback), only `.modal-body` scrolls, and page scroll is locked while the modal is open.
+- **Stacking order** (highest first): `.modal-overlay` 1000 > cookie banner 999 (inline in `CookieBanner.jsx`) > `.mobile-enquiry-bar` 500 > `nav` 100. The sticky bar is also not rendered while the modal is open. Inside the modal hero, the close button (z-index 2) sits above the badge and title (z-index 1), which sit above the gradient overlay. On screens ≤960px the modal is capped at `calc(100dvh - 3rem)` (vh fallback), only `.modal-body` scrolls, and page scroll is locked while the modal is open.
 
 ### "Get Listed" and "Get in Touch" forms
 
@@ -426,6 +426,7 @@ All 24 venues now have source material from the venue itself in `_local/venue-de
 - 2026-10-25: Babylonstoren feature; Stellenbosch-town title
 - 2026-10-25: price tiers aligned with published figures (Zorgvliet, La Cotte, Mont Rochelle to Contact Venue; Lourensford to Mid-Range; Belmond to Premium)
 - 2026-10-25: primary venue CTA shortened to 'Enquire' (aria-label keeps the venue name); mobile sticky bar no longer covers the open enquiry modal; no sitemap lastmod change because these are UI fixes
+- 2026-10-25: enquiry modal hero (badge no longer overlaps the title, close button moved to the corner) and date field overflow fixed; UI only, no sitemap lastmod change
 
 ---
 
